@@ -1,0 +1,71 @@
+%!TEX program=luatex
+\documentclass{report}
+\usepackage[T1]{fontenc}
+\usepackage[francais]{babel}
+\usepackage[Lenny]{fncychap} %Sonny, Lenny, Glenn, Conny, Rejne, Bjarne, Bjornstrup
+\usepackage{fontspec}
+\usepackage{wrapfig}
+\usepackage{graphicx}
+\usepackage{soul}
+\usepackage[colorlinks=true, linkcolor=blue]{hyperref}
+\usepackage[a4paper, width=150mm, top=25mm, bottom=25mm]{geometry}
+\usepackage{parskip}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{listings}
+\usepackage{float}
+\usepackage[final]{pdfpages}
+\setlist[itemize]{label=\textbullet}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhead{}
+\fancyhead[C]{\leftmark}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+\lstset{
+language=Python,                   % choix du langage (de programmation).
+keywordstyle=\color{blue},      % choix de la couleur des mots clés.
+stringstyle=\color{red},        % choix de la couleur des string.
+commentstyle=\color{green},     % choix de la couleur des commentaire.
+basicstyle=\normalsize,     % taille de la police du code
+% numbers=left,                   % placer le numéro de chaque ligne à gauche (on peut choisir à droite, ou ne pas mettre cette option pour aucun numéro de ligne).
+numberstyle=\normalsize,        % taille de la police des numéros.
+numbersep=0pt,                  % distance entre le code et sa numérotation.
+showstringspaces=false,         % pour ne pas afficher les espaces comme des caractères .
+breaklines=true,                % couper la ligne si la ligne du code est trop longue.
+}
+
+\usepackage{xcolor}
+\definecolor{light-gray}{gray}{0.90}
+\newcommand{\code}[1]{\colorbox{light-gray}{\texttt{#1}}}
+
+\usepackage{listings}
+\lstdefinestyle{code}{
+language=python,                   
+keywordstyle=\color{blue},      
+stringstyle=\color{blue},        
+commentstyle=\color{gray},     
+basicstyle=\small\ttfamily,           
+numbers=left,                   
+numberstyle=\normalsize,        
+numbersep=7pt,                  
+showstringspaces=false,         
+breaklines=true,                
+frame=leftline,                 
+framerule=2pt,
+}
+
+\begin{document}
+% \includepdf{Page_garde.pdf}
+\tableofcontents
+\pagenumbering{arabic}
+
+\chapter{}
+\newpage
+\section{}
+
+\Large
+\bibliographystyle{unsrt}
+\bibliography{biblio}
+\end{document}
