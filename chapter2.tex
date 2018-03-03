@@ -66,129 +66,143 @@ framerule=2pt,
 \section{Introduction}
 
 \section{Définition}
-Le TALN\footnote(Traitement automatique du langage naturel) est l'un des principaux domaines de l'intelligence artificielle, il permet de développer des systèmes qui peuvent \emph{analyser} et \emph{comprendre} le langage humain.\\
-En dehors des opérations courantes de traitement de texte qui considèrent les textes comme une simple séquence de symboles, l'utilisation des techniques de TALN permet d'organiser et de structurer des quantités énormes de connaissances pour développer des applications très avancées telles que la synthèse automatique, la reconnaissance d'entités, l'analyse des sentiments, la reconnaissance de la parole...\\
-Le TALN est considéré comme un problème difficile en informatique. Le langage humain est rarement précis ou simplement parlé. Comprendre le langage humain, c'est comprendre non seulement les mots, mais aussi les concepts et comment ils sont liés pour créer du sens. Bien que la langue soit l'une des choses les plus faciles à apprendre pour les humains, l'ambiguïté du langage est ce qui rend le traitement du langage naturel difficile à maîtriser pour les ordinateurs.\\
+Le Traitement automatique du langage naturel (TALN) est l'un des principaux domaines de l'intelligence artificielle, il permet de développer des systèmes qui peuvent \emph{analyser} et \emph{comprendre} le langage humain. En dehors des opérations courantes de traitement de texte qui considèrent les textes comme une simple séquence de symboles, l'utilisation des techniques de TALN permet d'organiser et de structurer des quantités énormes de connaissances pour développer des applications très avancées telles que la synthèse automatique, la reconnaissance d'entités, l'analyse des sentiments, la reconnaissance de la parole, etc.\\
+Le TALN est considéré comme un problème difficile en informatique. Le langage humain est rarement précis ou simplement parlé. Comprendre le langage humain, c'est comprendre non seulement les mots, mais aussi les concepts et comment ils sont liés pour créer du sens. Bien que la langue soit l'une des choses les plus faciles à apprendre pour les humains, l'ambiguïté rend le traitement de cette dernière difficile à maîtriser pour les ordinateurs.
 %an NLP expert at Meltwater Group, said in How Natural Language Processing Helps Uncover Social Media Sentiment. https://blog.algorithmia.com/introduction-natural-language-processing-nlp/
 
 
 \section{Domaines d'applications}
-Le TALN est utilisée pour manipuler le langage humain, qu'il s'agisse d'extraire du sens ou de générer du texte dans le but d'accomplir des tâches tels que le résumé automatique d'un document, la traduction entre deux langages naturels ou la détéction des spams.\\
-On peut distinguer deux grande catégories où les techniques du traitement automatique de la langue ont pu révolutionnées et faire leur preuve, la recherche scientifique et l'industrie informatique.\\
+Le TALN est utilisée pour manipuler le langage humain, qu'il s'agisse d'extraire du sens ou de générer du texte dans le but d'accomplir des tâches tels que le résumé automatique d'un document, la traduction entre deux langages naturels ou la détection des spams.\\
+On peut distinguer deux grande catégories où les techniques du traitement automatique de la langue ont pu faire avancé les choses, la \emph{recherche scientifique} et \emph{l'industrie informatique}.\\
 
-    %Recherche scientifique
-Dans les laboratoires de recherches en intelligence artificielle, le TALN est considéré, souvent, comme l'une des branches les plus importantes et les plus productives. De nombreuses activités cognitives qui se produisent dans l'esprit humain ont pu être simuler grâce au TALN.
-On peut trouvé: 
+%Recherche scientifique
+Dans les laboratoires de recherches en intelligence artificielle, le TALN est considéré, souvent, comme l'une des branches les plus importantes et les plus productives. De nombreuses activités cognitives qui se produisent dans l'esprit humain ont pu être simuler grâce à ses techniques.\\
+On peut cité: 
+\begin{itemize}
+    \item \textbf{La traduction automatique:}
+    La traduction automatique des textes est probablement l'un des domaines les plus connu de l'IA, Elle a fait l'objet de plusieurs travaux depuis très longtemps. Le processus de traduction est découpé en plusieurs phases successives. Tout d'abord la compréhension et l'assimilation, la déverbalisation et la conservation du sens, ensuite la réexpression et la reformulation en langue cible.\\
+    Le traducteur automatique le plus utilisé sur internet est \emph{Google Translate} développé par le département de traduction automatique de Google en 2006, il supporte maintenant plus de 103 langues.
 
-    \subsection*{La traduction automatique}
-    La traduction automatique des textes est probablement l'un des domaines les plus connu de l'IA\footnote{Intelligence artificielle}, Elle a fait l'objet de plusieurs travaux depuis très longtemps. Le processus de traduction est découpé en plusieurs phases successives. Tout d'abbord la compréhension et l'assimilation, la déverbalisation et la conservation du sens, ensuite la réexpression et la reformulation en langue cible.\\
-    Le traducteur automatique le plus utilisé sur internet est \emph{Google Translate} developpé par le département de traduction automatique de Google en 2006, il supporte maintenant plus de 103 langues.\\  
-
-    \subsection*{Le résumé automatique}
+    \item \textbf{Le résumé automatique:}
     La construction automatique de résumés est un champ de recherche originale au sein de l'informatique, même si son ampleur n'a jamais été aussi importante que la traduction automatique.\\
-    Plusieurs approches ont été proposées, premièrement des systèmes qui permettant l'élaboration automatique de résumés à partir de l'extraction de phrases. Ensuite, et avec le développement des outils informatiques (logiciels et matériels), la construction de résumés s'est basé sur le fait de donner au programme informatique la capacité d'élaborer des abstractions à partir de la \emph{compréhension} de ces textes.\\
+    Plusieurs approches ont été proposées, premièrement des systèmes qui permettent l'élaboration automatique de résumés à partir de l'extraction de phrases. Ensuite, et avec le développement des outils informatiques (logiciels et matériels), la construction de résumés s'est basé sur le fait de donner au programme informatique la capacité d'élaborer des abstractions à partir de la \emph{compréhension} des textes.
 
-    \subsection*{La classification de texte/document}
+    \item \textbf{La classification de texte/document:}
     La classification automatique de documents/textes est un problème connu en informatique, il s'agit d'assigner un document/texte à une ou plusieurs catégories ou classes. Le problème est différent selon la nature des documents/textes en question.\\
-    L'idée générale consiste en l'identification et l'extraction des éléments pertinents à partir d'un texte/document contenant des informations dont la nature est spécifiée à l'avance. Elle vise donc à transformer un texte de son format initial (une suite de chaines de caractères) à une représentation structurée et donc un format qui soit compréhensible par l'ordinateur.\\
+    L'idée générale consiste en l'identification et l'extraction des éléments pertinents à partir d'un texte/document contenant des informations dont la nature est spécifiée à l'avance. Elle vise donc à transformer un texte de son format initial (une suite de chaînes de caractères) à une représentation structurée et donc un format compréhensible par l'ordinateur.\\
+\end{itemize}
 
-
-    %Industrie
-Dans l'industrie, et avec le coût du calcul qui ne cesse de baisser, l'évolution exponentielles des algorithmes et surtout la disponibilité ... des données sur les différents supports numériques, les entreprises ont commencé à s'intérésser à l'analyse et l'exploitation de ces quantités massives de connaissances.
+%Industrie
+Dans l'industrie, et avec le coût du calcul qui ne cesse de baisser, l'évolution exponentielles des algorithmes et surtout la disponibilité des données sur les différents supports numériques, les entreprises ont commencé à s'intéresser à l'analyse et l'exploitation de ces quantités massives de connaissances.\\
 Grâce au TALN on a pu trouver des réponses aux différentes questions fréquentes. 
-
-    \subsection*{Service Client: "Comment puis-je garder mon client heureux ?"}
-    Fortement utilisées dans le service client, les techniques de TALN permettent de développer des systèmes capables de simuler les interactions entre les clients et les entreprises,
-    Ces derniers pointent vers les raisons de l'insatisfaction des consommateurs..........\\
-    % Afin de garder le pouls de l'intention des consommateurs, d
-    De nombreuses entreprises analysent maintenant les enregistrements d'appels clients, les discussions sur les réseaux sociaux et ..track. les comportements de leurs clie...., et déploient des robots de discussion et des assistants en ligne automatisés pour fournir une réponse immédiate aux besoins simples et réduire la charge de travails pour leurs employés.\\ 
-
-    Les tâches TAL pertinentes incluent:\\
+\begin{itemize}
+    \item \textbf{Service Client: "Comment puis-je garder mon client heureux ?"}\\
+    Fortement utilisées dans le service client, les techniques de TALN permettent de développer des systèmes capables de simuler les interactions entre les clients et les entreprises. Des systèmes qui pointent vers les raisons de l'insatisfaction/satisfaction des consommateurs.\\
+    De nombreuses entreprises analysent maintenant les enregistrements d'appels clients, les conversations sur les réseaux sociaux et les commentaires sur les forums. Ils déploient également des robots de discussion et des assistants en ligne automatisés pour fournir une réponse immédiate aux besoins simples et réduire la charge de travail pour leurs employés. On peut citer: 
     \begin{itemize}
-        \item \textbf{La reconnaissance vocale:} convertit le langage parlé en texte. Les progrès de l'apprentissage profond (Deep Learning) au cours des 10 dernières années et les quantitées massives de données disponibles sur internet ont permis de déployer cette technologie dans des systèmes commerciaux tels que Siri d'Apple, Alexa d'Amazon et Google Assistant/Home dernierement.\\
-        \item \textbf{Système de Question/Réponses:} répondre aux questions posées par les humains dans une langue naturelle. La technologie est utilisée aujourd'hui par de nombreuses entreprises pour les chatbots, à la fois pour les projets internes (RH, opérations) et externes (service client). Ces systèmes sont implémentés, pratiquement en natif, sur tout les systèmes d'exploitations mobile (Android, IOS)  
+        \item \textbf{La reconnaissance vocale:} convertit le langage parlé en texte. Les progrès de l'apprentissage profond (Deep Learning) au cours des dernières années et les quantités massives de données disponibles sur internet ont permis de déployer cette technologie dans des systèmes commerciaux tels que Siri d'Apple, Alexa d'Amazon et Google Assistant/Home dernièrement.
+        \item \textbf{Système de Question/Réponses:} répondre aux questions posées par les humains dans une langue naturelle. La technologie est utilisée aujourd'hui par de nombreuses entreprises pour les chatbots, à la fois pour les projets internes (RH, opérations) et externes (service client). Ces systèmes sont implémentés, pratiquement en natif, sur tout les systèmes d'exploitations mobile (Android, IOS).\\
     \end{itemize}
 
-    \subsection*{E-réputation: "Que disent les gens à propos de moi ?" }
-    Les entreprises ont commencé, et cela depuis les années 80, à utiliser des logiciels pour trouver des modèles dans leurs propres données et prendre de meilleures décisions.\\ 
-    L'optimisation des chaînes d'approvisionnement, des inventaires et des entrepôts, des processus de vente et de nombreuses autres applications ont donné naissance à ce que nous appelons aujourd'hui le Business Intelligence (BI). Mais pour une entreprise le plus important et le plus précieux est ce qui est dit dehors. C'est ce qui a poussé ces derniers à adopter des outils leur permettant d'exploiter les données externes/publiques collectées sur les réseaux sociaux.\\
-    Certaines de ces données sont structurées et prêtes à être analysées, la plus grande partie générés par l'homme tels que les articles de blog, commentaires sur les forums ou les offres d'emploi reste non structurées. Ces sources contiennent des informations précieuses sur l'évolution des concurrents, des clients et du marché dans son ensemble.\\
-    Selon l'enquête BrightLocal..., 92\% des clients lisent les avis en ligne et 86\% n'achèteront pas un produit avec moins de 3 étoiles sur 5, ce qui confirme que la plupart des clients vérifient les avis en ligne avant d'acheter un produit quelque soit son prix. 
-    Et comme les consommateurs formulent leurs plaintes de plus en plus sur Facebook et Twitter, la surveillance et la gestion de la e-réputation sont devenues une priorité pour les entreprises.\\
-
-    Tâches TAL pertinentes pour cette application comprennent:
+    \item \textbf{E-réputation: "Que disent les gens à propos de moi ?" }\\
+    Les entreprises ont commencé, et cela depuis les années 80, à utiliser des logiciels pour trouver des modèles dans leurs propres données et prendre de meilleures décisions. L'optimisation des chaînes d'approvisionnement, des inventaires et des entrepôts, des processus de vente et de nombreuses autres applications ont donné naissance à ce que nous appelons aujourd'hui le \emph{Business Intelligence}\footnote{ici mettre descriptive} (BI).\\ 
+    Mais pour une entreprise le plus important et le plus précieux est ce qui est dit dehors. C'est ce qui a poussé ces derniers à adopter des outils qui permettent d'exploiter les données externes/publiques collectées sur les réseaux sociaux.\\
+    Certaines de ces données sont structurées et prêtes à être analysées, par contre la plus grande partie générés par l'homme tels que les articles de blog, commentaires sur les forums ou les offres d'emploi reste non structurée. Ces sources contiennent des informations précieuses sur l'évolution des concurrents, des clients et du marché dans son ensemble.\\
+    % Selon l'enquête BrightLocal..., 92\% des clients lisent les avis en ligne et 86\% n'achèteront pas un produit avec moins de 3 étoiles sur 5, ce qui confirme que la plupart des clients vérifient les avis en ligne avant d'acheter un produit quelque soit son prix. 
+    Et comme les consommateurs formulent leurs plaintes de plus en plus sur Facebook et Twitter, la surveillance et la gestion de la e-réputation sont devenues une priorité pour les entreprises.
     \begin{itemize}
-        \item \textbf{L'analyse de sentiment:} déterminer l'attitude, l'état émotionnel, le jugement ou l'intention de l'internaute (positive, neutre ou négative) ou aussi reconnaitre l'humeur (heureux, triste, calme, en colère ...).\\
+        \item \textbf{L'analyse de sentiment:} déterminer l'attitude, l'état émotionnel, le jugement ou l'intention de l'internaute (positive, neutre ou négative) ou aussi reconnaître l'humeur (heureux, triste, calme, en colère ...).\\
     \end{itemize}
 
-    \subsection*{Publicité: "Qui est intéressé par mon produit ?"}
-    Les emails, les médias sociaux, le commerce électronique et les comportements sur les navigateurs contiennent beaucoup d'informations sur ce qui nous intéresse vraiment. L'énorme potentiel de ce type de données non structurées est confirmé par le fait les plus grandes entreprises génèrent aujourd'hui le plus de de leurs recettes de vente d'annonces (Google et Facebook).\\ 
-    Tâches TAL pertinentes pour cette application comprennent:
-
+    \item \textbf{Publicité: "Qui est intéressé par mon produit ?"}\\
+    Les emails, les médias sociaux, le commerce électronique et les comportements sur les navigateurs contiennent beaucoup d'informations sur ce qui nous intéresse vraiment. L'énorme potentiel de ce type de données non structurées est confirmé par le fait que les plus grandes entreprises génèrent aujourd'hui le plus de de leurs recettes de vente d'annonces (Google et Facebook).\\ Les tâches TALN comprennent:
     \begin{itemize}
         \item \textbf{Correspondance par mot-clé (matching):} vérifie si des mots d'intérêt sont inclus dans un texte. 
-        \item \textbf{Désambiguïsation:} identification du sens d'un mot utilisé dans une phrase.
+        \item \textbf{Désambiguïsation:} identification du sens d'un mot utilisé dans une phrase.\\\\
     \end{itemize}
+\end{itemize}
+
     
 \section{Techniques du TALN}
-Afin de réaliser une des applications sus-citées, un phase de pré-traitement des données (texte, phrase, mot...) est nécessaire. C'est une étape qui nécessite de l'expertise et la maîtrise de plusieurs techniques, et c'est l'étape  
+Afin de réaliser une des applications sus-citées, le processus de réalisation comporte plusieurs phases, commençant par la collecte de données, le pré-traitement et le nettoyage, la construction des corpus et des datasets, toute ces étapes nécessitent de l'expertise et la maîtrise des techniques de TALN, et c'est à ce moment là où on peut exploiter ces connaissances structurées.\\
+Parmi les techniques du traitement automatique de la langue les plus importantes, on trouve:
 
-\subsection{Expressions régulières}
-Une expression régulière est une chaîne de caractères, qui décrit, selon une syntaxe précise, un ensemble de chaînes de caractères possibles. Elles sont utilisées pour programmer des logiciels avec des fonctionnalités de lecture, de contrôle, de modification, et d'analyse de textes ainsi que dans la manipulation des langues formelles que sont les langages informatiques.\\
-On peut les retrouver dans plusieurs utilitaires tel que \textbf{GNU grep} qui utilisent ces expressions pour parcourir de façon automatique un document à la recherche de morceaux de texte compatibles avec le motif de recherche, et éventuellement effectuer un ajout, une substitution ou une suppression.
-
-L'Expression régulière suivante permet la reconnaissance des adresses mails:\\
-$$[\\w+.-]+@[\\w.-]+\\.[a-zA-Z]\{2,\}$$
+\subsection{Expressions régulières (REGEX)}
+Une expression régulière est une chaîne de caractères qui décrit, selon une syntaxe précise, un ensemble de chaînes de caractères possibles. Elles sont utilisées pour programmer des logiciels avec des fonctionnalités de lecture, de contrôle, de modification, et d'analyse de textes.\\
+On peut les retrouver dans plusieurs utilitaires tel que \textbf{GNU grep}, implémenté dans le noyaux \emph{Linux}, qui utilisent ces expressions pour parcourir de façon automatique un document à la recherche de morceaux de texte compatibles avec le motif de recherche, et éventuellement effectuer un ajout, une substitution ou une suppression.
+\begin{lstlisting}[style=code]
+    #Permet la reconnaissance des adresses mails
+    [\w+.-]+@[\w.-]+\.[a-zA-Z]{2,}
+\end{lstlisting}
 
     
 \subsection{Segmentation (Tokenization)}
-C'est l'opération la plus basique dans un process de TALN, elle consite en l'identification des tokens (mots), ou de phrases entières dans un texte que nous voulons traiter. La difficulté est dans le fait que l'utilisation de la ponctuation et les séparateurs pour la segmentation, et dans plusierus langues dont l'anglais et l'arabe, est souvent ambigu.     
-De nombreux algorithmes de segmentation appelés \emph{Tokenizer} sont disponibles sur internet en libre accés:
+C'est l'opération la plus basique dans un processus de TALN. Elle consiste en l'identification des Tokens\footnote{ici desciptive}, ou de phrases entières dans un texte que nous voulons traiter. La difficulté est dans le fait que l'utilisation de la ponctuation et les séparateurs pour la segmentation, et dans plusieurs langues dont l'anglais et l'arabe, est souvent ambigu.     
+De nombreux algorithmes de segmentation appelés \emph{Tokenizer} sont disponibles sur internet en libre accès:
 \begin{itemize}
-    \item \textbf{RegexpTokenizer} 
-    \item \textbf{Word_tokenize}
-    \item \textbf{TweetTokenizer} 
-    \item \textbf{PTBTokenizer}
-    \item
+    \item \textbf{RegexpTokenizer:} divise une chaîne en sous-chaînes en utilisant une expression régulière.
+    \item \textbf{TweetTokenizer:} développé en 2016 afin de pouvoir segmenter des Tweets en tokens, dans le but d'exploiter le contenu énorme des données disponible sur Twitter.
+    \item \textbf{PTBTokenizer:} c'est un programme open source, l’implémentation est basé sur des règles.  
 \end{itemize}
 
-
-
-
 \subsection{Lemmatisation et racinisation}
-La racine d’un mot correspond à la partie du mot restante une fois que l’on a supprimé son préfixe et son suffixe (et infixes dans certaines langue comme l'Arabe), à savoir son radical. Elle est aussi parfois connu sous le nom de stemme d’un mot.\\ 
-Contrairement au lemme qui correspond à un mot réel de la langue, la racine ou stemme ne correspond généralement pas à un mot réel.
-
-\textbf{Lemmatisation:} "chercher" => "cherch"\\
-\textbf{Racinisation (stemming):} "frontalier" => "front"  
-
-Plusieurs outils destinés à la lemmatisation et la racinisation sont implémenté dans des librairies majoritairement \emph{open source} et dans différents languages de programmation. Parmis ces dernieres on peut cités:
+La racine d'un mot correspond à la partie du mot restante une fois que l'on a supprimé son préfixe et son suffixe (et infixes dans certaines langue comme l'Arabe), à savoir son radical. Elle est aussi parfois connu sous le nom de \emph{Stemme} d'un mot.\\ 
+Contrairement au \emph{Lemme} qui correspond à un mot réel de la langue, la racine (Stemme) ne correspond généralement pas à un mot réel.
+\begin{lstlisting}[style=code]
+    #Lemmatisation 
+        "chercher" => "cherch"
+    #Racinisation (Stemming):
+        "frontalier" => "front"  
+\end{lstlisting}
+Plusieurs outils destinés à la lemmatisation et la racinisation sont implémentés dans des librairies majoritairement \emph{open source} et dans différents langages de programmations.
 \begin{itemize}
-    \item \textbf{Porter Stemmer} développé en 1979 par \emph{Martin Porter}  à Cambridge (Angleterre). 
-    L'algorithme permet d'éliminer les terminaisons morphologiques des mots en anglais.
-    \item \textbf{Snowball stemmer} mis en place par un groupe de linguiste, il prend en charge officielement 14 langue dont l'Anglais et le Français. 
-    \item ....other
+    \item \textbf{Porter Stemmer:} développé en 1979 par \emph{Martin Porter}  à Cambridge (Angleterre). 
+    L'algorithme permet d'éliminer les terminaisons morphologiques des mots en Anglais.
+    \item \textbf{Snowball stemmer:} mis en place par un groupe de linguiste, il prend en charge officiellement 14 langues dont l'Anglais et le Français. 
+    \item \textbf{Tashaphyne:} écrit entièrement en Python, \emph{Tashaphyne} est développé en 2012 par l'algérien Taha Zerrouki. Il est destiné au traitement de la langue Arabe uniquement.
+% @misc{zerrouki2012tashaphyne,
+% title={Tashaphyne, Arabic light stemmer},
+% author={Zerrouki, Taha},
+% url={https://pypi.python.org/pypi/Tashaphyne/0.2},
+% year={2012}
+% }
 \end{itemize} 
 
-
-\subsection{L'étiquetage morpho-syntaxique (POS Tagging)}
-Le POS Tagging est le processus qui consiste à associer à chaque mot d'un texte les informations grammaticales correspondantes comme la partie du discours, le genre, le nombre, etc. avec l'utilisation des programmes informatiques.\\
-L'étiquetage morpho-syntaxique est une opération très complexe, le fait d'avoir des mots et leur étiquettes est souvent pas suffisant vu les ambiguités qu'on peut rencontrer (pour un même mot, différentes étiquettes possible)
-Exemple:\\
-Le paysan ferme la ferme
-DET NN V DET NN
-DET NN ADJ PRN V
-
+\subsection{L'étiquetage morpho-syntaxique (PoS Tagging)}
+Le PoS Tagging est le processus qui consiste à associer à chaque mot d'un texte les informations grammaticales correspondantes comme le genre, le nombre, etc. avec l'utilisation des programmes informatiques.\\
+L'étiquetage morpho-syntaxique est une opération très complexe, le fait d'avoir des mots et leur étiquettes est souvent insuffisant vu les ambiguïtés qu'on peut rencontrer (pour un même mot, différentes étiquettes possible).
+\begin{lstlisting}[style=code]
+    """Phrase"""        Le  paysan ferme la  ferme
+    """Étiquetage 1"""  DET NN     V     DET NN
+    """Étiquetage 2"""  DET NN     ADJ   PRN V
+\end{lstlisting}
 Pour la langue anglaise on peut distinguer entre 50 et 150 étiquettes morpho-syntaxique selon le besoins et la précision voulues.
-Il existe également, comme pour les Stemmer, un grand ensemble d'algorithmes de POS Tagging (pré)entrainé:
+Il existe également, comme pour les Stemmer, un grand ensemble d'algorithmes de PoS Tagging (pré)entrainé:
 \begin{itemize}
-    \item Treetager
-    \item ........
-    \item Stanford Log-linear Part-Of-Speech Tagger
+    \item \textbf{Stanford PoS Tagger:} Écrit en Java dans ça totalité, le Stanford PoS Tagger reste l'un des meilleurs algorithmes d'étiquetage morpho-syntaxique. Il prend en charge plusieurs langues, dont l'Arabe, et il est implémenté dans plusieurs langages de programmations. 
+    \item \textbf{The MADAMIRA software:} développé au sein de l'université King Saud à l'Arabie Saoudite, MADAMIRA a montré une grande précision pour prédire correctement les étiquettes morpho-syntaxique des mots arabes.
+    % http://innovation.columbia.edu/technologies/cu14012_arabic-language-disambiguation-for-natural-language-processing-applications
 \end{itemize}
 
 \section{Aspect du langage}
     \subsection{Corpus}
+    Un corpus est un ensemble vaste de texte structuré, uniformisé et spécialisé, généralement, dans un domaine précis.
+    Les données stockés sont habituellement pré-traités soit manuellement par des experts, soit automatiquement à l'aide de programmes informatique. Un corpus peut contenir des textes dans une seule ou plusieurs langues.\\ 
+    Afin de rendre les corpus plus utiles, ils sont souvent soumis à des processus de vérifications par des experts du domaine. Ces experts font passé les corpus, généralement, par des pré-traitement tel que l'étiquetage morpho-syntaxique, l'indication des lemmes des mots utilisés...\\
+    Les corpus sont la base de connaissances principale en TALN et en linguistique. L'analyse et le traitement de divers types de corpus font également l'objet de nombreux travaux en reconnaissance vocale, traduction automatique, etc. où ils sont souvent utilisés pour créer des modèles d'apprentissage automatique et des modèles probabiliste tel que les modèles de Markov cachés.\\
+
+    Plusieurs corpus développés par des laboratoires de recherches sont disponibles gratuitement et en libre accès sur internet, on peut cité quelques un:
+    % Wołk, K .; Marasek, K. "Une méthode d'alignement basée sur la signification des phrases pour la préparation de corpus de texte parallèle". Avancées dans les systèmes intelligents et l'informatique . Springer. 275 : 107-114. ISBN  978-3-319-05950-1 . ISSN  2194-5357 .
+    % Wołk, K .; Marasek, K. (2015). "Tuned et GPU-accéléré l'extraction de données parallèle de corpus comparables". Notes de cours en intelligence artificielle . Springer: 32-40. ISBN  978-3-319-24032-9 .
+    % Yoon, H., et Hirvela, A. (2004). Attitudes des élèves ESL envers l'utilisation du corpus dans l'écriture L2. Journal of Second Language Writing, 13(4), 257-283. Récupéré le 21 mars 2012.
+    \begin{itemize}
+        \item \textbf{Gutenberg Corpus:} Une sélection de textes tirés des archives du projet Gutenberg, qui contient plus de 25000 livres électroniques gratuits (l'intégral des livres de William Shakespeare entre autre), tout le corpus est pré-traité, les textes sont segmentés en phrases et en mots, étiquetés et plein d'autres opérations très intéressantes.
+        \item \textbf{Web and Chat Text:} Il est très important de considérer un langage moins formel que les livres de Shakespeare. La collection de \emph{Web and Chat Text} disponible sur la librairie open source \textbf{NLTK}\footnote{shiash asuh nasub} est composés de discussions sur des forums de Firefox, des publicités personnelles et des critiques de films.
+        \item \textbf{Brown Corpus:} Créé en 1961 par l'université de Brown il fut le premier corpus électronique anglais de millions de mots. Ce corpus contient des textes classés par genre (Religion, sport, fiction..). C'est une ressource pratique pour étudier les différences entre les catégories de texte.
+        \item \textbf{Reuters Corpus:} Le Corpus Reuters contient 10.788 documents d'information totalisant 1,3 million de mots. Les documents ont été classés en 90 catégories. Cette répartition est destinée aux algorithmes d'apprentissage automatique supervisé qui prédisent la catégorie d'un document.
+    \end{itemize} %http://www.nltk.org/book/ch02.html
+
+    Il existe également d'autres corpus développés par des laboratoires de recherches des universités mais qui ne sont pas accessible, ils sont généralement payant à des prix très élevés comme le \emph{Penn Treebank} développé par l'université de Pennsylvania qui en a fait tout un commerce.
 
     \subsection{Base lexicales}
         \subsubsection{WordNet}
@@ -215,5 +229,5 @@ Il existe également, comme pour les Stemmer, un grand ensemble d'algorithmes de
 
 \Large
 \bibliographystyle{unsrt}
-\bibliography{biblio}
+\bibliography{biblio2}
 \end{document}
