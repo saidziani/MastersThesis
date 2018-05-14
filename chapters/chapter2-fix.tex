@@ -3,13 +3,16 @@
 \newpage
 \pagenumbering{arabic}
 \section{Introduction}
-Avec la montée du Web 2.0, la production de contenu participatif et collaboratif a largement remplacé les méthodes traditionnelles de partage de l'information. Un vaste potentiel inexploité réside dans les quantités de données à la fois énormes et dynamiques disponibles sur les différentes plate-formes numériques qui ne peuvent être traités avec les méthodes de l'informatique classique.\\
-Dans ce chapitre, nous allons discuter du Traitement Automatique du Langage Naturel (TALN), de sa puissance et son importance.\\ 
+Avec la montée du Web 2.0, la production de contenu participatif et collaboratif a largement remplacé les méthodes traditionnelles de partage de l'information. Un vaste potentiel inexploité réside dans les quantités de données à la fois énormes et dynamiques disponibles sur les différentes plate-formes numériques qui ne peuvent être traités avec les méthodes de l'informatique classique.
+
+\textcolor{red}{Les revues de presses, les blogs et les magazines représentent une partie considérable dans ce tsunami informationnel, et le choix des lectures quotidiennes devient de plus en plus difficile.}
+
+Dans ce chapitre, nous allons discuter du Traitement Automatique du Langage Naturel (TALN), de sa puissance et son importance.\
 
 En bref, l'objectif de cette partie est de décrire le but, les procédures et les applications pratiques du TALN d'une manière simple et claire. Nous examinerons la littérature la plus récente tout en décrivant les méthodes et les processus disponibles, nous analyserons certains des défis auxquels les chercheurs sont confrontés, et passerons brièvement en revue certaines des applications actuelles et futures de cette science.
 
 \section{Définition}
-Le Traitement automatique du langage naturel est l'un des principaux domaines de l'intelligence artificielle. Il permet de développer des systèmes qui peuvent \emph{analyser} et \emph{comprendre} le langage humain. En dehors des opérations courantes de traitement de texte qui considèrent les textes comme une simple séquence de symboles, l'utilisation des techniques de TALN permet d'organiser et de structurer des quantités énormes de connaissances pour développer des applications très avancées telles que la synthèse automatique, la reconnaissance d'entités, l'analyse des sentiments, la reconnaissance de la parole, ...etc.\\
+Le Traitement automatique du langage naturel est l'un des principaux domaines de l'intelligence artificielle. Il permet de développer des systèmes qui peuvent \emph{analyser} et \emph{comprendre} le langage humain. En dehors des opérations courantes de traitement de texte qui considèrent les textes comme une simple séquence de symboles, l'utilisation des techniques de TALN permet d'organiser et de structurer des quantités énormes de connaissances pour développer des applications très avancées telles que la synthèse automatique, la reconnaissance d'entités, l'analyse des sentiments, la reconnaissance de la parole, etc.\\
 
 Le TALN est considéré comme un problème difficile en informatique dû à l'imprécision du langage humain. Comprendre le langage humain, c'est comprendre non seulement les mots, mais aussi les concepts et comment ils sont liés pour créer du sens. Bien que la langue soit l'une des tâches les plus faciles à apprendre pour les humains, l'ambiguïté rend le traitement de cette dernière difficile à maîtriser pour les ordinateurs.
 
@@ -24,7 +27,7 @@ On peut en citer quelques unes:
 \begin{itemize}
     \item \textbf{La traduction automatique:}
     la traduction automatique des textes est probablement l'un des domaines les plus connus de l'IA. Elle a fait l'objet de plusieurs travaux depuis les années 50 du siècle passé. Le processus de traduction est découpé en plusieurs phases successives. Tout d'abord la compréhension et l'assimilation, ensuite la réexpression et la reformulation en langue cible.\\
-    Le traducteur automatique le plus utilisé sur internet est \emph{Google Translate} développé par le département de traduction automatique de \emph{Google} en 2006, il supporte aujourd'hui plus de 103 langues.[iciiiiii ref]
+    Le traducteur automatique le plus utilisé sur internet est \emph{Google Translate} développé par le département de traduction automatique de \emph{Google} en 2006, il supporte aujourd'hui plus de 103 langues\cite{ggltrans}.
 
     \item \textbf{Le résumé automatique:}
     la construction automatique de résumés est un champ de recherche original en informatique, même si son ampleur n'a jamais été aussi importante que la traduction automatique.\\
@@ -47,11 +50,11 @@ Quant à l'industrie, et avec le coût du calcul qui ne cesse de baisser, l'évo
 
     \item \textbf{E-réputation:}\\
     Les entreprises ont commencé, et cela depuis les années 80, à utiliser des logiciels pour trouver des modèles dans leurs propres données et prendre de meilleures décisions. L'optimisation des chaînes d'approvisionnement, des inventaires et des entrepôts, des processus de vente et de nombreuses autres applications ont donné naissance à ce que nous appelons aujourd'hui la \emph{Business Intelligence}\footnote{Stratégies et technologies utilisées par les entreprises pour l'analyse des données} (BI).\\ 
-    Mais, pour une entreprise, le plus important et le plus précieux est ce qui est dit dehors. C'est ce qui a poussé ces derniers à adopter des outils qui permettent d'exploiter les données externes/publiques collectées sur les réseaux sociaux.\\
+    Mais, pour une entreprise, le plus important et le plus précieux est \textcolor{red}{la réputation auprès des clientèls}. C'est ce qui a poussé \textcolor{red}{les acteurs du secteur professionnel} à adopter des outils qui permettent d'exploiter les données externes/publiques collectées sur les réseaux sociaux.\\
     Certaines de ces données sont structurées et prêtes à être analysées, par contre la plus grande partie générées par l'être humain, tels que les articles de blog, commentaires sur les forums ou les offres d'emploi, reste non structurée. Ces sources contiennent des informations précieuses sur l'évolution des concurrents, des clients et du marché dans son ensemble.\\
     Et comme les consommateurs formulent leurs plaintes de plus en plus sur \emph{Facebook} et \emph{Twitter}, la surveillance et la gestion de la e-réputation sont devenues une priorité pour les entreprises.
     \begin{itemize}
-        \item \textbf{L'analyse de sentiment:} Il s'agit de déterminer l'attitude, l'état émotionnel, le jugement ou l'intention de l'internaute (positive, neutre ou négative) ou aussi reconnaître l'humeur (heureux, triste, calme, en colère ...).\\
+        \item \textbf{L'analyse de sentiment:} Il s'agit de déterminer l'attitude, l'état émotionnel, le jugement ou l'intention de l'internaute (positive, neutre ou négative) ou aussi reconnaître l'humeur (heureux, triste, calme, en colère, etc).\\
     \end{itemize}
 
     \item \textbf{Publicité:}\\
@@ -64,12 +67,13 @@ Quant à l'industrie, et avec le coût du calcul qui ne cesse de baisser, l'évo
 
     
 \section{Outils de base}
-Afin de réaliser une des applications sus-citées, le processus comporte plusieurs phases, commençant par la collecte de données, le pré-traitement et la construction des corpus (Datasets). Toutes ces étapes nécessitent de l'expertise et la maîtrise des techniques de TALN, et c'est à ce moment là que l'on pourra exploiter ces connaissances structurées.
+Afin de réaliser une des applications sus-citées, le processus comporte plusieurs phases, commençant par la collecte de données, le pré-traitement et la construction des corpus (Datasets). Toutes ces étapes nécessitent de l'expertise et la maîtrise des techniques de TALN, et c'est à ce moment là que l'on pourra exploiter ces \textcolor{red}{connaissances structurées.!!}
 
 Parmi les techniques les plus importantes du traitement automatique de la langue, on trouve:
     \subsection{Reconnaissance de patrons}
     Un patron servira à retrouver dans un texte des formes ayant une même construction. Souvent, le \emph{pattern matching} se fait en utilisant les expressions régulières. Une expression régulière est une chaîne de caractères qui décrit, selon une syntaxe précise, un ensemble de chaînes de caractères possibles. Elles sont utilisées pour programmer des logiciels avec des fonctionnalités de lecture, de contrôle, de modification, et d'analyse de textes.\\
     On peut les retrouver dans plusieurs utilitaires tel que \textbf{GNU grep}, implémenté dans le noyau \emph{Linux}, qui utilise ces expressions pour parcourir de façon automatique un document à la recherche de morceaux de texte compatibles avec le motif défini, et éventuellement effectuer un ajout, une substitution ou une suppression.
+
     On peut voir dans l'exemple suivant une expression régulière qui sert à identifier des adresses mails dans un texte: 
     \begin{lstlisting}[style=code]
         [\w+.-]+@[\w.-]+\.[a-zA-Z]{2,}
@@ -89,9 +93,9 @@ Parmi les techniques les plus importantes du traitement automatique de la langue
     Contrairement au \emph{Lemme} qui correspond à un mot réel de la langue, la racine (stemme) ne correspond généralement pas à un mot du dictionnaire.
     \begin{lstlisting}[style=code]
         #Lemmatisation 
-            "chercher" => "cherch"
-        #Racinisation (Stemming):
             "frontalier" => "front"  
+        #Racinisation (Stemming):
+            "chercher" => "cherch"
     \end{lstlisting}
     Plusieurs outils destinés à la lemmatisation et la racinisation sont implémentés dans des librairies majoritairement open source et dans différents langages de programmations.
     % \begin{itemize}
@@ -102,7 +106,7 @@ Parmi les techniques les plus importantes du traitement automatique de la langue
     % \end{itemize} 
 
     \subsection{L'étiquetage morpho-syntaxique (PoS Tagging)}
-    Le PoS Tagging est le processus qui consiste à associer à chaque mot d'un texte les informations morpho-syntaxiques correspondantes comme le genre, le nombre, ...etc. en plus de la catégorie syntaxique avec l'utilisation des programmes informatiques.\\
+    Le PoS Tagging est le processus qui consiste à associer à chaque mot d'un texte les informations morpho-syntaxiques correspondantes comme le genre, le nombre, etc. en plus de la catégorie syntaxique avec l'utilisation des programmes informatiques.\\
     L'étiquetage morpho-syntaxique est une opération très complexe, le fait d'avoir des mots et leur étiquettes est souvent insuffisant vu les ambiguïtés qu'on peut rencontrer (pour un même mot, différentes étiquettes possibles).
     \begin{lstlisting}[style=code]
         """Phrase"""        Le  paysan ferme la  ferme
@@ -139,7 +143,7 @@ Parmi les techniques les plus importantes du traitement automatique de la langue
     nous voulons vectoriser le texte "La reconnaissance faciale", donc nous aurons le vecteur suivant: (1, 1, 0, 1).\\
     Afin d'améliorer cette représentation, il est préférable d'utiliser les techniques de lemmatisation des mots et des n-grammes.}
     
-    \subsection{TF-IDF Fréquence des Termes-Fréquence Document Inverse(Term Frequency-Inverse Document Frequency)}
+    \subsection{TF-IDF Fréquence des Termes-Fréquence Document Inverse}
     
      \textcolor{red}{C'est une statistique numérique qui révèle l'importance d'un mot pour un document dans une collection. le TF-IDF est souvent utilisé comme facteur de pondération dans l'extraction d'informations et l'exploration de texte (text mining).
     Cette valeur augmente proportionnellement que le nombre de fois qu'un mot apparaît dans le document, mais elle s'affecte par la fréquence du mot dans le corpus. Ceci peut aider à contrôler le fait que certains mots sont généralement plus commun que les autres. Le TF-IDF peut être utilisé pour le filtrage des mots d'arrêt dans divers domaines de sujet, y compris le résumé automatique ou la catégorisation de textes. \\
@@ -156,7 +160,7 @@ Parmi les techniques les plus importantes du traitement automatique de la langue
     Un corpus est un ensemble vaste de textes uniformisés et spécialisés, généralement, dans un domaine précis.
     Les données stockées sont habituellement pré-traitées soit manuellement par des experts, soit automatiquement à l'aide de programmes informatique. Un corpus peut contenir des textes dans une seule ou plusieurs langues.\\ 
     Afin de rendre les corpus plus utiles, ils sont souvent soumis à des processus de validations par des experts du domaine. Ces experts font passer les corpus, généralement, par des pré-traitements tel que l'étiquetage morpho-syntaxique, l'indication des lemmes des mots utilisés, etc.\\
-    Les corpus sont la base de connaissances principale en TALN et en linguistique. L'analyse et le traitement de divers types de corpus font également l'objet de nombreux travaux en reconnaissance vocale, traduction automatique, ...etc. où ils sont souvent utilisés pour créer des modèles d'apprentissage automatique et des modèles probabilistes tel que les Modèles de Markov Cachés.\\
+    Les corpus sont la base de connaissances principale en TALN et en linguistique. L'analyse et le traitement de divers types de corpus font également l'objet de nombreux travaux en reconnaissance vocale, traduction automatique, etc. où ils sont souvent utilisés pour créer des modèles d'apprentissage automatique et des modèles probabilistes tel que les Modèles de Markov Cachés.
 
     % Plusieurs corpus développés par des laboratoires de recherches sont disponibles gratuitement et en libre accès sur internet, on peut cité quelques un:
 
@@ -172,13 +176,14 @@ Parmi les techniques les plus importantes du traitement automatique de la langue
 
     \subsection{WordNet}
     WordNet est une grande base de données lexicale. Les noms, les verbes, les adjectifs et les adverbes sont regroupés dans des ensembles de synonymes cognitifs (Synsets), chacun exprimant un concept distinct. Les Synsets sont liés par des relations conceptuelles sémantiques et lexicales. WordNet est librement et publiquement disponible pour le téléchargement.\\
-    Le premier Wordnet, le Princeton Wordnet, a été développé pour l'Anglais par des linguistes du laboratoire des sciences cognitives de l'université de Princeton depuis une vingtaine d'années.[iciiiiiiii ref]
+    Le premier Wordnet, le Princeton Wordnet, a été développé pour l'Anglais par des linguistes du laboratoire des sciences cognitives de l'université de Princeton depuis une vingtaine d'années.
         \subsubsection{Structure}
-        La principale relation entre les mots dans WordNet est la \emph{synonymie}, des mots qui dénotent le même concept et sont interchangeables dans de nombreux contextes, un synset contient une brève définition («gloss») et, dans la plupart des cas, une ou plusieurs phrases courtes illustrant l'utilisation. On trouve aussi dans Wordnet d'autres relations en plus de la synonymie .|.|.|.|.| comme on peut le voire dans la FIGURE 2.1!!!!. 
+        La principale relation entre les mots dans WordNet est la \emph{synonymie}, des mots qui dénotent le même concept et sont interchangeables dans de nombreux contextes, un synset contient une brève définition («gloss») et, dans la plupart des cas, une ou plusieurs phrases courtes illustrant l'utilisation. Wordnet comporte aussi d'autres relations en plus de la synonymie comme on peut le voire dans la figure \ref{synset}, comme la méronymie\footnote{Méronymie: lorsqu'un terme désigne une partie d'un second terme. Par exemple, bras est un méronyme de corps[Wikipédia].}, hyperonymie\footnote{Hyperonymie: est la relation sémantique hiérarchique d'une unité lexicale à une autre selon laquelle l'extension du premier terme, plus général, englobe l'extension du second, plus spécifique. Le premier terme est dit hyperonyme de l'autre, ou superordonné par rapport à l'autre. Exemple: « coiffure » est un hyperonyme de « couronne »[Wikipédia].} et l'hyponymie\footnote{Hyponymie: relation sémantique d'un lexème à un autre selon laquelle l'extension du premier est incluse dans l'extension du second. Le premier terme est dit hyponyme de l'autre. C'est le contraire de l'hyperonymie. Exemple: « haut-de-forme » est un hyponyme de « chapeau »[Wikipédia].}. 
         \begin{figure}[H]
             \centering
-                \includegraphics[height=150pt,width=300pt]{img/chapter2/wordnet.jpg}
-            \caption{Synset du WordNet Anglophone}
+                \includegraphics[height=200pt,width=330pt]{img/chapter2/wordnet.jpg}
+            \caption{Synset du WordNet de l'Anglais}
+            \label{synset}
         \end{figure}
     
     
@@ -196,10 +201,10 @@ Parmi les techniques les plus importantes du traitement automatique de la langue
     \item  \textcolor{red}{La première appelée « Continuous Bag of Words » (CBOW), qui entraîne le réseau de neurones pour prédire un mot en fonction de son contexte, c’est à dire les mots avant/après dans une phrase.\\
     Dans le processus de CBOW, trois couches sont utilisées : la couche d'entrée correspond au contexte, la couche cachée correspond à la projection de chaque mot de la couche d'entrée dans la matrice de poids qui elle même  est projetée sur la troisième couche qui est la couche de sortie.\\ }
    
-         \begin{figure}[H]
+        \begin{figure}[H]
         	\centering
         	\includegraphics[height=250pt,width=300pt]{img/chapter2/Cbow.png}
-        	\caption{Réseau de neurones CBOW\cite{cbow}}
+            \caption{Réseau de neurones CBOW}
         \end{figure}
         
     
@@ -209,7 +214,7 @@ Parmi les techniques les plus importantes du traitement automatique de la langue
      \begin{figure}[H]
     	\centering
     	\includegraphics[height=250pt,width=300pt]{img/chapter2/Skip-Gram.png}
-    	\caption{Réseau de neurones Skip-Gram\cite{cbow}}
+    	\caption{Réseau de neurones Skip-Gram}
     \end{figure}
     
     \end{itemize}
@@ -328,7 +333,7 @@ Parmi les techniques les plus importantes du traitement automatique de la langue
             
         \textbf{•Méthode basée sur un modèle:} Elle utilise un modèle pour représenter le document. Les modèles linguistiques et les règles d'extraction sont utilisées pour identifier les extraits du texte les plus pertinents\cite{5}.
 
-        \textbf{•Méthode basée sur l'ontologie:} Dans cette méthode, il est question d'utiliser le domaine d'ontologie ou base de connaissances au processus de résumé \cite{ram}.
+        \textbf{•Méthode basée sur l'ontologie:} Dans cette méthode, \textcolor{red}{il est question d'utiliser des ontologies dans le processus de résumé automatique \cite{ram}.!!}
  
         
 
