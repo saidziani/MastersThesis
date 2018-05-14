@@ -102,14 +102,14 @@ Parmi les techniques les plus importantes du traitement automatique de la langue
     % \end{itemize} 
 
     \subsection{L'étiquetage morpho-syntaxique (PoS Tagging)}
-    Le PoS Tagging est le processus qui consiste à associer à chaque mot d'un texte les informations grammaticales correspondantes comme le genre, le nombre, ...etc. avec l'utilisation des programmes informatiques.\\
-    L'étiquetage morpho-syntaxique est une opération très complexe, le fait d'avoir des mots et leur étiquettes est souvent insuffisant vu les ambiguïtés qu'on peut rencontrer (pour un même mot, différentes étiquettes possible).
+    Le PoS Tagging est le processus qui consiste à associer à chaque mot d'un texte les informations morpho-syntaxiques correspondantes comme le genre, le nombre, ...etc. en plus de la catégorie syntaxique avec l'utilisation des programmes informatiques.\\
+    L'étiquetage morpho-syntaxique est une opération très complexe, le fait d'avoir des mots et leur étiquettes est souvent insuffisant vu les ambiguïtés qu'on peut rencontrer (pour un même mot, différentes étiquettes possibles).
     \begin{lstlisting}[style=code]
         """Phrase"""        Le  paysan ferme la  ferme
         """Étiquetage 1"""  DET NN     V     DET NN
         """Étiquetage 2"""  DET NN     ADJ   PRN V
     \end{lstlisting}
-    Pour la langue anglaise on peut distinguer entre 50 et 150 étiquettes morpho-syntaxique selon le besoins et la précision voulues.
+    Pour la langue anglaise on peut distinguer entre 50 et 150 étiquettes morpho-syntaxiques selon les besoins et la précision voulue.
     % Il existe également, comme pour les Stemmer, un grand ensemble d'algorithmes de PoS Tagging (pré)entrainé:
     % \begin{itemize}
     %     \item \textbf{Stanford PoS Tagger:} Écrit en Java dans ça totalité, le Stanford PoS Tagger reste l'un des meilleurs algorithmes d'étiquetage morpho-syntaxique. Il prend en charge plusieurs langues, dont l'Arabe, et il est implémenté dans plusieurs langages de programmations. 
@@ -153,10 +153,10 @@ Parmi les techniques les plus importantes du traitement automatique de la langue
 \section{Aspect du langage}
  
     \subsection{Corpus}
-    Un corpus est un ensemble vaste de texte structuré, uniformisé et spécialisé, généralement, dans un domaine précis.
-    Les données stockés sont habituellement pré-traités soit manuellement par des experts, soit automatiquement à l'aide de programmes informatique. Un corpus peut contenir des textes dans une seule ou plusieurs langues.\\ 
-    Afin de rendre les corpus plus utiles, ils sont souvent soumis à des processus de vérifications par des experts du domaine. Ces experts font passé les corpus, généralement, par des pré-traitement tel que l'étiquetage morpho-syntaxique, l'indication des lemmes des mots utilisés...etc.\\
-    Les corpus sont la base de connaissances principale en TALN et en linguistique. L'analyse et le traitement de divers types de corpus font également l'objet de nombreux travaux en reconnaissance vocale, traduction automatique, ...etc. où ils sont souvent utilisés pour créer des modèles d'apprentissage automatique et des modèles probabiliste tel que les modèles de Markov cachés.\\
+    Un corpus est un ensemble vaste de textes uniformisés et spécialisés, généralement, dans un domaine précis.
+    Les données stockées sont habituellement pré-traitées soit manuellement par des experts, soit automatiquement à l'aide de programmes informatique. Un corpus peut contenir des textes dans une seule ou plusieurs langues.\\ 
+    Afin de rendre les corpus plus utiles, ils sont souvent soumis à des processus de validations par des experts du domaine. Ces experts font passer les corpus, généralement, par des pré-traitements tel que l'étiquetage morpho-syntaxique, l'indication des lemmes des mots utilisés, etc.\\
+    Les corpus sont la base de connaissances principale en TALN et en linguistique. L'analyse et le traitement de divers types de corpus font également l'objet de nombreux travaux en reconnaissance vocale, traduction automatique, ...etc. où ils sont souvent utilisés pour créer des modèles d'apprentissage automatique et des modèles probabilistes tel que les Modèles de Markov Cachés.\\
 
     % Plusieurs corpus développés par des laboratoires de recherches sont disponibles gratuitement et en libre accès sur internet, on peut cité quelques un:
 
@@ -171,10 +171,10 @@ Parmi les techniques les plus importantes du traitement automatique de la langue
     % Il existe plusieurs corpus développés par des laboratoires de recherches des universités mais qui ne sont pas accessible, ils sont généralement payant à des prix très élevés comme le \emph{Penn Treebank} développé par l'université de Pennsylvania qui en a fait tout un commerce.
 
     \subsection{WordNet}
-    WordNet est une grande base de données lexicale. Les noms, les verbes, les adjectifs et les adverbes sont regroupés dans des ensembles de synonymes cognitifs (Synsets), chacun exprime un concept distinct.\\
-    Les Synsets sont liés par des relations conceptuelles sémantiques et lexicales. WordNet est librement et publiquement disponible pour le téléchargement.
+    WordNet est une grande base de données lexicale. Les noms, les verbes, les adjectifs et les adverbes sont regroupés dans des ensembles de synonymes cognitifs (Synsets), chacun exprimant un concept distinct. Les Synsets sont liés par des relations conceptuelles sémantiques et lexicales. WordNet est librement et publiquement disponible pour le téléchargement.\\
+    Le premier Wordnet, le Princeton Wordnet, a été développé pour l'Anglais par des linguistes du laboratoire des sciences cognitives de l'université de Princeton depuis une vingtaine d'années.[iciiiiiiii ref]
         \subsubsection{Structure}
-        La principale relation entre les mots dans WordNet est la \emph{synonymie}, des mots qui dénotent le même concept et sont interchangeables dans de nombreux contextes, un synset contient une brève définition («gloss») et, dans la plupart des cas, une ou plusieurs phrases courtes illustrant l'utilisation.
+        La principale relation entre les mots dans WordNet est la \emph{synonymie}, des mots qui dénotent le même concept et sont interchangeables dans de nombreux contextes, un synset contient une brève définition («gloss») et, dans la plupart des cas, une ou plusieurs phrases courtes illustrant l'utilisation. On trouve aussi dans Wordnet d'autres relations en plus de la synonymie .|.|.|.|.| comme on peut le voire dans la FIGURE 2.1!!!!. 
         \begin{figure}[H]
             \centering
                 \includegraphics[height=150pt,width=300pt]{img/chapter2/wordnet.jpg}
@@ -259,14 +259,13 @@ Parmi les techniques les plus importantes du traitement automatique de la langue
 
 \section{Résumé automatique}
     \subsection{Définition}
-    La procédure consiste à diminuer le contenu d'un document/texte avec un programme informatique. Le texte résultant (résumé) devrait contenir les idées les plus importantes du texte original.
+    Le résumé automatique consiste à diminuer le contenu d'un document/texte avec un programme informatique. Le texte résultant (résumé) devrait contenir les idées les plus importantes du texte original.
 
-    \emph{"La synthèse de texte est un processus qui consiste à distiller les informations les plus importantes d'une source pour produire une version abrégée"}\\
-    — Page 1, «Advances in Automatic Text Summarization»\cite{aats}, 1999.
+    \emph{"La synthèse de texte est un processus qui consiste à distiller les informations les plus importantes d'une source pour produire une version abrégée"}\footnote{Traduction par les auteurs de ce mémoire}\cite{aats}(Page 1)\\
 
     Cette technique est de plus en plus nécessaires pour répondre à la croissance exponentielle des quantités  de données textuelles disponibles sur internet pour mieux reconnaître les informations pertinentes et pour les consommer plus rapidement.
 
-    Dans un livre de 2014 intitulé «Automatic Text Summarization»\cite{atsjmtm}— Page 4-5, l'auteur à citer 6 raisons pour lesquelles nous avons besoin d'outils pour le résumé automatique:
+    Dans un livre de 2014 intitulé «Automatic Text Summarization»\cite{atsjmtm}(Pages 4-5), l'auteur à cité 6 raisons pour lesquelles nous avons besoin d'outils pour le résumé automatique:
 
     \begin{itemize}
         \item Les résumés réduisent le temps de lecture.
@@ -287,7 +286,7 @@ Parmi les techniques les plus importantes du traitement automatique de la langue
         \item Avis (Livre, article..)
         \item Biographie (Curriculum Vitae, nécrologie)
         \item Bulletins (prévisions météo)
-        \item Histoires (chronologies des événements)
+        \item Histoire (chronologies des événements)
     \end{itemize}
 
     \subsection{Résumé extractif}
