@@ -290,85 +290,82 @@ Parmi les techniques les plus importantes du traitement automatique de la langue
     \end{itemize}
 
     \subsection{Résumé extractif}
-        Cette approche implique la sélection de phrases à partir d'un document source pour constituer un nouveau texte (résumé). Les techniques consistent à classer la pertinence des phrases afin de retenir celles qui sont les plus importantes pour garder le sens et la signification du texte original.
+        Cette approche de résumé automatique implique la sélection de phrases à partir d'un document source pour constituer un nouveau texte (résumé). Les techniques consistent à classer la pertinence des phrases afin de retenir celles qui sont les plus importantes pour garder le sens et la signification du texte original.
 
-        La pertinence d'une phrase est calculée à base de plusieurs caractéristiques (Features), certaines on été citées dans un article publié dans \emph{"Journal of Computer Science"} en 2017 intitulé «A Review on Automatic Text Summarization Approaches»\cite{ratsa} :
+        La pertinence d'une phrase est calculée à base de plusieurs caractéristiques (Features). Certaines de celles-ci sont\cite{ratsa} :
         
         \begin{itemize}
             \item \textbf{Titre:} Les mots de titre apparaissant dans une phrase pourraient suggérer que la phrase contient des informations importantes
-            \item \textbf{Position de la phrase:} Les phrases de début dans un document habituellement décrit les principales informations concernant document.
-            \item \textbf{Longueur de la phrase:} Les phrases trop courtes peuvent contenir moins informations et les longues phrases ne sont pas appropriées à représenter le résumé.
-            \item \textbf{Poids d'un mot/terme:} Mots ou termes qui ont une occurrence élevée dans un document est utilisé pour déterminer l'importance d'un phrase.
-            \item \textbf{Nom propre/Entités nommées:} nom d'une personne, organisation un emplacement.. sont considéré comme porteur d'informations importantes.
+            \item \textbf{Position de la phrase:} Les phrases de début dans un document habituellement décrivent les principales informations concernant document.
+            \item \textbf{Longueur de la phrase:} Les phrases trop courtes peuvent contenir moins d'informations et les longues phrases ne sont pas appropriées à représenter le résumé.
+            \item \textbf{Poids d'un mot/terme:} Mots ou termes qui ont une occurrence élevée dans un document sont utilisés pour déterminer l'importance d'une phrase.
+            \item \textbf{Noms propres/Entités nommées:} les noms de personnes, organisations, lieux, etc. sont considérés comme porteurs d'informations importantes.
         \end{itemize}   
 
         \subsubsection{État de l'art du Résumé extractif}
-        \textbf{•La méthode basé TF-IDF\footnote{Term Frequency-Inverse Document Frequency, méthode de pondération souvent utilisée en recherche d'information.}:}
-            Les phrases sont classées en fonction du terme et de la fréquence du document \cite{tfidf}. La similarité entre le vecteur de requête et les vecteurs de phrases est calculé puis les phrases les plus importantes sont incluses dans le résumé. L'inconvénient est  la Redondance dans le résumé.\cite{surveysummarization}
+        \textbf{•La méthode basée TF-IDF\footnote{Term Frequency-Inverse Document Frequency, méthode de pondération souvent utilisée en recherche d'information.}:}
+            Les phrases sont classées en fonction de la fréquence du terme et de l'inverse de la fréquence du document \cite{tfidf}. La similarité entre le vecteur de requête et les vecteurs de phrases est calculée puis les phrases les plus importantes sont incluses dans le résumé. L'inconvénient est  la Redondance dans le résumés.\cite{surveysummarization}
             
-        \textbf{•La méthode basé sur apprentissage automatique supervisé:} Les phrases sont classées sur la base de l'inclusion de phrases récapitulatives et de l'exclusion de phrases résumées. La classification est basée sur les caractéristiques de la pertinence des phrases dans le résumé. Les probabilités de classification sont faites sur la base de la technique statistique en utilisant la règle de Bayes. Dans ce cas, La redondance sera peut être réduite mais cette méthode reste complexe.\cite{surveysummarization}
+        \textbf{•La méthode basée sur apprentissage automatique supervisé:} Les phrases sont classées sur la base de l'inclusion de phrases récapitulatives et de l'exclusion de phrases résumées. La classification est basée sur les caractéristiques de la pertinence des phrases dans le résumé. Les probabilités de classification sont faites sur la base de la technique statistique en utilisant la règle de Bayes. Dans ce cas, la redondance sera peut être réduite mais cette méthode reste complexe.\cite{surveysummarization}
             
-        \textbf{•La méthode basé sur le Clustering\footnote{Le partitionnement de données, méthode d'analyse de donnée. Elle vise à diviser un ensemble de données en différents « paquets » homogènes, chaque sous-ensemble partagent des caractéristiques communes.}:} ces documents sont représentés en utilisant le TF-IDF de des dizaines de mots. La fréquence de terme utilisée dans ce contexte est le nombre moyen d'occurrences (par document) sur le cluster. La valeur IDF est calculée sur la base du corpus entier. Le synthétiseur prend des documents déjà groupés en entrée. Chaque cluster est considéré comme un thème.
-            Le thème est représenté par des mots avec une fréquence de premier rang, dans le TF-IDF dans ce groupe.\\
-            La sélection de la phrase est basée sur la similarité des phrases au thème du cluster. Le facteur suivant qui est pris en compte pour la sélection de la phrase est l'emplacement de la phrase dans le document (Li). Le dernier facteur qui augmente la score d'une phrase est sa similitude avec la première phrase du document auquel elle appartient
-            (Fi).\\
-            L'avantage du clustering est qu'il peut être utilisé pour grouper des phrases similaires dans plusieurs documents.\cite{surveysummarization}
+        \textbf{•La méthode basée sur le Clustering\footnote{Le partitionnement de données, méthode d'analyse de données, vise à diviser un ensemble de données en différents « paquets » homogènes, chaque sous-ensemble partageant des caractéristiques communes.}:} Ces documents sont représentés en utilisant le TF-IDF de dizaines de mots. La fréquence de terme utilisée dans ce contexte est le nombre moyen d'occurrences (par document) dans le cluster. La valeur IDF est calculée sur la base du corpus entier. Le synthétiseur prend des documents déjà groupés en entrée. Chaque cluster est considéré comme un thème.
+        Le thème quant à lui est représenté par des mots avec leurs fréquences d’occurrences.\\
+        La sélection de la phrase est basée sur la similarité des phrases au thème du cluster. Le facteur suivant qui est pris en compte pour la sélection de la phrase est l'emplacement de la phrase dans le document (Li). Le dernier facteur qui augmente la score d'une phrase est sa similitude avec la première phrase du document auquel elle appartient (Fi).\\
+        L'avantage du clustering est qu'il peut être utilisé pour grouper des phrases similaires dans plusieurs document\cite{surveysummarization}.
             
-        \textbf{•La méthode basé Logique Flou\footnote{Formalisée par Lotfi Zadeh en 1965, elle consiste à tenir compte de divers facteurs numériques pour aboutir à une décision qu'on souhaite acceptable.}:} Le système flou considère les caractéristiques des phrases telles que la longueur de la phrase, le mot du titre, mot-clé,...etc\cite{10}. Score les phrases et extraire les phrases importantes sur la base de valeurs assignées. La fonction si-alors est utilisée pour trouver les phrases importantes.\\
-        L'avantage de cette méthode est que les caractéristiques sont extraites et le score de fonctionnalité est donné comme entrée à \emph{Fuzzifier}, mais la performance reste limitée.\cite{surveysummarization}
+        \textbf{•La méthode basée Logique Floue\footnote{Formalisée par Lotfi Zadeh en 1965, elle consiste à tenir compte de divers facteurs numériques pour aboutir à une décision qu'on souhaite acceptable.}:} Le système flou considère les caractéristiques des phrases telles que la longueur de la phrase, le mot du titre, les mots-clés, .etc\cite{10}. Il assigne un score aux phrases et extrait les plus importantes sur la base des valeurs assignées.\\
+        L'avantage de cette méthode consiste en la facilité de l'extraction des caractéristiques qui servent à calculé le score qui sert, à son tours, comme entrée à \emph{Fuzzifier}, mais la performance de cette approche reste limitée\cite{surveysummarization}.
 
     \subsection{Résumé abstractif}
-        L'approche abstractive quant à elle, consiste en la génération de phrases entièrement nouvelles. Cette méthode est plus difficile, mais c'est aussi l'approche utilisée par l'humain. Elle est basée sur la sélection et la compression du contenu original.
+        L'approche de résumé automatique abstractive quant à elle, consiste en la génération de phrases entièrement nouvelles. Cette méthode est plus difficile, mais c'est aussi l'approche utilisée par l'humain. Elle est basée sur la sélection et la compression du contenu original.
 
         Récemment, les méthodes d'apprentissage en profondeur ont montré des résultats prometteurs pour le résumé automatique. Des approches ont été proposées inspirées par l'application de méthodes d'apprentissage en profondeur pour la traduction automatique.
 
-        Principalement basées sur les Réseaux de neurones récurrents, ces dernières ont pu montrer des performances et des résultats assez impressionnantes, comme on peut le constater dans les deux articles «Abstractive Text Summarization Using Sequence-to-Sequence RNNs and Beyond»\cite{atsuss} et «A Neural Attention Model for Sentence Summarization»\cite{ruch} où plusieurs nouveau modèles basés sur l'apprentissage profond ont été proposés qui surpassent statistiquement tout les autres approches abstractives.
+        Principalement basées sur les Réseaux de neurones récurrents, ces dernières ont pu montrer des performances et des résultats assez impressionnants, comme on peut le constater dans \cite{atsuss} et \cite{ruch} où plusieurs nouveaux modèles basés sur l'apprentissage profond ont été proposés qui surpassent statistiquement toutes les autres approches abstractives.
 
         \subsubsection{État de l'art du Résumé abstractif}
-        \textbf{•Méthode basée sur un arbre:} Elle utilise un arbre de dépendance pour représenter le texte d'un document. Sur la base de relation entre les sous-arbres les phrases similaires sont sélectionné et le résumeur génère le résumé final \cite{5}.
+        \textbf{•Méthode basée sur les arbres:} Elle utilise un arbre de dépendance pour représenter le texte d'un document. Sur la base des relations entre les sous-arbres les phrases similaires sont sélectionnées et le résumeur génère le résumé final \cite{5}.
             
-        \textbf{•Méthode basée sur un modèle:} Elle utilise un modèle pour représenter le document. Les modèles linguistiques et les règles d'extraction sont utilisées pour identifier les extraits du texte sera cartographié dans les emplacements du modèle \cite{5}.
+        \textbf{•Méthode basée sur un modèle:} Elle utilise un modèle pour représenter le document. Les modèles linguistiques et les règles d'extraction sont utilisées pour identifier les extraits du texte les plus pertinents\cite{5}.
 
         \textbf{•Méthode basée sur l'ontologie:} Dans cette méthode, il est question d'utiliser le domaine d'ontologie ou base de connaissances au processus de résumé \cite{ram}.
  
         
 
-\section{Catégorisation de texte}
+\section{Catégorisation de textes}
     \subsection{Définition}
-    La catégorisation de textes a pour objectif de regrouper les textes similaires, c'est à dire thématiquement proches. L'intérêt d'une telle démarche est d'organiser les connaissances de façon à pouvoir effectuer, par la suite, une recherche ou une extraction d'information efficace. Elle est largement étudiée dans différentes communautés tels que le Data mining, les bases de données, l'apprentissage automatique et la recherche d'informations.
+    La catégorisation de textes a pour objectif de regrouper les textes similaires, c'est à dire thématiquement proches. L'intérêt d'une telle démarche est d'organiser les connaissances de façon à pouvoir effectuer, par la suite, une recherche ou une extraction d'information efficace. Elle est largement étudiée dans différentes communautés tels que le Data Mining, les bases de données, l'apprentissage automatique et la recherche d'informations.
 
     \subsection{Domaines d'application}
-    Plusieurs applications dans lesquels la catégorisation de texte est couramment utilisée, on peut citer:
+    Plusieurs applications dans lesquelles la catégorisation de textes est couramment utilisée, on peut citer:
 
-    \textbf{•Filtrage et organisation des informations d'actualités:} avec les quantités énormes de d'informations d'actualités en ligne, il est très difficile de catégoriser ces derniers manuellement, mais cela est possible grâce aux algorithmes de classifications. 
+    \textbf{•Filtrage et organisation des informations d'actualités:} avec les quantités énormes de d'informations d'actualités en ligne, il est très difficile de catégoriser ces dernières manuellement, mais cela est possible grâce aux algorithmes de classifications. 
 
-    \textbf{•Organisation des documents:} aider à la catégorisation de documents, un exemple d'application est les fichiers d'un ordinateur, distinguer les fichiers \emph{log}, \emph{système},...etc.
+    \textbf{•Organisation des documents:} aider à la catégorisation de documents, un exemple d'application est l'ensemble des fichiers d'un ordinateur où il s'agit de distinguer les fichiers \emph{log}, \emph{système}, etc.
 
-    \textbf{•Exploration des opinions:} souvent utilisé pour la catégorisation des commentaires sur internet.
+    \textbf{•Exploration des opinions:} souvent utilisée pour la catégorisation des commentaires sur les réseaux sociaux.
 
     \textbf{•Catégorisation des emails et filtrage des spams:} reconnaître l'objet de l'email ou déterminer les courriers indésirables de manière automatisée.
      
-    \subsection{Technique de catégorisation de texte}
-    De nombreuse techniques ont été conçues pour la catégorisation des textes. Puisque il est possible de modélisé ces derniers comme des données quantitatives généralement avec des fréquences de terme, la plupart des méthodes appliqués aux problèmes quantitatifs sont également applicables.\\    
-    Quelques techniques on été citées dans un travail de recherche sur les algorithmes de catégorisations apparu dans le \emph{chapitre 6} du livre de 2012 «Mining Text Data»\cite{stca}:
+    \subsection{Technique de classifications de textes}
+    De nombreuse techniques ont été conçues pour la catégorisation des textes. Puisqu'il est possible de modéliser ces derniers comme des données quantitatives généralement avec des fréquences de termes, la plupart des méthodes appliquées aux problèmes quantitatifs sont également applicables.\\    
+    Quelques une de ces techniques on été citées dans \cite{stca}:
 
     \begin{itemize}
-        \item Arbres de décisions: la division hiérarchique de l'espace de données dans les arbres de décisions permet de créer des partitions de classe qui sont plus asymétriques en termes de distribution de leur classe.
+        \item Arbres de décisions: la division hiérarchique de l'espace de données dans les arbres de décisions permet de créer des partitions de classes qui sont plus asymétriques en termes de distribution de leurs classes.
 
-        \item Basé règles: déterminer le modèles de mots le plus susceptibles d'être liés aux différentes classes, basé sur un ensemble de règles dans lesquelles le coté gauche correspond à un motif de mot, et le coté droit à une étiquette de classe.
+        \item Base de règles: déterminer les modèles de mots le plus susceptibles d'être liés aux différentes classes, basé sur un ensemble de règles dans lesquelles le coté gauche correspond à un motif de mot, et le coté droit à une étiquette de classe.
 
-        \item SVM: tentent de partitionner l'espace de données en utilisant des fonctions linéaires et non linéaires entre les classes.
+        \item SVM: tentent de partitionner l'espace de données en utilisant des fonctions linéaires et non linéaires pour séparer les classes.
 
-        \item Réseau de neurones: avec l'utilisation des caractéristiques des mots, tout comme les SVMs les RNs essaient de trouver la limite la plus optimales entre les classes.
+        \item Réseau de neurones: avec l'utilisation des caractéristiques des mots, tout comme les SVMs les RNs essaient de trouver la limite la plus optimale entre les classes.
 
-        \item Autres: presque tout les algorithmes de classifications peuvent être adaptés au données textuelles, tel que les algorithmes génétiques, ...etc.
+        \item Autres: presque tous les algorithmes de classification peuvent être adaptés aux données textuelles, tel que les algorithmes génétiques, etc.
     \end{itemize}
 
 
     \subsection{Catégorisation d'articles de presse}
-     L’étude de la presse en ligne est devenue ces derniers temps un enjeu de recherche, et le nombre phénoménal de journaux, magazines et blogs sur internet qui ne cessent d'augmenter a fait de la La catégorisation d'articles de presse l'une des tâches les plus importantes de la catégorisation de textes.
-
-    Il s'agit de ranger des articles dans des classes, idéalement convenables, suivant une problématique donnée souvent le domaine traité par l'article dont Politique, Sport, Religion, Économie, ...etc.
+     L’étude de la presse en ligne est devenue ces derniers temps un enjeu de recherche, et le nombre phénoménal de journaux, magazines et blogs sur internet qui ne cessent d'augmenter a fait de la catégorisation d'articles de presse l'une des tâches les plus importantes de la catégorisation de textes. Il s'agit de ranger des articles dans des classes, idéalement convenables, suivant une problématique donnée, souvent le domaine traité par l'article, comme Politique, Sport, Religion, Économie, etc.
 
     \subsubsection{État de l'art de la catégorisation d'articles de presse}
     
@@ -392,30 +389,30 @@ Parmi les techniques les plus importantes du traitement automatique de la langue
      \end{itemize}
      	
 
-\section{Système de traduction automatique}
-La traduction est une activité en croissance très rapide de nos jours \cite{tradstat}. C'est un moyen actif de transférer la culture et la langue en communicant avec autrui \cite{tradcom}. Son aspect principal est de faire passer un message ou un texte rédigé dans une langue vers une autre langue en respectant le contexte et la grammaire.\\
-Depuis très longtemps, la traduction automatique s'inscrit dans un ensemble de recherches appartenant aux domaine du traitement automatique du langage naturel.
+\section{La traduction automatique}
+La traduction est une activité en croissance très rapide de nos jours \cite{tradstat}. C'est un moyen actif de transférer la culture et la langue en communicant avec autrui \cite{tradcom}. Son aspect principal est de faire passer un message ou un texte rédigé d'une langue vers une autre en respectant le contexte et la grammaire.\\
+Depuis très longtemps, la traduction automatique s'inscrit dans une recherche appartenant au domaine du traitement automatique du langage naturel.
     \subsection{Définition}
-    La traduction automatique est le procédure par laquelle un ordinateur évalue un contenu source en entrée dans une langue donnée et délivre un contenu cible dans une langue différente en respectant les aspects lexicales, syntaxiques, sémantiques et morphologiques des deux langues.
+    La traduction automatique est la procédure par laquelle un ordinateur évalue un contenu source en entrée dans une langue donnée et délivre un contenu cible dans une langue différente en respectant les aspects lexicaux, syntaxiques, sémantiques et morphologiques des deux langues.
     \subsection{Types de traduction automatique}
     Les traducteurs automatiques se distinguent dans les catégories suivantes en :
         \subsubsection{Traducteur automatique basé dictionnaire}
-        Dans ce type de traducteur, la traduction automatique est basée sur les traductions des dictionnaires multilingue ordinaires, c'est a dire la traduction des mots du texte en entrée mot par mot en ne prenant pas en considération le sens des phrases. Il est a noter que les recherches dans le dictionnaire peuvent être faites avec ou sans l'utilisation des outils de langages dans l'analyse.
+        Dans ce type de traducteur, historiquement l'approche la plus ancienne et obsolète, la traduction automatique était basée sur les traductions des dictionnaires multilingues ordinaires, c'est a dire la traduction des mots du texte en entrée mot par mot en ne prenant pas en considération le sens des phrases. Il est a noter que les recherches dans le dictionnaire peuvent être faites avec ou sans l'utilisation des outils de langages dans l'analyse.
         \subsubsection{Traducteur automatique à base de règles de production}
-        Dans ce type de traduction automatique, le traducteur prend en compte les Données étymologiques sur langues des document en entrée et le document cible fondamentalement récupéré de 
-        lexiques et structures de phrases couvrant les règles sémantiques, morphologiques et syntaxiques principales de chaque langue individuellement. L'acquisition des phrases composant la langue du document source par le traducteur permet de produire phrases cible dans la langue du document cible sur le principe d'analyses morphologique, syntaxique et sémantique des deux langues.
-        Les principaux travaux utilisant les bases de règles pour la traduction ont été créés au milieu des années 1970.\cite{surveyTraduction}
-        les Traducteurs automatiques a base de règles de production sont capables de produire des traductions avec une qualité raisonnable, mais la construction du système prend beaucoup de temps et de main-d'œuvre parce que ces ressources linguistiques doivent être fabriquées à la main.De plus, il est très difficile de corriger l'entrée ou d'ajouter de nouvelles règles au système pour générer une traduction.\cite{jean}
+        Dans ce type de traduction automatique, le traducteur prend en compte les données étymologiques des langues des documents en entrée et le document cible fondamentalement récupéré de 
+        lexiques et structures de phrases couvrant les règles sémantiques, morphologiques et syntaxiques principales de chaque langue individuellement. L'acquisition des phrases composant la langue du document source par le traducteur permet de produire des phrases cibles dans la langue du document cible sur le principe d'analyses morphologique, syntaxique et sémantique des deux langues.
+        Les principaux travaux utilisant les bases de règles pour la traduction ont été créés au milieu des années 1970\cite{surveyTraduction}.
+        Les traducteurs automatiques à base de règles de production sont capables de produire des traductions avec une qualité raisonnable, mais la construction du système prend beaucoup de temps et de main-d'œuvre parce que ces ressources linguistiques doivent être fabriquées à la main.De plus, il est très difficile de corriger l'entrée ou d'ajouter de nouvelles règles au système pour générer une traduction\cite{jean}.
         \subsubsection{Traducteur automatique à base d'exemples}
-        L'approche à base d'exemples repose sur un ensemble de phrases traduites préalablement. Lors de la traduction le processus vérifie si la phrase a l'entrée est parmi les exemples, dans le cas positif il fournit directement sa traduction sinon il s'inspire d'autres phrases contenant un ou plusieurs ensembles de mots similaires et fournit la traduction de ces mots selon les exemples dont il dispose.\cite{setif}
+        L'approche à base d'exemples repose sur un ensemble de phrases traduites préalablement. Lors de la traduction, le processus vérifie si la phrase à l'entrée est parmi les exemples; dans le cas positif, il fournit directement sa traduction, sinon il s'inspire d'autres phrases contenant un ou plusieurs ensembles de mots similaires et fournit la traduction de ces mots selon les exemples dont il dispose\cite{setif}.
         \subsubsection{Traducteur automatique basé connaissances}
-        Ce type de traducteur automatique se concentre sur l'aspect lexicale que représente un domaine défini (propre a un seul domaine) exemple: traducteur pour les articles de recherches, Médecine, ...etc.\cite{surveyTraduction}
+        Ce type de traducteur automatique se concentre sur l'aspect lexical que représente un domaine défini (propre à un seul domaine), comme par exemple, un traducteur pour les articles de recherches, médecine, etc\cite{surveyTraduction}.
         \subsubsection{Traducteur automatique basé sur un corpus}
-        La traduction automatique basée sur le corpus (CBMT) est générée sur l'analyse des corpus de texte bilingues. Cette technique est utilisée depuis 1989 qui se base sur un corpus de traduction pour la machine. Cette technique a régné sur les autres compte tenu de son exactitude, notamment a l'ajout d'exemples au système qui peut améliorer les performances de ce dernier puisqu'il est basé sur les données, bien que l'accumulation et la gestion de l'énorme corpus de données bilingues puissent également être coûteuses.\cite{jean}
+        La traduction automatique basée sur le corpus (CBMT) est générée sur l'analyse des corpus de textes bilingues. Cette technique utilisée depuis 1989 se base sur un corpus de traduction pour la machine. Cette technique a dominé sur les autres compte tenu de son exactitude, notamment à l'ajout d'exemples au système qui peut améliorer ses performances puisqu'il est basé sur les données, bien que l'accumulation et la gestion de l'énorme corpus de données bilingues puisse également être coûteuses\cite{jean}.
         \subsubsection{Traducteur automatique basé contexte}
-        La traduction automatique basé contexte est un nouveau paradigme pour la traduction automatique basé corpus qui nécessite : un vaste corpus de texte cible monolingue et un dictionnaire bilingue complet. CONTRAST \cite{8} et REFTEX \cite{9} sont des exemples de la traduction automatique basé contexte.
+        La traduction automatique basée contexte est un nouveau paradigme pour la traduction automatique basée corpus qui nécessite un vaste corpus de textes cibles monolingues et un dictionnaire bilingue complet. CONTRAST \cite{8} et REFTEX \cite{9} sont deux exemples de systèmes de traduction automatique basée contexte.
 
 
 \section{Conclusion}
-Dans ce chapitre, nous avons essayer de faire le tour sur les techniques du Traitement Automatique du Langage Naturel. Nous avons d'abord présenté cette science, son importances et ses domaines d'application. Ensuite, nous avons examiner l'état de l'art de chaque technique en expliquant les processus et les méthodes. Et enfin, nous avons passer rapidement certaines applications actuelles du TALN.
-Le prochain point aborder quant à lui, présentera notre contribution, sa conception générale et ses différentes fonctionnalités.  
+Dans ce chapitre, nous avons essayé de faire le tour des techniques du Traitement Automatique du Langage Naturel. Nous avons d'abord présenté cette science, son importance et ses domaines d'application. Ensuite, nous avons examiné l'état de l'art de chaque technique en expliquant les processus et les méthodes. Enfin, nous avons passée rapidement en revue certaines applications actuelles du TALN.
+Le prochain point à aborder quant à lui, présentera notre contribution, la conception générale de la solution proposée et ses différentes fonctionnalités.  
