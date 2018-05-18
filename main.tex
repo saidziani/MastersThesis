@@ -17,6 +17,15 @@
 \usepackage[final]{pdfpages}
 \setlist[itemize]{label=\textbullet}
 \usepackage{fancyhdr}
+
+\usepackage{xcolor}
+\usepackage{tocbibind}
+\usepackage{tocloft}
+\usepackage{xpatch}
+\usepackage{amsmath}
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
+
 \pagestyle{fancy}
 \fancyhead{}
 \fancyhead[C]{\leftmark}
@@ -58,10 +67,11 @@ framerule=2pt,
 % \chapter{Systèmes de recommandations}
 % \input{chapters/chapter1}
 
-\chapter{Traitement Automatique du Langage Naturel}
-\input{chapters/chapter2}
+% \chapter{Traitement Automatique du Langage Naturel}
+% \input{chapters/chapter2}
 
-
+\chapter{Conception}
+\input{chapters/chapter3}
 
 \bibliographystyle{unsrt} 
 \bibliography{ref}
