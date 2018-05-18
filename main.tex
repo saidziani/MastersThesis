@@ -15,29 +15,35 @@
 \usepackage{listings}
 \usepackage{float}
 \usepackage[final]{pdfpages}
-\setlist[itemize]{label=\textbullet}
-\usepackage{fancyhdr}
-
 \usepackage{xcolor}
 \usepackage{tocbibind}
 \usepackage{tocloft}
 \usepackage{xpatch}
 \usepackage{amsmath}
 \usepackage{algorithm}
-\usepackage[noend]{algpseudocode}
-
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{graphics}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage[grey,utopia]{quotchap}
+\usepackage{moreverb}
+\usepackage{xcolor}
+\usepackage{framed}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\setlist[itemize]{label=\textbullet}
+\usepackage{fancyhdr}
 \pagestyle{fancy}
 \fancyhead{}
 \fancyhead[C]{\leftmark}
 \renewcommand{\headrulewidth}{0.4pt}
 \renewcommand{\footrulewidth}{0.4pt}
-
-
 \usepackage{xcolor}
 \definecolor{light-gray}{gray}{0.90}
 \newcommand{\code}[1]{\colorbox{light-gray}{\texttt{#1}}}
-
 \usepackage{listings}
+
 \lstdefinestyle{code}{
 language=python,                   
 keywordstyle=\color{blue},      
@@ -55,14 +61,28 @@ framerule=2pt,
 
 %~~~BEGIN~~~%
 \begin{document}
-
+\pagenumbering{gobble}
 \renewcommand{\contentsname}{Sommaire}
+
 \tableofcontents
+\clearpage
+
 \listoffigures
+\clearpage
+
 \listoftables
+\clearpage
+
+% \newcommand{\listequationsname}{Liste des Equations}
+% \newlistof{myequations}{equ}{\listequationsname}
+% \newcommand{\myequations}[1]{%
+%     \addcontentsline{equ}{myequations}{\protect\numberline{\theequation}#1}\par}
+
+% \xpretocmd{\listofmyequations}{\addcontentsline{toc}{chapter}{\listequationsname}}{}{}
+% \listofmyequations
+% \clearpage
 
 \pagenumbering{arabic} 
-
 
 % \chapter{Systèmes de recommandations}
 % \input{chapters/chapter1}
