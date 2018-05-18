@@ -15,17 +15,25 @@
 \usepackage{listings}
 \usepackage{float}
 \usepackage[final]{pdfpages}
-\setlist[itemize]{label=\textbullet}
-\usepackage{fancyhdr}
-
 \usepackage{xcolor}
 \usepackage{tocbibind}
 \usepackage{tocloft}
 \usepackage{xpatch}
 \usepackage{amsmath}
 \usepackage{algorithm}
-\usepackage[noend]{algpseudocode}
-
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{graphics}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage[grey,utopia]{quotchap}
+\usepackage{moreverb}
+\usepackage{xcolor}
+\usepackage{framed}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\setlist[itemize]{label=\textbullet}
+\usepackage{fancyhdr}
 \pagestyle{fancy}
 \fancyhead{}
 \fancyhead[C]{\leftmark}
@@ -55,26 +63,35 @@ framerule=2pt,
 
 %~~~BEGIN~~~%
 \begin{document}
-
+\pagenumbering{gobble}
 \renewcommand{\contentsname}{Sommaire}
+
 \tableofcontents
+\clearpage
+
 \listoffigures
+\clearpage
+
 \listoftables
+\clearpage
 
-\pagenumbering{arabic} 
+\newcommand{\listequationsname}{Liste des Equations}
+\newlistof{myequations}{equ}{\listequationsname}
+\newcommand{\myequations}[1]{%
+    \addcontentsline{equ}{myequations}{\protect\numberline{\theequation}#1}\par}
 
+\xpretocmd{\listofmyequations}{\addcontentsline{toc}{chapter}{\listequationsname}}{}{}
 
-% \chapter{Systèmes de recommandations}
-% \input{chapters/chapter1}
+\listofmyequations
+\clearpage
 
-% \chapter{Traitement Automatique du Langage Naturel}
-% \input{chapters/chapter2}
-
-\chapter{Conception}
+\chapter{Architecture proposée}
 \input{chapters/chapter3}
 
+
 \bibliographystyle{unsrt} 
-\bibliography{ref}
+\bibliography{references/ref3}
+\pagenumbering{gobble}
 
 \end{document}
 %~~~END~~~%
