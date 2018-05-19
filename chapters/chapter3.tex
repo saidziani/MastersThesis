@@ -375,7 +375,7 @@ En considérant P et Q comme des vecteurs, la distance euclidienne entre une pai
 \end{algorithm}
 
 \subsubsection{Processus de recommandation}
-\begin{algorithm}
+\begin{algorithm}[H]
 	\begin{algorithmic}[1]
 		\STATE Recommandation
 		\STATE Début
@@ -395,7 +395,7 @@ En considérant P et Q comme des vecteurs, la distance euclidienne entre une pai
 En se bansant sur les travaux de \cite{categorisation} pour l'Anglais et \cite{categorisation} pour l'Arabe, nous avons entrainé nos modèles sur des corpus d'articles de différentes sources afin de garantir la diversité dans nos données (plus de détails dans le chapitre 4\ref{chapter4}).
 À REVOIR!!
 \subsubsection{Processus de catégorisation}
-    \begin{algorithm}
+    \begin{algorithm}[H]
         \begin{algorithmic}[1]
         \STATE Algorithme
         \STATE Début
@@ -415,7 +415,7 @@ Pour ce module de résumé automatique, nous avons choisi un résumeur automatiq
 \subsection{Prétraitement des articles}
 Dans cette phase , il suffit juste de tokeniser le texte et supprimer les mots vides puisque le stemming ne peut pas être utilisé. Pour cause, le plongement de mots qu'on va utiliser (le modèle skip-gram entrainé sur le contenu Wikipédia) servira entre autre a détecté les régularités linguistiques des des mots de la même racine.
 
-\begin{algorithm}
+\begin{algorithm}[H]
 	\begin{algorithmic}[1]
 
 \STATE Prétraitement
@@ -433,7 +433,7 @@ Dans cette phase , il suffit juste de tokeniser le texte et supprimer les mots v
 \subsection{Construction d'un vecteur de centroïde}
 Afin de construire un vecteur centroïde en utilisant les plongement de mots, nous sélectionnons d'abord les mots significatifs dans le document. Pour cela, nous sélectionnons mots ayant le poids Tf-IDF supérieur à un seuil de document (idf). Ainsi, nous calculons l'encastrement du centroïde comme la somme des mots les mieux classés dans le document en utilisant les plongements de mots de Wikipédia (environ 1 million de mots). 
 
-\begin{algorithm}
+\begin{algorithm}[H]
 	\begin{algorithmic}[1]
 		\STATE Recommandation
 		\STATE Début
@@ -454,7 +454,7 @@ Afin de construire un vecteur centroïde en utilisant les plongement de mots, no
 Dans ce processus, pour chaque phrase du document on additionne les plongement de mots de chaque terme de telle façon a avoir un une représentation sur laquelle la phrase est représenté par un score. Ainsi, la phrase ayant le score le plus élevé désigne la phrase centroid.\\
 Il est a noter que les vecteurs a additionné sont calculé sur la base du modèle Word2Vec pré entrainé sur le contenu de Wikipédia.
 
-\begin{algorithm}
+\begin{algorithm}[H]
 	\begin{algorithmic}[1]
 		\STATE Notation
 		\STATE Début
@@ -470,7 +470,7 @@ Il est a noter que les vecteurs a additionné sont calculé sur la base du modè
 Pour chaque phrase du document, on calcule la \emph{similarité de cosinus} entre elle et la phrase centroïde du document. Les phrases sont ensuite triées par ordre décroissant de leurs scores de similarité. Les phrases les mieux classées sont itérativement sélectionnés et ajoutés au résumé jusqu'à ce que la limite (taille du résumé) soit atteinte. Afin de satisfaire la propriété de redondance, au cours de chaque itération nous allons calculer la \emph{similarité de cosinus} entre la phrase a venir et chacune déjà dans le résumé.
 Il est a noter qu' un seuil a été fixé afin de rejeter toutes les phrases qui ont une similarité très élevé par rapport a une phrase afin d'éviter cette redondance.
 
-\begin{algorithm}
+\begin{algorithm}[H]
 	\begin{algorithmic}[1]
 		\STATE Séléction
 		\STATE Début
@@ -490,9 +490,8 @@ Il est a noter qu' un seuil a été fixé afin de rejeter toutes les phrases qui
 
 \subsection{Algorithme du résumeur automatique extractif}
 
-\begin{algorithm}
+\begin{algorithm}[H]
 	\begin{algorithmic}[1]
-
 \STATE résumé
 \STATE Début
 \STATE Chargement du document ;
