@@ -67,7 +67,7 @@ Nous allons d'abord présenter l'environnement de travail ainsi que les outils e
                     \caption{Logos des langages de programmations utilisés}
                     \label{}
             \end{figure}
-            \begin{enumerate}
+            \begin{enumerate}[leftmargin=*]
                 \item{\textbf{Python : }}
                 Python est un langage de programmation de haut niveau. Il supporte la programmation impérative structurée, fonctionnelle et orientée objet. Il est doté d'un typage dynamique fort, d'une gestion automatique de la mémoire. Plusieurs bibliothèques sont fournies afin de faciliter les développements \cite{python}.\\
 
@@ -85,9 +85,9 @@ Nous allons d'abord présenter l'environnement de travail ainsi que les outils e
                     \caption{Logos de quelques librairies utilisées}
                     \label{}
             \end{figure}
-            \begin{enumerate}
+            \begin{enumerate}[leftmargin=*]
                 \item{\textbf{NLTK : }}
-                "Natural Language Toolkit" est une librairie python destinée au TALN. Elle fournit une suite de bibliothèques de traitement de texte pour la classification, tokenization, stemming, étiquetage, analyse et raisonnement sémantique, etc. \cite{nltk}.\\
+                "Natural Language Toolkit" est une librairie Python destinée au TALN. Elle fournit une suite de bibliothèques de traitement de texte pour la classification, tokenization, stemming, étiquetage, analyse et raisonnement sémantique, etc. \cite{nltk}.\\
 
                 \item{\textbf{Scikit-Learn : }\label{scikit-learn}}
                 Bibliothèque libre et Open source implémenté avec Python, dédiée à l'apprentissage automatique. Elle est conçue pour s'harmoniser avec d'autres bibliothèques Python (ou autres), notamment NumPy, SciPy, etc. \cite{scikit}.\\
@@ -108,10 +108,10 @@ Nous allons d'abord présenter l'environnement de travail ainsi que les outils e
                 "Mathematic Plot library" est une bibliothèque de traçage Python 2D qui produit des figures de qualité de publication dans une variété de formats papier et d'environnements interactifs entre plates-formes. Matplotlib peut être utilisé dans les scripts Python, les Shells Python et IPython, les notebook Jupyter, etc. \cite{matplotlib}.\\
 
                 \item{\textbf{Newspaper : }}
-                Librairie python accessible gratuitement qui permet d'extraire le contenu, l'image, les auteurs et la date de publication d'un article de presse en utilisant le protocole HTTP.\\
+                Librairie Python accessible gratuitement qui permet d'extraire le contenu, l'image, les auteurs et la date de publication d'un article de presse en utilisant le protocole HTTP.\\
 
                 \item{\textbf{Newsapi : }}
-                Web API qui permet d'obtenir des articles de presse de dernière minute et de recherchez des articles de plus de 30 000 sources et blogs. Elle fournit également la possibilité de sélectionner les sources, les pays, les catégories, etc.\\
+                Web API qui permet d'obtenir des articles de presse de dernière minute et de rechercher des articles de plus de 30 000 sources et blogs. Elle fournit également la possibilité de sélectionner les sources, les pays, les catégories, etc.\\
 
                 \item{\textbf{FeedParser : }}
                 "Universal Feed Parser" est une librairie Python pour le téléchargement et l'analyse des flux syndiqués connu sous l'appellation \emph{flux RSS}. Cette librairie se distingue par sa facilité d'utilisation \cite{feedparser}.\\
@@ -130,12 +130,12 @@ Nous allons d'abord présenter l'environnement de travail ainsi que les outils e
             \end{enumerate}
 
         \subsubsection{Formats de données}
-            \begin{enumerate}
+            \begin{enumerate}[leftmargin=*]
                 \item{\textbf{XML : }}
                 "eXtensible Markup Language" est un langage informatique de balisage générique. Ces balises permettent de structurer de manière hiérarchisée et organisée les données d'un document.\\
 
                 \item{\textbf{JSON : }}
-                "JavaScript Object Notation" est un format adapté aux types de données du langage JavaScript. Au cours des dernières années, JSON est devenu l'un des premiers format d'échange et de stockage de données notamment pour le développement Web \cite{jsonimpl}.\\
+                "JavaScript Object Notation" est un format adapté aux types de données du langage JavaScript. Au cours des dernières années, JSON est devenu l'un des premiers format d'échange et de stockage de données notamment pour le développement web \cite{jsonimpl}.\\
                 
                 \item{\textbf{CSV : }}
                 "Comma-separated values" est un format informatique représentant des données tabulaires sous forme de valeurs séparées par des virgules. Le format de fichier CSV est utilisable par les applications de tableur KSpread, OpenOffice Calc, Microsoft Excel, etc. De nombreuses autres applications prennent en charge CSV pour importer ou exporter des données.\cite{csv}
@@ -148,12 +148,12 @@ Nous allons d'abord présenter l'environnement de travail ainsi que les outils e
                     \caption{Logos des logiciels utilisés}
                     \label{}
             \end{figure}
-            \begin{enumerate}
+            \begin{enumerate}[leftmargin=*]
                 \item{\textbf{PyCharm Community Edition : }}
                 PyCharm est un éditeur de code pour le développement sous Python, il fournit la complétion de code intelligente, des inspections, la mise en évidence d'erreurs à la volée et des correctifs rapides, ainsi que des corrections de code automatisés et de riches fonctionnalités de navigation.\cite{pycharm} Le version \emph{Community Edition} que nous avons utilisé est gratuite et en libre accès.\\
 
                 \item{\textbf{WebStorm : }}
-                WebStorm est un éditeur de code pour le développement sous Javascript, il apporte une aide énorme au développeurs Web et mobile. Il supporte tout les langages compilés au JavaScript, Node.js, HTML et CSS \cite{webstorm}. Nous avons pu obtenir une licence étudiant d'une année.\\
+                WebStorm est un éditeur de code pour le développement sous Javascript, il apporte une aide énorme au développeurs web et mobile. Il supporte tout les langages compilés au JavaScript, Node.js, HTML et CSS \cite{webstorm}. Nous avons pu obtenir une licence étudiant d'une année.\\
 
                 \item{\textbf{Sublime Text : }}
                 Éditeur de texte générique codé en C++ et Python, disponible sur Linux, Mac et Windows. Depuis la version 2.0, sortie le 26 juin 2012, l'éditeur prend en charge 44 langages de programmation majeurs, tandis que des plugins sont souvent disponibles pour les langages plus rares \cite{sublime}. Nous avons utilisé la version d’essai qui est en libre accès sur internet.\\
@@ -165,7 +165,7 @@ Nous allons d'abord présenter l'environnement de travail ainsi que les outils e
 
 \section{Catégorisation}
     Le premier module sur lequel nous avons travailler, c'est la catégorisation d'articles de presse. Nous avons expérimenter plusieurs techniques proposées dans la littérature. Nous présentons ci-après chaque approche, ses résultats, ses points forts et ses faiblesses.
-    \subsection{Approches utilisées\label{approches}}
+    \subsection{Approches expérimentées\label{approches}}
         Toutes les approches utilisées sont basées sur l'apprentissage automatique, supervisé et non supervisé. 
         \subsubsection{Basées sur l'Apprentissage Non Supervisé}
             \begin{itemize}
@@ -220,7 +220,7 @@ Nous allons d'abord présenter l'environnement de travail ainsi que les outils e
                     \label{news-categ}
                 \end{table}
                 \item{\textbf{Arabe : }}
-                Le corpus TALAA\footnote{Traitement Automatique du Langage et Apprentissage Automatique, l'équipe de recherche du Laboratoire de Recherche en Intelligence Artificielle du département informatique de l'USTHB} pour la catégorisation d'articles de presse est une grande collection d'articles publiés à partir de 2010 jusqu'à 2014 dans différentes revue de presse sur internet. Il contient plus de 14 millions de mots de 582000 types différents. Le corpus contient 8 catégories, mais nous avons choisi de travailler sur 6 catégories plus générales comme on peut le constater dans le tableau suivant \ref{talaa-categ} \cite{talaa}. 
+                Le corpus TALAA\footnote{Traitement Automatique du Langage et Apprentissage Automatique, l'équipe de recherche du Laboratoire de Recherche en Intelligence Artificielle du département informatique de l'USTHB} pour la catégorisation d'articles de presse est une grande collection d'articles publiés entre 2010 et 2014 dans différentes revue de presse Arabe sur internet. Il contient plus de 14 millions de mots de 582000 types différents. Le corpus contient 8 catégories, mais nous avons choisi de travailler sur 6 catégories plus générales comme on peut le constater dans le tableau suivant \ref{talaa-categ} \cite{talaa}. 
                 \begin{table}[H]
                     \begin{center}
                         \begin{tabular}{|c|c|}
@@ -248,7 +248,7 @@ Nous allons d'abord présenter l'environnement de travail ainsi que les outils e
                 \end{table}
             \end{itemize}
         \subsubsection{Pré-traitement et structure des datasets}
-            Les deux corpus utilisés pour les deux langues étaient sous le format brute, ce qui nécessitaient une restructuration et un pré-traitement afin de permettre leur exploitation.  
+            Les deux corpus utilisés dans les deux langues étaient sous le format brute, ce qui nécessitaient une restructuration et un pré-traitement afin de permettre leur exploitation.  
 
             Plusieurs opérations de pré-traitements ont été effectuées. Ci-après les étapes suivies :
             \begin{enumerate}
@@ -363,10 +363,9 @@ Nous allons d'abord présenter l'environnement de travail ainsi que les outils e
         \end{itemize}
 
         \subsubsection{Évaluations}
-        \begin{itemize}
-            \item{\textbf{Anglais :} }
-            \begin{itemize}
-                \item{Matrice de confusions : }
+        \begin{itemize}[leftmargin=*]
+            \item{\textbf{Anglais :} }\\
+                Le \autoref{confusion-anglais} présente la matrice de confusion du module de catégorisation d'articles de presse pour l'Anglais. On peut constater qu'il y-a très peu de confusion entre les différentes catégories, à part quelques articles comme les 31 articles qui ont été prédits comme \emph{Science \& Technology} alors qu'ils appartiennent à la catégorie \emph{Business}, cela est dû au contenu de ces articles qui doivent parlés de business dans le domaine de la science et technologie. 
                 \begin{table}[H]
                     \begin{center}
                         \begin{tabular}{|c|c|c|c|c|c|c|c|}
@@ -390,6 +389,7 @@ Nous allons d'abord présenter l'environnement de travail ainsi que les outils e
                         \end{tabular}
                     \end{center}
                     \caption{Matrice de confusion du modèle de la catégorisation d'articles Anglais}
+                    \label{confusion-anglais}
                 \end{table}
                 % \item{Courbe ROC : }
                 % \begin{figure}[H]
@@ -398,9 +398,8 @@ Nous allons d'abord présenter l'environnement de travail ainsi que les outils e
                 %     \caption{}
                 %     \label{}
                 % \end{figure}
-            \end{itemize}
-            \item{\textbf{Arabe :} }
-                \item{Matrice de confusions : }
+            \item{\textbf{Arabe :} }\\
+                Tout comme l'Anglais le modèle développé pour l'Arabe, a montré une capacité de prédiction très élevée. Comme on peut le voire dans le \autoref{confusion-arabe}, la confusion entre les catégories est très faible à part quelques articles des catégories proches en terme de contenu. 
                 \begin{table}[H]
                     \begin{center}
                         \begin{tabular}{|c|c|c|c|c|c|c|}
@@ -425,6 +424,7 @@ Nous allons d'abord présenter l'environnement de travail ainsi que les outils e
                         \end{tabular}
                     \end{center}
                     \caption{Matrice de confusion du modèle de la catégorisation d'articles Arabe}
+                    \label{confusion-arabe}
                 \end{table}
 
                 % \item{Courbe ROC : }
@@ -437,28 +437,227 @@ Nous allons d'abord présenter l'environnement de travail ainsi que les outils e
         \end{itemize}
 
 \section{Résumé automatique}
-    Le deuxième module que nous avons développé est le module de résumé automatique, en eefet comme pour le module de recommandation, nous avons choisi \emph{Python} pour le développer.\\
-    \subsection{Approches utilisées}
+    La deuxième partie de la phase de réalisation est consacrée au résumé automatique. Nous avons expérimentés plusieurs techniques et méthodes que nous allons voire en détails dans cette section. 
+    \subsection{Approches expérimentées}
         \subsubsection{Résumé extractif par Apprentissage Supervisé}
-            \begin{itemize}
-                \item{\textbf{Corpus et datasets}}
-                \item{\textbf{Pré-traitement et structure des datasets}}
-                \item{\textbf{Faiblesse et critique}}
+            Nous avons commencé par une approche basée sur l'apprentissage automatique supervisé, ce qui nécessitait des corpus d'articles avec leur résumés types.
+
+            \begin{itemize}[leftmargin=*]
+                \item{\textbf{Corpus et datasets}}\\
+                Le dataset construit par Dr. Riadh Belkbir de l'équipe TALAA contient plus de 70 articles annotés manuellement. Il est dédié principalement au résumé automatique par apprentissage supervisé pour la langue Arabe, mais peut être utilisé également dans d'autres applications, telles que la compression des textes.
+
+                L'annotation consiste en l'attribution de quatre type d’étiquettes possibles à chaque phrase de l'article :
+                \begin{itemize}
+                    \item S (select) : phrase importante, à prendre en considération dans la construction du résumé.
+                    \item R (remove) : cette phrase est à supprimer, son absence n'affecte pas le sens du résumé.
+                    \item F (fusion) : fusion de deux phrases (ou plus).
+                    \item C (compress) : compression d'une phrase on supprimant les synonymes et les redondances dans le sens.\\
+                \end{itemize}
+                \item{\textbf{Contribution à la récolte de données : "Sumrized" et "Mou3in"}}\\
+                Face au manque flagrant des corpus (gratuits) pour le résumé automatique, nous avons développer une plate-forme contributive sur le web baptisée \textbf{Sumrized.com} pour la récolte des textes et des résumés en trois langues Arabe, Anglais et Français. 
+
+                Chaque texte et son résumé sont vérifier manuellement par un expert qui peut consulter et valider les contributions à partir d'un Dashboard dédié à cet effet. L'interface principale de la plate-forme, qui est en ligne depuis Février 2018, est présentée dans la figure \ref{sumrized-ui}. 
+
+                \begin{figure}[H]
+                    \centering
+                    \includegraphics[height=180pt,width=320pt]{img/chapter4/sumrized/responsive.png}
+                    \caption{La plate-forme Sumrized sur les différents supports}
+                    \label{sumrized-ui}
+                \end{figure} 
+
+                Nous avons également développé une application de bureau, appelée \textbf{Mou3in}, afin de faciliter l'annotation des textes, elle offre à son utilisateur la possibilité d'attribuer une étiquette à chaque phrase selon son jugement (à supprimer ou à laisser). La figure \ref{mou3in} présente l'espace de travail sur l'application "Mou3in" :
+                \begin{figure}[H]
+                    \centering
+                    \includegraphics[height=230pt,width=370pt]{img/chapter4/mou3in/mou3in.png}
+                    \caption{Interface utilisateur de "Mou3in"}
+                    \label{mou3in}
+                \end{figure}
+
+                \item{\textbf{Pré-traitement et structure du dataset}}\\
+                Tout les articles du dataset sont sous le format XML, chaque article a son propre identifiant et divisé en paquets de phrases selon l'opération effectuée. Ci-après la figure \ref{xml-structure} qui montre un exemple du dataset : 
+                \begin{figure}[H]
+                    \centering
+                    \includegraphics[height=220pt,width=430pt]{img/chapter4/xml.png}
+                    \caption{Structure d'un article du dataset}
+                    \label{xml-structure}
+                \end{figure}
+                L'approche basée sur l'apprentissage automatique demandait un très grand nombre d'articles résumés, ce qui nous a poussé à l'abandonner.
             \end{itemize}
         \subsubsection{Résumé extractif par Machine de Boltzman}
-            L'approche proposée dans \cite{boltzman} utilise un modèle d'apprentissage profond.   
-            \begin{itemize}
-                \item{\textbf{Pré-traitement et structure des datasets}}
-                \item{\textbf{Faiblesse et critique}}
+            L'approche proposée dans \cite{boltzman} utilise un modèle d'apprentissage profond afin de prédire les phrases les plus importantes dans un texte donnée en utilisant 9 caractéristiques sur chaque phrase. Elle consiste en trois grande phases: l'extraction des caractéristiques, la conversion en valeurs numériques et la génération du résumé à partir des scores de chaque phrase. 
+
+            Les caractéristiques extraites sont les suivantes :
+            \begin{enumerate}
+                \item{Nombre de mots clés}
+                \item{Position de la phrase dans le texte}
+                \item{Longueur de la phrase}
+                \item{Position de la phrase dans le paragraphe}
+                \item{Nombre de noms propres}
+                \item{Nombre d'entités numériques}
+                \item{Nombre d'entités nommées}
+                \item{TF-ISF (Term Frequency- Inverse Sentence Frequency)}
+                \item{Similarité avec la phrase centroïde}
+            \end{enumerate}    
+
+            \begin{itemize}[leftmargin=*]
+                \item{\textbf{Pré-traitement et structure du dataset}}\\
+                Cette méthode, contrairement aux autres, est appliquée sur un seul document, on a pas besoin de plusieurs documents. La texte est segmenté en phrase, chaque phrase est divisé en mots et les caractéristiques citées là-dessus sont calculées.\\
+
+                La matrice qui représentent le texte est injectée dans une Machine de Boltzman\footnote{Type de réseau de neurones artificiels pour l'apprentissage non supervisé} afin de calculé les score des phrases. Les résultats sont triés dans l'ordre décroissant des scores et le résumé est établi selon ces derniers.\\
+
+                \item{\textbf{Résultats et critiques}}\\
+                L'évaluation de ce modèle est effectuée en utilisant le \emph{Gold Standard}\footnote{Dataset de référence construit par des experts linguistes, utilisé pour l'évaluation des résultats} Duc2004 qui est un dataset qui contient 50 articles de presse de différentes catégories et 4 à 5 résumés de référence pour chaque article.
+
+                Nous avons obtenu les résultats présentés dans le \autoref{result-boltzman} en utilisant ROUGE (les métriques d'évaluations, ROUGE notamment, sont définies dans la \autoref{metrique-eval}) : 
+                \begin{table}[H]
+                    \begin{center}
+                        \begin{tabular}{|c|C{1.2cm}|C{1.2cm}|C{1.2cm}|C{1.2cm}|C{1.2cm}|C{1.2cm}|C{1.2cm}|C{1.2cm}|}
+                            \cline{2-9}
+                            \multicolumn{1}{c|}{} & \textbf{R-1} &  \textbf{R-2} &  \textbf{R-3} &  \textbf{R-4} &  \textbf{R-L} &  \textbf{R-W} &  \textbf{R-S} &  \textbf{R-SU} \\
+                            \hline
+                            \textbf{Rappel} & 0.4172 & 0.0615 & 0.0129 & 0.0042 & 0.3239 & 0.1089 & 0.1693 & 0.1739 \\
+                            \hline
+                            \textbf{Précision} & 0.1982 & 0.0264 & 0.0054 & 0.0016 & 0.1525 & 0.0919 & 0.0385 & 0.0402 \\
+                            \hline
+                            \textbf{F-mesure} & 0.2549 & 0.0346 & 0.0071 & 0.0022 & 0.1963 & 0.0934 & 0.0556 & 0.0578 \\
+                            \hline
+                        \end{tabular}
+                    \end{center}
+                    \caption{Résultats du résumeur extractif basé sur la Machine de Boltzman}
+                    \label{result-boltzman}
+                \end{table}
+                En effet, ces résultats sont très proches des résumeurs de l'état de l'art, mais le modèle que nous avons utilisé est pré-entraîné sur un type de données totalement différent (des images), ce qui nous a amené à laisser tomber cette approche.   
             \end{itemize}
+
         \subsubsection{Résumé extractif par Plongement de mots\ref{plongement}}
-                % \item{\textbf{Pré-traitement des données}}
+        L'approche proposée par l'équipe de recherche du département informatique de l'Université de Bari en Italie \cite{bari}, est basée sur la similarité textuelle entre la phrase centroïde et les autres phrases du texte en utilisant les plongements de mots (Word embeddings). La conception et l'algorithme de réalisation sont détaillés dans \ref{plongement}       
+
     \subsection{Résultats et évaluation}
-        \subsubsection{Métrique d'évaluation}
-        \title{Anglais}
-        \title{Arabe}
+        \subsubsection{Métrique d'évaluation : ROUGE\label{metrique-eval}}
+        ROUGE est l'acronyme de "Recall-Oriented Understudy for Gisting Evaluation". Il s'agit essentiellement d'un ensemble de métriques permettant d'évaluer le résumé automatique de textes ainsi que la traduction automatique. Il fonctionne en comparant un résumé produit automatiquement ou une traduction à un ensemble de résumés de référence (généralement produits par des humains). \cite{rouge0}
+    
+        \subsubsection{Types des métriques de ROUGE\label{type-rouge}}
+        \begin{itemize}
+            \item{ROUGE-1, 2, 3 et 4 : font référence au chevauchement des uni-grammes, bi-grammes, tri-grammes et quadri-grammes, respectivement, entre le système et les résumés de référence \cite{rouge1}.}\\
+            \item{ROUGE-L, W : basés sur la plus longue sous-séquence commune (LCS) \cite{rouge2}.}\\
+            \item{ROUGE-S : basé sur les cooccurrences des paires de mots dans l'ordre des phrases \cite{rouge2}.}\\
+            \item{ROUGE-SU : en plus des paires de mots, il utilise aussi la cooccurrence mot unique toujours dans l'ordre des phrases.}
+        \end{itemize}
+    
+        Les métriques citées dans la \autoref{type-rouge}, utilisent comme mesures le rappel et la précision :  
+        \begin{itemize}
+            \item {Le rappel dans le cas de ROUGE, donne une information sur le nombre de mots du résumé de référence ont été capturés par le résumé de notre généré par le système.\\ 
+            Exemple: si le rappel est égal a 40\%, cela signifie que 40\% des n-grammes du résumé de référence sont également présents dans le résumé généré par le système.}\\
+            \item {La précision quant à elle, mesure la partie du résumé du système qui est pertinente ou nécessaire.\\ 
+            Exemple : si la précision est égale a 40\%, cela signifie que 40\% des n-grammes du résumé généré par le système sont également présents dans le résumé de référence.}
+        \end{itemize}
+
+        \subsubsection{Résultats du modèle de résumé automatique final}
+        \begin{table}[H]
+            \begin{center}
+                \begin{tabular}{|c|C{1.2cm}|C{1.2cm}|C{1.2cm}|C{1.2cm}|C{1.2cm}|C{1.2cm}|C{1.2cm}|C{1.2cm}|}
+                    \cline{2-9}
+                    \multicolumn{1}{c|}{} & \textbf{R-1} &  \textbf{R-2} &  \textbf{R-3} &  \textbf{R-4} &  \textbf{R-L} &  \textbf{R-W} &  \textbf{R-S} &  \textbf{R-SU} \\
+                    \hline
+                    \textbf{Rappel} & 0.5631 & 0.1226 & 0.0346 & 0.0139 & 0.5111 & 0.1729 & 0.2981 & 0.3029 \\
+                    \hline
+                    \textbf{Précision} & 0.1662 & 0.0361 & 0.0105 & 0.0042 & 0.1503 & 0.0912 & 0.0281 & 0.0289 \\
+                    \hline
+                    \textbf{F-mesure} & 0.2485 & 0.0541 & 0.0157 & 0.0063 & 0.2245 & 0.1145 & 0.0488 & 0.0503 \\
+                    \hline
+                \end{tabular}
+             \end{center}
+            \caption{Résultats du résumeur extractif basé sur le plongement de mots}
+            \label{result-boltzman}
+        \end{table}
 
 \section{Recommandation}
-    \subsection{Approches utilisées}    
-    \subsection{Résultats et évaluation}
-        \subsubsection{Métrique d'évaluation}
+    \subsection{Approche utilisée}    
+        \subsubsection{YOW Dataset}
+        Afin de concevoir une base de données de profils utilisateurs, nous avons solliciter \emph{Google News}, \emph{Bing News} et \emph{Yahoo Webscope} mais sans aucune réponse de la part de ces entreprises. 
+
+        Mais au final, nous avons pu obtenir le dataset \emph{YOW} qui est le seul dataset d'interactions des profils avec des articles de presse. 
+
+        \emph{Yow} été collecté à l'Université \emph{Carnegie Mellon} pour le \emph{Yow-now} le système de filtrage des articles de presse \cite{carnegieYOW}.
+
+        Le dataset YOW est composé de plusieurs attribut, des informations sur les interactions de 22 utilisateurs avec des articles de presse de différentes catégories. Les instances du dataset sont très bien adapté au filtrage collaboratif. Comme il n'y a pas d'information sur le contenu des articles de presse, le filtrage basé sur le contenu n'est pas possible. 
+
+        \subsubsection{Structure du dataset}
+        Chaque instance du dataset YOW est composé de 23 attribut propre à l'utilisateur et à l'article de presse. Ci-après les attributs les plus importants pour notre système de recommandations :  
+        \begin{lstlisting}[style=code] 
+         {
+          'user_id': '19', 
+          'document_id': '27010084'
+          'timestamp': '2004-04-23T15:38:25Z'
+          'timeonpage': '63s', #temps de lecture
+          'classes': [
+                'space', 'international', 'iraq', 
+          ],
+          ...
+         },
+        \end{lstlisting}
+
+        \subsubsection{Statistiques sur le dataset}
+        Yow-now est un système de filtrage d'informations qui recommande des articles de presse aux utilisateurs à partir de divers flux RSS. Les données sont recueillies par une étude d'un mois qui comprend environ 25 personnes et plus de 7000 entrées de commentaires de tous les utilisateurs. Au total 383 articles évalués par chaque utilisateur. 
+
+        Le dataset comporte également des évaluations implicite et explicite sur les recommandations. Le profilage explicite est sous forme de note de 1 à 5, quant à l'implicite est établi selon les interactions de l'utilisateur (souris, clavier et activités de défilement).
+        
+
+        \subsubsection{Pré-traitement des données}
+        Chaque instance du dataset \emph{YOW} est une interaction de l'utilisateur U avec un article A.
+
+        L'interaction peut avoir plusieurs valeurs pour l'attribut \emph{Classe} (catégorie dans notre cas). "Classe" peut prendre des noms de catégories et des mots-clés de l'article, par exemple :
+        \begin{itemize}
+            \item Noms de catégories : world, science, entertainment, space, business, food, etc.
+            \item Mots-clés :Iraq, Amazon, Malaysia, Oil, Japan, etc.\\ 
+        \end{itemize}
+        Pour adapter ces données à notre modèle de catégorisation d'article nous avons effectué des pré-traitement sur chaque instance du dataset. Nous avons annoter le dataset manuellement dans le but de convertir les noms de catégories et les mots-clés en catégories présente dans notre système (7 pour l'Anglais et 6 pour l'Arabe), par exemple :
+        \begin{itemize}
+            \item Avant : nuclear weapons, international, middle east, business, John Kerry, accident, tradegy, space, science.
+            \item Après : 
+                \begin{itemize}
+                    \item {nuclear weapons, international, middle east} : World
+                    \item {John Kerry} : US
+                    \item {space, science} : Science \& Technology
+                    \item {accident, tradegy} : Society
+                    \item {business} : Business\\
+                \end{itemize}    
+        \end{itemize}
+        De plus, le dataset a été classé dans l'ordre croissant de l'attribut "Timestamp", la date et l'horaire de l'interaction, dans le but de récupérer l'historique et le changement des centres d’intérêts de chaque utilisateur. 
+
+        À chaque nouvelle interaction le vecteur de probabilité de sélection des catégories d'articles se mets à jour en fonction de l'article visité. 
+
+        La mise à jour consiste en l'augmentation de la probabilité de sélection de la catégorie de l'article choisie et la diminution des autres catégories (s'il y-en a). 
+
+        L'exemple suivant montre le processus de mise à jour :
+        \begin{itemize}[label={}]
+            \item $P = {'news': 0.0581,'sport': 0.717, 'sci\_tech': 0.149}$\\
+        \end{itemize}
+
+        L'utilisateur X a cliqué et lu un article de la catégorie \emph{Sport}, le vecteur de probabilité de sélection va se mettre à jour en fonction de cette dernière interaction (détails dans \ref{proba-select}).
+        \begin{itemize}[label={}]
+            \item $P[sport] = (1-{\alpha}) * {P[sport]} + {\alpha}$
+            \item $P[sport] = (1-{0.1}) * {P[sport]} + {0.1}$
+            \item $P[sport] = (1-{0.1}) * {0.717} + {0.1}$
+            \item $P[sport] = 0.745$
+        \end{itemize}
+
+        Quant aux autres catégories du vecteurs de sélection :
+        \begin{itemize}[label={}]
+            \item $P[news] = (1-{\alpha}) * {P[news]} $
+            \item $P[news] = (1-{0.1}) * {P[news]} $
+            \item $P[news] = (1-{0.1}) * {0.0581} $
+            \item $P[news] = 0.0523$
+            \item 
+            \item $P[sci\_tech] = (1-{\alpha}) * {P[sci\_tech]} $
+            \item $P[sci\_tech] = (1-{0.1}) * {P[sci\_tech]} $
+            \item $P[sci\_tech] = (1-{0.1}) * {0.1499} $
+            \item $P[sci\_tech] = 0.135$
+        \end{itemize}
+        Après cette interaction, le vecteur de probabilité de sélection devient :
+        \begin{itemize}[label={}]
+            \item $P = {'news': 0.0523, 'sport': 0.745, 'sci_tech': 0.135}$\\
+        \end{itemize}
+        Pour un nouvel utilisateur, le même traitement est appliqué, le vecteur de probabilité de sélection se remplie petit à petit en fonction des interaction qui vont être mise à jour de la même façon.
+    % \subsection{Résultats et évaluation}
+    %     \subsubsection{Métrique d'évaluation}
