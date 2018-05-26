@@ -11,3 +11,11 @@ main.toc
 main.equ
 main.lof
 main.lot
+
+arabluatex.lua
+arabluatex.sty
+arabluatex_fullvoc.lua
+arabluatex_novoc.lua
+arabluatex-patch.sty
+arabluatex_trans.lua
+arabluatex_voc.lua
