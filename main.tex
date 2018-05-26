@@ -30,6 +30,8 @@
 \usepackage{moreverb}
 \usepackage{xcolor}
 \usepackage{framed}
+\usepackage{arabluatex}
+% \usepackage{utf8}
 \usepackage{algorithm}
 \usepackage{algorithmic}
 \setlist[itemize]{label=\textbullet}
@@ -43,6 +45,12 @@
 \definecolor{light-gray}{gray}{0.90}
 \newcommand{\code}[1]{\colorbox{light-gray}{\texttt{#1}}}
 \usepackage{listings}
+\usepackage{multirow}
+
+\usepackage{array}
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
 
 \lstdefinestyle{code}{
 language=python,                   
@@ -87,11 +95,14 @@ framerule=2pt,
 % \chapter{Systèmes de recommandations}
 % \input{chapters/chapter1}
 
-\chapter{Traitement Automatique du Langage Naturel}
-\input{chapters/chapter2}
+% \chapter{Traitement Automatique du Langage Naturel}
+% \input{chapters/chapter2}
 
 % \chapter{Conception}    
 % \input{chapters/chapter3}
+
+\chapter{Réalisation}    
+\input{chapters/chapter4}
 
 \bibliographystyle{unsrt} 
 \bibliography{ref}
