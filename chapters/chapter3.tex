@@ -7,18 +7,208 @@ La réalisation d'un logiciel ou d'un système informatique doit être obligatoi
 La première motivation de ce travail été de fournir un outil qui enchaîne les processus de catégorisation de résumé, de traduction et de recommandation d'articles de presse. Pour parvenir à réaliser cet ensemble de tâches en deux langues (Anglais et Arabe), nous proposons une architecture 3-tiers. 
 
 
-\section{Architecture modulaire de \textquotedbl Feedny\textquotedbl}
-Dans cette partie, nous allons la conception des architectures modulaires des modules de recommandation, résumé automatique, catégorisation et traduction automatique.
+% \section{Architecture modulaire de \textquotedbl Feedny\textquotedbl}
+% Dans cette partie, nous allons la conception des architectures modulaires des modules de recommandation, résumé automatique, catégorisation et traduction automatique.
 
-\subsection{Module de recommandation}
+\section{Module de recommandation}
+Dans cette partie, nous allons voir la conception détaillée de notre système de recommandation. Ci-dessous, nous présentons les deux approches proposée la recommandation personnalisée et non personnalisée d'articles de presse  : 
+    \subsection{Recommandation personnalisée}
+    La recommandation des articles aux utilisateurs se base sur les profils de ces derniers. En effet, le profilage utilisateur débute lorsque l'utilisateur s'authentifie pour la première fois et à chaque fois les informations relatives à ses préférences sont récoltés et traités.\\
+    Cette étape nécessite le profilage utilisateur et le calcul de similarité entre utilisateurs. Dans ce qui suit les détails de chacun.
+
+        \subsubsection{Profilage d'un utilisateur}
+        Elle consiste à déterminer les centres d'intérêts d'un utilisateur tout en se basant sur les articles lus par ce dernier. Pour cela, nous avons décidé d'utiliser une méthode de calcul des préférences afin de mieux cibler les utilisateurs et garantir une solution conforme aux caractéristiques de la recommandation pour les articles de presse. 
+
+        Pour le calcul des préférences utilisateurs, nous avons utiliser une méthode de calcul qui permet à la fois de résoudre les problèmes de récence \autoref{} et le démarrage à froid \autoref{}. Cette méthode testée s'avère très efficace par rapport aux méthodes existantes et décrites dans \autoref{}.
+
+        Le calcul de la probabilité de sélection d'une catégorie pour un utilisateur est basé sur ses interactions avec les articles de presse disponible. En effet, dés qu'un est sélectionné, l'information est sauvegardée et utilisée pour la mise à jour du vecteur des catégories préférées \autoref{}.
+
+        L'exemple suivant présente un vecteur de probabilité de sélection pour les catégories préférées d'un utilisateur U :  
+        \begin{itemize}[label={}]
+            \item $P(U) = {'sport': 0.7178, 'news': 0.1581, 'sci\_tech': 0.1492}$\\
+        \end{itemize}
+        Il faut noter que la taille du vecteur de probabilité de sélection des catégories préférées est différentes d'un utilisateur à un autre.
+
+        Ce vecteur se mets à jour, comme déjà cité, après chaque interaction de l'utilisateur U avec l'article A de la catégorie C. Au fur et à mesure, la probabilité de sélection d'une catégorie C\textsubscript{i} augmente si cette dernière est sélectionnée, sinon elle diminue pour donner moins d'importances aux articles qui en font partis!!
+
+        Ci-après les formules dédiées à cet effet :\\
+        \[
+        P(U, C) =
+        \begin{cases}
+            (1-{\alpha}) * {P(U, C)} + {\alpha} & \text{si } \text{article A est sélectionne} \\
+            (1-{\alpha}) * {P(U, C)} & \text{sinon.}
+        \end{cases}
+        \]
+
+        Avec initialement :
+        \[
+        \begin{cases}
+            P(U, C) = 1 / NbC \forall \text{C} \in \{categorie\textsubscript{1}, categorie\textsubscript{2}, ..., categorie\textsubscript{NbC}\}\\
+            NbC : \text{nombre de categories}\\
+            \alpha = \text{une constante empirique représentant le biais pour la diminution}
+        \end{cases}
+        \]
+        \begin{algorithm2e}[H]
+        \SetAlgoLined
+        \SetKwInOut{Input}{input}
+        \SetKwInOut{Output}{output}
+        \Input{A: Article, U: Utilisateur}
+        \textbf{Const :} \alpha = 0.1, NbC = nombre de catégories\\
+        préférences = U.préférences\\
+        catégorie = A.catégorie\\
+        \eIf{catégorie \in préférences}{
+            préférences[catégorie] = (1-{\alpha}) * {préférences[catégorie]} + {\alpha}\\
+            \While{i < taille(préférences)}{
+                \If{préférences[i] != catégorie}{
+                    préférences[i] = (1-{\alpha}) * {préférences[catégorie]}\\
+                }
+            } 
+        }
+        {
+            préférences[catégorie] = 1 / NbC
+        }
+        \caption{Algorithme de profilage d'un utilisateur}
+        \end{algorithm2e}
+        \subsubsection{Similarité entre utilisateurs}
+        Afin de diversifier la recommandation des articles de presse, nous avons mis en place une méthode de calcul de similarité qui permet de recommander des articles par rapport à la similarité entre utilisateurs. 
+
+        Selon \cite{euclidepreuve} qui propose une étude détaillé sur les mesures de similarité pour le filtrage collaboratif, il en est ressorti comme conclusion que la distance euclidienne était la mesure la plus adéquate en terme de précision et temps d'exécution. La formule de calcul de la distance euclidienne est la suivante :
+
+        Soient : \\
+        \begin{itemize}[label={}]
+            \item U\textsubscript{1} et U\textsubscript{2} deux utilisateurs,
+            \item P(U\textsubscript{1}) et P(U\textsubscript{2}) les vecteurs de probabilité de sélection des catégories préférées des deux utilisateurs,
+            \item NbC\textsubscript{1} et NbC\textsubscript{2} le nombre de catégories préférées de chaque utilisateur,\  
+            \item \[d({P(U\textsubscript{1})}, {P(U\textsubscript{2})}) = {\sqrt {\sum _{i=1, j=1}^{NbC\textsubscript{1},NbC\textsubscript{2}}(P(U\textsubscript{1}, C\textsubscript{i})-P(U\textsubscript{2}, C\textsubscript{j}))^{2}}}\]
+        \end{itemize}
+
+        Dans ce qui suit, un exemple de calcul de similarité entre deux utilisateurs :
+        \begin{itemize}[label={}]
+            \item \[P(U\textsubscript{1}) = {'news': 0.7178,'sport': 0.1581, 'sci\_tech': 0.1492}\]
+            \item \[P(U\textsubscript{2}) = {'religion': 0.8813,'sport': 0.4421, 'business': 0.3519}\]\\
+            \item \[d({P(U\textsubscript{1})}, {P(U\textsubscript{2})}) = d({q} ,{p})={\sqrt {(q_{1}-p_{1})^{2}+(q_{2}-p_{2})^{2}+\cdots +(q_{n}-p_{n})^{2}}}\\
+            =\]
+        \end{itemize}
+        \begin{algorithm2e}[H]
+        \SetAlgoLined
+        \SetKwInOut{Input}{input}
+        \SetKwInOut{Output}{output}
+        \Input{A: Article, U: utilisateur}
+        \textbf{Const :} seuil = 0.1\\
+        utilisateurs = lire(base de profils)\\
+        \While{i < taille(utilisateurs)}{
+            \If{utilisateurs[i] != U}{
+                similarité = distance\_euclidienne(U.préférences, utilisateurs[i].préférences)\\
+                \If{similarité >= seuil}{
+                    U.préférences += utilisateurs[i].préférences
+                }
+            }
+        } 
+        \caption{Algorithme de calcul de similarité entre utilisateurs}
+        \end{algorithm2e}
+
+    \subsection{Recommandation non personnalisée}
+    La recommandation non personnalisée vise à recommander des articles pour des utilisateurs qui n'ont pas de comptes (i.e : qui sont non authentifiés), pour cela notre système effectue une recommandation selon le choix de lecture de l'utilisateur, c'est à dire par calcul de similarité entre l'article qui est entrain d'être lu et les nouveaux articles disponible. 
+
+    Un pré-traitement est effectué sur chaque article comprend la suppression des mots vides et l'extraction des racines de mots. Ensuite, le sac à mots de l'article est converti en TF-IDF.  
+
+    Le de calcul de la similarité entre les articles est présenté ci-dessous:
+
+    Soient : \\
+    \begin{itemize}[label={}]
+        \item U un utilisateur,
+        \item A\textsubscript{1} et A\textsubscript{2} deux articles de presse,
+        \item A\textsubscript{1} a été déjà sélectionné et A\textsubscript{2} un nouvel article,
+        \item BoW(A\textsubscript{1}) et BoW(A\textsubscript{2}) les sacs à mots (Bag of Words) de chaque article,\\
+
+        \item BoW(A\textsubscript{1}) = \{\begin{arab}'لواء شفيق مدير مكتب رئيس مخلوع مبارك أراد دائم إيقاع عمر سليمان مشير طنطاوي وصف لواء شفيق عاش قصر رئيس مصري مخلوع وفاة عمر سليمان رئيس مخابرة مصري نائب مبارك خسارة أكبر مصر رجل أفضل رجل شجع صعب تعويض تحدث لواء شفيق تصريح علاقة عمر سليمان رئيس مخلوع مبارك قائل عمر سليمان مات نشاط حكومة دفن خزان سر مبارك أمين قوي ملتزم عمل أحرج مبارك كثير موقف طلب تقرير وزير نفذ إخلاص تفصيل جيد سيئ مدعم رئيس وزير جماعة مستند صور أطلع مشروع شخصي إلا مبارك نفذ قرار طلب تدخل'\end{arab}\},
+
+        \item BoW(A\textsubscript{2}) = \{\begin{arab}'نائب رئيس أمريكي بغداد بحث أزمة طائفي قاعدة تبنى تفجير بغداد أعلن حماية عراق استمر وضع عراق تأزم اتجاه حرب طائفي أعلن جماعة أطلق اسم دولة عراق إسلامي مسؤولية سلسلة تفجير استهدف عاصمة بغداد أسبوع منصرم أسفر تعويض مقتل أكثر أشار بيان جماعة تابع قاعدة تفجير جاء رد مشروع إيراني عراق تأكيد حركة هدف حماية عراقي مشروع إيراني بيان رسمي جماعة دولة عراق إسلامي أتى تبني تفجير استمر نزاع رئيس وزير نوري مالكي شيعي خصم حكم أنصار قائمة عراقي لواء خلفية اتهام مالكي نائب رئيس طارق هاشمي ضلع عملية إرهابي أمر أدى تجميد نشاط حكومة انسحاب وزير قائمة عراقي تفاقم خلاف نظر مطالبة تيار صدري قائمة عراقي حل برلمان تبكير'\end{arab}\},
+
+        \item TF-IDF(A\textsubscript{1}) = ,
+        \item TF-IDF(A\textsubscript{2}) = ,
+
+        \item \[sim\_cos(TF-IDF(A\textsubscript{1}), TF-IDF(A\textsubscript{2})) = \frac {TF-IDF(A\textsubscript{1}) \cdot TF-IDF(A\textsubscript{2})}{||TF-IDF(A\textsubscript{1})|| \cdot ||TF-IDF(A\textsubscript{2})||}\]
+    \end{itemize}
+    \begin{algorithm2e}[H]
+        \SetAlgoLined
+        \SetKwInOut{Input}{input}
+        \SetKwInOut{Output}{output}
+        \Input{A: Article, U: utilisateur}
+        \Output{ListeArticlesSimilaires: Article}
+        articles = lire(base de articles)\\
+        \While{i < taille(articles)}{
+            segmentation(articles[i])\\
+            suppression\_mots\_vides(articles[i])\\
+            racinisation(articles[i])\\
+        }
+        tf-idf = TF-IDF(articles)\\
+        mat\_similarité = TRI(cosinus\_similarité(tf-idf))\\
+        ListeArticlesSimilaires = mat\_similarité.articles\\
+        \Return ListeArticlesSimilaires[:5]
+        \caption{Algorithme de calcul de similarité entre articles}
+    \end{algorithm2e}
+    Say something
+    \begin{algorithm2e}[H]
+        \SetAlgoLined
+        \SetKwInOut{Input}{input}
+        \SetKwInOut{Output}{output}
+        \Input{A: Article, U: utilisateur}
+        \Output{ListeArticlesSimilaires: Article}
+        \eIf{U est authentifié}{
+        }
+        \caption{Algorithme de calcul de similarité entre articles}
+    \end{algorithm2e}
 
 
-\subsection{Module de résumé automatique}
+\section{Module de résumé automatique}
+Pour ce module de résumé automatique, nous avons choisi un résumeur automatique extractif \cite{notreresume} basé sur les plongements de mots (Word embeddings)!!!!!!! comme décrit dans le chapitre précédent \autoref{}.
+Ci-dessous la présentation des différentes approches expérimentées.
+    \subsection{Résumé extractif par Apprentissage Supervisé}
+    Nous avons, tout d'abord, expérimenté l'approche proposé dans \ref{riad-belkbir} qui est basée sur un apprentissage automatique supervisé en utilisant un dataset annoté manuellement. 
+        \subsubsection{Corpus et datasets}
+        Le dataset contient plus de 70 articles. Il est dédié principalement au résumé automatique par apprentissage supervisé pour la langue Arabe, mais peut être utilisé également dans d'autres applications, telles que la compression des textes.
 
-Pour ce module de résumé automatique, nous avons choisi un résumeur automatique extractif de \cite{notreresume} qui est basé sur les plongements de mots (Word embeddings) décrit dans le chapitre précédent.
+        L'annotation consiste en l'attribution de quatre type d’étiquettes possibles à chaque phrase de l'article :
+            \begin{itemize}
+                \item S (select) : phrase importante, à prendre en considération dans la construction du résumé.
+                \item R (remove) : cette phrase est à supprimer, son absence n'affecte pas le sens du résumé.
+                \item F (fusion) : fusion de deux phrases (ou plus).
+                \item C (compress) : compression d'une phrase on supprimant les synonymes et les redondances dans le sens.\\
+            \end{itemize}
 
-\subsubsection{Prétraitement des articles}
-Dans cette phase , il suffit juste de tokeniser le texte et supprimer les mots vides puisque le stemming ne peut pas être utilisé. Pour cause, le plongement de mots qu'on va utiliser (le modèle skip-gram entrainé sur le contenu Wikipédia) servira entre autre a détecté les régularités linguistiques des des mots de la même racine.
+        \subsubsection{Pré-traitement et structure du dataset}
+        Tout les articles du dataset sont sous le format XML, chaque article a son propre identifiant et divisé en paquets de phrases selon l'opération effectuée. Ci-après la figure \ref{xml-structure} qui montre un exemple du dataset : 
+        \begin{figure}[H]
+            \centering
+            \includegraphics[height=220pt,width=430pt]{img/chapter4/xml.png}
+            \caption{Structure d'un article du dataset}
+            \label{xml-structure}
+        \end{figure}
+        L'approche basée sur l'apprentissage automatique demandait un très grand nombre d'articles résumés, ce qui nous a poussé à l'abandonner.
+
+    \subsection{Résumé extractif par Machine de Boltzman}
+    L'approche proposée dans \cite{boltzman} utilise un modèle d'apprentissage profond afin de prédire les phrases les plus importantes dans un texte donnée en utilisant 9 caractéristiques sur chaque phrase. Elle consiste en trois grande phases: l'extraction des caractéristiques, la conversion en valeurs numériques et la génération du résumé à partir des scores de chaque phrase. 
+
+    Les caractéristiques extraites sont les suivantes :
+    \begin{enumerate}
+        \item{Nombre de mots clés}
+        \item{Position de la phrase dans le texte}
+        \item{Longueur de la phrase}
+        \item{Position de la phrase dans le paragraphe}
+        \item{Nombre de noms propres}
+        \item{Nombre d'entités numériques}
+        \item{Nombre d'entités nommées}
+        \item{TF-ISF (Term Frequency- Inverse Sentence Frequency)}
+        \item{Similarité avec la phrase centroïde}
+    \end{enumerate} 
+
+    \subsection{Résumé extractif par Plongement de mots\ref{plongement}}
+    L'approche proposée par l'équipe de recherche du département informatique de l'Université de Bari en Italie \cite{bari}, est basée sur la similarité textuelle entre la phrase centroïde et les autres phrases du texte en utilisant les plongements de mots (Word embeddings)\ref{}. La conception et l'algorithme de réalisation sont détaillés dans \ref{plongement}
+
+        \subsubsection{Prétraitement des articles}
+        Dans cette phase, il suffit juste de segmenter le texte et supprimer les mots vides. Ceci étant dû au fait que le plongement de mots qu'on va utiliser (le modèle Skip-Gram entraîné sur le contenu Wikipédia) servira entre autre a détecté les régularités linguistiques des des mots de la même racine.!!!!
+
 
 %\begin{algorithm}[H]
 %   \begin{algorithmic}[1]
@@ -112,76 +302,73 @@ Il est a noter qu' un seuil a été fixé afin de rejeter toutes les phrases qui
 %\end{algorithm}
 
 
-\subsection{Module de catégorisation}
-En se basant sur les travaux de \cite{categorisation} pour l'Anglais et \cite{categorisation} pour l'Arabe, nous avons entrainé nos modèles sur des corpus d'articles de différentes sources afin de garantir la diversité dans nos données (plus de détails dans le chapitre 4\ref{chapter4}).
+\section{Module de catégorisation d'article de presse}
+Le premier module sur lequel nous avons travailler, c'est la catégorisation d'articles de presse. Nous avons expérimenter plusieurs techniques proposées dans la littérature. Nous présentons ci-après chaque approche, ses résultats, ses points forts et ses faiblesses.
+
+En se basant sur les travaux de \cite{categorisation} pour l'Anglais et \cite{categorisation} pour l'Arabe, nous avons entraîné nos modèles sur des corpus d'articles de différentes sources afin de garantir la diversité dans nos données (plus de détails dans le chapitre 4\ref{chapter4}).
 À REVOIR!!
 
-\subsubsection{Approches expérimentées\label{approches}}
-Toutes les approches utilisées sont basées sur l'apprentissage automatique, supervisé et non supervisé. 
+    \subsection{Approches expérimentées\label{approches}}
+    Toutes les approches utilisées sont basées sur l'apprentissage automatique, supervisé et non supervisé. 
 
-\begin{enumerate}[leftmargin=*]
-    \item{Basées sur l'Apprentissage Non Supervisé}
-        \begin{itemize}
-            \item{LDA (Latent Dirichlet Allocation) : }
-            NOT YET
-            \item{K-means : }
-            L'algorithme de clustering K-means est connu pour être efficace dans la mise en place de cluster de grands ensembles de données. Cet algorithme a été développé par MacQueen et est l'un des algorithmes d'apprentissage non supervisés les plus simples et les plus connus. K-Means vise à partitionner un ensemble d'objets, en fonction de leurs attributs/caractéristiques, en k clusters, où k est une constante prédéfinie ou définie par l'utilisateur. 
-        
-            L'idée principale est de définir k centroïdes, un pour chaque cluster. Le centroïde d'une grappe est formé de telle sorte qu'il est étroitement lié (en termes de fonction de similarité, la similarité peut être mesurée en utilisant différentes méthodes telles que la similarité cosinus, la distance euclidienne, Jaccard étendu) à tous les objets de cette grappe.
-        
-            Pour cela, nous nous sommes penché au tout début de l'élaboration du modèle de clustering sur cette methode \cite{methodeKmeans}.
-        \end{itemize}
-
-    \item{Basées sur l'Apprentissage Supervisé}
-        \begin{itemize}
-            \item{Naïve de Bayes : }
-            c'est une méthode connue de l'Apprentissage automatique supervisé. Un de ses avantages en plus d'être un modèle simple, c'est qu'ils renvoient non seulement la prédiction mais aussi le degré de certitude, ce qui peut être très utile dans certaines applications. Mais en ayant un problème à classes multiples, cette approche nous a donnés des résultats très modeste en un temps d'exécution assez importants, ce qui nous a poussé à abandonner son utilisation.\\
+        \subsubsection{Basées sur l'Apprentissage Non Supervisé}
+            \begin{itemize}
+                \item{LDA (Latent Dirichlet Allocation) : }
+                NOT YET
+                \item{K-means : }
+                L'algorithme de clustering K-means est connu pour être efficace dans la mise en place de cluster de grands ensembles de données. Cet algorithme a été développé par MacQueen et est l'un des algorithmes d'apprentissage non supervisés les plus simples et les plus connus. K-Means vise à partitionner un ensemble d'objets, en fonction de leurs attributs/caractéristiques, en k clusters, où k est une constante prédéfinie ou définie par l'utilisateur. 
             
-            \item{Arbres de décision : }
-            peuvent être assistés par un expert. Ces principaux avantages sont : robuste face aux données aberrantes, pas très sensible aux données manquantes, possibilité d’intervenir dans la construction de l’arbre, etc. Son principale inconvénient reste la dépendance très forte entre la taille de la base d’apprentissage et les performances.\\
+                L'idée principale est de définir k centroïdes, un pour chaque cluster. Le centroïde d'une grappe est formé de telle sorte qu'il est étroitement lié (en termes de fonction de similarité, la similarité peut être mesurée en utilisant différentes méthodes telles que la similarité cosinus, la distance euclidienne, Jaccard étendu) à tous les objets de cette grappe.
             
-            % \item{Réseaux de neurones : }
-            \item{SVM (Support Vector Machines) : }
-            NOT YET
-            \item{Descente de Gradient Stochastique : }
-            NOT YET
-        \end{itemize}
-\end{enumerate}
+                Pour cela, nous nous sommes penché au tout début de l'élaboration du modèle de clustering sur cette methode \cite{methodeKmeans}.
+            \end{itemize}
 
-\subsubsection{Processus de catégorisation}
-%    \begin{algorithm}[H]
-%        \begin{algorithmic}[1]
-%        \STATE Algorithme
-%        \STATE Début
-%        \STATE Chargement du l'article;\\
-%        \STATE Prétraitement: Tokenisation, élimination des mots vides, racinisation ;\\
-%        \STATE Calcul de la fréquence des termes par document TF-IDF ;\\
-%        \STATE Prédiction de la catégorie;\\
-%        \STATE \quad Retourner Modèle;
-%        \STATE Fin
-%        \end{algorithmic}
-%    \end{algorithm}
+        \subsubsection{Basées sur l'Apprentissage Supervisé}
+            \begin{itemize}
+                \item{Naïve de Bayes : }
+                c'est une méthode connue de l'Apprentissage automatique supervisé. Un de ses avantages en plus d'être un modèle simple, c'est qu'ils renvoient non seulement la prédiction mais aussi le degré de certitude, ce qui peut être très utile dans certaines applications. Mais en ayant un problème à classes multiples, cette approche nous a donnés des résultats très modeste en un temps d'exécution assez importants, ce qui nous a poussé à abandonner son utilisation.\\
+                
+                \item{Arbres de décision : }
+                peuvent être assistés par un expert. Ces principaux avantages sont : robuste face aux données aberrantes, pas très sensible aux données manquantes, possibilité d’intervenir dans la construction de l’arbre, etc. Son principale inconvénient reste la dépendance très forte entre la taille de la base d’apprentissage et les performances.\\
+                
+                \item{SVM (Support Vector Machines) : }
+                NOT YET
+                \item{Descente de Gradient Stochastique : }
+                NOT YET
+            \end{itemize}
 
- Le premier module sur lequel nous avons travailler, c'est la catégorisation d'articles de presse. Nous avons expérimenter plusieurs techniques proposées dans la littérature. Nous présentons ci-après chaque approche, ses résultats, ses points forts et ses faiblesses.
+        \subsection{Processus de catégorisation}
+        %    \begin{algorithm}[H]
+        %        \begin{algorithmic}[1]
+        %        \STATE Algorithme
+        %        \STATE Début
+        %        \STATE Chargement du l'article;\\
+        %        \STATE Prétraitement: Tokenisation, élimination des mots vides, racinisation ;\\
+        %        \STATE Calcul de la fréquence des termes par document TF-IDF ;\\
+        %        \STATE Prédiction de la catégorie;\\
+        %        \STATE \quad Retourner Modèle;
+        %        \STATE Fin
+        %        \end{algorithmic}
+        %    \end{algorithm}
 
+            \subsubsection{Pré-traitement des articles de presse}
+             Plusieurs opérations de pré-traitements ont été effectuées. Ci-après les étapes suivies :
+            \begin{enumerate}
+                \item{\textbf{Segmentation (Tokenization) et suppression des mots vides :} }permet d'extraire toutes les entités lexicales d'un article donné. Pour l'Anglais nous avons utiliser le Tokenizer natif de NLTK, et FARASA Toolbox pour la langue Arabe. La segmentation est suivie de la suppression des tokens non utiles tel que la ponctuation, les pronoms, les déterminants, etc.\\  
+                
+                \item{\textbf{Racinisation (Stemming) :} }les mots d'un document sont représentés par leurs racines plutôt que par les mots d'origine. Plusieurs variantes d'un terme peuvent ainsi être groupées dans une seule forme représentative, ce qui réduit le nombre des termes distincts nécessaires pour représenter un document. Le Snowball Stemmer a été utilisé pour l'Anglais, quant à l'Arabe c'est toujours la Toolbox FARASA.\\
+                
+                \item{\textbf{N-grammes :} }les N-grammes permettent de construire une sous-séquence de n mots consécutives. Ils permettent de contextualiser l'ordre d'apparition d'un ensemble de mots. L'algorithme natif de NLTK a été utilisé pour les deux langues (Anglais et Arabe).\\ 
+                
+                \item{\textbf{Extraction des caractéristiques :} }avec l'utilisation de TF-IDF, le sac de mots représentant un article sera convertit en valeurs numériques décrivant la fréquence d'occurrence de chaque mot par rapport à l'ensemble des articles du corpus et à l'article lui même.\\
+            \end{enumerate}
 
- Plusieurs opérations de pré-traitements ont été effectuées. Ci-après les étapes suivies :
-\begin{enumerate}
-    \item{\textbf{Segmentation (Tokenization) et suppression des mots vides :} }permet d'extraire toutes les entités lexicales d'un article donné. Pour l'Anglais nous avons utiliser le Tokenizer natif de NLTK, et FARASA Toolbox pour la langue Arabe. La segmentation est suivie de la suppression des tokens non utiles tel que la ponctuation, les pronoms, les déterminants, etc.\\  
-    
-    \item{\textbf{Racinisation (Stemming) :} }les mots d'un document sont représentés par leurs racines plutôt que par les mots d'origine. Plusieurs variantes d'un terme peuvent ainsi être groupées dans une seule forme représentative, ce qui réduit le nombre des termes distincts nécessaires pour représenter un document. Le Snowball Stemmer a été utilisé pour l'Anglais, quant à l'Arabe c'est toujours la Toolbox FARASA.\\
-    
-    \item{\textbf{N-grammes :} }les N-grammes permettent de construire une sous-séquence de n mots consécutives. Ils permettent de contextualiser l'ordre d'apparition d'un ensemble de mots. L'algorithme natif de NLTK a été utilisé pour les deux langues (Anglais et Arabe).\\ 
-    
-    \item{\textbf{Extraction des caractéristiques :} }avec l'utilisation de TF-IDF, le sac de mots représentant un article sera convertit en valeurs numériques décrivant la fréquence d'occurrence de chaque mot par rapport à l'ensemble des articles du corpus et à l'article lui même.\\
-\end{enumerate}
-
-À la fin de la phase de pré-traitement, nous avons définie une structure pour faciliter l'exploration des datasets. Ci-dessous la structure choisie :
-\begin{itemize}
-    \item{\textbf{id} :}un identifiant unique de l'article,
-    \item{\textbf{contenu} :}les différents paragraphes de l'article,
-    \item{\textbf{catégorie} :}la catégorie de l'article extraite depuis la source.
-\end{itemize}
+            À la fin de la phase de pré-traitement, nous avons définie une structure pour faciliter l'exploration des datasets. Ci-dessous la structure choisie :
+            \begin{itemize}
+                \item{\textbf{id} :}un identifiant unique de l'article,
+                \item{\textbf{contenu} :}les différents paragraphes de l'article,
+                \item{\textbf{catégorie} :}la catégorie de l'article extraite depuis la source.
+            \end{itemize}
 
 
 
@@ -220,28 +407,34 @@ Afin d'intégrer un bon système de traduction automatique, nous avons explorer 
 
 
 
-\section{Architecture des bases de données}
+\section{Conception de la base de données}
+Le choix a été porté sur les bases de données NoSQL (\autoref{nosql}) vu la structure très dynamique des articles de presse mais aussi des profils utilisateurs.
+
 MongoDB est une base de données orientée document écrite en C++ \cite{NOSQL3}. Les objets sont stockés en série sous la forme BSON.
-Les objets n'ont pas besoin d'avoir la même structure ou les mêmes champs et les champs communs n'ont pas besoin d'avoir le même type,
-permettant ainsi un stockage de schéma flexible. A cet effet, nous présentons ci-dessous, sous ce format, la "collection d'articles" et la "collection des profils".
+Les objets n'ont pas besoin d'avoir la même structure ou les mêmes champs et les champs communs n'ont pas besoin d'avoir le même type, permettant ainsi un stockage de schéma flexible. À cet effet, nous présentons ci-dessous, sous ce format, la "collection d'articles" et la "collection des profils".
 
-\subsection{Architecture de la collection d'articles}
+\subsection{Collection d'articles}
+Les articles extraits depuis différentes sources sont tous sauvegardés sous une structure définie au préalable, prenant en considération les différences entre les formats suivies par les revu de presse. 
+
+À cet effet nous avons choisi \emph{JSON} qui est un format léger d'échange de données. Il est facile à lire ou à écrire pour des humains\cite{json} et est pris en charge par tout les langages de programmation.
+
+Chaque article est représenté comme suit:
 \begin{itemize}
-    \item \textbf{\_id (Identifiant) :} Hash  
-    \item \textbf{language (Langue) :} [\textquotesingle Ar\textquotesingle, \textquotesingle En\textquotesingle]
-    \item \textbf{title (Titre) :} Chaîne de caractères
-    \item \textbf{source (Source) :} [\textquotesingle espn\textquotesingle, \textquotesingle bbc-news\textquotesingle, \textquotesingle echourouk\textquotesingle, \textquotesingle elkhabar\textquotesingle, etc.]
-    \item \textbf{author (Auteur) :} Chaîne de caractères
-    \item \textbf{content (Contenu) :} Texte
-    \item \textbf{"publishedAt" (Horaire) :} Timestamp: AAAA-MM-JJTHH:MM:SS
-    \item \textbf{Lien de l'url (article) :} URL
-    \item \textbf{Lien de l'urlToImage (image) :} URL 
-    \item \textbf{categoryPredicted (Catégorie) :} [\textquotesingle sport\textquotesingle, \textquotesingle business\textquotesingle, \textquotesingle religion\textquotesingle, etc.]
-    \item \textbf{summaryGenerated (Résumé) :} Texte
-    \item \textbf{translatedContent (Traduction) :} Texte
+    \item \textbf{Identifiant, \textquotedbl \_id\textquotedbl: } identifiant unique d'un article de presse.
+    \item \textbf{Langue, \textquotedbl language\textquotedbl:} la langue dans laquelle l'article est écrit.
+    \item \textbf{Titre, \textquotedbl title\textquotedbl:} le titre de l'article.
+    \item \textbf{Source, \textquotedbl source\textquotedbl:} nom de la revue de presse source.
+    \item \textbf{Auteur, \textquotedbl author\textquotedbl:} on sauvegarde le nom de l'auteur.
+    \item \textbf{Contenu, \textquotedbl content\textquotedbl:} contenu de l'article de presse.
+    \item \textbf{Horaire, \textquotedbl publishedAt\textquotedbl:} date et heur local de publication.
+    \item \textbf{Lien de l'article, \textquotedbl url\textquotedbl:} lien vers la page de l'article originale.
+    \item \textbf{Lien de l'image, \textquotedbl urlToImage\textquotedbl:} lien vers l'image principale de l'article originale.
+    \item \textbf{Catégorie, \textquotedbl categoryPredicted\textquotedbl:} catégorie de l'article inférée en utilisant nos modèles.
+    \item \textbf{Résumé, \textquotedbl summaryGenerated\textquotedbl:} résumé automatique générée.
+    \item \textbf{Traduction, \textquotedbl translatedContent\textquotedbl:} contenu de l'article de presse traduit.\\
 \end{itemize}
-Voici maintenant un exemple d'un document de la collection d'articles.
 
+Voici maintenant un exemple d'un document de la collection d'articles.
 \begin{lstlisting}[style=code]
 {
 '_id': '5afc18571d41c833a8632a24', 
@@ -259,17 +452,20 @@ Voici maintenant un exemple d'un document de la collection d'articles.
 },
 \end{lstlisting}
 
-\subsection{Architecture de la collection de profils}
+\subsection{Collection de profils}
+Le profile d'utilisateur regroupe très peu d'informations dans le but de protéger la vie privée. Cependant, les catégories et les sources préférées par l'utilisateur sont sauvegardées. 
 
+Un profil utilisateur est représenté comme suit :
 \begin{itemize}
-    \item \textbf{\_id (Identifiant ): } Hash
-    \item \textbf{username (Nom d'utilisateur) : } Chaîne de caractères
-    \item \textbf{password (Mot de passe): } Hash
-    \item \textbf{email (Adreese mail): } Chaîne de caractères
-    \item \textbf{categories (Catégories): } {catégorie: taux de préférences }
-    \item \textbf{sources (Sources): } [\textquotesingle bbc-news\textquotesingle, \textquotesingle al-jazeera-english\textquotesingle, \textquotesingle wello-mag\textquotesingle, etc.] 
+    \item \textbf{Identifiant, \textquotedbl  \_id\textquotedbl : } identifiant unique.
+    \item \textbf{Nom d'utilisateur, \textquotedbl  username\textquotedbl : } nom d'utilisateur unique.
+    \item \textbf{Mot de passe, \textquotedbl  password\textquotedbl : } mot de passe pour l'authentification crypté.
+    \item \textbf{Adreese mail, \textquotedbl  email\textquotedbl : } email de l'utilisateur.
+    \item \textbf{Catégories préférées, \textquotedbl  preferences\textquotedbl : } vecteurs de catégories préférées .
+    \item \textbf{Sources préférées, \textquotedbl  sources\textquotedbl : } noms des sources de revues de presse préférées. 
 \end{itemize}
-Voici maintenant un exemple d'un document de la collection de profils.
+
+Ci-dessous un exemple d'un document de la collection de profils :
 \begin{lstlisting}[style=code]
 {
 '_id': '5afc18571d41c833a8632a24', 
