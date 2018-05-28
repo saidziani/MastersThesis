@@ -163,3 +163,467 @@ Dans cette partie, nous allons voir la conception détaillée de notre système 
     %     % }
     %     \caption{Algorithme de calcul de similarité entre articles}
     % \end{algorithm2e}
+%%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~%%    
+\section{Module de résumé automatique}
+Pour ce module de résumé automatique, nous avons choisi un résumeur automatique extractif \cite{notreresume} basé sur les plongements de mots (Word embeddings)!!!!!!! comme décrit dans le chapitre précédent \autoref{}.
+Ci-dessous la présentation des différentes approches expérimentées.
+    \subsection{Résumé extractif par Apprentissage Supervisé}
+    Nous avons, tout d'abord, expérimenté l'approche proposé dans \ref{riad-belkbir} qui est basée sur un apprentissage automatique supervisé en utilisant un dataset annoté manuellement. 
+        \subsubsection{Corpus et datasets}
+        Le dataset contient plus de 70 articles. Il est dédié principalement au résumé automatique par apprentissage supervisé pour la langue Arabe, mais peut être utilisé également dans d'autres applications, telles que la compression des textes.
+
+        L'annotation consiste en l'attribution de quatre type d'étiquettes possibles à chaque phrase de l'article :
+            \begin{itemize}
+                \item S (select) : phrase importante, à prendre en considération dans la construction du résumé.
+                \item R (remove) : cette phrase est à supprimer, son absence n'affecte pas le sens du résumé.
+                \item F (fusion) : fusion de deux phrases (ou plus).
+                \item C (compress) : compression d'une phrase on supprimant les synonymes et les redondances dans le sens.\\
+            \end{itemize}
+
+        \subsubsection{Pré-traitement et structure du dataset}
+        Tout les articles du dataset sont sous le format XML, chaque article a son propre identifiant et divisé en paquets de phrases selon l'opération effectuée. Ci-après la figure \ref{xml-structure} qui montre un exemple du dataset : 
+        \begin{figure}[H]
+            \centering
+            \includegraphics[height=220pt,width=430pt]{img/chapter4/xml.png}
+            \caption{Structure d'un article du dataset}
+            \label{xml-structure}
+        \end{figure}
+        L'approche basée sur l'apprentissage automatique demandait un très grand nombre d'articles résumés, ce qui nous a poussé à l'abandonner.
+
+    \subsection{Résumé extractif par Machine de Boltzman}
+    L'approche proposée dans \cite{boltzman} utilise un modèle d'apprentissage profond afin de prédire les phrases les plus importantes dans un texte donnée en utilisant 9 caractéristiques sur chaque phrase. Elle consiste en trois grande phases: l'extraction des caractéristiques, la conversion en valeurs numériques et la génération du résumé à partir des scores de chaque phrase. 
+
+    Les caractéristiques extraites sont les suivantes :
+    \begin{enumerate}
+        \item{Nombre de mots clés}
+        \item{Position de la phrase dans le texte}
+        \item{Longueur de la phrase}
+        \item{Position de la phrase dans le paragraphe}
+        \item{Nombre de noms propres}
+        \item{Nombre d'entités numériques}
+        \item{Nombre d'entités nommées}
+        \item{TF-ISF (Term Frequency- Inverse Sentence Frequency)}
+        \item{Similarité avec la phrase centroïde}
+    \end{enumerate} 
+
+    \subsection{Résumé extractif par Plongement de mots\ref{plongement}}
+    L'approche proposée par l'équipe de recherche du département informatique de l'Université de Bari en Italie \cite{bari}, est basée sur la similarité textuelle entre la phrase centroïde et les autres phrases du texte en utilisant les plongements de mots (Word embeddings)\ref{}. La conception et l'algorithme de réalisation sont détaillés dans \ref{plongement}
+
+        \subsubsection{Prétraitement des articles}
+        Dans cette phase, il suffit juste de segmenter le texte et supprimer les mots vides. Ceci étant dû au fait que le plongement de mots qu'on va utiliser (le modèle Skip-Gram entraîné sur le contenu Wikipédia) servira entre autre a détecté les régularités linguistiques des des mots de la même racine.!!!!
+
+
+%\begin{algorithm}[H]
+%   \begin{algorithmic}[1]
+
+%\STATE Prétraitement
+%\STATE Début
+%\STATE Chargement du document;
+%\STATE Extraction des phrases ;
+%\STATE Tokenisation ;
+%\STATE Suppression des mots vides;
+%\STATE \quad Retourner $Document_traité$;
+%\STATE Fin
+
+%\end{algorithmic}
+%\end{algorithm}
+
+\subsubsection{Construction d'un vecteur de centroïde}
+Afin de construire un vecteur centroïde en utilisant les plongement de mots, nous sélectionnons d'abord les mots significatifs dans le document. Pour cela, nous sélectionnons mots ayant le poids Tf-IDF supérieur à un seuil de document (idf). Ainsi, nous calculons l'encastrement du centroïde comme la somme des mots les mieux classés dans le document en utilisant les plongements de mots de Wikipédia (environ 1 million de mots). 
+
+%\begin{algorithm}[H]
+%   \begin{algorithmic}[1]
+%       \STATE Recommandation
+%       \STATE Début
+%       \STATE Lecture du seuil idf fixé;
+%       \STATE Calcul du tf-idf de chaque terme dans le document ;
+%       \STATE Pour chaque terme dans le document Faire:
+%       \STATE SI tf-idf(terme) >= seuil Alors:
+%       \STATE    $Liste_des_mots_importants$ \gets terme;
+%       \STATE FinsI;
+%       \STATE FinPour;
+%       \STATE \quad Retourner $Liste_des_mots_importants$;
+%       \STATE Fin
+%   \end{algorithmic}
+%\end{algorithm}
+
+
+\subsubsection{Notation des phrases}
+Dans ce processus, pour chaque phrase du document on additionne les plongement de mots de chaque terme de telle façon a avoir un une représentation sur laquelle la phrase est représenté par un score. Ainsi, la phrase ayant le score le plus élevé désigne la phrase centroid.\\
+Il est a noter que les vecteurs a additionné sont calculé sur la base du modèle Word2Vec pré entrainé sur le contenu de Wikipédia.
+
+%\begin{algorithm}[H]
+%   \begin{algorithmic}[1]
+%       \STATE Notation
+%       \STATE Début
+%       \STATE Lecture du vecteur de centroïde;
+%       \STATE Calcul de score pour chaque phrase;
+%       \STATE \quad Retourner $Notations$;
+%       \STATE Fin
+%   \end{algorithmic}
+%\end{algorithm}
+
+
+\subsubsection{Séléction des phrases}
+Pour chaque phrase du document, on calcule la \emph{similarité de cosinus} entre elle et la phrase centroïde du document. Les phrases sont ensuite triées par ordre décroissant de leurs scores de similarité. Les phrases les mieux classées sont itérativement sélectionnés et ajoutés au résumé jusqu'à ce que la limite (taille du résumé) soit atteinte. Afin de satisfaire la propriété de redondance, au cours de chaque itération nous allons calculer la \emph{similarité de cosinus} entre la phrase a venir et chacune déjà dans le résumé.
+Il est a noter qu' un seuil a été fixé afin de rejeter toutes les phrases qui ont une similarité très élevé par rapport a une phrase afin d'éviter cette redondance.
+
+%\begin{algorithm}[H]
+%   \begin{algorithmic}[1]
+%       \STATE Séléction
+%       \STATE Début
+%       \STATE Lecture du seuil de résumé fixé;
+%       \STATE Lecture du seuil de similarité fixé;
+%       \STATE Tant que le seuil du résumé est non atteint Faire :
+%       \STATE similarité entre la phrase actuelle et la phrase centroïde \gets \[cos(\pmb P, \pmb C\];
+%       \STATE similarité de cosinus entre la phrase actuelle et celle du résumé  \gets \[cos(\pmb P, \pmb R\]  
+%       \STATE Si (\[cos(\pmb P, \pmb R\] <= seuil de similarité et \[cos(\pmb P, \pmb C\] <= seuil de similarité) Alors :
+%       \STATE $phrases_résumé \gets phrase_actuelle$
+%       \STATE Finsi
+%       \STATE Fintantque;  
+%       \STATE \quad Retourner $phrases_résumés$;
+%       \STATE Fin
+%   \end{algorithmic}
+%\end{algorithm}
+
+\subsubsection{Algorithme du résumeur automatique extractif}
+
+%\begin{algorithm}[H]
+%   \begin{algorithmic}[1]
+%\STATE résumé
+%\STATE Début
+%\STATE Chargement du document ;
+%\STATE Lecture des paramètres ;
+%\STATE Prétraitement de l'article ;
+%\STATE Construction du vecteur de centroide selon le modèle de plongement de mots pré entrainé de Wikipédia;
+%\STATE Notation des phrases;
+%\STATE Séléction des phrases pertinentes;
+%\STATE Ordonnancement des phrases selon leur rang dans le document;
+%\STATE \quad Retourner résumé;
+%\STATE Fin 
+%   \end{algorithmic}
+%\end{algorithm}
+
+
+\section{Module de catégorisation d'article de presse}
+Le premier module sur lequel nous avons travailler, c'est la catégorisation d'articles de presse. Nous avons expérimenter plusieurs techniques proposées dans la littérature. Nous présentons ci-après chaque approche, ses résultats, ses points forts et ses faiblesses.
+
+En se basant sur les travaux de \cite{categorisation} pour l'Anglais et \cite{categorisation} pour l'Arabe, nous avons entraîné nos modèles sur des corpus d'articles de différentes sources afin de garantir la diversité dans nos données (plus de détails dans le chapitre 4\ref{chapter4}).
+À REVOIR!!
+
+    \subsection{Approches expérimentées\label{approches}}
+    Toutes les approches utilisées sont basées sur l'apprentissage automatique, supervisé et non supervisé. 
+
+        \subsubsection{Basées sur l'Apprentissage Non Supervisé}
+            \begin{itemize}
+                \item{LDA (Latent Dirichlet Allocation) : }
+                NOT YET
+                \item{K-means : }
+                L'algorithme de clustering K-means est connu pour être efficace dans la mise en place de cluster de grands ensembles de données. Cet algorithme a été développé par MacQueen et est l'un des algorithmes d'apprentissage non supervisés les plus simples et les plus connus. K-Means vise à partitionner un ensemble d'objets, en fonction de leurs attributs/caractéristiques, en k clusters, où k est une constante prédéfinie ou définie par l'utilisateur. 
+            
+                L'idée principale est de définir k centroïdes, un pour chaque cluster. Le centroïde d'une grappe est formé de telle sorte qu'il est étroitement lié (en termes de fonction de similarité, la similarité peut être mesurée en utilisant différentes méthodes telles que la similarité cosinus, la distance euclidienne, Jaccard étendu) à tous les objets de cette grappe.
+            
+                Pour cela, nous nous sommes penché au tout début de l'élaboration du modèle de clustering sur cette methode \cite{methodeKmeans}.
+            \end{itemize}
+
+        \subsubsection{Basées sur l'Apprentissage Supervisé}
+            \begin{itemize}
+                \item{Naïve de Bayes : }
+                c'est une méthode connue de l'Apprentissage automatique supervisé. Un de ses avantages en plus d'être un modèle simple, c'est qu'ils renvoient non seulement la prédiction mais aussi le degré de certitude, ce qui peut être très utile dans certaines applications. Mais en ayant un problème à classes multiples, cette approche nous a donnés des résultats très modeste en un temps d'exécution assez importants, ce qui nous a poussé à abandonner son utilisation.\\
+                
+                \item{Arbres de décision : }
+                peuvent être assistés par un expert. Ces principaux avantages sont : robuste face aux données aberrantes, pas très sensible aux données manquantes, possibilité d'intervenir dans la construction de l'arbre, etc. Son principale inconvénient reste la dépendance très forte entre la taille de la base d'apprentissage et les performances.\\
+                
+                \item{SVM (Support Vector Machines) : }
+                NOT YET
+                \item{Descente de Gradient Stochastique : }
+                NOT YET
+            \end{itemize}
+
+        \subsection{Processus de catégorisation}
+        %    \begin{algorithm}[H]
+        %        \begin{algorithmic}[1]
+        %        \STATE Algorithme
+        %        \STATE Début
+        %        \STATE Chargement du l'article;\\
+        %        \STATE Prétraitement: Tokenisation, élimination des mots vides, racinisation ;\\
+        %        \STATE Calcul de la fréquence des termes par document TF-IDF ;\\
+        %        \STATE Prédiction de la catégorie;\\
+        %        \STATE \quad Retourner Modèle;
+        %        \STATE Fin
+        %        \end{algorithmic}
+        %    \end{algorithm}
+
+            \subsubsection{Pré-traitement des articles de presse}
+             Plusieurs opérations de pré-traitements ont été effectuées. Ci-après les étapes suivies :
+            \begin{enumerate}
+                \item{\textbf{Segmentation (Tokenization) et suppression des mots vides :} }permet d'extraire toutes les entités lexicales d'un article donné. Pour l'Anglais nous avons utiliser le Tokenizer natif de NLTK, et FARASA Toolbox pour la langue Arabe. La segmentation est suivie de la suppression des tokens non utiles tel que la ponctuation, les pronoms, les déterminants, etc.\\  
+                
+                \item{\textbf{Racinisation (Stemming) :} }les mots d'un document sont représentés par leurs racines plutôt que par les mots d'origine. Plusieurs variantes d'un terme peuvent ainsi être groupées dans une seule forme représentative, ce qui réduit le nombre des termes distincts nécessaires pour représenter un document. Le Snowball Stemmer a été utilisé pour l'Anglais, quant à l'Arabe c'est toujours la Toolbox FARASA.\\
+                
+                \item{\textbf{N-grammes :} }les N-grammes permettent de construire une sous-séquence de n mots consécutives. Ils permettent de contextualiser l'ordre d'apparition d'un ensemble de mots. L'algorithme natif de NLTK a été utilisé pour les deux langues (Anglais et Arabe).\\ 
+                
+                \item{\textbf{Extraction des caractéristiques :} }avec l'utilisation de TF-IDF, le sac de mots représentant un article sera convertit en valeurs numériques décrivant la fréquence d'occurrence de chaque mot par rapport à l'ensemble des articles du corpus et à l'article lui même.\\
+            \end{enumerate}
+
+            À la fin de la phase de pré-traitement, nous avons définie une structure pour faciliter l'exploration des datasets. Ci-dessous la structure choisie :
+            \begin{itemize}
+                \item{\textbf{id} :}un identifiant unique de l'article,
+                \item{\textbf{contenu} :}les différents paragraphes de l'article,
+                \item{\textbf{catégorie} :}la catégorie de l'article extraite depuis la source.
+            \end{itemize}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{Module de traduction}
+
+Dans ce module, nous avons a la base choisi d'intégrer uniquement une solution de de traduction existante. Ci-dessous, une figure qui montre le processus de traduction automatique.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%Architecture%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%ù
+
+
+Afin d'intégrer un bon système de traduction automatique, nous avons explorer 2 sources principales, la première était destiné a une utilisation professionnelle, de lus la version gratuite offrait une traduction pour des textes de taille limités. et la deuxième était la solution adaptée a notre système. Elle était a la fois accessible et offrait des possibilités de traduction pour des textes longs (Articles de presse, etc). 
+
+
+
+\section{Conception de la base de données}
+Le choix a été porté sur les bases de données NoSQL (\autoref{nosql}) vu la structure très dynamique des articles de presse mais aussi des profils utilisateurs.
+
+MongoDB est une base de données orientée document écrite en C++ \cite{NOSQL3}. Les objets sont stockés en série sous la forme BSON.
+Les objets n'ont pas besoin d'avoir la même structure ou les mêmes champs et les champs communs n'ont pas besoin d'avoir le même type, permettant ainsi un stockage de schéma flexible. À cet effet, nous présentons ci-dessous, sous ce format, la "collection d'articles" et la "collection des profils".
+
+\subsection{Collection d'articles}
+Les articles extraits depuis différentes sources sont tous sauvegardés sous une structure définie au préalable, prenant en considération les différences entre les formats suivies par les revu de presse. 
+
+À cet effet nous avons choisi \emph{JSON} qui est un format léger d'échange de données. Il est facile à lire ou à écrire pour des humains\cite{json} et est pris en charge par tout les langages de programmation.
+
+Chaque article est représenté comme suit:
+\begin{itemize}
+    \item \textbf{Identifiant, \textquotedbl \_id\textquotedbl: } identifiant unique d'un article de presse.
+    \item \textbf{Langue, \textquotedbl language\textquotedbl:} la langue dans laquelle l'article est écrit.
+    \item \textbf{Titre, \textquotedbl title\textquotedbl:} le titre de l'article.
+    \item \textbf{Source, \textquotedbl source\textquotedbl:} nom de la revue de presse source.
+    \item \textbf{Auteur, \textquotedbl author\textquotedbl:} on sauvegarde le nom de l'auteur.
+    \item \textbf{Contenu, \textquotedbl content\textquotedbl:} contenu de l'article de presse.
+    \item \textbf{Horaire, \textquotedbl publishedAt\textquotedbl:} date et heur local de publication.
+    \item \textbf{Lien de l'article, \textquotedbl url\textquotedbl:} lien vers la page de l'article originale.
+    \item \textbf{Lien de l'image, \textquotedbl urlToImage\textquotedbl:} lien vers l'image principale de l'article originale.
+    \item \textbf{Catégorie, \textquotedbl categoryPredicted\textquotedbl:} catégorie de l'article inférée en utilisant nos modèles.
+    \item \textbf{Résumé, \textquotedbl summaryGenerated\textquotedbl:} résumé automatique générée.
+    \item \textbf{Traduction, \textquotedbl translatedContent\textquotedbl:} contenu de l'article de presse traduit.\\
+\end{itemize}
+
+Voici maintenant un exemple d'un document de la collection d'articles.
+\begin{lstlisting}[style=code]
+{
+'_id': '5afc18571d41c833a8632a24', 
+'language': 'en',
+'title': "Smart's stellar Game 2 play draws Cavs praise", 
+'source': 'espn', 
+'author': 'Chris Forsberg', 
+'content': 'LeBron James and Tyronn Lue explain what they think of Marcus...'
+'publishedAt': '2018-05-16T05:48:55Z', 
+'url': 'http://espn.go.com/nba/id/235168',
+'urlToImage': 'http://espn.go.com/nba/id/235168/main.png',  
+'categoryPredicted': 'sport', 
+'summaryGenerated': 'The Celtics improved to 8-2 since Smart returned...', 
+'translatedContent': '?????? ???? ???? ?? ???? ?? ?? ????? ?????? ????? ?? ??????? ????? ?????? ??? ????....', 
+},
+\end{lstlisting}
+
+\subsection{Collection de profils}
+Le profile d'utilisateur regroupe très peu d'informations dans le but de protéger la vie privée. Cependant, les catégories et les sources préférées par l'utilisateur sont sauvegardées. 
+
+Un profil utilisateur est représenté comme suit :
+\begin{itemize}
+    \item \textbf{Identifiant, \textquotedbl  \_id\textquotedbl : } identifiant unique.
+    \item \textbf{Nom d'utilisateur, \textquotedbl  username\textquotedbl : } nom d'utilisateur unique.
+    \item \textbf{Mot de passe, \textquotedbl  password\textquotedbl : } mot de passe pour l'authentification crypté.
+    \item \textbf{Adreese mail, \textquotedbl  email\textquotedbl : } email de l'utilisateur.
+    \item \textbf{Catégories préférées, \textquotedbl  preferences\textquotedbl : } vecteurs de catégories préférées .
+    \item \textbf{Sources préférées, \textquotedbl  sources\textquotedbl : } noms des sources de revues de presse préférées. 
+\end{itemize}
+
+Ci-dessous un exemple d'un document de la collection de profils :
+\begin{lstlisting}[style=code]
+{
+'_id': '5afc18571d41c833a8632a24', 
+'username': 'yankheloufi'
+'password': 'CAESEMgZsfgjSKT7GvZNAtFJaAs'
+'email': 'yk@usthb.dz',
+'categories': {
+'entertainment': '0.63',
+'world': '0.42',
+'health': '0.12',
+},
+'sources': [
+'wello-mag', 'al-jazeera-english', 'bbc-news', 
+],
+},
+\end{lstlisting}
+
+
+
+
+
+
+
+\section{Architecture globale de "Feedny"}
+Dans cette partie, nous allons présenter l'architecture globale de notre système, cette dernière est déployé sous la forme d'une architecture 3-tiers. Ci-dessous, nous présentons ce qu'est une architecture 3-tiers ainsi que son avantage avant d'expliciter un schéma de l'architecture globale.
+\subsection{Présentation de l'architecture 3-tiers}
+
+Une application Web possède souvent une architecture 3-tiers.
+La couche DAO : " Data Access Object " s'occupe de l'accès aux données, le plus souvent des
+données persistantes au sein d'un SGBD.
+
+La couche métier : implémente les algorithmes " métier " de l'application. Cette couche est indé-
+pendante de toute forme d'interface avec l'utilisateur.C'est généralement la couche la plus
+stable de l'architecture. Elle ne change pas si on change l'interface utilisateur ou la façon
+d'accéder aux données nécessaires au fonctionnement de l'application.
+
+La couche interface utilisateur : interface (graphique souvent) qui permet à l'utilisateur de pi
+loter l'application et d'en recevoir des informations.
+FIGURE 3.1 – Architecture 3-tiers
+
+
+\subsection{Avantage de l'architecture multi-tiers}
+L'avantage principal d'une architecture 3-tiers (multi-tiers) est la facilité de déploiement.L'application
+en elle même n'est déployée que sur la partie serveur.
+Le client ne nécessite qu'une installation et une configuration minime.
+En effet il suffit d'installer un navigateur web compatible avec l'application pour que le client
+puisse accéder à l'application.
+Cette facilité de déploiement aura pour conséquence non seulement de réduire le coût de déploie
+ment mais aussi de permettre une évolution régulière du système. Cette évolution ne nécessitera
+que la mise à jour de l'application sur le serveur applicatif.[4]
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Shéma %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+
+\section{Schémas conceptuels de "Feedny"}
+Nous allons présenter dans cette partie, la façon avec laquelle le logiciel fournit les différentes fonctionnalités. Celle-ci décrit d'une manière claire et précise, le fonctionnement du futur système en utilisant un langage de modélisation. 
+
+Nous avons choisi la méthode UML (Unified Modeling Language), qui est une notation graphique conçue pour représenter, spécifier et construire les systèmes logiciels. UML utilise des techniques orientées objets pour la modélisation des systèmes, depuis la conception jusqu'à la maintenance, d'une manière compréhensible par l'homme et disposant de qualités formelles suffisantes pour être traduites automatiquement en code source.\cite{UML}
+
+\subsection{Diagramme de cas d'utilisation}
+"Le diagrammes de cas d'utilisation (initié par Ivar Jacobson en 1992 dans la méthode OOSE) est un type de diagramme UML qui permet de définir les besoins des acteurs dans un système quelconque en établissant les fonctionnalités attendues et en organisant les besoins. Il peut être aussi utilisés ensuite comme moyen d'organisation du développement du logiciel, notamment pour la structuration et le déroulement des tests du logiciel".\cite{UML}
+
+\subsubsection{Diagramme de cas d'utilisation de "Feedny"}
+\begin{figure}[H]
+    \centering
+    \includegraphics[height=400pt,width=350pt]{img/chapter3/diagcasdutilisation.png}
+    \caption{Diagramme présentant les cas d'utilisations}
+\end{figure}
+
+\subsection{Diagramme de classe}
+Le diagramme de classe est l'un des pivots essentiels de la modélisation avec UML, il décrit la structure statique du système. En effet, aucun détail ni traitement sont représenté dans ce diagramme puisque il 
+se base uniquement sur la notion d'objet, de classe et les différents types d'associations.\cite{UML}
+
+\subsubsection{Diagramme de classe de "Feedny"}
+\begin{figure}[H]
+    \centering
+    \includegraphics[height=100pt,width=320pt]{img/chapter3/classdiagram.png}
+    \caption{Diagramme de classe}
+\end{figure}
+
+\subsection{Diagramme de séquence}
+Le diagramme de séquence est un diagramme UML qui fait partie des diagrammes comportementaux (dynamiques) dont L'objectif est de représenter les interactions entre les objets et les acteurs ou bien entre objets uniquement  en indiquant la chronologie des échanges. Cette représentation peut se réaliser en considérant les différents scénarios associés.\cite{UML}
+
+
+\subsubsection{Diagrammes de séquence de "Feedny"}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[height=500pt,width=425pt]{img/chapter3/diagseqperso.png}
+    \caption{Diagramme de séquence dans le cas personnalisé}
+\end{figure}
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[height=500pt,width=425pt]{img/chapter3/diagseqnonperso.png}
+    \caption{Diagramme de séquence dans le cas non personnalisé}
+\end{figure}
+
+
+
+
+
+
+\section{Mesures d'évaluation du système}
+
+\subsection{Métriques d'évaluations du module de résumé automatique}
+
+\subsubsection{Métrique d'évaluation : ROUGE\label{metrique-eval}}
+ROUGE est l'acronyme de "Recall-Oriented Understudy for Gisting Evaluation". Il s'agit essentiellement d'un ensemble de métriques permettant d'évaluer le résumé automatique de textes ainsi que la traduction automatique. Il fonctionne en comparant un résumé produit automatiquement ou une traduction à un ensemble de résumés de référence (généralement produits par des humains). \cite{rouge0}
+
+\subsubsection{Types des métriques de ROUGE\label{type-rouge}}
+\begin{itemize}
+    \item{ROUGE-1, 2, 3 et 4 : font référence au chevauchement des uni-grammes, bi-grammes, tri-grammes et quadri-grammes, respectivement, entre le système et les résumés de référence \cite{rouge1}.}\\
+    \item{ROUGE-L, W : basés sur la plus longue sous-séquence commune (LCS) \cite{rouge2}.}\\
+    \item{ROUGE-S : basé sur les cooccurrences des paires de mots dans l'ordre des phrases \cite{rouge2}.}\\
+    \item{ROUGE-SU : en plus des paires de mots, il utilise aussi la cooccurrence du mot unique toujours dans l'ordre des phrases.}
+\end{itemize}
+
+Les métriques citées dans la \autoref{type-rouge}, utilisent comme mesures le rappel, la précision et la f-mesure :  
+\begin{itemize}
+    
+    \item {Le rappel dans le cas de ROUGE, donne une information sur le nombre de mots du résumé de référence ont été capturés par le résumé de notre généré par le système.\\ 
+        Exemple: si le rappel est égal a 40\%, cela signifie que 40\% des n-grammes du résumé de référence sont également présents dans le résumé généré par le système.}\\
+    \item {La précision quant à elle, mesure la partie du résumé du système qui est pertinente ou nécessaire.\\ 
+        Exemple : si la précision est égale a 40\%, cela signifie que 40\% des n-grammes du résumé généré par le système sont également présents dans le résumé de référence.}
+    \item {La f-mesure dépend de la précision et le rappel et est calculé comme suit :\\
+                        \[ F-mesure = \frac{2 * (Precision * Rappel)} {(Precision + Rappel)} \]}
+
+\end{itemize}
+
+
+
+
+\subsection{Métriques d'évaluations du module de catégorisation}
+\begin{itemize}
+    \item{\textbf{Accuracy :} }c'est une mesure qui évalue l'efficacité globale de l'algorithme par rapport au données de test.
+    \[ Accuracy = \frac{tp+tn} {tp+fp+tn+fn} \]
+    \item{\textbf{Précision :} }elle évalue le pouvoir prédictif du modèle en mesurant la capacité du modèle à prédire que des classes correctes.
+    \[ Precision = \frac{tp} {tp+fp} \]
+    \item{\textbf{Rappel :} }la capacité d'un modèle à prédire toutes les classes correctes de l'ensemble de test.
+    \[ Rappel = \frac{tp} {tp+fn} \]
+    \item{\textbf{F-mesure :} }une mesure composite qui profite aux algorithmes avec une sensibilité plus élevée et des algorithmes de défis avec spécificité plus élevée.!!!
+    \[ F-mesure = \frac{2 * (Precision * Rappel)} {(Precision + Rappel)} \]
+\end{itemize}
+Avec :
+\begin{itemize}
+    \item{\textbf{TP }True Positive (vrais positifs) :} nombre d'individus bien prédits dans la classe à juste titre.
+    \item{\textbf{FP }False Positive (faux positifs) :} nombre d'individus prédits d'une classe alors qu'ils ne devraient pas en faire parti.
+    \item{\textbf{FN }False Negative (faux négatifs) :} nombre d'individus prédits comme étant de la classe alors qu'il ne le sont pas en vrai.
+    \item{\textbf{TN }True Negative (vrais négatifs) :} nombre d'individus prédits comme n'étant pas dans la classe à juste titre.
+\end{itemize}
