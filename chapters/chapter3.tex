@@ -10,25 +10,26 @@ Le logiciel que nous proposons enchaîne les processus de catégorisation, de r�
 
 
 \section{Module de recommandation}
-Dans cette partie, nous allons voir la conception détaillée de notre système de recommandation. Ci-dessous, nous présentons les deux approches proposées, la recommandation personnalisée et non personnalisée d'articles de presse  : 
-    \subsection{Recommandation personnalisée}
-    La recommandation des articles pour les utilisateurs est basée sur le contenu de leurs profils. En effet, le profilage utilisateur débute lorsque l'utilisateur s'authentifie pour la première fois et à chaque fois les informations relatives à ses préférences sont récoltées et traitées.\\
+Dans cette partie, nous allons voir la conception détaillée de notre système de recommandation. Ci-dessous, nous présentons les deux approches proposées, la recommandation personnalisée et non personnalisée d'articles de presse.
+    \subsection{Recommandation personnalisée\label{personal}}
+    La recommandation d'articles est basée sur le contenu des profils utilisateurs. En effet, le profilage utilisateur débute lorsque l'utilisateur s'authentifie pour la première fois et à chaque fois les informations relatives à ses préférences sont récoltées et traitées.
+
     Cette étape nécessite le profilage de l'utilisateur et le calcul de similarité entre utilisateurs. Dans ce qui suit les détails de chacun.
 
         \subsubsection{Profilage d'un utilisateur}
         Elle consiste à déterminer les centres d'intérêts d'un utilisateur tout en se basant sur les articles lus par ce dernier. Pour cela, nous avons décidé d'utiliser une méthode de calcul des préférences afin de mieux cibler les utilisateurs et garantir une solution conforme aux caractéristiques de la recommandation pour les articles de presse. 
 
-        Pour le calcul des préférences utilisateurs, nous avons utiliser une méthode de calcul qui permet à la fois de résoudre les problèmes de récence \autoref{} et le démarrage à froid \autoref{}. Cette méthode testée s'avère très efficace par rapport aux méthodes existantes et décrites dans \autoref{}.
+        Pour le calcul des préférences utilisateurs, nous avons utiliser une méthode de calcul qui permet à la fois de résoudre le problèmes de la récence \autoref{} et le démarrage à froid \autoref{}. Cette méthode testée s'avère très efficace par rapport aux méthodes existantes et décrites dans \autoref{}.
 
-        Le calcul de la probabilité de sélection d'une catégorie pour un utilisateur est basé sur ses interactions avec les articles de presse disponible. En effet, dés qu'un est sélectionné, l'information est sauvegardée et utilisée pour la mise à jour du vecteur des catégories préférées \autoref{}.
+        Le calcul de la probabilité de sélection d'une catégorie pour un utilisateur est basé sur ses interactions avec les articles de presse disponible. Dés qu'un article est sélectionné, l'information est sauvegardée et utilisée pour la mise à jour du vecteur des probabilités de sélection des catégories préférées \autoref{}.
 
         L'exemple suivant présente un vecteur de probabilité de sélection pour les catégories préférées d'un utilisateur U :
             \[P(U) = {'sport': 0.7178, 'news': 0.1581, 'sci\_tech': 0.1492}\]            
         Il faut noter que la taille du vecteur de probabilité de sélection des catégories préférées est différentes d'un utilisateur à un autre.
 
-        Ce vecteur se mets à jour, comme déjà cité, après chaque interaction de l'utilisateur U avec l'article A de la catégorie C. Au fur et à mesure, la probabilité de sélection d'une catégorie C\textsubscript{i} augmente si cette dernière est sélectionnée, sinon elle diminue pour donner moins d'importances aux articles qui en font partis!!
+        Ce vecteur se met à jour, comme déjà cité, après chaque interaction de l'utilisateur U avec l'article A de la catégorie C. Au fur et à mesure, la probabilité de sélection d'une catégorie C\textsubscript{i} augmente si cette dernière est sélectionnée, sinon, elle diminue pour donner moins d'importances aux articles qui font partie de cette catégorie.
 
-        Ci-après les formules dédiées à cet effet :\\
+        Ci-après les formules dédiées à la mise à jour des probabilités de sélection des catégories préférées :\\
             \[
             P(U, C) =
             \begin{cases}
@@ -40,9 +41,9 @@ Dans cette partie, nous allons voir la conception détaillée de notre système 
         Avec initialement :\\
         \[
         \begin{cases}
-            P(U, C) = 1 / NbC \forall \text{C} \in \{categorie\textsubscript{1}, categorie\textsubscript{2}, ..., categorie\textsubscript{NbC}\}\\
+            P(U, C) = 1 / \text{NbC } \forall \text{ C} \in \{categorie\textsubscript{1}, categorie\textsubscript{2}, ..., categorie\textsubscript{NbC}\}\\
             NbC : \text{nombre de categories}\\
-            \alpha = \text{une constante empirique représentant le biais pour la diminution}
+            \alpha = \text{une constante empirique représentant le biais de la diminution}
         \end{cases}
         \]
         \begin{algorithm2e}[H]
@@ -69,11 +70,11 @@ Dans cette partie, nous allons voir la conception détaillée de notre système 
         \subsubsection{Similarité entre utilisateurs}
         Afin de diversifier la recommandation des articles de presse, nous avons mis en place une méthode de calcul de similarité qui permet de recommander des articles par rapport à la similarité entre utilisateurs. 
 
-        Selon \cite{euclidepreuve} qui propose une étude détaillé sur les mesures de similarité pour le filtrage collaboratif, il en est ressorti comme conclusion que la distance euclidienne était la mesure la plus adéquate en terme de précision et temps d'exécution. La formule de calcul de la distance euclidienne est la suivante :
+        Selon \cite{euclidepreuve} qui propose une étude détaillée sur les mesures de similarité pour le filtrage collaboratif, il en est ressorti comme conclusion que la distance euclidienne était la mesure la plus adéquate en terme de précision et temps d'exécution. La formule de calcul de la distance euclidienne entre les préférences des utilisateurs est la suivante :
 
         \begin{itemize}[label={}, leftmargin=0cm]
             \item Soient U\textsubscript{1} et U\textsubscript{2} deux utilisateurs,
-            \item P(U\textsubscript{1}) et P(U\textsubscript{2}) les vecteurs de probabilité de sélection des catégories préférées des deux utilisateurs,
+            \item P(U\textsubscript{1}) et P(U\textsubscript{2}) les vecteurs de probabilité de sélection des catégories préférées des deux utilisateurs respectivement,
             \item NbC\textsubscript{1} et NbC\textsubscript{2} le nombre de catégories préférées de chaque utilisateur,\  
             \item \[Sim({P(U\textsubscript{1})}, {P(U\textsubscript{2})}) = d({P(U\textsubscript{1})}, {P(U\textsubscript{2})}) = {\sqrt {\sum _{i=1, j=1}^{NbC\textsubscript{1},NbC\textsubscript{2}}(P(U\textsubscript{1}, C\textsubscript{i})-P(U\textsubscript{2}, C\textsubscript{j}))^{2}}}\]
         \end{itemize}
@@ -102,8 +103,8 @@ Dans cette partie, nous allons voir la conception détaillée de notre système 
         utilisateurs = lire(base de profils)\\
         \While{i < taille(utilisateurs)}{
             \If{utilisateurs[i] != U}{
-                similarité = distance\_euclidienne(U.préférences, utilisateurs[i].préférences)\\
-                \If{similarité >= seuil}{
+                sim = distance\_euclidienne(U.préférences, utilisateurs[i].préférences)\\
+                \If{sim >= seuil}{
                     U.préférences += utilisateurs[i].préférences
                 }
             }
@@ -114,14 +115,12 @@ Dans cette partie, nous allons voir la conception détaillée de notre système 
     \subsection{Recommandation non personnalisée}
     La recommandation non personnalisée vise à recommander des articles pour des utilisateurs qui n'ont pas de comptes (i.e : qui sont non authentifiés), pour cela notre système effectue une recommandation selon le choix de lecture de l'utilisateur, c'est à dire par calcul de similarité entre l'article qui est entrain d'être lu et les nouveaux articles disponible. 
 
-    Un pré-traitement est effectué sur chaque article comprend la suppression des mots vides et l'extraction des racines de mots. Ensuite, le sac à mots de l'article est converti en TF-IDF.  
-
-    Le de calcul de la similarité entre les articles est présenté ci-dessous:
+    Un pré-traitement est effectué sur chaque article comprend la suppression des mots vides et l'extraction des racines de mots. Ensuite, le sac à mots (Bag of Words) de l'article est converti en TF-IDF. La martice résultante de la conversion en TF-IDF est utilisée pour le calcul de la similarité de cosinus et les cinq articles les plus similaires seront recommandés. Le calcul de la similarité entre les articles est présenté ci-dessous :
 
     \begin{itemize}[label={}, leftmargin=0cm]
         \item Soient U un utilisateur, A\textsubscript{1} et A\textsubscript{2} deux articles de presse,
         \item A\textsubscript{1} a été déjà sélectionné et A\textsubscript{2} est un nouvel article,
-        \item BoW(A\textsubscript{1}) et BoW(A\textsubscript{2}) les sacs à mots (Bag of Words) de chaque article,\\
+        \item BoW(A\textsubscript{1}) et BoW(A\textsubscript{2}) les sacs à mots de chaque article,\\
 
         \item BoW(A\textsubscript{1}) = \{\begin{arab}'لواء', 'شفيق', 'مدير', 'مكتب', 'رئيس', 'مخلوع', 'مبارك', 'أراد', 'دائم', 'إيقاع', 'عمر', 'سليمان', 'مشير', 'طنطاوي', 'وصف', 'لواء', 'شفيق', 'عاش', 'قصر', 'رئيس', 'مصري', 'مخلوع', 'وفاة', 'عمر', 'سليمان', 'رئيس', 'مخابرة', 'مصري', 'نائب', 'مبارك', 'خسارة', 'أكبر', 'مصر', 'رجل', 'أفضل', 'رجل', 'شجع', 'صعب', 'تعويض', 'تحدث', 'لواء', 'شفيق', 'تصريح', 'علاقة', 'عمر', 'سليمان', 'رئيس', 'مخلوع', 'مبارك'\end{arab}\},
 
@@ -152,14 +151,14 @@ Dans cette partie, nous allons voir la conception détaillée de notre système 
         \Return ListeArticlesSimilaires[:5]
         \caption{Algorithme de calcul de similarité entre articles}
     \end{algorithm2e}
-    % Say something
-    % \begin{algorithm2e}[H]
-    %     \SetAlgoLined
-    %     \SetKwInOut{Input}{input}
-    %     \SetKwInOut{Output}{output}
-    %     \Input{A: Article, U: utilisateur}
-    %     \Output{ListeArticlesSimilaires: Article}
-    %     % \eIf{U est authentifié}{
-    %     % }
-    %     \caption{Algorithme de calcul de similarité entre articles}
-    % \end{algorithm2e}
+% Deux types de recommandations d'articles de presse ont étaient présentées dans la section précédente qui dépendent du mode d'utilisation. L'algorithme \autoref{algo-recom} résume le fonctionnement des deux types de recommandation.\\\\ 
+%     \begin{algorithm2e}[H]\label{algo-recom}
+%         \SetAlgoLined
+%         \SetKwInOut{Input}{input}
+%         \SetKwInOut{Output}{output}
+%         \Input{A: Article, U: utilisateur}
+%         \Output{ListeArticlesSimilaires: Article}
+%         % \eIf{U est authentifié}{
+%         % }
+%         \caption{Algorithme de calcul de similarité entre articles}
+%     \end{algorithm2e}
