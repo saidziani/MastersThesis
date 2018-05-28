@@ -170,10 +170,32 @@ Nous allons d'abord présenter l'environnement de travail ainsi que les outils e
         \subsubsection{Basées sur l'Apprentissage Non Supervisé}
             \begin{itemize}
                 \item{LDA (Latent Dirichlet Allocation) : }
+                NOT YET
                 \item{K-means : }
+                L'algorithme de clustering K-means est connu pour être efficace dans la mise en place de cluster de grands ensembles de données. Cet algorithme a été développé par MacQueen et est l'un des algorithmes d'apprentissage non supervisés les plus simples et les plus connus. K-Means vise à partitionner un ensemble d'objets, en fonction de leurs attributs/caractéristiques, en k clusters, où k est une constante prédéfinie ou définie par l'utilisateur. 
+
+                L'idée principale est de définir k centroïdes, un pour chaque cluster. Le centroïde d'une grappe est formé de telle sorte qu'il est étroitement lié (en termes de fonction de similarité, la similarité peut être mesurée en utilisant différentes méthodes telles que la similarité cosinus, la distance euclidienne, Jaccard étendu) à tous les objets de cette grappe.
+
+                Pour cela, nous nous sommes penché au tout début de l'élaboration du modèle de clustering sur cette methode \cite{methodeKmeans}.
             \end{itemize}
 
         \subsubsection{Basées sur l'Apprentissage Supervisé}
+            \begin{table}[H]
+                    \begin{center}
+                        \begin{tabular}{|c|c|c|c|c}
+                            \hline
+                            \textbf{Modèle} & \textbf{Précision} & \textbf{Rappel} & \textbf{F-mesure} \\
+                            \hline
+                            Naïve de Bayes & 0.89 & 0.87 & 0.88 \\
+                            Arbre de décision & 0.82 & 0.84 & 0.83 \\
+                            \textbf{Descente de Gradient Stochastique} & \textbf{0.94} & \textbf{0.94} & \textbf{0.94} \\
+                            SVM & 0.91 & 0.89 & 0.90 \\
+                            \hline
+                        \end{tabular}
+                    \end{center}
+                    \caption{Résultats comparatifs des modèles de catégorisation}
+                    \label{modele-categ}
+                \end{table}
             \begin{itemize}
                 \item{Naïve de Bayes : }
                 c'est une méthode connue de l'Apprentissage automatique supervisé. Un de ses avantages en plus d'être un modèle simple, c'est qu'ils renvoient non seulement la prédiction mais aussi le degré de certitude, ce qui peut être très utile dans certaines applications. Mais en ayant un problème à classes multiples, cette approche nous a donnés des résultats très modeste en un temps d'exécution assez importants, ce qui nous a poussé à abandonner son utilisation.\\
@@ -181,9 +203,11 @@ Nous allons d'abord présenter l'environnement de travail ainsi que les outils e
                 \item{Arbres de décision : }
                 peuvent être assistés par un expert. Ces principaux avantages sont : robuste face aux données aberrantes, pas très sensible aux données manquantes, possibilité d’intervenir dans la construction de l’arbre, etc. Son principale inconvénient reste la dépendance très forte entre la taille de la base d’apprentissage et les performances.\\
 
-                \item{Réseaux de neurones : }
+                % \item{Réseaux de neurones : }
                 \item{SVM (Support Vector Machines) : }
+                NOT YET
                 \item{Descente de Gradient Stochastique : }
+                NOT YET
             \end{itemize}
                 
     \subsection{Corpus et dataset}
@@ -198,20 +222,13 @@ Nous allons d'abord présenter l'environnement de travail ainsi que les outils e
                             \hline
                             \textbf{Catégorie} &  \textbf{Nombre d'articles} \\
                             \hline
-                            Business & 5366 \\
-                            \hline
+                            Business & 5366 \\                            
                             Entertainment & 3286 \\
-                            \hline
                             Health & 1851 \\
-                            \hline
                             Science \& Technology & 2872 \\
-                            \hline
                             Sport & 8189 \\
-                            \hline
                             US & 4783 \\
-                            \hline
                             World & 6255 \\
-                            \hline
                             \textbf{Totale} &  \textbf{32602} \\
                             \hline
                         \end{tabular}
@@ -228,17 +245,11 @@ Nous allons d'abord présenter l'environnement de travail ainsi que les outils e
                             \textbf{Catégorie} &  \textbf{Nombre d'articles} \\
                             \hline
                             \begin{arab}الجزائر\end{arab} & 6603 \\
-                            \hline
                             \begin{arab}الثقافة\end{arab} & 3311 \\
-                            \hline
                             \begin{arab}الدين\end{arab} & 2568 \\
-                            \hline
                             \begin{arab}المجتمع\end{arab} & 7714 \\
-                            \hline
                             \begin{arab}الرياضة\end{arab} & 8104 \\
-                            \hline
                             \begin{arab}العالم\end{arab} & 4380 \\
-                            \hline
                             \textbf{Totale} & \textbf{32680} \\
                             \hline
                         \end{tabular}
@@ -369,8 +380,8 @@ Nous allons d'abord présenter l'environnement de travail ainsi que les outils e
                 \begin{table}[H]
                     \begin{center}
                         \begin{tabular}{|c|c|c|c|c|c|c|c|}
-                            \hline
-                            \textbf{VIDE} & \textbf{Sport} &  \textbf{World} &  \textbf{News} &  \textbf{Business} &  \textbf{Health} & \textbf{Entert.\footnote{Entertainment}} &  \textbf{Sci-Tech} \\
+                            \cline{2-8}
+                            \multicolumn{1}{c|}{} & \textbf{Sport} &  \textbf{World} &  \textbf{News} &  \textbf{Business} &  \textbf{Health} & \textbf{Entert.\footnote{Entertainment}} &  \textbf{Sci-Tech} \\
                             \hline
                             \textbf{Sport} & 1635 & 0 & 0 & 0 & 0 & 0 & 0 \\
                             \hline
@@ -403,10 +414,11 @@ Nous allons d'abord présenter l'environnement de travail ainsi que les outils e
                 \begin{table}[H]
                     \begin{center}
                         \begin{tabular}{|c|c|c|c|c|c|c|}
+                            % \cline{2-7}
+                            % \hline
+                            % \multicolumn{1}{c|}{} & \multicolumn{6}{|c|}{Predicted} \\
+                            % \hline
                             \cline{2-7}
-                            \hline
-                            \multicolumn{1}{c|}{} & \multicolumn{6}{|c|}{Predicted} \\
-                            \hline
                             \multicolumn{1}{c|}{} & \textbf{\begin{arab}العالم\end{arab}} &  \textbf{\begin{arab}الرياضة\end{arab}} &  \textbf{\begin{arab}الجزائر\end{arab}} &  \textbf{\begin{arab}المجتمع\end{arab}} &  \textbf{\begin{arab}الدين\end{arab}} &  \textbf{\begin{arab}الثقافة\end{arab}} \\
                             \hline
                             \textbf{\begin{arab}العالم\end{arab}} & 1232  &  1  & 11 &  51  & 18  &  3 \\
@@ -571,8 +583,31 @@ Nous allons d'abord présenter l'environnement de travail ainsi que les outils e
             \label{result-boltzman}
         \end{table}
 
+\section{Traduction Automatique}
+Comme il a été décrit dans le chapitre précédent, la traduction sera intégrée directement à l'application finale afin d'offrir une fonctionnalité de traduction en plus de celle du résumé et la catégorisation. A cet effet, nous avons utilisé la bibliothèque TextBlob qui offre une traduction multilingues d'un article ou d'un résumé.
+    \subsection{Exemple de traduction automatique}
+    \begin{itemize}
+        \item Anglais :\\ 
+        "The Interior Ministers of Spain and Algeria signed an agreement this week to form a joint team of investigation with the goals of fighting “illegal migration” and “preventing Islamist terrorism.” The agreement comes after recent crackdowns by the Algerian authorities during the first months of 2018 have reduced the number of undocumented Algerian migrants arriving in Spain, a reduction that was praised by the Spanish Interior Minister Juan Ignacio Zoido at their meeting in Madrid."\\
+        \item Espagnol :\\
+        "Los ministros del Interior de España y Argelia firmaron un acuerdo esta semana para formar un equipo conjunto de investigación con los objetivos de luchar contra la "migración ilegal" y "prevenir el terrorismo islamista". El acuerdo surge tras las recientes medidas represivas de las autoridades argelinas durante los primeros meses de 2018 redujo el número de inmigrantes argelinos indocumentados que llegan a España, una reducción que fue alabada por el ministro del Interior español, Juan Ignacio Zoido, en su reunión en Madrid."
+    \end{itemize}
+
 \section{Recommandation}
-    \subsection{Approche utilisée}    
+    \subsection{Approche basé sur Wordnet}    
+    NOT YET
+    % Tout d'abord nous avons exploiter la piste de \cite{wordnetrecommandation} qui traite la recommandation par un arbre d'hypernymes Wordnet. 
+
+    % Nous avons utiliser à cet effet la bibliothèque Wordnet de NLTK qui permet de générer des arbres d'hypernymes pour tout les mots-clés appartenant à un vecteur de préférences d'un utilisateur ensuite nous aurons une liste de préférences pour chaque utilisateur.
+
+    %     \subsubsection{Exemple}
+    %     \begin{itemize}[leftmargin=*]
+    %         \item Vecteur de préférences de l'utilisateur U :\\ ["arabic", "english", "theatre", "business"]\\
+    %         \item Arbre des hypernymes :\\
+    %         \{'Arabic': 2 / 2, 'Arabic_language': 1 / 2, 'English': 6 / 2, 'English_language': 1 / 2, 'English_people': 1 / 2, 'side': 1 / 2, 'theater': 3 / 6, 'theatre': 3 / ,6 'house': 1 / 3, 'dramaturgy': 1 / 5, 'dramatic_art': 1 / 5, 'dramatics': 1 / 5, 'field': 1 / 6, 'field_of_operations': 1 / 6, 'theater_of_operations': 1 / 6, 'theatre_of_operations': 1 / 6, 'sport': 9 / 12, 'athletics': 1 / 2, 'summercater': 1 / 2, 'sportsman': 1 / 3, 'sportswoman': 1 / 3, 'mutant': 1 / 4, 'mutation': 1 / 4, 'variation': 1 / 4, 'fun': 1 / 3, 'play': 1 / 3, 'feature': 1 / 3, 'boast': 1 / 3, 'frolic': 1 / 12, 'lark': 1 / 12, 'rollick': 1 / 12, 'skylark': 1 / 12, 'disport': 1 / 10, 'cavort': 1 / 12, 'gambol': 1 / 12, 'frisk': 1 / 12, 'romp': 1 / 12, 'run_around': 1 / 12, 'lark_about': 1 / 12, 'tennis': 1 / 2, 'lawn_tennis': 1 / 2, 'crime': 2 / 6, 'offense': 1 / 6, 'criminal_offense': 1 / 6, 'criminal_offence': 1 / 6, 'offence': 1 / 6, 'law-breaking': 1 / 6, 'business': 9 / 5, 'concern': 1 / 5, 'business_concern': 1 / 5, 'business_organization': 1 / 5, 'business_organisation': 1 / 5, 'commercial_enterprise': 1 / 3, 'business_enterprise': 1 / 3, 'occupation': 1 / 5, 'job': 1 / 5, 'line_of_work': 1 / 5, 'line': 1 / 5, 'business_sector': 1 / 2, 'clientele': 1 / 3, 'patronage': 1 / 3, 'stage_business': 1 / 3, 'byplay': 1 / 3\} 
+    %     \end{itemize}
+
+    \subsection{Approche probabilité de sélection}    
         \subsubsection{YOW Dataset}
         Afin de concevoir une base de données de profils utilisateurs, nous avons solliciter \emph{Google News}, \emph{Bing News} et \emph{Yahoo Webscope} mais sans aucune réponse de la part de ces entreprises. 
 
@@ -659,5 +694,19 @@ Nous allons d'abord présenter l'environnement de travail ainsi que les outils e
             \item $P = {'news': 0.0523, 'sport': 0.745, 'sci_tech': 0.135}$\\
         \end{itemize}
         Pour un nouvel utilisateur, le même traitement est appliqué, le vecteur de probabilité de sélection se remplie petit à petit en fonction des interaction qui vont être mise à jour de la même façon.
-    % \subsection{Résultats et évaluation}
-    %     \subsubsection{Métrique d'évaluation}
+
+        \subsubsection{Utilisateur non identifier}
+        Dans le cas où l'utilisateur n'est pas connecté, donc il n’y a pas de vecteur de probabilité de sélection, la recommandation est basée sur la similarité entre articles.
+
+        Si l'utilisateur U a lu l'article A1, les articles A2, A3, ..., An similaires à A1, seront recommandés. La similarité entre article est calculé à partir du contenu, le texte sera convertit en TF-IDF et les articles les plus proches en calculant la similarité du Cosinus seront considérés comme article qui parle du même sujet ou de la même catégorie.
+
+        \begin{itemize}[leftmargin=*]
+            \item Exemple :\\ 
+            A1 = "Real Madrid 3-1 Liverpool: Jurgen Klopp says Reds wanted everything and got minus something"\\
+            Articles similaires à A1 = \{\\
+                'Gareth Bale on his Champions League final goal for Real Madrid': 0.26435,\\
+                'Real Madrid 3-1 Liverpool: ‘Flawed Karius pays for lack of focus’': 0.21839,\\
+                'Columbus Crew: Two US cities fight over one football team': 0.073586
+            \}
+        \end{itemize} 
+
