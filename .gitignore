@@ -19,3 +19,5 @@ arabluatex_novoc.lua
 arabluatex-patch.sty
 arabluatex_trans.lua
 arabluatex_voc.lua
+
+algorithm2e.sty
