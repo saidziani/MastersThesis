@@ -10,25 +10,26 @@ Le logiciel que nous proposons enchaîne les processus de catégorisation, de r�
 
 
 \section{Module de recommandation}
-Dans cette partie, nous allons voir la conception détaillée de notre système de recommandation. Ci-dessous, nous présentons les deux approches proposées, la recommandation personnalisée et non personnalisée d'articles de presse  : 
-    \subsection{Recommandation personnalisée}
-    La recommandation des articles pour les utilisateurs est basée sur le contenu de leurs profils. En effet, le profilage utilisateur débute lorsque l'utilisateur s'authentifie pour la première fois et à chaque fois les informations relatives à ses préférences sont récoltées et traitées.\\
+Dans cette partie, nous allons voir la conception détaillée de notre système de recommandation. Ci-dessous, nous présentons les deux approches proposées, la recommandation personnalisée et non personnalisée d'articles de presse.
+    \subsection{Recommandation personnalisée\label{personal}}
+    La recommandation d'articles est basée sur le contenu des profils utilisateurs. En effet, le profilage utilisateur débute lorsque l'utilisateur s'authentifie pour la première fois et à chaque fois les informations relatives à ses préférences sont récoltées et traitées.
+
     Cette étape nécessite le profilage de l'utilisateur et le calcul de similarité entre utilisateurs. Dans ce qui suit les détails de chacun.
 
         \subsubsection{Profilage d'un utilisateur}
         Elle consiste à déterminer les centres d'intérêts d'un utilisateur tout en se basant sur les articles lus par ce dernier. Pour cela, nous avons décidé d'utiliser une méthode de calcul des préférences afin de mieux cibler les utilisateurs et garantir une solution conforme aux caractéristiques de la recommandation pour les articles de presse. 
 
-        Pour le calcul des préférences utilisateurs, nous avons utiliser une méthode de calcul qui permet à la fois de résoudre les problèmes de récence \autoref{} et le démarrage à froid \autoref{}. Cette méthode testée s'avère très efficace par rapport aux méthodes existantes et décrites dans \autoref{}.
+        Pour le calcul des préférences utilisateurs, nous avons utiliser une méthode de calcul qui permet à la fois de résoudre le problèmes de la récence \autoref{} et le démarrage à froid \autoref{}. Cette méthode testée s'avère très efficace par rapport aux méthodes existantes et décrites dans \autoref{}.
 
-        Le calcul de la probabilité de sélection d'une catégorie pour un utilisateur est basé sur ses interactions avec les articles de presse disponible. En effet, dés qu'un est sélectionné, l'information est sauvegardée et utilisée pour la mise à jour du vecteur des catégories préférées \autoref{}.
+        Le calcul de la probabilité de sélection d'une catégorie pour un utilisateur est basé sur ses interactions avec les articles de presse disponible. Dés qu'un article est sélectionné, l'information est sauvegardée et utilisée pour la mise à jour du vecteur des probabilités de sélection des catégories préférées \autoref{}.
 
         L'exemple suivant présente un vecteur de probabilité de sélection pour les catégories préférées d'un utilisateur U :
             \[P(U) = {'sport': 0.7178, 'news': 0.1581, 'sci\_tech': 0.1492}\]            
         Il faut noter que la taille du vecteur de probabilité de sélection des catégories préférées est différentes d'un utilisateur à un autre.
 
-        Ce vecteur se mets à jour, comme déjà cité, après chaque interaction de l'utilisateur U avec l'article A de la catégorie C. Au fur et à mesure, la probabilité de sélection d'une catégorie C\textsubscript{i} augmente si cette dernière est sélectionnée, sinon elle diminue pour donner moins d'importances aux articles qui en font partis!!
+        Ce vecteur se met à jour, comme déjà cité, après chaque interaction de l'utilisateur U avec l'article A de la catégorie C. Au fur et à mesure, la probabilité de sélection d'une catégorie C\textsubscript{i} augmente si cette dernière est sélectionnée, sinon, elle diminue pour donner moins d'importances aux articles qui font partie de cette catégorie.
 
-        Ci-après les formules dédiées à cet effet :\\
+        Ci-après les formules dédiées à la mise à jour des probabilités de sélection des catégories préférées :\\
             \[
             P(U, C) =
             \begin{cases}
@@ -40,9 +41,9 @@ Dans cette partie, nous allons voir la conception détaillée de notre système 
         Avec initialement :\\
         \[
         \begin{cases}
-            P(U, C) = 1 / NbC \forall \text{C} \in \{categorie\textsubscript{1}, categorie\textsubscript{2}, ..., categorie\textsubscript{NbC}\}\\
+            P(U, C) = 1 / \text{NbC } \forall \text{ C} \in \{categorie\textsubscript{1}, categorie\textsubscript{2}, ..., categorie\textsubscript{NbC}\}\\
             NbC : \text{nombre de categories}\\
-            \alpha = \text{une constante empirique représentant le biais pour la diminution}
+            \alpha = \text{une constante empirique représentant le biais de la diminution}
         \end{cases}
         \]
         \begin{algorithm2e}[H]
@@ -69,11 +70,11 @@ Dans cette partie, nous allons voir la conception détaillée de notre système 
         \subsubsection{Similarité entre utilisateurs}
         Afin de diversifier la recommandation des articles de presse, nous avons mis en place une méthode de calcul de similarité qui permet de recommander des articles par rapport à la similarité entre utilisateurs. 
 
-        Selon \cite{euclidepreuve} qui propose une étude détaillé sur les mesures de similarité pour le filtrage collaboratif, il en est ressorti comme conclusion que la distance euclidienne était la mesure la plus adéquate en terme de précision et temps d'exécution. La formule de calcul de la distance euclidienne est la suivante :
+        Selon \cite{euclidepreuve} qui propose une étude détaillée sur les mesures de similarité pour le filtrage collaboratif, il en est ressorti comme conclusion que la distance euclidienne était la mesure la plus adéquate en terme de précision et temps d'exécution. La formule de calcul de la distance euclidienne entre les préférences des utilisateurs est la suivante :
 
         \begin{itemize}[label={}, leftmargin=0cm]
             \item Soient U\textsubscript{1} et U\textsubscript{2} deux utilisateurs,
-            \item P(U\textsubscript{1}) et P(U\textsubscript{2}) les vecteurs de probabilité de sélection des catégories préférées des deux utilisateurs,
+            \item P(U\textsubscript{1}) et P(U\textsubscript{2}) les vecteurs de probabilité de sélection des catégories préférées des deux utilisateurs respectivement,
             \item NbC\textsubscript{1} et NbC\textsubscript{2} le nombre de catégories préférées de chaque utilisateur,\  
             \item \[Sim({P(U\textsubscript{1})}, {P(U\textsubscript{2})}) = d({P(U\textsubscript{1})}, {P(U\textsubscript{2})}) = {\sqrt {\sum _{i=1, j=1}^{NbC\textsubscript{1},NbC\textsubscript{2}}(P(U\textsubscript{1}, C\textsubscript{i})-P(U\textsubscript{2}, C\textsubscript{j}))^{2}}}\]
         \end{itemize}
@@ -99,11 +100,11 @@ Dans cette partie, nous allons voir la conception détaillée de notre système 
         \SetKwInOut{Output}{output}
         \Input{A: Article, U: utilisateur}
         \textbf{const :} seuil = 0.1\\
-        utilisateurs = lire(base de profils)\\
+        utilisateurs = Lire(collection de profils)\\
         \While{i < taille(utilisateurs)}{
             \If{utilisateurs[i] != U}{
-                similarité = distance\_euclidienne(U.préférences, utilisateurs[i].préférences)\\
-                \If{similarité >= seuil}{
+                sim = distance\_euclidienne(U.préférences, utilisateurs[i].préférences)\\
+                \If{sim >= seuil}{
                     U.préférences += utilisateurs[i].préférences
                 }
             }
@@ -114,14 +115,12 @@ Dans cette partie, nous allons voir la conception détaillée de notre système 
     \subsection{Recommandation non personnalisée}
     La recommandation non personnalisée vise à recommander des articles pour des utilisateurs qui n'ont pas de comptes (i.e : qui sont non authentifiés), pour cela notre système effectue une recommandation selon le choix de lecture de l'utilisateur, c'est à dire par calcul de similarité entre l'article qui est entrain d'être lu et les nouveaux articles disponible. 
 
-    Un pré-traitement est effectué sur chaque article comprend la suppression des mots vides et l'extraction des racines de mots. Ensuite, le sac à mots de l'article est converti en TF-IDF.  
-
-    Le de calcul de la similarité entre les articles est présenté ci-dessous:
+    Un pré-traitement est effectué sur chaque article comprend la suppression des mots vides et l'extraction des racines de mots. Ensuite, le sac à mots (Bag of Words) de l'article est converti en TF-IDF. La martice résultante de la conversion en TF-IDF est utilisée pour le calcul de la similarité de cosinus et les cinq articles les plus similaires seront recommandés. Le calcul de la similarité entre les articles est présenté ci-dessous :
 
     \begin{itemize}[label={}, leftmargin=0cm]
         \item Soient U un utilisateur, A\textsubscript{1} et A\textsubscript{2} deux articles de presse,
         \item A\textsubscript{1} a été déjà sélectionné et A\textsubscript{2} est un nouvel article,
-        \item BoW(A\textsubscript{1}) et BoW(A\textsubscript{2}) les sacs à mots (Bag of Words) de chaque article,\\
+        \item BoW(A\textsubscript{1}) et BoW(A\textsubscript{2}) les sacs à mots de chaque article,\\
 
         \item BoW(A\textsubscript{1}) = \{\begin{arab}'لواء', 'شفيق', 'مدير', 'مكتب', 'رئيس', 'مخلوع', 'مبارك', 'أراد', 'دائم', 'إيقاع', 'عمر', 'سليمان', 'مشير', 'طنطاوي', 'وصف', 'لواء', 'شفيق', 'عاش', 'قصر', 'رئيس', 'مصري', 'مخلوع', 'وفاة', 'عمر', 'سليمان', 'رئيس', 'مخابرة', 'مصري', 'نائب', 'مبارك', 'خسارة', 'أكبر', 'مصر', 'رجل', 'أفضل', 'رجل', 'شجع', 'صعب', 'تعويض', 'تحدث', 'لواء', 'شفيق', 'تصريح', 'علاقة', 'عمر', 'سليمان', 'رئيس', 'مخلوع', 'مبارك'\end{arab}\},
 
@@ -140,14 +139,14 @@ Dans cette partie, nous allons voir la conception détaillée de notre système 
         \SetKwInOut{Output}{output}
         \Input{A: Article, U: utilisateur}
         \Output{ListeArticlesSimilaires: Article}
-        articles = lire(base de articles)\\
+        articles = Lire(collection d'articles)\\
         \While{i < taille(articles)}{
             segmentation(articles[i])\\
             suppression\_mots\_vides(articles[i])\\
             racinisation(articles[i])\\
         }
         tf-idf = TF-IDF(articles)\\
-        mat\_similarité = TRI(cosinus\_similarité(tf-idf))\\
+        mat\_similarité = Tri(cosinus\_similarité(tf-idf))\\
         ListeArticlesSimilaires = mat\_similarité.articles\\
         \Return ListeArticlesSimilaires[:5]
         \caption{Algorithme de calcul de similarité entre articles}
@@ -164,6 +163,141 @@ Dans cette partie, nous allons voir la conception détaillée de notre système 
     %     \caption{Algorithme de calcul de similarité entre articles}
     % \end{algorithm2e}
 %%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~%%    
+
+
+\section{Module de catégorisation d'article de presse}
+Le premier module sur lequel nous avons travailler, c'est la catégorisation d'articles de presse. Nous avons expérimenter plusieurs techniques proposées dans la littérature. Nous présentons ci-après chaque approche, ses résultats, ses points forts et ses faiblesses.
+
+En se basant sur les travaux de \cite{categorisation} pour l'Anglais et \cite{categorisation} pour l'Arabe, nous avons entraîné nos modèles sur des corpus d'articles de différentes sources afin de garantir la diversité dans nos données (plus de détails dans le chapitre 4\ref{chapter4}).
+À REVOIR!!
+
+    \subsection{Approches expérimentées\label{approches}}
+    Toutes les approches utilisées sont basées sur l'apprentissage automatique, supervisé et non supervisé. 
+
+    \subsubsection{Basées sur l'Apprentissage Non Supervisé}
+        
+        \begin{itemize}
+            \item{LDA (Latent Dirichlet Allocation) : }
+            Latent Dirichlet Allocation (LDA) est un modèle probabiliste génératif qui permet de décrire des collections de documents de texte ou d’autres types de données discrètes. LDA fait partie d’une catégorie de modèles appelés “topic models”, qui cherchent à découvrir des structures thématiques cachées dans des vastes archives de documents. Ceci permet d’obtenir des méthodes efficaces pour le traitement et l’organisation des documents de ces archives: organisation automatique des documents par sujet.
+        \end{itemize}
+        
+        \begin{itemize}
+            \item{Corpus et dataset}
+        \end{itemize}
+        
+    \subsubsection{Basées sur l'Apprentissage Supervisé}
+        \begin{itemize}
+            \item{Naïve de Bayes : }
+            c'est une méthode connue de l'Apprentissage automatique supervisé. Un de ses avantages en plus d'être un modèle simple, c'est qu'ils renvoient non seulement la prédiction mais aussi le degré de certitude, ce qui peut être très utile dans certaines applications. Mais en ayant un problème à classes multiples, cette approche nous a donnés des résultats très modeste en un temps d'exécution assez importants, ce qui nous a poussé à abandonner son utilisation.\\
+            
+            \item{Arbres de décision : }
+            peuvent être assistés par un expert. Ces principaux avantages sont : robuste face aux données aberrantes, pas très sensible aux données manquantes, possibilité d’intervenir dans la construction de l’arbre, etc. Son principale inconvénient reste la dépendance très forte entre la taille de la base d’apprentissage et les performances.\\
+            
+            \item{SVM (Support Vector Machines) : }
+            Les machines à vecteurs support (en anglais Support Vector Machine, SVM) sont un ensemble de techniques d’apprentissage supervisé destinées à résoudre des problèmes de classification (SVC) et de régression. Les SVM sont des types des classifieurs. On ne considérera ici que le cas des SVM linéaires.
+            
+            \item{Descente de Gradient Stochastique : }
+            Descente de gradient stochastique¶
+            La SGD peut être beaucoup plus rapide que la descente de gradient ordinaire (batch), parce que le nombre de mises à jour est beaucoup plus grand. C’est particulièrement vrai pour des jeux de données volumineux, ou pour le cas en ligne. En fait, dans les tâches d’apprentissage machine, on n’utilise la descente de gradient ordinaire (au lieu de stochastique) que lorsque la fonction à minimiser ne peut pas être décomposée comme ci-dessus (comme une moyenne).
+        \end{itemize}
+
+        \begin{itemize}[leftmargin=*, label={}]
+            \item{Corpus et dataset}\\
+                À la fin de la phase de pré-traitement, nous avons définie une structure pour faciliter l'exploration des datasets. Ci-dessous la structure choisie :
+                \begin{itemize}
+                   \item{\textbf{id} : }un identifiant unique de l'article,
+                   \item{\textbf{contenu} : }les différents paragraphes de l'article,
+                   \item{\textbf{catégorie} : }la catégorie de l'article extraite depuis la source.
+                \end{itemize}
+        \end{itemize}
+
+    \subsection{Processus de catégorisation}
+        \subsubsection{Pré-traitement des articles de presse}
+         Plusieurs opérations de pré-traitements ont été effectuées. Ci-après les étapes suivies :
+        \begin{enumerate}
+            \item{\textbf{Segmentation (Tokenization) et suppression des mots vides :} }permet d'extraire toutes les entités lexicales d'un article donné. La segmentation est suivie de la suppression des tokens non utiles tel que la ponctuation, les pronoms, les déterminants, etc.\\ 
+                          
+        %         % Exemple :
+        %         %          بلغ مستوى التضخم 4.3 بالمائة إلى غاية أفريل 2018، بعد أن  كان في حدود 4.6 بالمائة شهر مارس الماضي.
+                
+        %         % Aprés segmentation : on aura une liste de mots.
+                                       
+        %         %                        ['بلغ', 'مستوى', 'التضخم', '4.3', 'بالمائة','إلى','غاية','أفريل', '2018', '،','بعد', 'أن', 'كان', 'في', 'حدود',' 4.6 ', 'بالمائة', 'شهر', 'مارس', 'الماضي','.']
+                                                          
+        %         % Liste des mots vides de la phrase précédente.                                         
+                
+                                                               
+        %         %                                        ['بعد', 'أن', 'كان', 'في', 'ب','إلى','.','4.3','2018', '،','4.6']  
+                
+        %         % Aprés suppression des mots vides :
+                
+                
+        %         %                           ['بلغ', 'مستوى', 'التضخم','المائة','غاية','حدود','المائة', 'شهر', 'مارس', 'الماضي']  
+                
+                
+        %         % \item{\textbf{Racinisation (Stemming) :} }les mots d'un document sont représentés par leurs racines plutôt que par les mots d'origine. Plusieurs variantes d'un terme peuvent ainsi être groupées dans une seule forme représentative, ce qui réduit le nombre des termes distincts nécessaires pour représenter un document.\\
+                
+        %         % Exemple :
+                
+                
+        %         %                                ['بلغ', 'مستوى', 'التضخم','المائة','غاية','حدود','المائة', 'شهر', 'مارس', 'الماضي']  
+               
+                
+                
+        %         % \item{\textbf{N-grammes :} }les N-grammes permettent de construire une sous-séquence de n mots consécutives. Ils permettent de contextualiser l'ordre d'apparition d'un ensemble de mots.\\
+                
+        %         % Exemple : 
+        %         %          بلغ مستوى التضخم 4.3 بالمائة إلى غاية أفريل 2018، بعد أن  كان في حدود 4.6 بالمائة شهر مارس الماضي.      
+                
+                
+        %         \item{\textbf{Extraction des caractéristiques :} }avec l'utilisation de TF-IDF, le sac de mots représentant un article sera convertit en valeurs numériques décrivant la fréquence d'occurrence de chaque mot par rapport à l'ensemble des articles du corpus et à l'article lui même.\\
+        %     
+        \end{enumerate}
+        \subsubsection{Modèle de classification d'articles de presse}
+            Nous avons développé plusieurs modèles de catégorisation d'articles basés sur l'apprentissage supervisé et non supervisé cités dans \autoref{},  zfeze hfnzoflk nz,ofkzne fomizeln zomifn zofiznefoi eofnze fozefm, zfopiz nf,zome ifnzef oizfn zoifz !!!Say something about classification.
+
+            \begin{algorithm2e}[H]
+            \SetAlgoLined
+            \SetKwInOut{Input}{input}
+            \SetKwInOut{Output}{output}
+            \Input{Dataset: Article}
+            \Output{ModèleEntrainé}
+            tf-idf = [ ]\\
+            \For{article \in Dataset}{
+                segmentation(article)\\
+                suppression\_mots\_vides(article)\\
+                racinisation(article)\\
+                n-grammes(article)\\
+                tf-idf += TF-IDF(article)
+            }
+            ModèleEntrainé = AlgorithmeClassification(tf-idf)\\
+            \Return{ModèleEntrainé}
+            \caption{Algorithme de construction des modèles de catégorisation}
+            \end{algorithm2e}
+
+        \subsubsection{Prédiction des catégories d'articles de presse}
+            Nous avons développé plusieurs modèles de catégorisation d'articles basés sur l'apprentissage supervisé et non supervisé cités dans \autoref{},  zfeze hfnzoflk nz,ofkzne fomizeln zomifn zofiznefoi eofnze fozefm, zfopiz nf,zome ifnzef oizfn zoifz !!!Say something about classification.
+            
+            \begin{algorithm2e}[H]
+            \SetAlgoLined
+            \SetKwInOut{Input}{input}
+            \SetKwInOut{Output}{output}
+            \Input{A: Article}
+            \Output{catégorie: Catégorie}
+            segmentation(A)\\
+            suppression\_mots\_vides(A)\\
+            racinisation(A)\\
+            n-grammes(A)\\
+            prédiction = Charger(modèle)
+            catégorie = prédiction(A)
+            \Return{catégorie}
+            \caption{Algorithme de prédiction de catégorie d'un article de presse}
+            \end{algorithm2e}
+
+
+%%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~%%
+
+>>>>>>> fawzi31
 \section{Module de résumé automatique}
 Pour ce module de résumé automatique, nous avons choisi un résumeur automatique extractif \cite{notreresume} basé sur les plongements de mots (Word embeddings)!!!!!!! comme décrit dans le chapitre précédent \autoref{}.
 Ci-dessous la présentation des différentes approches expérimentées.
@@ -171,8 +305,7 @@ Ci-dessous la présentation des différentes approches expérimentées.
     Nous avons, tout d'abord, expérimenté l'approche proposé dans \ref{riad-belkbir} qui est basée sur un apprentissage automatique supervisé en utilisant un dataset annoté manuellement. 
         \subsubsection{Corpus et datasets}
         Le dataset contient plus de 70 articles. Il est dédié principalement au résumé automatique par apprentissage supervisé pour la langue Arabe, mais peut être utilisé également dans d'autres applications, telles que la compression des textes.
-
-        L'annotation consiste en l'attribution de quatre type d'étiquettes possibles à chaque phrase de l'article :
+        L'annotation consiste en l'attribution de quatre type d’étiquettes possibles à chaque phrase de l'article :
             \begin{itemize}
                 \item S (select) : phrase importante, à prendre en considération dans la construction du résumé.
                 \item R (remove) : cette phrase est à supprimer, son absence n'affecte pas le sens du résumé.
@@ -206,6 +339,7 @@ Ci-dessous la présentation des différentes approches expérimentées.
         \item{Similarité avec la phrase centroïde}
     \end{enumerate} 
 
+<<<<<<< HEAD
     \subsection{Résumé extractif par Plongement de mots\ref{plongement}}
     L'approche proposée par l'équipe de recherche du département informatique de l'Université de Bari en Italie \cite{bari}, est basée sur la similarité textuelle entre la phrase centroïde et les autres phrases du texte en utilisant les plongements de mots (Word embeddings)\ref{}. La conception et l'algorithme de réalisation sont détaillés dans \ref{plongement}
 
@@ -407,6 +541,126 @@ Dans ce module, nous avons a la base choisi d'intégrer uniquement une solution 
 
 
 Afin d'intégrer un bon système de traduction automatique, nous avons explorer 2 sources principales, la première était destiné a une utilisation professionnelle, de lus la version gratuite offrait une traduction pour des textes de taille limités. et la deuxième était la solution adaptée a notre système. Elle était a la fois accessible et offrait des possibilités de traduction pour des textes longs (Articles de presse, etc). 
+=======
+    \subsection{Résumé automatique extractif par Plongement de mots\ref{plongement}}
+    L'approche proposée par l'équipe de recherche du département informatique de l'Université de Bari en Italie \cite{bari}, est basée sur la similarité textuelle entre la phrase centroïde et les autres phrases du texte en utilisant les plongements de mots (Word embeddings)\ref{}. Le plongement de mots utilisé dans cette approche est un modéle skip-gram entrainé sur le contenu de Wikipédia \cite{} en utilisant la bibliothèque fasttext du laboratoire en intelligence artificielle de facebook qui ont dévellopé des modéles pour 294 langues différentes \cite{fasttext}. parmi les modéles developpé, nous allons nous intérésser a celui de l'anglais et l'arabe. La conception et l'algorithme de réalisation sont détaillés dans \ref{plongement}. Ci-dessous, nous allons présenter les étapes de conception du résumé automatique.
+
+        \subsubsection{Prétraitement des articles}
+        Dans cette phase, il suffit juste de segmenter le texte, le tokeniser et supprimer les mots vides. Ceci étant dû au fait que le plongement de mots que nous allons utiliser (le modèle Skip-Gram entraîné sur le contenu Wikipédia) servira entre autre a détecter les régularités linguistiques des  mots de la même racine. par exemple : le mot le plus similaire a "Algeria" est le mot "Algerian" \ref{}, c'est pour cela que le stemming n'est pas utilisé dans ce cas.
+
+         \begin{algorithm2e}[H]
+           \SetAlgoLined
+          \SetKwInOut{Input}{input}
+          \SetKwInOut{Output}{output}
+          \Input{A: Article}
+          \Output{ListeTokens: token}
+          Lire(A)\\
+          phrases = segmentation(A)\\
+          \For{phrase \in phrases}{
+            tokens = tokenisation(phrase)\\
+            ListesTokens += suppression\_mots\_vides(tokens)\\
+          }
+          \Return {ListesTokens}
+         \caption{Algorithme de prétraitment du résumé}
+        \end{algorithm2e}
+
+       \subsubsection{Construction d'un vecteur de centroïde}
+        Après l'étape de prétraitement, place a la construction des vecteurs de centroïde. Afin de construire un vecteur centroïde en utilisant les plongement de mots, nous sélectionnons d'abord les mots significatifs dans le document. Pour cela, nous calculons le poids Tf-IDF de chaque mots de chaque document, ensuite nous sélectionnons les mots ayant le poids Tf-IDF supérieur à une constante empirique fixé au tout début de cette phase qui désignera un seuil de document (idf). Ainsi, nous calculons l'encastrement du centroïde comme la somme des mots les mieux classés dans le document en utilisant les plongements de mots de Wikipédia comme le montre l'equation suivante :
+
+             \begin{equation*}
+             C = \sum_{\substack{w\in D\\
+                             tf-idf(w)>t }}
+                    E[idx(w)]
+             \end{equation*}
+             
+             C: l'encastrement centroïde lié au document D.
+             et 
+             idx(w) : une fonction qui retourne l'indice du mot dans le vocabulaire.
+             
+             exemple :
+             
+             \begin{figure}[H]
+                \centering
+                \includegraphics[height=120pt,width=380pt]{img/chapter3/centroideembed.jpg}
+                \caption{Constuction des vecteurs centroïde}
+                \label{Constuction des vecteurs centroïde}
+             \end{figure}
+
+         \subsubsection{Notation des phrases}
+         Dans ce processus, pour chaque phrase du document on crée un plongement pour la phrase en additionnons les plongements de mots de chaque terme dans la phrase.
+
+        \begin{equation*}
+         S\textsubscript{j} = \sum_{\substack{w\in S\textsubscript{j}}}
+         E[idx(w)]
+        \end{equation*}
+
+        Afin de calculer le score finale de la phrase, on calcule la similarité de cosinus entre le plongement de la phrase S\textsubscript{j} et le plongement de la phrase centroide C.
+        
+        \[sim\_cos(C,S\textsubscript{j}) = \frac {C \cdot S\textsubscript{j}}{||C|| \cdot ||S\textsubscript{j}||}\]
+                    
+                    \begin{figure}[H]
+                        \centering
+                        \includegraphics[height=150pt,width=380pt]{img/chapter3/scoreembed.jpg}
+                        \caption{Notation des phrases}
+                        \label{Notation des phrases}
+                    \end{figure}
+
+        \subsubsection{Séléction des phrases}
+        Pour chaque phrase du document, on calcule la \emph{similarité de cosinus} entre elle et la phrase centroïde du document. Les phrases sont ensuite triées par ordre décroissant de leurs scores de similarité. Les phrases les mieux classées sont itérativement sélectionnés et ajoutés au résumé jusqu'à ce que la limite (taille du résumé) soit atteinte. Afin de satisfaire la propriété de redondance, au cours de chaque itération nous allons calculer la \emph{similarité de cosinus} entre la phrase a venir et chacune déjà dans le résumé.
+        Il est a noter qu' un seuil a été fixé afin de rejeter toutes les phrases qui ont une similarité très élevé par rapport a une phrase afin d'éviter cette redondance.
+
+        \begin{algorithm2e}[H]
+            \SetAlgoLined
+            \SetKwInOut{Input}{input}
+            \SetKwInOut{Output}{output}
+            \Input{phrases, scores, seuilSimilarité, seuilRésumé}
+            \Output{Résumé}
+            
+            phrases = Tri(phrases, scores)\\
+            k = 1\\
+             \For{i=1 \KwTo taille(phrases)}{                
+                \If{taille(Résumé) > seuilRésumé}{
+                    \Return Résumé\\
+                    sv = sommeVecteurs(phrases[i])\\
+                    prendrePhrase = Vrai\\
+                }
+                \For{j=1 \KwTo k}{
+                    sv2 = sommeVecteurs(Résumé[j])\\
+                    sim = similarité(sv, sv2)\\
+                    \If{sim > seuilSimilarité}{
+                        prendrePhrase = Faux\\
+                    }
+                }
+                \If{prendrePhrase}{
+                    Résumé[k] = phrases[i]\\
+                    k += 1\\      
+                }
+             }
+             \Return{Résumé}
+            \caption{Algorithme de Séléction des phrases}
+        \end{algorithm2e}
+
+        % \begin{algorithm2e}[H]
+        %     \SetAlgoLined
+        %     \SetKwInOut{Input}{input}
+        %     \SetKwInOut{Output}{output}
+        %     \Input{Résumé}
+        %     \Output{RésuméTrié}
+            
+        %     RésuméTrié = Tri(Résumé, ordreApparitionPhrases)\\
+            
+        %      \Return{RésuméTrié}
+        %     \caption{Algorithme de génération du résumé automatique}
+        % \end{algorithm2e}
+
+%%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~%%
+
+\section{Module de traduction}
+Dans ce module, notre tâche n'était pas d'implémenter ou de concevoir un traducteur automatique, mais uniquement d'utiliser un traducteur automatique multilingue existant, et de l'intégrer dans notre architecture globale présenté dans la (figure \ref{shemaglobal}). 
+Toutefois, il fallait rechercher le module de traduction le plus performant afin de traduire un article complet de la manière la plus rapide.
+
+Afin d'intégrer un bon système de traduction automatique, nous avons explorer deux sources principales, la première était destiné a une utilisation professionnelle, de plus la version gratuite offrait une traduction pour des textes de taille limités. et la deuxième était la solution adaptée a notre système. Elle était a la fois accessible et offrait des possibilités de traduction pour des textes longs (Articles de presse, etc). 
+>>>>>>> fawzi31
 
 
 
@@ -451,7 +705,11 @@ Voici maintenant un exemple d'un document de la collection d'articles.
 'urlToImage': 'http://espn.go.com/nba/id/235168/main.png',  
 'categoryPredicted': 'sport', 
 'summaryGenerated': 'The Celtics improved to 8-2 since Smart returned...', 
+<<<<<<< HEAD
 'translatedContent': '?????? ???? ???? ?? ???? ?? ?? ????? ?????? ????? ?? ??????? ????? ?????? ??? ????....', 
+=======
+'translatedContent': 'sada da ada faffa fazgz eg rzgergtehk th roh...', 
+>>>>>>> fawzi31
 },
 \end{lstlisting}
 
@@ -487,6 +745,7 @@ Ci-dessous un exemple d'un document de la collection de profils :
 \end{lstlisting}
 
 
+<<<<<<< HEAD
 
 
 
@@ -528,6 +787,53 @@ que la mise à jour de l'application sur le serveur applicatif.[4]
 
 
 
+=======
+\section{Architecture du système \textquotedbl Feedny\textquotedbl}
+Dans cette partie, nous allons présenter l'architecture globale de notre système, cette dernière est déployé sous la forme d'une architecture 3-tiers. Ci-dessous, nous présentons ce qu'est une architecture 3-tiers ainsi que son avantage avant d'expliciter un schéma de l'architecture globale.
+
+\subsection{Présentation de l’architecture 3-tiers}
+Une application Web possède souvent une architecture 3-tiers.
+La couche DAO : " Data Access Object " s’occupe de l’accès aux données, le plus souvent des
+données persistantes au sein d’un SGBD.
+
+La couche métier : implémente les algorithmes " métier " de l’application. Cette couche est indé-
+pendante de toute forme d’interface avec l’utilisateur.C’est généralement la couche la plus
+stable de l’architecture. Elle ne change pas si on change l’interface utilisateur ou la façon
+d’accéder aux données nécessaires au fonctionnement de l’application.
+
+La couche interface utilisateur : interface (graphique souvent) qui permet à l’utilisateur de pi
+loter l’application et d’en recevoir des informations.
+FIGURE 3.1 – Architecture 3-tiers
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[height=100pt,width=400pt]{img/chapter3/tiers.png}
+    \caption{Diagramme présentant les cas d'utilisations}
+\end{figure}
+
+\subsection{Avantage de l’architecture multi-tiers}
+L’avantage principal d’une architecture 3-tiers (multi-tiers) est la facilité de déploiement.L’application
+en elle même n’est déployée que sur la partie serveur.
+Le client ne nécessite qu’une installation et une configuration minime.
+En effet il suffit d’installer un navigateur web compatible avec l’application pour que le client
+puisse accéder à l’application.
+Cette facilité de déploiement aura pour conséquence non seulement de réduire le coût de déploie
+ment mais aussi de permettre une évolution régulière du système. Cette évolution ne nécessitera
+que la mise à jour de l’application sur le serveur applicatif.[4]
+
+\subsection{Schéma global de \textquotedbl Feedny\textquotedbl}
+L'architecture globale du système "Feedny" comporte quatre processus principales: Catégorisation, résumé, traduction et recommandation d'articles de presse.
+
+Les entrées (articles de presse extraits de plusieurs sources) sont sauvegardés dans une base de données. Le processus de catégorisation commence par classifier l'article selon son contenu, ensuite un résumé est généré, l'article est traduit de l'Anglais vers l'Arabe (ou l'inverse) et enfin, il sera recommandé à un utilisateur selon son profile et ses préférences comme on peut le voir dans la figure \ref{shemaglobal}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[height=600pt,width=450pt]{img/chapter3/global.png}
+    \caption{Diagramme présentant les cas d'utilisations}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Shéma %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+>>>>>>> fawzi31
 
 \section{Schémas conceptuels de "Feedny"}
 Nous allons présenter dans cette partie, la façon avec laquelle le logiciel fournit les différentes fonctionnalités. Celle-ci décrit d'une manière claire et précise, le fonctionnement du futur système en utilisant un langage de modélisation. 
@@ -544,6 +850,7 @@ Nous avons choisi la méthode UML (Unified Modeling Language), qui est une notat
     \caption{Diagramme présentant les cas d'utilisations}
 \end{figure}
 
+<<<<<<< HEAD
 \subsection{Diagramme de classe}
 Le diagramme de classe est l'un des pivots essentiels de la modélisation avec UML, il décrit la structure statique du système. En effet, aucun détail ni traitement sont représenté dans ce diagramme puisque il 
 se base uniquement sur la notion d'objet, de classe et les différents types d'associations.\cite{UML}
@@ -555,6 +862,8 @@ se base uniquement sur la notion d'objet, de classe et les différents types d'a
     \caption{Diagramme de classe}
 \end{figure}
 
+=======
+>>>>>>> fawzi31
 \subsection{Diagramme de séquence}
 Le diagramme de séquence est un diagramme UML qui fait partie des diagrammes comportementaux (dynamiques) dont L'objectif est de représenter les interactions entre les objets et les acteurs ou bien entre objets uniquement  en indiquant la chronologie des échanges. Cette représentation peut se réaliser en considérant les différents scénarios associés.\cite{UML}
 
@@ -574,6 +883,7 @@ Le diagramme de séquence est un diagramme UML qui fait partie des diagrammes co
     \caption{Diagramme de séquence dans le cas non personnalisé}
 \end{figure}
 
+<<<<<<< HEAD
 
 
 
@@ -627,3 +937,48 @@ Avec :
     \item{\textbf{FN }False Negative (faux négatifs) :} nombre d'individus prédits comme étant de la classe alors qu'il ne le sont pas en vrai.
     \item{\textbf{TN }True Negative (vrais négatifs) :} nombre d'individus prédits comme n'étant pas dans la classe à juste titre.
 \end{itemize}
+=======
+\section{Mesures d'évaluation du système}
+    \subsection{Métriques d'évaluations du module de résumé automatique}
+        \subsubsection{Métrique d'évaluation : ROUGE\label{metrique-eval}}
+        ROUGE est l'acronyme de "Recall-Oriented Understudy for Gisting Evaluation". Il s'agit essentiellement d'un ensemble de métriques permettant d'évaluer le résumé automatique de textes ainsi que la traduction automatique. Il fonctionne en comparant un résumé produit automatiquement ou une traduction à un ensemble de résumés de référence (généralement produits par des humains). \cite{rouge0}
+
+        \subsubsection{Types des métriques de ROUGE\label{type-rouge}}
+        \begin{itemize}
+            \item{ROUGE-1, 2, 3 et 4 : font référence au chevauchement des uni-grammes, bi-grammes, tri-grammes et quadri-grammes, respectivement, entre le système et les résumés de référence \cite{rouge1}.}\\
+            \item{ROUGE-L, W : basés sur la plus longue sous-séquence commune (LCS) \cite{rouge2}.}\\
+            \item{ROUGE-S : basé sur les cooccurrences des paires de mots dans l'ordre des phrases \cite{rouge2}.}\\
+            \item{ROUGE-SU : en plus des paires de mots, il utilise aussi la cooccurrence du mot unique toujours dans l'ordre des phrases.}
+        \end{itemize}
+
+        Les métriques citées dans la \autoref{type-rouge}, utilisent comme mesures le rappel, la précision et la f-mesure :  
+        \begin{itemize}
+            
+            \item {Le rappel dans le cas de ROUGE, donne une information sur le nombre de mots du résumé de référence ont été capturés par le résumé de notre généré par le système.\\ 
+                Exemple: si le rappel est égal a 40\%, cela signifie que 40\% des n-grammes du résumé de référence sont également présents dans le résumé généré par le système.}\\
+            \item {La précision quant à elle, mesure la partie du résumé du système qui est pertinente ou nécessaire.\\ 
+                Exemple : si la précision est égale a 40\%, cela signifie que 40\% des n-grammes du résumé généré par le système sont également présents dans le résumé de référence.}
+            \item {La f-mesure dépend de la précision et le rappel et est calculé comme suit :\\
+                                \[ F-mesure = \frac{2 * (Precision * Rappel)} {(Precision + Rappel)} \]}
+
+        \end{itemize}
+
+    \subsection{Métriques d'évaluations du module de catégorisation}
+    \begin{itemize}
+        \item{\textbf{Accuracy :} }c'est une mesure qui évalue l'efficacité globale de l'algorithme par rapport au données de test.
+        \[ Accuracy = \frac{tp+tn} {tp+fp+tn+fn} \]
+        \item{\textbf{Précision :} }elle évalue le pouvoir prédictif du modèle en mesurant la capacité du modèle à prédire que des classes correctes.
+        \[ Precision = \frac{tp} {tp+fp} \]
+        \item{\textbf{Rappel :} }la capacité d’un modèle à prédire toutes les classes correctes de l'ensemble de test.
+        \[ Rappel = \frac{tp} {tp+fn} \]
+        \item{\textbf{F-mesure :} }une mesure composite qui profite aux algorithmes avec une sensibilité plus élevée et des algorithmes de défis avec spécificité plus élevée.!!!
+        \[ F-mesure = \frac{2 * (Precision * Rappel)} {(Precision + Rappel)} \]
+    \end{itemize}
+    Avec :
+    \begin{itemize}
+        \item{\textbf{TP }True Positive (vrais positifs) :} nombre d'individus bien prédits dans la classe à juste titre.
+        \item{\textbf{FP }False Positive (faux positifs) :} nombre d'individus prédits d'une classe alors qu'ils ne devraient pas en faire parti.
+        \item{\textbf{FN }False Negative (faux négatifs) :} nombre d'individus prédits comme étant de la classe alors qu'il ne le sont pas en vrai.
+        \item{\textbf{TN }True Negative (vrais négatifs) :} nombre d'individus prédits comme n'étant pas dans la classe à juste titre.
+    \end{itemize}
+>>>>>>> fawzi31
