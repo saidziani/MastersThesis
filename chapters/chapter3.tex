@@ -4,22 +4,22 @@
 \section{Introduction}
 La réalisation d'un logiciel ou d'un système informatique doit être obligatoirement précédée d'une étape d'analyse et de conception qui a pour objectif de définir et de formaliser les étapes nécessaires du développement de l'application afin de rendre cette dernière plus fidèle aux besoins.
 
-La première motivation de ce travail été de fournir un outil qui permet à l'utilisateur de faire ça revue de presse quotidienne de la façon la plus efficace et la plus enrichissante possible tout en considérant ses centres d'intérêts et préférences. 
+La première motivation de ce travail été de fournir un outil qui permet à l'utilisateur de faire ça revue de presse quotidienne de la façon la plus efficace et la plus enrichissante possible tout en considérant ses centres d'intérêt et préférences. 
 
 Le logiciel que nous proposons enchaîne les processus de catégorisation, de résumé, de traduction et de recommandation d'articles de presse. Pour parvenir à réaliser cet ensemble de tâches en deux langues (Anglais et Arabe), nous allons présenter dans cette partie notre conception qui décrit d'une manière claire et précise le fonctionnement de chaque module du système. 
 
 
 \section{Module de recommandation}
-Dans cette partie, nous allons voir la conception détaillée de notre système de recommandation. Ci-dessous, nous présentons les deux approches proposées, la recommandation personnalisée et non personnalisée d'articles de presse.
+Dans cette partie, nous allons voir la conception détaillée de notre système de recommandation. Ci-dessous, nous présentons les deux approches proposées, la recommandation personnalisée et non-personnalisée d'articles de presse.
     \subsection{Recommandation personnalisée\label{personal}}
-    La recommandation d'articles est basée sur le contenu des profils utilisateurs. En effet, le profilage utilisateur débute lorsque l'utilisateur s'authentifie pour la première fois et à chaque fois les informations relatives à ses préférences sont récoltées et traitées.
+    La recommandation d'articles est basée sur le contenu des profils utilisateurs. En effet, le profilage débute lorsque l'utilisateur s'authentifie pour la première fois et à chaque fois les informations relatives à ses préférences sont récoltées et traitées.
 
-    Cette étape nécessite le profilage de l'utilisateur et le calcul de similarité entre utilisateurs. Dans ce qui suit les détails de chacun.
+    Cette étape nécessite le profilage des utilisateurs et le calcul de similarité entre ces derniers. Dans ce qui suit les détails de chacune des deux méthodes.
 
         \subsubsection{Profilage d'un utilisateur}
-        Elle consiste à déterminer les centres d'intérêts d'un utilisateur tout en se basant sur les articles lus par ce dernier. Pour cela, nous avons décidé d'utiliser une méthode de calcul des préférences afin de mieux cibler les utilisateurs et garantir une solution conforme aux caractéristiques de la recommandation pour les articles de presse. 
+        Elle consiste à déterminer les centres d'intérêt d'un utilisateur tout en se basant sur les articles lus et visiter. Pour cela, nous avons mis en place plusieurs méthodes de calcul des probabilités de préférences afin de mieux cibler les utilisateurs et garantir une solution conforme aux caractéristiques de la recommandation pour les articles de presse. 
 
-        Pour le calcul des préférences utilisateurs, nous avons utiliser une méthode de calcul qui permet à la fois de résoudre le problèmes de la récence \autoref{} et le démarrage à froid \autoref{}. Cette méthode testée s'avère très efficace par rapport aux méthodes existantes et décrites dans \autoref{}.
+        Pour le calcul des probabilités de préférences utilisateurs, nous avons utilisé une méthode de calcul qui permet à la fois de résoudre le problème de la récence \autoref{} et le démarrage à froid \autoref{}. Cette méthode testée s'avère très efficace par rapport aux méthodes existantes et décrites dans \autoref{}.
 
         Le calcul de la probabilité de sélection d'une catégorie pour un utilisateur est basé sur ses interactions avec les articles de presse disponible. Dés qu'un article est sélectionné, l'information est sauvegardée et utilisée pour la mise à jour du vecteur des probabilités de sélection des catégories préférées \autoref{}.
 
@@ -33,7 +33,7 @@ Dans cette partie, nous allons voir la conception détaillée de notre système 
             \[
             P(U, C) =
             \begin{cases}
-                (1-{\alpha}) * {P(U, C)} + {\alpha} & \text{si } \text{article A est sélectionne} \\
+                (1-{\alpha}) * {P(U, C)} + {\alpha} & \text{si } \text{article A est sélectionné} \\
                 (1-{\alpha}) * {P(U, C)} & \text{sinon.}
             \end{cases}
             \]
@@ -43,7 +43,7 @@ Dans cette partie, nous allons voir la conception détaillée de notre système 
         \begin{cases}
             P(U, C) = 1 / \text{NbC } \forall \text{ C} \in \{categorie\textsubscript{1}, categorie\textsubscript{2}, ..., categorie\textsubscript{NbC}\}\\
             NbC : \text{nombre de categories}\\
-            \alpha = \text{une constante empirique représentant le biais de la diminution}
+            \alpha = \text{constante empirique représentant le biais de la diminution}
         \end{cases}
         \]
         \begin{algorithm2e}[H]
@@ -68,7 +68,7 @@ Dans cette partie, nous allons voir la conception détaillée de notre système 
         \caption{Algorithme de profilage d'un utilisateur}
         \end{algorithm2e}
         \subsubsection{Similarité entre utilisateurs}
-        Afin de diversifier la recommandation des articles de presse, nous avons mis en place une méthode de calcul de similarité qui permet de recommander des articles par rapport à la similarité entre utilisateurs. 
+        Afin de diversifier la recommandation d'articles de presse, nous avons mis en place une méthode de calcul de similarité entre utilisateur qui permet de recommander des articles selon les préférences et les centres d'intérêt d'un utilisateur similaire. 
 
         Selon \cite{euclidepreuve} qui propose une étude détaillée sur les mesures de similarité pour le filtrage collaboratif, il en est ressorti comme conclusion que la distance euclidienne était la mesure la plus adéquate en terme de précision et temps d'exécution. La formule de calcul de la distance euclidienne entre les préférences des utilisateurs est la suivante :
 
@@ -86,7 +86,7 @@ Dans cette partie, nous allons voir la conception détaillée de notre système 
             P(U\textsubscript{2}) = {'religion': 0.8813,'sport': 0.4421, 'business': 0.3519}\\
         \end{cases}
         \]
-        On ignore les probabilités de séléction des catégories non commune entre les deux utilisateurs.
+        On ignore les probabilités de sélection des catégories non-commune entre les deux utilisateurs.
         \[
         \begin{cases}
         d({'sport'}) = P(U\textsubscript{1},'sport')-P(U\textsubscript{2},'sport') = 0.7581 - 0.4421 = 0.32\\
@@ -112,10 +112,10 @@ Dans cette partie, nous allons voir la conception détaillée de notre système 
         \caption{Algorithme de calcul de similarité entre utilisateurs}
         \end{algorithm2e}
 
-    \subsection{Recommandation non personnalisée}
-    La recommandation non personnalisée vise à recommander des articles pour des utilisateurs qui n'ont pas de comptes (i.e : qui sont non authentifiés), pour cela notre système effectue une recommandation selon le choix de lecture de l'utilisateur, c'est à dire par calcul de similarité entre l'article qui est entrain d'être lu et les nouveaux articles disponible. 
+    \subsection{Recommandation non-personnalisée}
+    La recommandation non-personnalisée vise à recommander des articles pour des utilisateurs qui n'ont pas de comptes (i.e : qui sont non authentifiés), pour cela, notre système effectue une recommandation selon le choix de lecture de l'utilisateur, c'est-à-dire par calcul de similarité entre l'article qui est en train d'être lu et les nouveaux articles disponibles. 
 
-    Un pré-traitement est effectué sur chaque article comprend la suppression des mots vides et l'extraction des racines de mots. Ensuite, le sac à mots (Bag of Words) de l'article est converti en TF-IDF. La martice résultante de la conversion en TF-IDF est utilisée pour le calcul de la similarité de cosinus et les cinq articles les plus similaires seront recommandés. Le calcul de la similarité entre les articles est présenté ci-dessous :
+    Un pré-traitement est effectué sur chaque article comprend la suppression des mots vides et l'extraction des racines de mots. Ensuite, le sac à mots (Bag of Words) de l'article est converti en TF-IDF. La matrice résultante de la conversion en TF-IDF est utilisée pour le calcul de la similarité de cosinus et les cinq articles les plus similaires seront recommandés. Le calcul de la similarité entre les articles est présenté ci-dessous.
 
     \begin{itemize}[label={}, leftmargin=0cm]
         \item Soient U un utilisateur, A\textsubscript{1} et A\textsubscript{2} deux articles de presse,
@@ -151,19 +151,8 @@ Dans cette partie, nous allons voir la conception détaillée de notre système 
         \Return ListeArticlesSimilaires[:5]
         \caption{Algorithme de calcul de similarité entre articles}
     \end{algorithm2e}
-% Deux types de recommandations d'articles de presse ont étaient présentées dans la section précédente qui dépendent du mode d'utilisation. L'algorithme \autoref{algo-recom} résume le fonctionnement des deux types de recommandation.\\\\ 
-%     \begin{algorithm2e}[H]\label{algo-recom}
-%         \SetAlgoLined
-%         \SetKwInOut{Input}{input}
-%         \SetKwInOut{Output}{output}
-%         \Input{A: Article, U: utilisateur}
-%         \Output{ListeArticlesSimilaires: Article}
-%         % \eIf{U est authentifié}{
-%         % }
-%         \caption{Algorithme de calcul de similarité entre articles}
-%     \end{algorithm2e}
-%%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~%%
 
+%%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~%%
 \section{Module de catégorisation d'article de presse}
 Le premier module sur lequel nous avons travailler, c'est la catégorisation d'articles de presse. Nous avons expérimenter plusieurs techniques proposées dans la littérature. Nous présentons ci-après chaque approche, ses résultats, ses points forts et ses faiblesses.
 
@@ -176,7 +165,7 @@ En se basant sur les travaux de \cite{categorisation} pour l'Anglais et \cite{ca
     \subsubsection{Basées sur l'Apprentissage Non Supervisé}
         
         \begin{itemize}
-            \item{LDA (Latent Dirichlet Allocation) : }
+            \item{LDA (Latent Dirichlet Allocation) : }\\
             Latent Dirichlet Allocation (LDA) est un modèle probabiliste génératif qui permet de décrire des collections de documents de texte ou d’autres types de données discrètes. LDA fait partie d’une catégorie de modèles appelés “topic models”, qui cherchent à découvrir des structures thématiques cachées dans des vastes archives de documents. Ceci permet d’obtenir des méthodes efficaces pour le traitement et l’organisation des documents de ces archives: organisation automatique des documents par sujet.
         \end{itemize}
         
@@ -186,16 +175,16 @@ En se basant sur les travaux de \cite{categorisation} pour l'Anglais et \cite{ca
         
     \subsubsection{Basées sur l'Apprentissage Supervisé}
         \begin{itemize}
-            \item{Naïve de Bayes : }
-            c'est une méthode connue de l'Apprentissage automatique supervisé. Un de ses avantages en plus d'être un modèle simple, c'est qu'ils renvoient non seulement la prédiction mais aussi le degré de certitude, ce qui peut être très utile dans certaines applications. Mais en ayant un problème à classes multiples, cette approche nous a donnés des résultats très modeste en un temps d'exécution assez importants, ce qui nous a poussé à abandonner son utilisation.\\
+            \item{Naïve de Bayes : }\\
+            c'est une méthode connue de l'Apprentissage automatique supervisé. Un de ses avantages en plus d'être un modèle simple, c'est qu'ils renvoient non seulement la prédiction mais aussi le degré de certitude, ce qui peut être très utile dans certaines applications. Mais en ayant un problème à classes multiples, cette approche nous a donnés des résultats très modeste en un temps d'exécution assez importants, ce qui nous a poussé à abandonner son utilisation.
             
-            \item{Arbres de décision : }
-            peuvent être assistés par un expert. Ces principaux avantages sont : robuste face aux données aberrantes, pas très sensible aux données manquantes, possibilité d’intervenir dans la construction de l’arbre, etc. Son principale inconvénient reste la dépendance très forte entre la taille de la base d’apprentissage et les performances.\\
+            \item{Arbres de décision : }\\
+            peuvent être assistés par un expert. Ces principaux avantages sont : robuste face aux données aberrantes, pas très sensible aux données manquantes, possibilité d’intervenir dans la construction de l’arbre, etc. Son principale inconvénient reste la dépendance très forte entre la taille de la base d’apprentissage et les performances.
             
-            \item{SVM (Support Vector Machines) : }
+            \item{SVM (Support Vector Machines) : }\\
             Les machines à vecteurs support (en anglais Support Vector Machine, SVM) sont un ensemble de techniques d’apprentissage supervisé destinées à résoudre des problèmes de classification (SVC) et de régression. Les SVM sont des types des classifieurs. On ne considérera ici que le cas des SVM linéaires.
             
-            \item{Descente de Gradient Stochastique : }
+            \item{Descente de Gradient Stochastique : }\\
             Descente de gradient stochastique¶
             La SGD peut être beaucoup plus rapide que la descente de gradient ordinaire (batch), parce que le nombre de mises à jour est beaucoup plus grand. C’est particulièrement vrai pour des jeux de données volumineux, ou pour le cas en ligne. En fait, dans les tâches d’apprentissage machine, on n’utilise la descente de gradient ordinaire (au lieu de stochastique) que lorsque la fonction à minimiser ne peut pas être décomposée comme ci-dessus (comme une moyenne).
         \end{itemize}
@@ -212,45 +201,34 @@ En se basant sur les travaux de \cite{categorisation} pour l'Anglais et \cite{ca
 
     \subsection{Processus de catégorisation}
         \subsubsection{Pré-traitement des articles de presse}
-         Plusieurs opérations de pré-traitements ont été effectuées. Ci-après les étapes suivies :
-        \begin{enumerate}
-            \item{\textbf{Segmentation (Tokenization) et suppression des mots vides :} }permet d'extraire toutes les entités lexicales d'un article donné. La segmentation est suivie de la suppression des tokens non utiles tel que la ponctuation, les pronoms, les déterminants, etc.\\ 
-                          
-        %         % Exemple :
-        %         %          بلغ مستوى التضخم 4.3 بالمائة إلى غاية أفريل 2018، بعد أن  كان في حدود 4.6 بالمائة شهر مارس الماضي.
-                
-        %         % Aprés segmentation : on aura une liste de mots.
-                                       
-        %         %                        ['بلغ', 'مستوى', 'التضخم', '4.3', 'بالمائة','إلى','غاية','أفريل', '2018', '،','بعد', 'أن', 'كان', 'في', 'حدود',' 4.6 ', 'بالمائة', 'شهر', 'مارس', 'الماضي','.']
-                                                          
-        %         % Liste des mots vides de la phrase précédente.                                         
-                
-                                                               
-        %         %                                        ['بعد', 'أن', 'كان', 'في', 'ب','إلى','.','4.3','2018', '،','4.6']  
-                
-        %         % Aprés suppression des mots vides :
-                
-                
-        %         %                           ['بلغ', 'مستوى', 'التضخم','المائة','غاية','حدود','المائة', 'شهر', 'مارس', 'الماضي']  
-                
-                
-        %         % \item{\textbf{Racinisation (Stemming) :} }les mots d'un document sont représentés par leurs racines plutôt que par les mots d'origine. Plusieurs variantes d'un terme peuvent ainsi être groupées dans une seule forme représentative, ce qui réduit le nombre des termes distincts nécessaires pour représenter un document.\\
-                
-        %         % Exemple :
-                
-                
-        %         %                                ['بلغ', 'مستوى', 'التضخم','المائة','غاية','حدود','المائة', 'شهر', 'مارس', 'الماضي']  
-               
-                
-                
-        %         % \item{\textbf{N-grammes :} }les N-grammes permettent de construire une sous-séquence de n mots consécutives. Ils permettent de contextualiser l'ordre d'apparition d'un ensemble de mots.\\
-                
-        %         % Exemple : 
-        %         %          بلغ مستوى التضخم 4.3 بالمائة إلى غاية أفريل 2018، بعد أن  كان في حدود 4.6 بالمائة شهر مارس الماضي.      
-                
-                
-        %         \item{\textbf{Extraction des caractéristiques :} }avec l'utilisation de TF-IDF, le sac de mots représentant un article sera convertit en valeurs numériques décrivant la fréquence d'occurrence de chaque mot par rapport à l'ensemble des articles du corpus et à l'article lui même.\\
-        %     
+        Plusieurs opérations de pré-traitements ont été effectuées. 
+        On prend le paragraphe suivant comme exemple :
+
+            \begin{arab}أمرت السلطات القطرية الأسواق والمراكز التجارية في البلاد برفع وإزالة السلع الواردة من السعودية والبحرين والإمارات ومصر في الذكرى الأولى لإعلان هذه الدول الحصار عليها.\end{arab}
+            
+        Ci-après les étapes suivies :
+        \begin{enumerate}[leftmargin=*]
+            \item{\textbf{Segmentation (Tokenization) et suppression des mots vides :} }permet d'extraire toutes les entités lexicales d'un article donné. La segmentation est suivie de la suppression des tokens non utiles tel que la ponctuation, les pronoms, les déterminants, etc.
+
+            Après segmentation : \{
+                \begin{arab}'أمرت', 'السلطات', 'القطرية', 'الأسواق', 'و', 'المراكز', 'التجارية', 'في', 'البلاد', 'برفع', 'و', 'إزالة', 'السلع', 'الواردة', 'من', 'السعودية', 'و', 'البحرين', 'و', 'الإمارات', 'و', 'مصر', 'في', 'الذكرى', 'الأولى', 'لإعلان', 'هذه', 'الدول', 'الحصار', 'عليها', '.'\end{arab}
+            \}
+
+            Après suppression des mots vides : \{
+            \begin{arab}'أمرت', 'السلطات', 'القطرية', 'الأسواق', 'المراكز', 'التجارية', 'البلاد', 'برفع', 'إزالة', 'السلع', 'الواردة', 'السعودية', 'البحرين', 'الإمارات', 'مصر', 'الذكرى', 'الأولى', 'لإعلان', 'الدول', 'الحصار'\end{arab}
+            \}\\
+            
+            \item{\textbf{Racinisation (Stemming) :} }les mots d'un document sont représentés par leurs racines plutôt que par les mots d'origine. Plusieurs variantes d'un terme peuvent ainsi être groupées dans une seule forme représentative, ce qui réduit le nombre des termes distincts nécessaires pour représenter un document.
+
+            Après racinisation : \{
+            \begin{arab}'أمر', ' سلطة ', 'قطر', 'سوق', 'مركز', 'تجاري', 'بلد', 'رفع', 'إزالة', 'سلعة', 'وارد', 'سعودية', 'بحرين', 'إمارة', 'مصر', 'ذكرى', 'أول', 'إعلان', 'دولة', 'حصار'\end{arab}
+            \}\\
+
+            \item{\textbf{N-grammes :} }les N-grammes permettent de construire une sous-séquence de n mots consécutives. Ils permettent de contextualiser l'ordre d'apparition d'un ensemble de mots.\\
+
+            Après génération des N-grammes (bi-grammes dans notre cas) : \{
+            \begin{arab}('أمر', 'سلطة'), ('سلطة', 'قطر'), ('قطر', 'سوق'), ('سوق', 'مركز'), ('مركز', 'تجاري'), ('تجاري', 'بلد'), ('بلد', 'رفع'), ('رفع', 'إزالة'),('إزالة', 'سلعة'), ('سلعة', 'وارد'), ('وارد', 'سعودية'), ('سعودية', 'بحرين'), ('بحرين', 'إمارة'), ('إمارة', 'مصر'), ('مصر', 'ذكرى'), ('ذكرى', 'أول'), ('أول', 'إعلان'), ('إعلان', 'دولة'), ('دولة', 'حصار')\end{arab}
+            \}\\
         \end{enumerate}
         \subsubsection{Modèle de classification d'articles de presse}
             Nous avons développé plusieurs modèles de catégorisation d'articles basés sur l'apprentissage supervisé et non supervisé cités dans \autoref{},  zfeze hfnzoflk nz,ofkzne fomizeln zomifn zofiznefoi eofnze fozefm, zfopiz nf,zome ifnzef oizfn zoifz !!!Say something about classification.
@@ -313,11 +291,11 @@ Ci-dessous la présentation des différentes approches expérimentées.
             \end{itemize}
 
         \subsubsection{Pré-traitement et structure du dataset}
-        Tout les articles du dataset sont sous le format XML, chaque article a son propre identifiant et divisé en paquets de phrases selon l'opération effectuée. Ci-après la figure \ref{xml-structure} qui montre un exemple du dataset : 
+        Tout les articles du dataset sont sous le format XML, chaque article a son propre identifiant et divisé en paquets de phrases selon l'opération effectuée. Ci-après la \autoref{xml-structure} qui montre un exemple du dataset : 
         \begin{figure}[H]
             \centering
             \includegraphics[height=220pt,width=430pt]{img/chapter4/xml.png}
-            \caption{Structure d'un article du dataset}
+            \caption{Structure d'un article du dataset de résumé automatique}
             \label{xml-structure}
         \end{figure}
         L'approche basée sur l'apprentissage automatique demandait un très grand nombre d'articles résumés, ce qui nous a poussé à l'abandonner.
@@ -369,17 +347,15 @@ Ci-dessous la présentation des différentes approches expérimentées.
                     E[idx(w)]
              \end{equation*}
              
-             C: l'encastrement centroïde lié au document D.
-             et 
+             C : l'encastrement centroïde lié au document D,\\
              idx(w) : une fonction qui retourne l'indice du mot dans le vocabulaire.
              
-             exemple :
-             
+            La \autoref{centro-vec} présente un exemple d'un vecteur de centroïdes. 
              \begin{figure}[H]
                 \centering
-                \includegraphics[height=120pt,width=380pt]{img/chapter3/centroideembed.jpg}
-                \caption{Constuction des vecteurs centroïde}
-                \label{Constuction des vecteurs centroïde}
+                \includegraphics[height=95pt,width=420pt]{img/chapter3/centroideembed.jpg}
+                \caption{Vecteurs de centroïdes}
+                \label{centro-vec}
              \end{figure}
 
          \subsubsection{Notation des phrases}
@@ -390,13 +366,13 @@ Ci-dessous la présentation des différentes approches expérimentées.
          E[idx(w)]
         \end{equation*}
 
-        Afin de calculer le score finale de la phrase, on calcule la similarité de cosinus entre le plongement de la phrase S\textsubscript{j} et le plongement de la phrase centroide C.
+        Afin de calculer le score finale de la phrase, on calcule la similarité de cosinus entre le plongement de la phrase S\textsubscript{j} et le plongement de la phrase centroide S\textsubscript{centroide}.
         
-        \[sim\_cos(C,S\textsubscript{j}) = \frac {C \cdot S\textsubscript{j}}{||C|| \cdot ||S\textsubscript{j}||}\]
+        \[sim\_cos(S\textsubscript{centroide},S\textsubscript{j}) = \frac {S\textsubscript{centroide} \cdot S\textsubscript{j}}{||S\textsubscript{centroide}|| \cdot ||S\textsubscript{j}||}\]
                     
                     \begin{figure}[H]
                         \centering
-                        \includegraphics[height=150pt,width=380pt]{img/chapter3/scoreembed.jpg}
+                        \includegraphics[height=155pt,width=400pt]{img/chapter3/scoreembed.jpg}
                         \caption{Notation des phrases}
                         \label{Notation des phrases}
                     \end{figure}
