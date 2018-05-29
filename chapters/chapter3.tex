@@ -100,7 +100,7 @@ Dans cette partie, nous allons voir la conception détaillée de notre système 
         \SetKwInOut{Output}{output}
         \Input{A: Article, U: utilisateur}
         \textbf{const :} seuil = 0.1\\
-        utilisateurs = lire(base de profils)\\
+        utilisateurs = Lire(collection de profils)\\
         \While{i < taille(utilisateurs)}{
             \If{utilisateurs[i] != U}{
                 sim = distance\_euclidienne(U.préférences, utilisateurs[i].préférences)\\
@@ -139,14 +139,14 @@ Dans cette partie, nous allons voir la conception détaillée de notre système 
         \SetKwInOut{Output}{output}
         \Input{A: Article, U: utilisateur}
         \Output{ListeArticlesSimilaires: Article}
-        articles = lire(base de articles)\\
+        articles = Lire(collection d'articles)\\
         \While{i < taille(articles)}{
             segmentation(articles[i])\\
             suppression\_mots\_vides(articles[i])\\
             racinisation(articles[i])\\
         }
         tf-idf = TF-IDF(articles)\\
-        mat\_similarité = TRI(cosinus\_similarité(tf-idf))\\
+        mat\_similarité = Tri(cosinus\_similarité(tf-idf))\\
         ListeArticlesSimilaires = mat\_similarité.articles\\
         \Return ListeArticlesSimilaires[:5]
         \caption{Algorithme de calcul de similarité entre articles}
@@ -312,14 +312,14 @@ Ci-dessous la présentation des différentes approches expérimentées.
           \SetKwInOut{Input}{input}
           \SetKwInOut{Output}{output}
           \Input{A: Article}
-          \Output{Listesdestokens: token}
-          
+          \Output{ListeTokens: token}
           Lire(A)\\
-          C=Segmentationdesphrases(A)\\
-          T=Tokenisation(C)\\
-          Listedestokens=Suppression\_mots\_vides(T)\\
-          
-          \Return {Listesdestokens}
+          phrases = segmentation(A)\\
+          \For{phrase \in phrases}{
+            tokens = tokenisation(phrase)\\
+            ListesTokens += suppression\_mots\_vides(tokens)\\
+          }
+          \Return {ListesTokens}
          \caption{Algorithme de prétraitment du résumé}
         \end{algorithm2e}
 
@@ -344,37 +344,6 @@ Ci-dessous la présentation des différentes approches expérimentées.
                 \caption{Constuction des vecteurs centroïde}
                 \label{Constuction des vecteurs centroïde}
              \end{figure}
-             
-%\begin{algorithm2e}[H]
-%   \SetAlgoLined
-%   \SetKwInOut{Input}{input}
-%   \SetKwInOut{Output}{output}
-%   \Input{S,Scores,st,limite}
-%   \Output{Résumé}
-    
-%   S=Tri(phrases,Scores)\\
-%   $k \gets 1$
-    
-%   \For{$i\gets1$ \KwTo $m$ }{
-%       $longeur \gets Longeur(résumé)$
-        
-%       \If{longeur > limite}{
-%           \Return résumé\\
-%           $sv \gets somme_des_vecteurs(S[i])$\\
-%           $inclus \gets vrai$\\}
-%       \For{$j\gets1$ \KwTo $k$ }{
-%           $SV2 \gets somme_des_vecteurs(résumé[i])$\\
-%           $sim \gets Similarité(SV,SV2)$\\
-%           \If{sim > st}{
-%               $Inclus \gets FAUX$ \\}
-%       }
-%       \If{inclus}{
-%           $résumé[k]\gets S[i]$\\
-%           $k\gets k+1$\\      
-%       }
-%   }
-%   \caption{Algorithme de construction d'un vecteur centroide}
-%\end{algorithm2e}
 
          \subsubsection{Notation des phrases}
          Dans ce processus, pour chaque phrase du document on crée un plongement pour la phrase en additionnons les plongements de mots de chaque terme dans la phrase.
@@ -395,40 +364,53 @@ Ci-dessous la présentation des différentes approches expérimentées.
                         \label{Notation des phrases}
                     \end{figure}
 
-\subsubsection{Séléction des phrases}
-Pour chaque phrase du document, on calcule la \emph{similarité de cosinus} entre elle et la phrase centroïde du document. Les phrases sont ensuite triées par ordre décroissant de leurs scores de similarité. Les phrases les mieux classées sont itérativement sélectionnés et ajoutés au résumé jusqu'à ce que la limite (taille du résumé) soit atteinte. Afin de satisfaire la propriété de redondance, au cours de chaque itération nous allons calculer la \emph{similarité de cosinus} entre la phrase a venir et chacune déjà dans le résumé.
-Il est a noter qu' un seuil a été fixé afin de rejeter toutes les phrases qui ont une similarité très élevé par rapport a une phrase afin d'éviter cette redondance.
+        \subsubsection{Séléction des phrases}
+        Pour chaque phrase du document, on calcule la \emph{similarité de cosinus} entre elle et la phrase centroïde du document. Les phrases sont ensuite triées par ordre décroissant de leurs scores de similarité. Les phrases les mieux classées sont itérativement sélectionnés et ajoutés au résumé jusqu'à ce que la limite (taille du résumé) soit atteinte. Afin de satisfaire la propriété de redondance, au cours de chaque itération nous allons calculer la \emph{similarité de cosinus} entre la phrase a venir et chacune déjà dans le résumé.
+        Il est a noter qu' un seuil a été fixé afin de rejeter toutes les phrases qui ont une similarité très élevé par rapport a une phrase afin d'éviter cette redondance.
 
-\begin{algorithm2e}[H]
-    \SetAlgoLined
-    \SetKwInOut{Input}{input}
-    \SetKwInOut{Output}{output}
-    \Input{S,Scores,st,limite}
-    \Output{Résumé}
-    
-    S=Tri(phrases,Scores)\\
-    $k \gets 1$
-    
-     \For{$i\gets1$ \KwTo $m$ }{
-        $longeur \gets Longeur(résumé)$
-        
-        \If{longeur > limite}{
-            \Return résumé\\
-            $sv \gets somme_des_vecteurs(S[i])$\\
-            $inclus \gets vrai$\\}
-            \For{$j\gets1$ \KwTo $k$ }{
-                $SV2 \gets somme_des_vecteurs(résumé[i])$\\
-                $sim \gets Similarité(SV,SV2)$\\
-                \If{sim > st}{
-                    $Inclus \gets FAUX$ \\}
+        \begin{algorithm2e}[H]
+            \SetAlgoLined
+            \SetKwInOut{Input}{input}
+            \SetKwInOut{Output}{output}
+            \Input{phrases, scores, seuilSimilarité, seuilRésumé}
+            \Output{Résumé}
+            
+            phrases = Tri(phrases, scores)\\
+            k = 1\\
+             \For{i=1 \KwTo taille(phrases)}{                
+                \If{taille(Résumé) > seuilRésumé}{
+                    \Return Résumé\\
+                    sv = sommeVecteurs(phrases[i])\\
+                    prendrePhrase = Vrai\\
                 }
-        \If{inclus}{
-            $résumé[k]\gets S[i]$\\
-            $k\gets k+1$\\      
-        }
-     }
-    \caption{Algorithme de Séléction des phrases}
-\end{algorithm2e}
+                \For{j=1 \KwTo k}{
+                    sv2 = sommeVecteurs(Résumé[j])\\
+                    sim = similarité(sv, sv2)\\
+                    \If{sim > seuilSimilarité}{
+                        prendrePhrase = Faux\\
+                    }
+                }
+                \If{prendrePhrase}{
+                    Résumé[k] = phrases[i]\\
+                    k += 1\\      
+                }
+             }
+             \Return{Résumé}
+            \caption{Algorithme de Séléction des phrases}
+        \end{algorithm2e}
+
+        % \begin{algorithm2e}[H]
+        %     \SetAlgoLined
+        %     \SetKwInOut{Input}{input}
+        %     \SetKwInOut{Output}{output}
+        %     \Input{Résumé}
+        %     \Output{RésuméTrié}
+            
+        %     RésuméTrié = Tri(Résumé, ordreApparitionPhrases)\\
+            
+        %      \Return{RésuméTrié}
+        %     \caption{Algorithme de génération du résumé automatique}
+        % \end{algorithm2e}
 
 %%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~%%
 
@@ -520,7 +502,7 @@ Ci-dessous un exemple d'un document de la collection de profils :
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Architecture globale %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Architecture globale de "Feedny"}
+\section{Architecture du système \textquotedbl Feedny\textquotedbl}
 Dans cette partie, nous allons présenter l'architecture globale de notre système, cette dernière est déployé sous la forme d'une architecture 3-tiers. Ci-dessous, nous présentons ce qu'est une architecture 3-tiers ainsi que son avantage avant d'expliciter un schéma de l'architecture globale.
 
 \subsection{Présentation de l’architecture 3-tiers}
@@ -553,7 +535,11 @@ Cette facilité de déploiement aura pour conséquence non seulement de réduire
 ment mais aussi de permettre une évolution régulière du système. Cette évolution ne nécessitera
 que la mise à jour de l’application sur le serveur applicatif.[4]
 
-\subsection{Schéma fonctionnel de \textquotedbl Feedny\textquotedbl}
+\subsection{Schéma global de \textquotedbl Feedny\textquotedbl}
+L'architecture globale du système "Feedny" comporte quatre processus principales: Catégorisation, résumé, traduction et recommandation d'articles de presse.
+
+Les entrées (articles de presse extraits de plusieurs sources) sont sauvegardés dans une base de données. Le processus de catégorisation commence par classifier l'article selon son contenu, ensuite un résumé est généré, l'article est traduit de l'Anglais vers l'Arabe (ou l'inverse) et enfin, il sera recommandé à un utilisateur selon son profile et ses préférences comme on peut le voir dans la figure \ref{shemaglobal}.
+
 \begin{figure}[H]
     \centering
     \includegraphics[height=600pt,width=450pt]{img/chapter3/global.png}
