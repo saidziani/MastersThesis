@@ -172,76 +172,19 @@ En se basant sur les travaux de \cite{categorisation} pour l'Anglais et \cite{ca
 
     \subsection{Approches expérimentées\label{approches}}
     Toutes les approches utilisées sont basées sur l'apprentissage automatique, supervisé et non supervisé. 
-     
-     \subsubsection{Organisation des données}
-      Apprentissage non supervisé :
-     
-     
-     
-       Apprentissage supervisé:
-     
-      À la fin de la phase de pré-traitement, nous avons définie une structure pour faciliter l'exploration des datasets. Ci-dessous la structure choisie :
-     \begin{itemize}
-        \item{\textbf{id} :}un identifiant unique de l'article,
-        \item{\textbf{contenu} :}les différents paragraphes de l'article,
-        \item{\textbf{catégorie} :}la catégorie de l'article extraite depuis la source.
-     \end{itemize}
-      
-        \subsection{Processus de catégorisation}
-         
-            \subsubsection{Pré-traitement des articles de presse}
-           
-             Plusieurs opérations de pré-traitements ont été effectuées. Ci-après les étapes suivies :
-            \begin{enumerate}
-                \item{\textbf{Segmentation (Tokenization) et suppression des mots vides :} }permet d'extraire toutes les entités lexicales d'un article donné. La segmentation est suivie de la suppression des tokens non utiles tel que la ponctuation, les pronoms, les déterminants, etc.\\ 
-                          
-                % Exemple :
-                %          بلغ مستوى التضخم 4.3 بالمائة إلى غاية أفريل 2018، بعد أن  كان في حدود 4.6 بالمائة شهر مارس الماضي.
-                
-                % Aprés segmentation : on aura une liste de mots.
-                                       
-                %                        ['بلغ', 'مستوى', 'التضخم', '4.3', 'بالمائة','إلى','غاية','أفريل', '2018', '،','بعد', 'أن', 'كان', 'في', 'حدود',' 4.6 ', 'بالمائة', 'شهر', 'مارس', 'الماضي','.']
-                                                          
-                % Liste des mots vides de la phrase précédente.                                         
-                
-                                                               
-                %                                        ['بعد', 'أن', 'كان', 'في', 'ب','إلى','.','4.3','2018', '،','4.6']  
-                
-                % Aprés suppression des mots vides :
-                
-                
-                %                           ['بلغ', 'مستوى', 'التضخم','المائة','غاية','حدود','المائة', 'شهر', 'مارس', 'الماضي']  
-                
-                
-                % \item{\textbf{Racinisation (Stemming) :} }les mots d'un document sont représentés par leurs racines plutôt que par les mots d'origine. Plusieurs variantes d'un terme peuvent ainsi être groupées dans une seule forme représentative, ce qui réduit le nombre des termes distincts nécessaires pour représenter un document.\\
-                
-                % Exemple :
-                
-                
-                %                                ['بلغ', 'مستوى', 'التضخم','المائة','غاية','حدود','المائة', 'شهر', 'مارس', 'الماضي']  
-               
-                
-                
-                % \item{\textbf{N-grammes :} }les N-grammes permettent de construire une sous-séquence de n mots consécutives. Ils permettent de contextualiser l'ordre d'apparition d'un ensemble de mots.\\
-                
-                % Exemple : 
-                %          بلغ مستوى التضخم 4.3 بالمائة إلى غاية أفريل 2018، بعد أن  كان في حدود 4.6 بالمائة شهر مارس الماضي.      
-                
-                
-                \item{\textbf{Extraction des caractéristiques :} }avec l'utilisation de TF-IDF, le sac de mots représentant un article sera convertit en valeurs numériques décrivant la fréquence d'occurrence de chaque mot par rapport à l'ensemble des articles du corpus et à l'article lui même.\\
-            
-        
-            \end{enumerate}
 
-        \subsubsection{Basées sur l'Apprentissage Non Supervisé}
+    \subsubsection{Basées sur l'Apprentissage Non Supervisé}
         
         \begin{itemize}
             \item{LDA (Latent Dirichlet Allocation) : }
             Latent Dirichlet Allocation (LDA) est un modèle probabiliste génératif qui permet de décrire des collections de documents de texte ou d’autres types de données discrètes. LDA fait partie d’une catégorie de modèles appelés “topic models”, qui cherchent à découvrir des structures thématiques cachées dans des vastes archives de documents. Ceci permet d’obtenir des méthodes efficaces pour le traitement et l’organisation des documents de ces archives: organisation automatique des documents par sujet.
-            
         \end{itemize}
         
-        \subsubsection{Basées sur l'Apprentissage Supervisé}
+        \begin{itemize}
+            \item{Corpus et dataset}
+        \end{itemize}
+        
+    \subsubsection{Basées sur l'Apprentissage Supervisé}
         \begin{itemize}
             \item{Naïve de Bayes : }
             c'est une méthode connue de l'Apprentissage automatique supervisé. Un de ses avantages en plus d'être un modèle simple, c'est qu'ils renvoient non seulement la prédiction mais aussi le degré de certitude, ce qui peut être très utile dans certaines applications. Mais en ayant un problème à classes multiples, cette approche nous a donnés des résultats très modeste en un temps d'exécution assez importants, ce qui nous a poussé à abandonner son utilisation.\\
@@ -252,10 +195,103 @@ En se basant sur les travaux de \cite{categorisation} pour l'Anglais et \cite{ca
             \item{SVM (Support Vector Machines) : }
             NOT YET
             
-            
             \item{Descente de Gradient Stochastique : }
             NOT YET
         \end{itemize}
+
+        \begin{itemize}[leftmargin=*, label={}]
+            \item{Corpus et dataset}\\
+                À la fin de la phase de pré-traitement, nous avons définie une structure pour faciliter l'exploration des datasets. Ci-dessous la structure choisie :
+                \begin{itemize}
+                   \item{\textbf{id} : }un identifiant unique de l'article,
+                   \item{\textbf{contenu} : }les différents paragraphes de l'article,
+                   \item{\textbf{catégorie} : }la catégorie de l'article extraite depuis la source.
+                \end{itemize}
+        \end{itemize}
+
+    \subsection{Processus de catégorisation}
+        \subsubsection{Pré-traitement des articles de presse}
+         Plusieurs opérations de pré-traitements ont été effectuées. Ci-après les étapes suivies :
+        \begin{enumerate}
+            \item{\textbf{Segmentation (Tokenization) et suppression des mots vides :} }permet d'extraire toutes les entités lexicales d'un article donné. La segmentation est suivie de la suppression des tokens non utiles tel que la ponctuation, les pronoms, les déterminants, etc.\\ 
+                          
+        %         % Exemple :
+        %         %          بلغ مستوى التضخم 4.3 بالمائة إلى غاية أفريل 2018، بعد أن  كان في حدود 4.6 بالمائة شهر مارس الماضي.
+                
+        %         % Aprés segmentation : on aura une liste de mots.
+                                       
+        %         %                        ['بلغ', 'مستوى', 'التضخم', '4.3', 'بالمائة','إلى','غاية','أفريل', '2018', '،','بعد', 'أن', 'كان', 'في', 'حدود',' 4.6 ', 'بالمائة', 'شهر', 'مارس', 'الماضي','.']
+                                                          
+        %         % Liste des mots vides de la phrase précédente.                                         
+                
+                                                               
+        %         %                                        ['بعد', 'أن', 'كان', 'في', 'ب','إلى','.','4.3','2018', '،','4.6']  
+                
+        %         % Aprés suppression des mots vides :
+                
+                
+        %         %                           ['بلغ', 'مستوى', 'التضخم','المائة','غاية','حدود','المائة', 'شهر', 'مارس', 'الماضي']  
+                
+                
+        %         % \item{\textbf{Racinisation (Stemming) :} }les mots d'un document sont représentés par leurs racines plutôt que par les mots d'origine. Plusieurs variantes d'un terme peuvent ainsi être groupées dans une seule forme représentative, ce qui réduit le nombre des termes distincts nécessaires pour représenter un document.\\
+                
+        %         % Exemple :
+                
+                
+        %         %                                ['بلغ', 'مستوى', 'التضخم','المائة','غاية','حدود','المائة', 'شهر', 'مارس', 'الماضي']  
+               
+                
+                
+        %         % \item{\textbf{N-grammes :} }les N-grammes permettent de construire une sous-séquence de n mots consécutives. Ils permettent de contextualiser l'ordre d'apparition d'un ensemble de mots.\\
+                
+        %         % Exemple : 
+        %         %          بلغ مستوى التضخم 4.3 بالمائة إلى غاية أفريل 2018، بعد أن  كان في حدود 4.6 بالمائة شهر مارس الماضي.      
+                
+                
+        %         \item{\textbf{Extraction des caractéristiques :} }avec l'utilisation de TF-IDF, le sac de mots représentant un article sera convertit en valeurs numériques décrivant la fréquence d'occurrence de chaque mot par rapport à l'ensemble des articles du corpus et à l'article lui même.\\
+        %     
+        \end{enumerate}
+        \subsubsection{Modèle de classification d'articles de presse}
+            Nous avons développé plusieurs modèles de catégorisation d'articles basés sur l'apprentissage supervisé et non supervisé cités dans \autoref{},  zfeze hfnzoflk nz,ofkzne fomizeln zomifn zofiznefoi eofnze fozefm, zfopiz nf,zome ifnzef oizfn zoifz !!!Say something about classification.
+
+            \begin{algorithm2e}[H]
+            \SetAlgoLined
+            \SetKwInOut{Input}{input}
+            \SetKwInOut{Output}{output}
+            \Input{Dataset: Article}
+            \Output{ModèleEntrainé}
+            tf-idf = [ ]\\
+            \For{article \in Dataset}{
+                segmentation(article)\\
+                suppression\_mots\_vides(article)\\
+                racinisation(article)\\
+                n-grammes(article)\\
+                tf-idf += TF-IDF(article)
+            }
+            ModèleEntrainé = AlgorithmeClassification(tf-idf)\\
+            \Return{ModèleEntrainé}
+            \caption{Algorithme de construction des modèles de catégorisation}
+            \end{algorithm2e}
+
+        \subsubsection{Prédiction des catégories d'articles de presse}
+            Nous avons développé plusieurs modèles de catégorisation d'articles basés sur l'apprentissage supervisé et non supervisé cités dans \autoref{},  zfeze hfnzoflk nz,ofkzne fomizeln zomifn zofiznefoi eofnze fozefm, zfopiz nf,zome ifnzef oizfn zoifz !!!Say something about classification.
+            
+            \begin{algorithm2e}[H]
+            \SetAlgoLined
+            \SetKwInOut{Input}{input}
+            \SetKwInOut{Output}{output}
+            \Input{A: Article}
+            \Output{catégorie: Catégorie}
+            segmentation(A)\\
+            suppression\_mots\_vides(A)\\
+            racinisation(A)\\
+            n-grammes(A)\\
+            prédiction = Charger(modèle)
+            catégorie = prédiction(A)
+            \Return{catégorie}
+            \caption{Algorithme de prédiction de catégorie d'un article de presse}
+            \end{algorithm2e}
+
 
 %%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~%%
 
@@ -417,11 +453,7 @@ Ci-dessous la présentation des différentes approches expérimentées.
 \section{Module de traduction}
 
 Dans ce module, nous avons a la base choisi d'intégrer uniquement une solution de de traduction existante. Ci-dessous, une figure qui montre le processus de traduction automatique.
-
-
-%ici image%%%%%%%%
-
-Afin d'intégrer un bon système de traduction automatique, nous avons explorer 2 sources principales, la première était destiné a une utilisation professionnelle, de lus la version gratuite offrait une traduction pour des textes de taille limités. et la deuxième était la solution adaptée a notre système. Elle était a la fois accessible et offrait des possibilités de traduction pour des textes longs (Articles de presse, etc). 
+Afin d'intégrer un bon système de traduction automatique, nous avons explorer 2 sources principales, la première était destiné a une utilisation professionnelle, de plus la version gratuite offrait une traduction pour des textes de taille limités. et la deuxième était la solution adaptée a notre système. Elle était a la fois accessible et offrait des possibilités de traduction pour des textes longs (Articles de presse, etc). 
 
 \section{Conception de la base de données}
 Le choix a été porté sur les bases de données NoSQL (\autoref{nosql}) vu la structure très dynamique des articles de presse mais aussi des profils utilisateurs.
