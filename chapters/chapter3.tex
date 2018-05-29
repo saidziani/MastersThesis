@@ -193,10 +193,11 @@ En se basant sur les travaux de \cite{categorisation} pour l'Anglais et \cite{ca
             peuvent être assistés par un expert. Ces principaux avantages sont : robuste face aux données aberrantes, pas très sensible aux données manquantes, possibilité d’intervenir dans la construction de l’arbre, etc. Son principale inconvénient reste la dépendance très forte entre la taille de la base d’apprentissage et les performances.\\
             
             \item{SVM (Support Vector Machines) : }
-            NOT YET
+            Les machines à vecteurs support (en anglais Support Vector Machine, SVM) sont un ensemble de techniques d’apprentissage supervisé destinées à résoudre des problèmes de classification (SVC) et de régression. Les SVM sont des types des classifieurs. On ne considérera ici que le cas des SVM linéaires.
             
             \item{Descente de Gradient Stochastique : }
-            NOT YET
+            Descente de gradient stochastique¶
+            La SGD peut être beaucoup plus rapide que la descente de gradient ordinaire (batch), parce que le nombre de mises à jour est beaucoup plus grand. C’est particulièrement vrai pour des jeux de données volumineux, ou pour le cas en ligne. En fait, dans les tâches d’apprentissage machine, on n’utilise la descente de gradient ordinaire (au lieu de stochastique) que lorsque la fonction à minimiser ne peut pas être décomposée comme ci-dessus (comme une moyenne).
         \end{itemize}
 
         \begin{itemize}[leftmargin=*, label={}]
@@ -451,9 +452,12 @@ Ci-dessous la présentation des différentes approches expérimentées.
 %%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~%%
 
 \section{Module de traduction}
+Dans ce module, notre tâche n'était pas d'implémenter ou de concevoir un traducteur automatique, mais uniquement d'utiliser un traducteur automatique multilingue existant, et de l'intégrer dans notre architecture globale présenté dans la (figure \ref{shemaglobal}). 
+Toutefois, il fallait rechercher le module de traduction le plus performant afin de traduire un article complet de la manière la plus rapide.
 
-Dans ce module, nous avons a la base choisi d'intégrer uniquement une solution de de traduction existante. Ci-dessous, une figure qui montre le processus de traduction automatique.
-Afin d'intégrer un bon système de traduction automatique, nous avons explorer 2 sources principales, la première était destiné a une utilisation professionnelle, de plus la version gratuite offrait une traduction pour des textes de taille limités. et la deuxième était la solution adaptée a notre système. Elle était a la fois accessible et offrait des possibilités de traduction pour des textes longs (Articles de presse, etc). 
+Afin d'intégrer un bon système de traduction automatique, nous avons explorer deux sources principales, la première était destiné a une utilisation professionnelle, de plus la version gratuite offrait une traduction pour des textes de taille limités. et la deuxième était la solution adaptée a notre système. Elle était a la fois accessible et offrait des possibilités de traduction pour des textes longs (Articles de presse, etc). 
+
+
 
 \section{Conception de la base de données}
 Le choix a été porté sur les bases de données NoSQL (\autoref{nosql}) vu la structure très dynamique des articles de presse mais aussi des profils utilisateurs.
@@ -496,7 +500,7 @@ Voici maintenant un exemple d'un document de la collection d'articles.
 'urlToImage': 'http://espn.go.com/nba/id/235168/main.png',  
 'categoryPredicted': 'sport', 
 'summaryGenerated': 'The Celtics improved to 8-2 since Smart returned...', 
-'translatedContent': '?????? ???? ???? ?? ???? ?? ?? ????? ?????? ????? ?? ??????? ????? ?????? ??? ????....', 
+'translatedContent': 'sada da ada faffa fazgz eg rzgergtehk th roh...', 
 },
 \end{lstlisting}
 
@@ -531,8 +535,6 @@ Ci-dessous un exemple d'un document de la collection de profils :
 },
 \end{lstlisting}
 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Architecture globale %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Architecture du système \textquotedbl Feedny\textquotedbl}
 Dans cette partie, nous allons présenter l'architecture globale de notre système, cette dernière est déployé sous la forme d'une architecture 3-tiers. Ci-dessous, nous présentons ce qu'est une architecture 3-tiers ainsi que son avantage avant d'expliciter un schéma de l'architecture globale.
@@ -614,52 +616,46 @@ Le diagramme de séquence est un diagramme UML qui fait partie des diagrammes co
     \caption{Diagramme de séquence dans le cas non personnalisé}
 \end{figure}
 
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Mesures d'evaluation %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 \section{Mesures d'évaluation du système}
+    \subsection{Métriques d'évaluations du module de résumé automatique}
+        \subsubsection{Métrique d'évaluation : ROUGE\label{metrique-eval}}
+        ROUGE est l'acronyme de "Recall-Oriented Understudy for Gisting Evaluation". Il s'agit essentiellement d'un ensemble de métriques permettant d'évaluer le résumé automatique de textes ainsi que la traduction automatique. Il fonctionne en comparant un résumé produit automatiquement ou une traduction à un ensemble de résumés de référence (généralement produits par des humains). \cite{rouge0}
 
-\subsection{Métriques d'évaluations du module de résumé automatique}
+        \subsubsection{Types des métriques de ROUGE\label{type-rouge}}
+        \begin{itemize}
+            \item{ROUGE-1, 2, 3 et 4 : font référence au chevauchement des uni-grammes, bi-grammes, tri-grammes et quadri-grammes, respectivement, entre le système et les résumés de référence \cite{rouge1}.}\\
+            \item{ROUGE-L, W : basés sur la plus longue sous-séquence commune (LCS) \cite{rouge2}.}\\
+            \item{ROUGE-S : basé sur les cooccurrences des paires de mots dans l'ordre des phrases \cite{rouge2}.}\\
+            \item{ROUGE-SU : en plus des paires de mots, il utilise aussi la cooccurrence du mot unique toujours dans l'ordre des phrases.}
+        \end{itemize}
 
-\subsubsection{Métrique d'évaluation : ROUGE\label{metrique-eval}}
-ROUGE est l'acronyme de "Recall-Oriented Understudy for Gisting Evaluation". Il s'agit essentiellement d'un ensemble de métriques permettant d'évaluer le résumé automatique de textes ainsi que la traduction automatique. Il fonctionne en comparant un résumé produit automatiquement ou une traduction à un ensemble de résumés de référence (généralement produits par des humains). \cite{rouge0}
+        Les métriques citées dans la \autoref{type-rouge}, utilisent comme mesures le rappel, la précision et la f-mesure :  
+        \begin{itemize}
+            
+            \item {Le rappel dans le cas de ROUGE, donne une information sur le nombre de mots du résumé de référence ont été capturés par le résumé de notre généré par le système.\\ 
+                Exemple: si le rappel est égal a 40\%, cela signifie que 40\% des n-grammes du résumé de référence sont également présents dans le résumé généré par le système.}\\
+            \item {La précision quant à elle, mesure la partie du résumé du système qui est pertinente ou nécessaire.\\ 
+                Exemple : si la précision est égale a 40\%, cela signifie que 40\% des n-grammes du résumé généré par le système sont également présents dans le résumé de référence.}
+            \item {La f-mesure dépend de la précision et le rappel et est calculé comme suit :\\
+                                \[ F-mesure = \frac{2 * (Precision * Rappel)} {(Precision + Rappel)} \]}
 
-\subsubsection{Types des métriques de ROUGE\label{type-rouge}}
-\begin{itemize}
-    \item{ROUGE-1, 2, 3 et 4 : font référence au chevauchement des uni-grammes, bi-grammes, tri-grammes et quadri-grammes, respectivement, entre le système et les résumés de référence \cite{rouge1}.}\\
-    \item{ROUGE-L, W : basés sur la plus longue sous-séquence commune (LCS) \cite{rouge2}.}\\
-    \item{ROUGE-S : basé sur les cooccurrences des paires de mots dans l'ordre des phrases \cite{rouge2}.}\\
-    \item{ROUGE-SU : en plus des paires de mots, il utilise aussi la cooccurrence du mot unique toujours dans l'ordre des phrases.}
-\end{itemize}
+        \end{itemize}
 
-Les métriques citées dans la \autoref{type-rouge}, utilisent comme mesures le rappel, la précision et la f-mesure :  
-\begin{itemize}
-    
-    \item {Le rappel dans le cas de ROUGE, donne une information sur le nombre de mots du résumé de référence ont été capturés par le résumé de notre généré par le système.\\ 
-        Exemple: si le rappel est égal a 40\%, cela signifie que 40\% des n-grammes du résumé de référence sont également présents dans le résumé généré par le système.}\\
-    \item {La précision quant à elle, mesure la partie du résumé du système qui est pertinente ou nécessaire.\\ 
-        Exemple : si la précision est égale a 40\%, cela signifie que 40\% des n-grammes du résumé généré par le système sont également présents dans le résumé de référence.}
-    \item {La f-mesure dépend de la précision et le rappel et est calculé comme suit :\\
-                        \[ F-mesure = \frac{2 * (Precision * Rappel)} {(Precision + Rappel)} \]}
-
-\end{itemize}
-
-\subsection{Métriques d'évaluations du module de catégorisation}
-\begin{itemize}
-    \item{\textbf{Accuracy :} }c'est une mesure qui évalue l'efficacité globale de l'algorithme par rapport au données de test.
-    \[ Accuracy = \frac{tp+tn} {tp+fp+tn+fn} \]
-    \item{\textbf{Précision :} }elle évalue le pouvoir prédictif du modèle en mesurant la capacité du modèle à prédire que des classes correctes.
-    \[ Precision = \frac{tp} {tp+fp} \]
-    \item{\textbf{Rappel :} }la capacité d’un modèle à prédire toutes les classes correctes de l'ensemble de test.
-    \[ Rappel = \frac{tp} {tp+fn} \]
-    \item{\textbf{F-mesure :} }une mesure composite qui profite aux algorithmes avec une sensibilité plus élevée et des algorithmes de défis avec spécificité plus élevée.!!!
-    \[ F-mesure = \frac{2 * (Precision * Rappel)} {(Precision + Rappel)} \]
-\end{itemize}
-Avec :
-\begin{itemize}
-    \item{\textbf{TP }True Positive (vrais positifs) :} nombre d'individus bien prédits dans la classe à juste titre.
-    \item{\textbf{FP }False Positive (faux positifs) :} nombre d'individus prédits d'une classe alors qu'ils ne devraient pas en faire parti.
-    \item{\textbf{FN }False Negative (faux négatifs) :} nombre d'individus prédits comme étant de la classe alors qu'il ne le sont pas en vrai.
-    \item{\textbf{TN }True Negative (vrais négatifs) :} nombre d'individus prédits comme n'étant pas dans la classe à juste titre.
-\end{itemize}
+    \subsection{Métriques d'évaluations du module de catégorisation}
+    \begin{itemize}
+        \item{\textbf{Accuracy :} }c'est une mesure qui évalue l'efficacité globale de l'algorithme par rapport au données de test.
+        \[ Accuracy = \frac{tp+tn} {tp+fp+tn+fn} \]
+        \item{\textbf{Précision :} }elle évalue le pouvoir prédictif du modèle en mesurant la capacité du modèle à prédire que des classes correctes.
+        \[ Precision = \frac{tp} {tp+fp} \]
+        \item{\textbf{Rappel :} }la capacité d’un modèle à prédire toutes les classes correctes de l'ensemble de test.
+        \[ Rappel = \frac{tp} {tp+fn} \]
+        \item{\textbf{F-mesure :} }une mesure composite qui profite aux algorithmes avec une sensibilité plus élevée et des algorithmes de défis avec spécificité plus élevée.!!!
+        \[ F-mesure = \frac{2 * (Precision * Rappel)} {(Precision + Rappel)} \]
+    \end{itemize}
+    Avec :
+    \begin{itemize}
+        \item{\textbf{TP }True Positive (vrais positifs) :} nombre d'individus bien prédits dans la classe à juste titre.
+        \item{\textbf{FP }False Positive (faux positifs) :} nombre d'individus prédits d'une classe alors qu'ils ne devraient pas en faire parti.
+        \item{\textbf{FN }False Negative (faux négatifs) :} nombre d'individus prédits comme étant de la classe alors qu'il ne le sont pas en vrai.
+        \item{\textbf{TN }True Negative (vrais négatifs) :} nombre d'individus prédits comme n'étant pas dans la classe à juste titre.
+    \end{itemize}
