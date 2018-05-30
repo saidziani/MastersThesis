@@ -285,19 +285,19 @@ Le premier module sur lequel nous avons travailler, c'est la catégorisation d'a
 %%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~%%
 
 \section{Module de résumé automatique}
-Pour ce module de résumé automatique, nous avons choisi un résumeur automatique extractif \cite{notreresume} basé sur les plongements de mots (Word embeddings)!!!!!!! comme décrit dans le chapitre précédent \autoref{}.
-Ci-dessous la présentation des différentes approches expérimentées.
-    \subsection{Résumé extractif par Apprentissage Supervisé}
-    Nous avons, tout d'abord, expérimenté l'approche proposé dans \ref{riad-belkbir} qui est basée sur un apprentissage automatique supervisé en utilisant un dataset annoté manuellement. 
-        \subsubsection{Corpus et datasets}
-        Le dataset contient plus de 70 articles. Il est dédié principalement au résumé automatique par apprentissage supervisé pour la langue Arabe, mais peut être utilisé également dans d'autres applications, telles que la compression des textes.
+Le résumé automatique permet à l'utilisateur de notre système d'avoir une idée générale sur le contenu d'un article de presse. Les idées les plus importantes d'un texte sont identifiées. Afin de réussir l'identification des idées (phrases ou mots), nous avons expérimenté plusieurs techniques que nous allons présenter dans ce qui suit.
 
-        L'annotation consiste en l'attribution de quatre type d'étiquettes possibles à chaque phrase de l'article :
+    \subsection{Résumé extractif par Apprentissage Supervisé}
+    Tout d'abord, nous avons commencé par l'approche proposée dans \cite{riad-belkbir} qui est basée sur un apprentissage automatique supervisé en utilisant un dataset annoté manuellement. 
+        \subsubsection{Corpus et datasets}
+        Le dataset développé par l'équipe TALAA, contient plus de 70 articles. Il est dédié principalement au résumé automatique par apprentissage supervisé pour la langue Arabe, mais peut être utilisé également dans d'autres applications, telles que la compression des textes.
+
+        L'annotation consiste en l'attribution de quatre types d'étiquettes possibles à chaque phrase de l'article :
             \begin{itemize}
                 \item S (select) : phrase importante, à prendre en considération dans la construction du résumé.
                 \item R (remove) : cette phrase est à supprimer, son absence n'affecte pas le sens du résumé.
                 \item F (fusion) : fusion de deux phrases (ou plus).
-                \item C (compress) : compression d'une phrase on supprimant les synonymes et les redondances dans le sens.\\
+                \item C (compress) : compression d'une phrase, on supprimant les synonymes et les redondances dans le sens.\\
             \end{itemize}
 
         \subsubsection{Pré-traitement et structure du dataset}
@@ -308,10 +308,10 @@ Ci-dessous la présentation des différentes approches expérimentées.
             \caption{Structure d'un article du dataset de résumé automatique}
             \label{xml-structure}
         \end{figure}
-        L'approche basée sur l'apprentissage automatique demandait un très grand nombre d'articles résumés, ce qui nous a poussé à l'abandonner.
+        L'approche basée sur l'apprentissage automatique demandait un très grand nombre d'articles avec leurs résumés, ce qui nous a poussés à l'abandonner.
 
     \subsection{Résumé extractif par Machine de Boltzman}
-    L'approche proposée dans \cite{boltzman} utilise un modèle d'apprentissage profond afin de prédire les phrases les plus importantes dans un texte donnée en utilisant 9 caractéristiques sur chaque phrase. Elle consiste en trois grande phases: l'extraction des caractéristiques, la conversion en valeurs numériques et la génération du résumé à partir des scores de chaque phrase. 
+    L'approche proposée dans \cite{boltzman} utilise un modèle d'apprentissage profond afin de prédire les phrases les plus importantes dans un texte donnée en utilisant 9 caractéristiques sur chaque phrase. Elle consiste en trois grandes phases: l'extraction des caractéristiques, la conversion en valeurs numériques et la génération du résumé à partir des scores de chaque phrase. 
 
     Les caractéristiques extraites sont les suivantes :
     \begin{enumerate}
@@ -327,13 +327,14 @@ Ci-dessous la présentation des différentes approches expérimentées.
     \end{enumerate} 
 
     \subsection{Résumé automatique extractif par Plongement de mots\ref{plongement}}
-    L'approche proposée par l'équipe de recherche du département informatique de l'Université de Bari en Italie \cite{bari}, est basée sur la similarité textuelle entre la phrase centroïde et les autres phrases du texte en utilisant les plongements de mots (Word embeddings)\ref{}. Le plongement de mots utilisé dans cette approche est un modéle skip-gram entrainé sur le contenu de Wikipédia \cite{} en utilisant la bibliothèque fasttext du laboratoire en intelligence artificielle de facebook qui ont dévellopé des modéles pour 294 langues différentes \cite{fasttext}. parmi les modéles developpé, nous allons nous intérésser a celui de l'anglais et l'arabe. La conception et l'algorithme de réalisation sont détaillés dans \ref{plongement}. Ci-dessous, nous allons présenter les étapes de conception du résumé automatique.
+    L'approche proposée par l'équipe de recherche du département informatique de l'Université de Bari en Italie \cite{notrerésumé}, est basée sur la similarité textuelle entre la phrase centroïde et les autres phrases du texte en utilisant les plongements de mots (Word embeddings) présentés dans \autoref{wordebd}. Le plongement de mots utilisé dans cette approche est un modèle Skip-Gram (\autoref{skip-gram}) entraîné sur le contenu de Wikipédia en utilisant la bibliothèque FastText développé par le Laboratoire en Intelligence Artificielle de \emph{Facebook} qui prend en charge 294 langues différentes \cite{fasttext}. Parmi les modèles développés, nous allons nous intéresser à celui de l'Anglais et l'Arabe. Ci-dessous, nous allons présenter les étapes de conception du résumé automatique.
 
-        \subsubsection{Prétraitement des articles}
-        Dans cette phase, il suffit juste de segmenter le texte, le tokeniser et supprimer les mots vides. Ceci étant dû au fait que le plongement de mots que nous allons utiliser (le modèle Skip-Gram entraîné sur le contenu Wikipédia) servira entre autre a détecter les régularités linguistiques des  mots de la même racine. par exemple : le mot le plus similaire a "Algeria" est le mot "Algerian" \ref{}, c'est pour cela que le stemming n'est pas utilisé dans ce cas.
+        \subsubsection{pré-traitement des articles}
+        Dans cette phase, il suffit juste de segmenter les textes en phrases, les phrases en tokens et supprimer les mots vides. Ceci étant dû au fait que le plongement de mots que nous allons utiliser (le modèle Skip-Gram entraîné sur le contenu Wikipédia) servira entre autres à détecter les régularités linguistiques des  mots de la même racine. Par exemple : le mot le plus similaire à \textquotedbl Algeria\textquotedbl est le mot \textquotedbl Algerian\textquotedbl \ref{}, c'est pour cela que la racinisation n'est pas utilisée. L'algorithme \autoref{algopreresume} décrit les étapes de pré-traitement d'un article.
 
          \begin{algorithm2e}[H]
-           \SetAlgoLined
+          \label{algopreresume}
+          \SetAlgoLined
           \SetKwInOut{Input}{input}
           \SetKwInOut{Output}{output}
           \Input{A: Article}
@@ -345,11 +346,11 @@ Ci-dessous la présentation des différentes approches expérimentées.
             ListesTokens += suppression\_mots\_vides(tokens)\\
           }
           \Return {ListesTokens}
-         \caption{Algorithme de prétraitment du résumé}
+         \caption{Algorithme de pré-traitement du résumé}
         \end{algorithm2e}
 
        \subsubsection{Construction d'un vecteur de centroïde}
-        Après l'étape de prétraitement, place a la construction des vecteurs de centroïde. Afin de construire un vecteur centroïde en utilisant les plongement de mots, nous sélectionnons d'abord les mots significatifs dans le document. Pour cela, nous calculons le poids Tf-IDF de chaque mots de chaque document, ensuite nous sélectionnons les mots ayant le poids Tf-IDF supérieur à une constante empirique fixé au tout début de cette phase qui désignera un seuil de document (idf). Ainsi, nous calculons l'encastrement du centroïde comme la somme des mots les mieux classés dans le document en utilisant les plongements de mots de Wikipédia comme le montre l'equation suivante :
+        Après l'étape de pré-traitement, place à la construction des vecteurs de centroïde. Afin de construire un vecteur centroïde en utilisant les plongements de mots, nous sélectionnons d'abord les mots significatifs dans le document. Pour cela, nous calculons le poids TF-IDF de chaque mot dans chaque document. Ensuite, les mots ayant le poids TF-IDF supérieur à une constante empirique fixée au tout début de cette phase qui désignera un seuil de document (IDF) seront sélectionnés. Ainsi, nous calculons l'encastrement\footnote{ICI DEF} du centroïde comme la somme des mots les mieux classés dans le document en utilisant les plongements de mots de Wikipédia, comme le montre l'équation suivante :
 
              \begin{equation*}
              C = \sum_{\substack{w\in D\\
@@ -357,39 +358,64 @@ Ci-dessous la présentation des différentes approches expérimentées.
                     E[idx(w)]
              \end{equation*}
              
-             C : l'encastrement centroïde lié au document D,\\
-             idx(w) : une fonction qui retourne l'indice du mot dans le vocabulaire.
+             C: l'encastrement centroïde lié au document D.\\
+             et idx(w) : une fonction qui retourne l'indice du mot dans le vocabulaire.\\
              
-            La \autoref{centro-vec} présente un exemple d'un vecteur de centroïdes. 
+             \begin{algorithm2e}[H]
+                \SetAlgoLined
+                \SetKwInOut{Input}{input}
+                \SetKwInOut{Output}{output}
+                \Input{phrases, SeuilDocument}
+                \Output{Vecteur centroïde}
+                
+                Lire(phrases)\\
+                \For{phrase \in phrases}{
+                    \For{mot \in phrase}{   
+                    tf-idf=CalculTfIdf(mot)\\
+                    \If{tf-idf > seuilDocument}
+                    {
+                    Séléction += mot
+                    }
+                 }
+             }
+                
+                Encastrement=SommeVecteurs(Séléction)
+                
+                \Return{Encastrement}
+                \caption{Algorithme de construction du vecteur centroïde}
+             \end{algorithm2e}
+             
+             exemple :
+             
              \begin{figure}[H]
                 \centering
-                \includegraphics[height=95pt,width=420pt]{img/chapter3/centroideembed.jpg}
-                \caption{Vecteurs de centroïdes}
-                \label{centro-vec}
+                \includegraphics[height=120pt,width=380pt]{img/chapter3/centroideembed.jpg}
+                \caption{Constuction des vecteurs centroïde}
+                \label{Constuction des vecteurs centroïde}
              \end{figure}
 
          \subsubsection{Notation des phrases}
-         Dans ce processus, pour chaque phrase du document on crée un plongement pour la phrase en additionnons les plongements de mots de chaque terme dans la phrase.
+         Après l'étape de construction des vecteurs centroïde, nous allons attribuer un score pour chaque phrase du document. Tout d'abord, nous allons créer un plongement pour chaque phrase en additionnons les plongements de mots de chaque terme dans la phrase.
 
         \begin{equation*}
          S\textsubscript{j} = \sum_{\substack{w\in S\textsubscript{j}}}
          E[idx(w)]
         \end{equation*}
 
-        Afin de calculer le score finale de la phrase, on calcule la similarité de cosinus entre le plongement de la phrase S\textsubscript{j} et le plongement de la phrase centroide S\textsubscript{centroide}.
+        Ensuite, afin de calculer le score finale de la phrase, on calcule la similarité de cosinus entre le plongement de la phrase S\textsubscript{j} et le plongement de la phrase centroide C.
         
-        \[sim\_cos(S\textsubscript{centroide},S\textsubscript{j}) = \frac {S\textsubscript{centroide} \cdot S\textsubscript{j}}{||S\textsubscript{centroide}|| \cdot ||S\textsubscript{j}||}\]
+        \[sim\_cos(C,S\textsubscript{j}) = \frac {C \cdot S\textsubscript{j}}{||C|| \cdot ||S\textsubscript{j}||}\]
                     
                     \begin{figure}[H]
                         \centering
-                        \includegraphics[height=155pt,width=400pt]{img/chapter3/scoreembed.jpg}
+                        \includegraphics[height=150pt,width=380pt]{img/chapter3/scoreembed.jpg}
                         \caption{Notation des phrases}
                         \label{Notation des phrases}
                     \end{figure}
 
         \subsubsection{Séléction des phrases}
-        Pour chaque phrase du document, on calcule la \emph{similarité de cosinus} entre elle et la phrase centroïde du document. Les phrases sont ensuite triées par ordre décroissant de leurs scores de similarité. Les phrases les mieux classées sont itérativement sélectionnés et ajoutés au résumé jusqu'à ce que la limite (taille du résumé) soit atteinte. Afin de satisfaire la propriété de redondance, au cours de chaque itération nous allons calculer la \emph{similarité de cosinus} entre la phrase a venir et chacune déjà dans le résumé.
-        Il est a noter qu' un seuil a été fixé afin de rejeter toutes les phrases qui ont une similarité très élevé par rapport a une phrase afin d'éviter cette redondance.
+       Aprés avoir noté les phrases du document, nous calculons a présent la \emph{similarité de cosinus} entre elles et la phrase centroïde du document. Les phrases sont ensuite triées par ordre décroissant de leurs scores de similarité. Les phrases les mieux classées sont itérativement sélectionnés et ajoutés au résumé jusqu'à ce que la limite (taille du résumé) soit atteinte. Afin de satisfaire la propriété de redondance, au cours de chaque itération nous allons calculer la \emph{similarité de cosinus} entre la phrase a venir et chacune déjà dans le résumé.
+       Il est a noter qu' un seuil a été fixé afin de rejeter toutes les phrases qui ont une similarité très élevé par rapport a une phrase afin d'éviter cette redondance.
 
         \begin{algorithm2e}[H]
             \SetAlgoLined
@@ -422,18 +448,21 @@ Ci-dessous la présentation des différentes approches expérimentées.
             \caption{Algorithme de Séléction des phrases}
         \end{algorithm2e}
 
-        % \begin{algorithm2e}[H]
-        %     \SetAlgoLined
-        %     \SetKwInOut{Input}{input}
-        %     \SetKwInOut{Output}{output}
-        %     \Input{Résumé}
-        %     \Output{RésuméTrié}
+        
+        A la fin de cette étape, nous allons avoir un résumé du document désordonné puisque les phrases sont triées selon leur score. Pour y remédier, nous allons rajouté un tri des phrases selon leur ordre d'apparition dans le document.
+        
+         \begin{algorithm2e}[H]
+             \SetAlgoLined
+             \SetKwInOut{Input}{input}
+             \SetKwInOut{Output}{output}
+             \Input{Résumé}
+             \Output{RésuméTrié}
             
-        %     RésuméTrié = Tri(Résumé, ordreApparitionPhrases)\\
+             RésuméTrié = Tri(Résumé, ordreApparitionPhrases)\\
             
-        %      \Return{RésuméTrié}
-        %     \caption{Algorithme de génération du résumé automatique}
-        % \end{algorithm2e}
+              \Return{RésuméTrié}
+             \caption{Algorithme de génération du résumé automatique}
+         \end{algorithm2e}
 
 %%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~%%
 
