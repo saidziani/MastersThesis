@@ -611,9 +611,62 @@ Le diagramme de séquence est un diagramme UML qui fait partie des diagrammes co
 
 %%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~%%
 \section{Mesures d'évaluation du système}
+L'évaluation de chaque module du système est l'une des étapes les plus importantes. Plusieurs métriques d'évaluations ont été utilisées, nous allons les présenter dans ce qui suit.
+
+    \subsection{Métriques d'évaluations du module de recommandation}
+    Pour évaluer le système de recommandation, il existe deux métriques principales, le \emph{RMSE} (Root mean squared error) et le \emph{MAE} (Mean absolute error). On va les présenter brièvement dans le point suivant. 
+
+        \subsubsection{Métrique d'évaluation MAE}
+        La moyenne erreur absolue (MAE) est une mesure largement utilisée dans les évaluations des modèles de recommandations. Elle est utilisée pour estimer la différence moyenne entre la note réelle et celle que le système de recommandation va prédire. 
+
+        Plus la valeur du MAE est basse, plus la précision sera meilleure. En général, la valeur du MAE peut aller de 0 à l'infini, où l'infini est l'erreur maximale en fonction de l'échelle de notation de l'application mesurée. Le calcul de l'erreur absolue moyenne est fait comme suit \cite{rmse}:
+
+        \[MAE = \frac{1}{n}\sum_{t=1}^{n}|d\textsubscript{i}|-|D\textsubscript{i}|\]
+
+        Où d\textsubscript{i} est la note actuelle, D\textsubscript{i} est la note prédite et n est le nombre de notes.
+
+        \subsubsection{Métrique d'évaluation RMSE}
+        L'erreur quadratique moyenne (RMSE) a été utilisée comme mesure statistique standard pour mesurer la performance d'un modèle de recommandation. Elle  calcule la valeur moyenne de toutes les différences au carré entre les notes réelles et prédites. 
+
+        En conséquence, de grandes erreurs peuvent affecter considérablement la note RMSE \cite{rmse}. La formule de calcul est la suivante :
+
+        \[RMSE = \sqrt{\frac{1}{n}\sum_{t=1}^{n}(d\textsubscript{i} - D\textsubscript{i})^2}\] \\
+
+        Où d\textsubscript{i} est la note actuelle, D\textsubscript{i} est la note prédite et n est le nombre de notes.
+
+    \subsection{Métriques d'évaluations du module de catégorisation}
+    Dans le module de catégorisation des articles, nous allons évaluer nos modèles en utilisant la précision, le rappel, la F-mesure et les tables de confusions.
+        \subsubsection{La matrice de Confusion}
+        Pour analyser plus finement la qualité des classes produites par le modèle de catégorisation, on peut s’intéresser aux tables de confusion. 
+        
+        \begin{itemize}
+            \item{\textbf{TP }True Positive (vrais positifs) :} nombre d'articles bien prédits de la classe.
+            \item{\textbf{FP }False Positive (faux positifs) :} nombre d'articles prédits d'une classe alors qu'ils ne devraient pas en faire parti.
+            \item{\textbf{FN }False Negative (faux négatifs) :} nombre d'articles prédits comme étant de la classe alors qu'il ne le sont pas en vrai.
+            \item{\textbf{TN }True Negative (vrais négatifs) :} nombre d'articles prédits comme n'étant pas dans la classe à juste titre.
+        \end{itemize}
+        
+        \subsubsection{Accuracy} 
+        C'est une mesure qui évalue l'efficacité globale de l'algorithme par rapport au données de test.
+        \[ Accuracy = \frac{tp+tn} {tp+fp+tn+fn} \]
+        \subsubsection{Précision} 
+        Elle évalue le pouvoir prédictif du modèle en mesurant la capacité du modèle à prédire que des classes correctes.
+        \[ Precision = \frac{tp} {tp+fp} \]
+        \subsubsection{Rappel} 
+        La capacité d’un modèle à prédire toutes les classes correctes de l'ensemble de test.
+        \[ Rappel = \frac{tp} {tp+fn} \]
+        \subsubsection{F-mesure}
+        Une mesure composite qui profite aux algorithmes avec une sensibilité plus élevée et des algorithmes de défis avec spécificité plus élevée. \label{fmesure}
+        \[ F-mesure = \frac{2 * (Precision * Rappel)} {(Precision + Rappel)}\]
+        
+        \subsubsection{Courbe ROC} 
+        Courbe ROC : ROC montre une relation entre la sensibilité et la spécificité de l'algorithme.
+        
     \subsection{Métriques d'évaluations du module de résumé automatique}
+    Dans le module de résumé automatique, la mesure principale est \emph{Rouge}. Ci-dessous, nous allons la présenter.
+
         \subsubsection{Métrique d'évaluation : ROUGE\label{metrique-eval}}
-        ROUGE est l'acronyme de "Recall-Oriented Understudy for Gisting Evaluation". Il s'agit essentiellement d'un ensemble de métriques permettant d'évaluer le résumé automatique de textes ainsi que la traduction automatique. Il fonctionne en comparant un résumé produit automatiquement ou une traduction à un ensemble de résumés de référence (généralement produits par des humains). \cite{rouge0}
+        ROUGE est l'acronyme de \textquotedbl Recall-Oriented Understudy for Gisting Evaluation\textquotedbl. Il s'agit essentiellement d'un ensemble de métriques permettant d'évaluer le résumé automatique de textes ainsi que la traduction automatique. Il fonctionne en comparant un résumé produit automatiquement ou une traduction à un ensemble de résumés de référence (généralement produits par des humains). \cite{rouge0}
 
         \subsubsection{Types des métriques de ROUGE\label{type-rouge}}
         \begin{itemize}
@@ -623,33 +676,11 @@ Le diagramme de séquence est un diagramme UML qui fait partie des diagrammes co
             \item{ROUGE-SU : en plus des paires de mots, il utilise aussi la cooccurrence du mot unique toujours dans l'ordre des phrases.}
         \end{itemize}
 
-        Les métriques citées dans la \autoref{type-rouge}, utilisent comme mesures le rappel, la précision et la f-mesure :  
+        Les métriques citées dans la \autoref{type-rouge}, utilisent comme mesures le rappel, la précision et la f-mesure, déjà présentées. Dans ce qui suit, nous allons donner des explications de l'utilisation de chaque métrique :  
         \begin{itemize}
-            
             \item {Le rappel dans le cas de ROUGE, donne une information sur le nombre de mots du résumé de référence ont été capturés par le résumé de notre généré par le système.\\ 
                 Exemple: si le rappel est égal a 40\%, cela signifie que 40\% des n-grammes du résumé de référence sont également présents dans le résumé généré par le système.}\\
             \item {La précision quant à elle, mesure la partie du résumé du système qui est pertinente ou nécessaire.\\ 
                 Exemple : si la précision est égale a 40\%, cela signifie que 40\% des n-grammes du résumé généré par le système sont également présents dans le résumé de référence.}
-            \item {La f-mesure dépend de la précision et le rappel et est calculé comme suit :\\
-                                \[ F-mesure = \frac{2 * (Precision * Rappel)} {(Precision + Rappel)} \]}
-
+            \item {La F-mesure est calculée à partir de la précision et du rappel \ref{fmesure}.}
         \end{itemize}
-
-    \subsection{Métriques d'évaluations du module de catégorisation}
-    \begin{itemize}
-        \item{\textbf{Accuracy :} }c'est une mesure qui évalue l'efficacité globale de l'algorithme par rapport au données de test.
-        \[ Accuracy = \frac{tp+tn} {tp+fp+tn+fn} \]
-        \item{\textbf{Précision :} }elle évalue le pouvoir prédictif du modèle en mesurant la capacité du modèle à prédire que des classes correctes.
-        \[ Precision = \frac{tp} {tp+fp} \]
-        \item{\textbf{Rappel :} }la capacité d'un modèle à prédire toutes les classes correctes de l'ensemble de test.
-        \[ Rappel = \frac{tp} {tp+fn} \]
-        \item{\textbf{F-mesure :} }une mesure composite qui profite aux algorithmes avec une sensibilité plus élevée et des algorithmes de défis avec spécificité plus élevée.!!!
-        \[ F-mesure = \frac{2 * (Precision * Rappel)} {(Precision + Rappel)} \]
-    \end{itemize}
-    Avec :
-    \begin{itemize}
-        \item{\textbf{TP }True Positive (vrais positifs) :} nombre d'individus bien prédits dans la classe à juste titre.
-        \item{\textbf{FP }False Positive (faux positifs) :} nombre d'individus prédits d'une classe alors qu'ils ne devraient pas en faire parti.
-        \item{\textbf{FN }False Negative (faux négatifs) :} nombre d'individus prédits comme étant de la classe alors qu'il ne le sont pas en vrai.
-        \item{\textbf{TN }True Negative (vrais négatifs) :} nombre d'individus prédits comme n'étant pas dans la classe à juste titre.
-    \end{itemize}
