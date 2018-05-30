@@ -4,7 +4,7 @@
 \section{Introduction}
 La réalisation d'un logiciel ou d'un système informatique doit être obligatoirement précédée d'une étape d'analyse et de conception qui a pour objectif de définir et de formaliser les étapes nécessaires du développement de l'application afin de rendre cette dernière plus fidèle aux besoins.
 
-La première motivation de ce travail été de fournir un outil qui permet à l'utilisateur de faire ça revue de presse quotidienne de la façon la plus efficace et la plus enrichissante possible tout en considérant ses centres d'intérêt et préférences. 
+La première motivation de ce travail a été de fournir un outil qui permet à l'utilisateur de faire sa revue de presse quotidienne de la façon la plus efficace et la plus enrichissante possible tout en considérant ses centres d'intérêt et préférences. 
 
 Le logiciel que nous proposons enchaîne les processus de catégorisation, de résumé, de traduction et de recommandation d'articles de presse. Pour parvenir à réaliser cet ensemble de tâches en deux langues (Anglais et Arabe), nous allons présenter dans cette partie notre conception qui décrit d'une manière claire et précise le fonctionnement de chaque module du système. 
 
@@ -156,21 +156,18 @@ Dans cette partie, nous allons voir la conception détaillée de notre système 
 \section{Module de catégorisation d'article de presse}
 Le premier module sur lequel nous avons travailler, c'est la catégorisation d'articles de presse. Nous avons expérimenter plusieurs techniques proposées dans la littérature. Nous présentons ci-après chaque approche, ses résultats, ses points forts et ses faiblesses.
 
-% En se basant sur les travaux de \cite{categorisation} pour l'Anglais et \cite{categorisation} pour l'Arabe, nous avons entraîné nos modèles sur des corpus d'articles de différentes sources afin de garantir la diversité dans nos données (plus de détails dans le chapitre 4\ref{chapter4}).
-% À REVOIR!!
-
     \subsection{Approches expérimentées\label{approches}}
     Toutes les approches utilisées, pour la catégorisation d'articles de presse, sont basées sur l'apprentissage automatique, supervisé et non supervisé. 
 
     \subsubsection{Basées sur l'Apprentissage Non Supervisé}
         \begin{itemize}
             \item{LDA (Latent Dirichlet Allocation) : }\\
-            "Latent Dirichlet Allocation" est un modèle probabiliste génératif qui permet de décrire des collections de documents de texte ou d'autres types de données discrètes. LDA fait partie d'une catégorie de modèles appelés "topic models", qui cherchent à découvrir des structures thématiques cachées dans des vastes archives de documents. L'organisation automatique des documents par sujet est une application connue de LDA.
+            \textquotedbl Latent Dirichlet Allocation\textquotedbl  est un modèle probabiliste génératif qui permet de décrire des collections de documents de texte ou d'autres types de données discrètes. LDA fait partie d'une catégorie de modèles appelés \textquotedbl topic models\textquotedbl , qui cherchent à découvrir des structures thématiques cachées dans des vastes archives de documents. L'organisation automatique des documents par sujet est une application connue de LDA.
         \end{itemize}
         
     \begin{itemize}[label={}, leftmargin=*]
         \item{\textbf{Corpus et dataset}}\\
-        Le Dataset \emph{DeepMind Q\&A} de Hermann et al. (2015) \cite{cnndailymail} a été utilisé. Les articles de presse ont étaient récoltés pour l'utilisation dans un travail de recherche dans les systèmes de Questions/Réponses. Le corpus est contient 92 579 articles de presse de \emph{CNN}.
+        Le Dataset \emph{DeepMind Q\&A} de \cite{cnndailymail} a été utilisé. Les articles de presse ont étaient récoltés pour l'utilisation dans un travail de recherche dans les systèmes de Questions/Réponses. Le corpus est contient 92 579 articles de presse de \emph{CNN}.
 
         Chaque article est sous le format suivant :
        \begin{itemize}
@@ -199,7 +196,7 @@ Le premier module sur lequel nous avons travailler, c'est la catégorisation d'a
         \end{itemize}
 
     \begin{itemize}[leftmargin=*, label={}]
-        \item{Corpus et dataset}\\
+        \item{\textbf{Corpus et dataset}}\\
             Nous avons défini une structure pour chaque article, pour faciliter l'exploration des datasets. Ci-dessous la structure choisie :
             \begin{itemize}
                \item{\textbf{id} : }un identifiant unique de l'article,
@@ -220,25 +217,25 @@ Le premier module sur lequel nous avons travailler, c'est la catégorisation d'a
         \begin{enumerate}[leftmargin=*]
             \item{\textbf{Segmentation (Tokenization) et suppression des mots vides :} }permet d'extraire toutes les entités lexicales d'un article donné. La segmentation est suivie de la suppression des tokens non-utiles tel que la ponctuation, les pronoms, les déterminants, etc.
 
-            Après segmentation : \{
+            Après segmentation : 
                 \begin{arab}'أمرت', 'السلطات', 'القطرية', 'الأسواق', 'و', 'المراكز', 'التجارية', 'في', 'البلاد', 'برفع', 'و', 'إزالة', 'السلع', 'الواردة', 'من', 'السعودية', 'و', 'البحرين', 'و', 'الإمارات', 'و', 'مصر', 'في', 'الذكرى', 'الأولى', 'لإعلان', 'هذه', 'الدول', 'الحصار', 'عليها', '.'\end{arab}
-            \}
+            
 
-            Après suppression des mots vides : \{
+            Après suppression des mots vides : 
             \begin{arab}'أمرت', 'السلطات', 'القطرية', 'الأسواق', 'المراكز', 'التجارية', 'البلاد', 'برفع', 'إزالة', 'السلع', 'الواردة', 'السعودية', 'البحرين', 'الإمارات', 'مصر', 'الذكرى', 'الأولى', 'لإعلان', 'الدول', 'الحصار'\end{arab}
-            \}\\
+            
             
             \item{\textbf{Racinisation (Stemming) :} }les mots d'un document sont représentés par leurs racines plutôt que par les mots d'origine. Plusieurs variantes d'un terme peuvent ainsi être groupées dans une seule forme représentative, ce qui réduit le nombre des termes distincts nécessaires pour représenter un document.
 
-            Après racinisation : \{
+            Après racinisation : 
             \begin{arab}'أمر', ' سلطة ', 'قطر', 'سوق', 'مركز', 'تجاري', 'بلد', 'رفع', 'إزالة', 'سلعة', 'وارد', 'سعودية', 'بحرين', 'إمارة', 'مصر', 'ذكرى', 'أول', 'إعلان', 'دولة', 'حصار'\end{arab}
-            \}\\
+            
 
             \item{\textbf{N-grammes :} }les N-grammes permettent de construire une sous-séquence de n mots consécutifs. Ils permettent de contextualiser l'ordre d'apparition d'un ensemble de mots.
 
-            Après génération des N-grammes (bi-grammes dans notre cas) : \{
+            Après génération des N-grammes (bi-grammes dans notre cas) : 
             \begin{arab}('أمر', 'سلطة'), ('سلطة', 'قطر'), ('قطر', 'سوق'), ('سوق', 'مركز'), ('مركز', 'تجاري'), ('تجاري', 'بلد'), ('بلد', 'رفع'), ('رفع', 'إزالة'),('إزالة', 'سلعة'), ('سلعة', 'وارد'), ('وارد', 'سعودية'), ('سعودية', 'بحرين'), ('بحرين', 'إمارة'), ('إمارة', 'مصر'), ('مصر', 'ذكرى'), ('ذكرى', 'أول'), ('أول', 'إعلان'), ('إعلان', 'دولة'), ('دولة', 'حصار')\end{arab}
-            \}\\
+            
         \end{enumerate}
         \subsubsection{Modèle de classification d'articles de presse}
             Nous avons développé plusieurs modèles de catégorisation d'articles de presse basés sur l'apprentissage supervisé et non supervisé cités présentés la \autoref{approches}. L'algorithme \autoref{algomodeles} présente les étapes de développement des différents modèles.
@@ -277,8 +274,8 @@ Le premier module sur lequel nous avons travailler, c'est la catégorisation d'a
             suppression\_mots\_vides(A)\\
             racinisation(A)\\
             n-grammes(A)\\
-            prédiction = Charger(modèle)
-            catégorie = prédiction(A)
+            prédiction = Charger(modèle)\\
+            catégorie = prédiction(A)\\
             \Return{catégorie}
             \caption{Algorithme de prédiction de catégorie d'un article de presse}
             \end{algorithm2e}
@@ -327,7 +324,7 @@ Le résumé automatique permet à l'utilisateur de notre système d'avoir une id
     \end{enumerate} 
 
     \subsection{Résumé automatique extractif par plongement de mots}
-    L'approche proposée par l'équipe de recherche du département informatique de l'Université de Bari en Italie \cite{notrerésumé}, est basée sur la similarité textuelle entre la phrase centroïde et les autres phrases du texte en utilisant les plongements de mots (Word embeddings) présentés dans \autoref{wordebd}. Le plongement de mots utilisé dans cette approche est un modèle Skip-Gram (\autoref{skip-gram}) entraîné sur le contenu de Wikipédia en utilisant la bibliothèque FastText développé par le Laboratoire en Intelligence Artificielle de \emph{Facebook} qui prend en charge 294 langues différentes \cite{fasttext}. Parmi les modèles développés, nous allons nous intéresser à celui de l'Anglais et l'Arabe. Ci-dessous, nous allons présenter les étapes de conception du résumé automatique.
+    L'approche proposée par l'équipe de recherche du département informatique de l'Université de Bari en Italie \cite{notreresume}, est basée sur la similarité textuelle entre la phrase centroïde et les autres phrases du texte en utilisant les plongements de mots (Word embeddings) présentés dans \autoref{wordebd}. Le plongement de mots utilisé dans cette approche est un modèle Skip-Gram (\autoref{skip-gram}) entraîné sur le contenu de Wikipédia en utilisant la bibliothèque FastText développé par le Laboratoire en Intelligence Artificielle de \emph{Facebook} qui prend en charge 294 langues différentes \cite{fasttext}. Parmi les modèles développés, nous allons nous intéresser à celui de l'Anglais et l'Arabe. Ci-dessous, nous allons présenter les étapes de conception du résumé automatique.
 
         \subsubsection{pré-traitement des articles}
         Dans cette phase, il suffit juste de segmenter les textes en phrases, les phrases en tokens et supprimer les mots vides. Ceci étant dû au fait que le plongement de mots que nous allons utiliser (le modèle Skip-Gram entraîné sur le contenu Wikipédia) servira entre autres à détecter les régularités linguistiques des  mots de la même racine. Par exemple : le mot le plus similaire à \textquotedbl Algeria\textquotedbl est le mot \textquotedbl Algerian\textquotedbl \ref{}, c'est pour cela que la racinisation n'est pas utilisée. L'algorithme \autoref{algopreresume} décrit les étapes de pré-traitement d'un article.
@@ -358,8 +355,9 @@ Le résumé automatique permet à l'utilisateur de notre système d'avoir une id
                     E[idx(w)]
              \end{equation*}
              
+             Où :
              C: l'encastrement centroïde lié au document D.\\
-             et idx(w) : une fonction qui retourne l'indice du mot dans le vocabulaire.\\
+             idx(w) : une fonction qui retourne l'indice du mot dans le vocabulaire.\\
              
              \begin{algorithm2e}[H]
                 \SetAlgoLined
@@ -401,17 +399,20 @@ Le résumé automatique permet à l'utilisateur de notre système d'avoir une id
          S\textsubscript{j} = \sum_{\substack{w\in S\textsubscript{j}}}
          E[idx(w)]
         \end{equation*}
-        Où S\textsubscript{j}, la $j\textsuperscript{ième}$ phrase du document et $E[idx(w)]$ est le plongement de mot du terme $w$
+        Où :
+        S\textsubscript{j}: la $j\textsuperscript{ième}$ phrase du document. \\ 
+        $E[idx(w)]$ : le plongement de mot du terme $w$.
 
         Afin d'obtenir le score finale de la phrase, on calcule la similarité de cosinus entre la somme des plongements, déjà calculé (\ref{somplong}), de la phrase S\textsubscript{j} et le plongement de la phrase centroïde S\textsubscript{centroide}.
         
         \[sim\_cos(S\textsubscript{centroide},S\textsubscript{j}) = \frac {S\textsubscript{centroide} \cdot S\textsubscript{j}}{||S\textsubscript{centroide}|| \cdot ||S\textsubscript{j}||}\]
 
+        Exemple :
             \begin{figure}[H]
                 \centering
                 \includegraphics[height=155pt,width=400pt]{img/chapter3/scoreembed.jpg}
-                \caption{Notation des phrases}
-                \label{Notation des phrases - Table 2, page 14 \ref{plongement}}
+                \caption{Notation des phrases - Table 2, page 14 \ref{plongement}}
+                \label{}
             \end{figure}
 
         \subsubsection{Sélection des phrases}
@@ -501,7 +502,7 @@ Voici maintenant un exemple d'un document de la collection d'articles :
 {
 '_id': '5afc18571d41c833a8632a24', 
 'language': 'en',
-'title': "Smart's stellar Game 2 play draws Cavs praise", 
+'title': \textquotedbl Smart's stellar Game 2 play draws Cavs praise\textquotedbl , 
 'source': 'espn', 
 'author': 'Chris Forsberg', 
 'content': 'LeBron James and Tyronn Lue explain what they think of Marcus...'
@@ -510,7 +511,7 @@ Voici maintenant un exemple d'un document de la collection d'articles :
 'urlToImage': 'http://espn.go.com/nba/id/235168/main.png',  
 'categoryPredicted': 'sport', 
 'summaryGenerated': 'The Celtics improved to 8-2 since Smart returned...', 
-'translatedContent': 'sada da ada faffa fazgz eg rzgergtehk th roh...', 
+'translatedContent': 'Les Celtics ont enchainé, depuis le retour de Smart...', 
 },
 \end{lstlisting}
 
@@ -553,9 +554,9 @@ Dans cette partie, nous allons présenter l'architecture globale de notre systè
 Une application mobile ou web possède souvent une architecture 3-tiers.
 \begin{itemize}
     \item\textbf{La couche DAO : }\\
-    "Data Access Object" s'occupe de l'accès aux données, le plus souvent des données persistantes au sein d'un SGBD.\\
+    \textquotedbl Data Access Object\textquotedbl  s'occupe de l'accès aux données, le plus souvent des données persistantes au sein d'un SGBD.\\
     \item\textbf{La couche métier : }\\
-    Implémente les algorithmes "métiers" de l'application. Cette couche est indépendante de toute forme d'interface avec l'utilisateur. C'est généralement la couche la plus stable de l'architecture. Elle ne change pas si on change l'interface utilisateur ou la façon d'accéder aux données nécessaires au fonctionnement de l'application.\\
+    Implémente les algorithmes \textquotedbl métiers\textquotedbl  de l'application. Cette couche est indépendante de toute forme d'interface avec l'utilisateur. C'est généralement la couche la plus stable de l'architecture. Elle ne change pas si on change l'interface utilisateur ou la façon d'accéder aux données nécessaires au fonctionnement de l'application.\\
     \item\textbf{La couche interface utilisateur : }interface (web ou mobile) qui permet à l'utilisateur de piloter l'application et d'en recevoir des informations.
 \end{itemize}
 
@@ -572,28 +573,28 @@ en elle même n'est déployée que sur la partie serveur. Le client ne nécessit
 Cette facilité de déploiement aura pour conséquence non seulement de réduire le coût de déploiement, mais aussi de permettre une évolution régulière du système. Cette évolution ne nécessitera que la mise à jour de l'application sur le serveur applicatif.
 
 \subsection{Schéma global de \textquotedbl Feedny\textquotedbl}
-L'architecture globale du système "Feedny" comporte quatre processus principaux: catégorisation, résumé, traduction et recommandation d'articles de presse.
+L'architecture globale du système \textquotedbl Feedny\textquotedbl  comporte quatre processus principaux: catégorisation, résumé, traduction et recommandation d'articles de presse.
 
 Les entrées (articles de presse extraits de plusieurs sources) sont sauvegardées dans une base de données. Le processus de catégorisation commence par classifier l'article selon son contenu, ensuite un résumé est généré, l'article est traduit de l'Anglais vers l'Arabe (ou l'inverse) et enfin, il sera recommandé à un utilisateur selon son profil et ses préférences comme on peut le voir dans la figure \ref{shemaglobal}.
 
 \begin{figure}[H]
     \centering
     \includegraphics[height=600pt,width=450pt]{img/chapter3/global.png}
-    \caption{Schéma global du fonctionnement de "Feedny"}
+    \caption{Schéma global du fonctionnement de \textquotedbl Feedny\textquotedbl }
     \label{shemaglobal}
 \end{figure}
 
-\section{Schémas conceptuels de "Feedny"}
+\section{Schémas conceptuels de \textquotedbl Feedny\textquotedbl }
 Nous allons présenter dans cette partie, la façon avec laquelle le logiciel fournit les différentes fonctionnalités. Celle-ci décrit d'une manière claire et précise, le fonctionnement du futur système en utilisant un langage de modélisation. 
 
 Nous avons choisi la méthode UML (Unified Modeling Language), qui est une notation graphique conçue pour représenter, spécifier et construire les systèmes logiciels. UML utilise des techniques orientées objets pour la modélisation des systèmes, depuis la conception jusqu'à la maintenance, d'une manière compréhensible par l'être humain et disposant de qualités formelles suffisantes pour être traduites automatiquement en code source \cite{UML}.
 
 \subsection{Diagramme de cas d'utilisation}
-"Le diagrammes de cas d'utilisation (initié par Ivar Jacobson en 1992 dans la méthode OOSE) est un type de diagramme UML qui permet de définir les besoins des acteurs dans un système quelconque en établissant les fonctionnalités attendues et en organisant les besoins. Il peut être aussi utilisés ensuite comme moyen d'organisation du développement du logiciel, notamment pour la structuration et le déroulement des tests du logiciel".\cite{UML}
+\textquotedbl Le diagramme de cas d'utilisation (initié par Ivar Jacobson en 1992 dans la méthode OOSE) est un type de diagramme UML qui permet de définir les besoins des acteurs dans un système quelconque en établissant les fonctionnalités attendues et en organisant les besoins. Il peut être aussi utilisés ensuite comme moyen d'organisation du développement du logiciel, notamment pour la structuration et le déroulement des tests du logiciel\textquotedbl .\cite{UML}
 \begin{figure}[H]
     \centering
     \includegraphics[height=400pt,width=350pt]{img/chapter3/diagcasdutilisation.png}
-    \caption{Diagramme présentant les cas d'utilisations de "Feedny"}
+    \caption{Diagramme présentant les cas d'utilisations dans \textquotedbl Feedny\textquotedbl }
 \end{figure}
 
 \subsection{Diagramme de séquence}
@@ -601,19 +602,19 @@ Le diagramme de séquence est un diagramme UML qui fait partie des diagrammes co
 \begin{figure}[H]
     \centering
     \includegraphics[height=500pt,width=425pt]{img/chapter3/diagseqperso.png}
-    \caption{Diagramme de séquence dans le cas de l'utilisation personnalisée de "Feedny"}
+    \caption{Diagramme de séquence de \textquotedbl Feedny\textquotedbl dans le cas personnalisée }
 \end{figure}
 
 \begin{figure}[H]
     \centering
     \includegraphics[height=500pt,width=425pt]{img/chapter3/diagseqnonperso.png}
-    \caption{Diagramme de séquence dans le cas de l'utilisation non personnalisée de "Feedny"}
+    \caption{Diagramme de séquence de \textquotedbl Feedny\textquotedbl dans le cas non personnalisée }
 \end{figure}
 
 \section{Mesures d'évaluation du système}
 L'évaluation de chaque module du système est l'une des étapes les plus importantes. Plusieurs métriques d'évaluations ont été utilisées, nous allons les présenter dans ce qui suit.
 
-    \subsection{Métriques d'évaluations du module de recommandation}
+    \subsection{Métriques d'évaluation du module de recommandation}
     Pour évaluer le système de recommandation, il existe deux métriques principales, le \emph{RMSE} (Root mean squared error) et le \emph{MAE} (Mean absolute error). On va les présenter brièvement dans le point suivant. 
 
         \subsubsection{Métrique d'évaluation MAE}
@@ -634,8 +635,8 @@ L'évaluation de chaque module du système est l'une des étapes les plus import
 
         Où d\textsubscript{i} est la note actuelle, D\textsubscript{i} est la note prédite et n est le nombre de notes.
 
-    \subsection{Métriques d'évaluations du module de catégorisation}
-    Dans le module de catégorisation des articles, nous allons évaluer nos modèles en utilisant la précision, le rappel, la F-mesure et les tables de confusions.
+    \subsection{Métriques d'évaluation du module de catégorisation}
+    Dans le module de catégorisation des articles, nous allons évaluer nos modèles en utilisant la précision, le rappel, la F-mesure et les tables de confusions \cite{mesurecateg}.
         \subsubsection{La matrice de Confusion}
         Pour analyser plus finement la qualité des classes produites par le modèle de catégorisation, on peut s’intéresser aux tables de confusion. 
         
@@ -663,7 +664,7 @@ L'évaluation de chaque module du système est l'une des étapes les plus import
         Courbe ROC : ROC montre une relation entre la sensibilité et la spécificité de l'algorithme.
         
         \subsubsection{Perplexité}
-        Dans le traitement du automatique du langage naturel, la perplexité est un moyen d'évaluer les modèles de langage. Un modèle de langage est une distribution de probabilité sur des phrases ou des textes entiers. Elle est calculée comme suit:
+        Dans le traitement du automatique du langage naturel, la perplexité est un moyen d'évaluer les modèles de langage \cite{perplexite}. Un modèle de langage est une distribution de probabilité sur des phrases ou des textes entiers. Elle est calculée comme suit:
         \[
         \text{perplexite}(D\textsubscript{test}) =
         \exp
@@ -677,7 +678,7 @@ L'évaluation de chaque module du système est l'une des étapes les plus import
         \subsubsection{Cohérence de sujet}
         La cohérence de sujet (Topic coherence) mesure le , dans les mots utilisés pour décrire une catégorie, un mot commun est en moyenne un bon prédicteur pour un mot moins commun.
 
-        Nous allons calculer la cohérence en utilisant \textquotedbl intrinsic UMass measure\textquotedbl qui est proposé par \cite{}. La formule est présentée là-dessous :
+        Nous allons calculer la cohérence en utilisant \textquotedbl intrinsic UMass measure\textquotedbl qui est proposé par \cite{perplexite}. La formule est présentée là-dessous :
         \[
         \text{score}_{\text{UMass}}(w_i, w_j) =
         \log
@@ -685,7 +686,7 @@ L'évaluation de chaque module du système est l'une des étapes les plus import
         \]
         Où w\textsubscript{i} est un mot commun et w\textsubscript{j} est moins commun, les deux mots font parti des mots qui décrivent une catégorie, D est un document.
 
-    \subsection{Métriques d'évaluations du module de résumé automatique}
+    \subsection{Métriques d'évaluation du module de résumé automatique}
     Dans le module de résumé automatique, la mesure principale est \emph{Rouge}. Ci-dessous, nous allons la présenter.
 
         \subsubsection{Métrique d'évaluation : ROUGE\label{metrique-eval}}
