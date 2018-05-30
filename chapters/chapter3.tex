@@ -385,37 +385,38 @@ Le résumé automatique permet à l'utilisateur de notre système d'avoir une id
                 \caption{Algorithme de construction du vecteur centroïde}
              \end{algorithm2e}
              
-             exemple :
-             
-             \begin{figure}[H]
-                \centering
-                \includegraphics[height=120pt,width=380pt]{img/chapter3/centroideembed.jpg}
-                \caption{Constuction des vecteurs centroïde}
-                \label{Constuction des vecteurs centroïde}
+             La \autoref{centro-vec} présente un exemple d'un vecteur de centroïdes. 
+              \begin{figure}[H]
+                 \centering
+                \includegraphics[height=95pt,width=420pt]{img/chapter3/centroideembed.jpg}
+                \caption{Vecteurs de centroïdes - Table 1, page 14 \ref{plongement}}
+                \label{centro-vec}
              \end{figure}
 
          \subsubsection{Notation des phrases}
-         Après l'étape de construction des vecteurs centroïde, nous allons attribuer un score pour chaque phrase du document. Tout d'abord, nous allons créer un plongement pour chaque phrase en additionnons les plongements de mots de chaque terme dans la phrase.
+         Après l'étape de construction du vecteur centroïde, la somme des plongements de mots de chaque terme  est attribuée à la phrase où il apparaît.\label{somplong}
 
         \begin{equation*}
          S\textsubscript{j} = \sum_{\substack{w\in S\textsubscript{j}}}
          E[idx(w)]
         \end{equation*}
+        Où S\textsubscript{j}, la $j\textsuperscript{ième}$ phrase du document et $E[idx(w)]$ est le plongement de mot du terme $w$
 
-        Ensuite, afin de calculer le score finale de la phrase, on calcule la similarité de cosinus entre le plongement de la phrase S\textsubscript{j} et le plongement de la phrase centroide C.
+        Afin d'obtenir le score finale de la phrase, on calcule la similarité de cosinus entre la somme des plongements, déjà calculé (\ref{somplong}), de la phrase S\textsubscript{j} et le plongement de la phrase centroïde S\textsubscript{centroide}.
         
-        \[sim\_cos(C,S\textsubscript{j}) = \frac {C \cdot S\textsubscript{j}}{||C|| \cdot ||S\textsubscript{j}||}\]
-                    
-                    \begin{figure}[H]
-                        \centering
-                        \includegraphics[height=150pt,width=380pt]{img/chapter3/scoreembed.jpg}
-                        \caption{Notation des phrases}
-                        \label{Notation des phrases}
-                    \end{figure}
+        \[sim\_cos(S\textsubscript{centroide},S\textsubscript{j}) = \frac {S\textsubscript{centroide} \cdot S\textsubscript{j}}{||S\textsubscript{centroide}|| \cdot ||S\textsubscript{j}||}\]
 
-        \subsubsection{Séléction des phrases}
-       Aprés avoir noté les phrases du document, nous calculons a présent la \emph{similarité de cosinus} entre elles et la phrase centroïde du document. Les phrases sont ensuite triées par ordre décroissant de leurs scores de similarité. Les phrases les mieux classées sont itérativement sélectionnés et ajoutés au résumé jusqu'à ce que la limite (taille du résumé) soit atteinte. Afin de satisfaire la propriété de redondance, au cours de chaque itération nous allons calculer la \emph{similarité de cosinus} entre la phrase a venir et chacune déjà dans le résumé.
-       Il est a noter qu' un seuil a été fixé afin de rejeter toutes les phrases qui ont une similarité très élevé par rapport a une phrase afin d'éviter cette redondance.
+            \begin{figure}[H]
+                \centering
+                \includegraphics[height=155pt,width=400pt]{img/chapter3/scoreembed.jpg}
+                \caption{Notation des phrases}
+                \label{Notation des phrases - Table 2, page 14 \ref{plongement}}
+            \end{figure}
+
+        \subsubsection{Sélection des phrases}
+       Après la phase de notation des phrases du document, elles sont, ensuite, triées par ordre décroissant en fonction de la similarité. Les phrases les mieux classées sont itérativement sélectionnées et ajoutées au résumé jusqu'à ce que la limite (taille du résumé) soit atteinte. Afin de satisfaire la propriété de redondance, nous allons calculer, à chaque itération, la \emph{similarité de cosinus} entre la phrase à venir et les phrases déjà sélectionnées dans le résumé.
+
+       Il est à noter qu'un seuil a été fixé afin de rejeter toutes les phrases qui ont une similarité très élevés par rapport à une phrase afin d'éviter cette redondance.
 
         \begin{algorithm2e}[H]
             \SetAlgoLined
@@ -423,7 +424,6 @@ Le résumé automatique permet à l'utilisateur de notre système d'avoir une id
             \SetKwInOut{Output}{output}
             \Input{phrases, scores, seuilSimilarité, seuilRésumé}
             \Output{Résumé}
-            
             phrases = Tri(phrases, scores)\\
             k = 1\\
              \For{i=1 \KwTo taille(phrases)}{                
@@ -445,11 +445,10 @@ Le résumé automatique permet à l'utilisateur de notre système d'avoir une id
                 }
              }
              \Return{Résumé}
-            \caption{Algorithme de Séléction des phrases}
+            \caption{Algorithme de Sélection des phrases}
         \end{algorithm2e}
 
-        
-        A la fin de cette étape, nous allons avoir un résumé du document désordonné puisque les phrases sont triées selon leur score. Pour y remédier, nous allons rajouté un tri des phrases selon leur ordre d'apparition dans le document.
+        À la fin de cette étape, nous allons avoir un résumé du document désordonné et les phrases sont triées selon leur score et pas dans l'ordre de leurs apparitions dan le texte original. Pour y remédier, nous allons rajouter un tri des phrases selon l'ordre du document.
         
          \begin{algorithm2e}[H]
              \SetAlgoLined
@@ -457,21 +456,16 @@ Le résumé automatique permet à l'utilisateur de notre système d'avoir une id
              \SetKwInOut{Output}{output}
              \Input{Résumé}
              \Output{RésuméTrié}
-            
              RésuméTrié = Tri(Résumé, ordreApparitionPhrases)\\
-            
               \Return{RésuméTrié}
              \caption{Algorithme de génération du résumé automatique}
          \end{algorithm2e}
 
-%%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~%%
-
 \section{Module de traduction}
-Dans ce module, notre tâche n'était pas d'implémenter ou de concevoir un traducteur automatique, mais uniquement d'utiliser un traducteur automatique multilingue existant, et de l'intégrer dans notre architecture globale présenté dans la (figure \ref{shemaglobal}). 
+Dans ce module, notre tâche n'était pas d'implémenter ou de concevoir un traducteur automatique, mais uniquement d'utiliser un traducteur multilingue existant, et de l'intégrer dans notre architecture globale présentée dans la \autoref{shemaglobal}. 
 Toutefois, il fallait rechercher le module de traduction le plus performant afin de traduire un article complet de la manière la plus rapide.
 
-Afin d'intégrer un bon système de traduction automatique, nous avons explorer deux sources principales, la première était destiné a une utilisation professionnelle, de plus la version gratuite offrait une traduction pour des textes de taille limités. et la deuxième était la solution adaptée a notre système. Elle était a la fois accessible et offrait des possibilités de traduction pour des textes longs (Articles de presse, etc). 
-
+Afin d'intégrer un bon système de traduction automatique, nous avons exploré deux sources principales, la première était destiné à une utilisation professionnelle, de plus, la version gratuite offrait une traduction pour des textes de taille limités. Et la deuxième, était la solution la plus adaptée à notre cas d'étude. Elle est à la fois accessible et offrait des possibilités de traduction pour des textes longs (articles de presse, thèse, etc). 
 
 
 \section{Conception de la base de données}
@@ -592,7 +586,8 @@ Les entrées (articles de presse extraits de plusieurs sources) sont sauvegardé
 \begin{figure}[H]
     \centering
     \includegraphics[height=600pt,width=450pt]{img/chapter3/global.png}
-    \caption{Diagramme présentant les cas d'utilisations}
+    \caption{Schéma global du fonctionnement de "Feedny"}
+    \label{shemaglobal}
 \end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Shéma %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
