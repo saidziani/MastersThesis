@@ -19,9 +19,9 @@ Dans cette partie, nous allons voir la conception détaillée de notre système 
         \subsubsection{Profilage d'un utilisateur}
         Elle consiste à déterminer les centres d'intérêt d'un utilisateur tout en se basant sur les articles lus et visiter. Pour cela, nous avons mis en place plusieurs méthodes de calcul des probabilités de préférences afin de mieux cibler les utilisateurs et garantir une solution conforme aux caractéristiques de la recommandation pour les articles de presse. 
 
-        Pour le calcul des probabilités de préférences utilisateurs, nous avons utilisé une méthode de calcul qui permet à la fois de résoudre le problème de la récence \autoref{} et le démarrage à froid \autoref{}. Cette méthode testée s'avère très efficace par rapport aux méthodes existantes et décrites dans \autoref{}.
+        Pour le calcul des probabilités de préférences utilisateurs, nous avons utilisé une méthode de calcul qui permet à la fois de résoudre le problème de la récence \autoref{recence} et le démarrage à froid \autoref{froid}.
 
-        Le calcul de la probabilité de sélection d'une catégorie pour un utilisateur est basé sur ses interactions avec les articles de presse disponible. Dés qu'un article est sélectionné, l'information est sauvegardée et utilisée pour la mise à jour du vecteur des probabilités de sélection des catégories préférées \autoref{}.
+        Le calcul de la probabilité de sélection d'une catégorie pour un utilisateur est basé sur ses interactions avec les articles de presse disponible. Dés qu'un article est sélectionné, l'information est sauvegardée et utilisée pour la mise à jour du vecteur des probabilités de sélection des catégories préférées.
 
         L'exemple suivant présente un vecteur de probabilité de sélection pour les catégories préférées d'un utilisateur U :
             \[P(U) = {'sport': 0.7178, 'news': 0.1581, 'sci\_tech': 0.1492}\]            
@@ -238,7 +238,7 @@ Le premier module sur lequel nous avons travailler, c'est la catégorisation d'a
             
         \end{enumerate}
         \subsubsection{Modèle de classification d'articles de presse}
-            Nous avons développé plusieurs modèles de catégorisation d'articles de presse basés sur l'apprentissage supervisé et non supervisé cités présentés la \autoref{approches}. L'algorithme \autoref{algomodeles} présente les étapes de développement des différents modèles.
+            Nous avons développé plusieurs modèles de catégorisation d'articles de presse basés sur l'apprentissage supervisé et non supervisé présentés dans la \autoref{approches}. L'algorithme \autoref{algomodeles} présente les étapes de développement des différents modèles.
 
             \begin{algorithm2e}[H]
             \label{algomodeles}
@@ -391,7 +391,7 @@ Le résumé automatique permet à l'utilisateur de notre système d'avoir une id
                 \caption{Vecteurs de centroïdes - Table 1, page 14 \ref{plongement}}
                 \label{centro-vec}
              \end{figure}
-
+         \vspace*{1cm}    
          \subsubsection{Notation des phrases}
          Après l'étape de construction du vecteur centroïde, la somme des plongements de mots de chaque terme  est attribuée à la phrase où il apparaît.\label{somplong}
 
@@ -407,19 +407,17 @@ Le résumé automatique permet à l'utilisateur de notre système d'avoir une id
         
         \[sim\_cos(S\textsubscript{centroide},S\textsubscript{j}) = \frac {S\textsubscript{centroide} \cdot S\textsubscript{j}}{||S\textsubscript{centroide}|| \cdot ||S\textsubscript{j}||}\]
 
-        Exemple :
+        La \autoref{notation-phrase} présente un exemple de plongement de mots.
             \begin{figure}[H]
                 \centering
                 \includegraphics[height=155pt,width=400pt]{img/chapter3/scoreembed.jpg}
                 \caption{Notation des phrases - Table 2, page 14 \ref{plongement}}
-                \label{}
+                \label{notation-phrase}
             \end{figure}
 
         \subsubsection{Sélection des phrases}
-       Après la phase de notation des phrases du document, elles sont, ensuite, triées par ordre décroissant en fonction de la similarité. Les phrases les mieux classées sont itérativement sélectionnées et ajoutées au résumé jusqu'à ce que la limite (taille du résumé) soit atteinte. Afin de satisfaire la propriété de redondance, nous allons calculer, à chaque itération, la \emph{similarité de cosinus} entre la phrase à venir et les phrases déjà sélectionnées dans le résumé.
-
+       Après la phase de notation des phrases du document, elles sont, ensuite, triées par ordre décroissant en fonction de la similarité. Les phrases les mieux classées sont itérativement sélectionnées et ajoutées au résumé jusqu'à ce que la limite (taille du résumé) soit atteinte. Afin de satisfaire la propriété de redondance, nous allons calculer, à chaque itération, la \emph{similarité de cosinus} entre la phrase à venir et les phrases déjà sélectionnées dans le résumé.\\
        Il est à noter qu'un seuil a été fixé afin de rejeter toutes les phrases qui ont une similarité très élevées par rapport à une phrase afin d'éviter cette redondance.
-
         \begin{algorithm2e}[H]
             \SetAlgoLined
             \SetKwInOut{Input}{input}
@@ -502,7 +500,7 @@ Voici maintenant un exemple d'un document de la collection d'articles :
 {
 '_id': '5afc18571d41c833a8632a24', 
 'language': 'en',
-'title': \textquotedbl Smart's stellar Game 2 play draws Cavs praise\textquotedbl , 
+'title': "Smart's stellar Game 2 play draws Cavs praise", 
 'source': 'espn', 
 'author': 'Chris Forsberg', 
 'content': 'LeBron James and Tyronn Lue explain what they think of Marcus...'
@@ -535,14 +533,8 @@ Ci-dessous un exemple d'un document de la collection de profils :
 'username': 'yankheloufi'
 'password': 'CAESEMgZsfgjSKT7GvZNAtFJaAs'
 'email': 'yk@usthb.dz',
-'categories': {
-'entertainment': '0.63',
-'world': '0.42',
-'health': '0.12',
-},
-'sources': [
-'wello-mag', 'al-jazeera-english', 'bbc-news', 
-],
+'preferences': {'entertainment': '0.63','world': '0.42','health': '0.12'},
+'sources': ['wello-mag', 'al-jazeera-english', 'bbc-news'],
 },
 \end{lstlisting}
 
@@ -579,18 +571,16 @@ Les entrées (articles de presse extraits de plusieurs sources) sont sauvegardé
 
 \begin{figure}[H]
     \centering
-    \includegraphics[height=600pt,width=450pt]{img/chapter3/global.png}
+    \includegraphics[height=520pt,width=380pt]{img/chapter3/global.png}
     \caption{Schéma global du fonctionnement de \textquotedbl Feedny\textquotedbl }
     \label{shemaglobal}
 \end{figure}
 
 \section{Schémas conceptuels de \textquotedbl Feedny\textquotedbl }
-Nous allons présenter dans cette partie, la façon avec laquelle le logiciel fournit les différentes fonctionnalités. Celle-ci décrit d'une manière claire et précise, le fonctionnement du futur système en utilisant un langage de modélisation. 
-
-Nous avons choisi la méthode UML (Unified Modeling Language), qui est une notation graphique conçue pour représenter, spécifier et construire les systèmes logiciels. UML utilise des techniques orientées objets pour la modélisation des systèmes, depuis la conception jusqu'à la maintenance, d'une manière compréhensible par l'être humain et disposant de qualités formelles suffisantes pour être traduites automatiquement en code source \cite{UML}.
+Nous allons présenter dans cette partie, la façon avec laquelle le logiciel fournit les différentes fonctionnalités. Celle-ci décrit d'une manière claire et précise, le fonctionnement du futur système en utilisant un langage de modélisation. Nous avons choisi la méthode UML (Unified Modeling Language), qui est une notation graphique conçue pour représenter, spécifier et construire les systèmes logiciels \cite{UML}.
 
 \subsection{Diagramme de cas d'utilisation}
-\textquotedbl Le diagramme de cas d'utilisation (initié par Ivar Jacobson en 1992 dans la méthode OOSE) est un type de diagramme UML qui permet de définir les besoins des acteurs dans un système quelconque en établissant les fonctionnalités attendues et en organisant les besoins. Il peut être aussi utilisés ensuite comme moyen d'organisation du développement du logiciel, notamment pour la structuration et le déroulement des tests du logiciel\textquotedbl .\cite{UML}
+\textquotedbl Le diagramme de cas d'utilisation (initié par Ivar Jacobson en 1992 dans la méthode OOSE) est un type de diagramme UML qui permet de définir les besoins des acteurs dans un système quelconque en établissant les fonctionnalités attendues et en organisant les besoins. Il peut être aussi utilisés ensuite comme moyen d'organisation du développement du logiciel, notamment pour la structuration et le déroulement des tests du logiciel\textquotedbl\text{ }\cite{UML}.
 \begin{figure}[H]
     \centering
     \includegraphics[height=400pt,width=350pt]{img/chapter3/diagcasdutilisation.png}
@@ -620,7 +610,7 @@ L'évaluation de chaque module du système est l'une des étapes les plus import
         \subsubsection{Métrique d'évaluation MAE}
         La moyenne erreur absolue (MAE) est une mesure largement utilisée dans les évaluations des modèles de recommandations. Elle est utilisée pour estimer la différence moyenne entre la note réelle et celle que le système de recommandation va prédire. 
 
-        Plus la valeur du MAE est basse, plus la précision sera meilleure. En général, la valeur du MAE peut aller de 0 à l'infini, où l'infini est l'erreur maximale en fonction de l'échelle de notation de l'application mesurée. Le calcul de l'erreur absolue moyenne est fait comme suit \cite{rmse}:
+        Plus la valeur du MAE est basse, plus la précision sera meilleure. En général, la valeur du MAE peut aller de 0 à l'infini, où l'infini est l'erreur maximale en fonction de l'échelle de notation de l'application mesurée \cite{rmse}. Le calcul de l'erreur absolue moyenne est fait comme suit :
 
         \[MAE = \frac{1}{n}\sum_{t=1}^{n}|d\textsubscript{i}|-|D\textsubscript{i}|\]
 
@@ -663,7 +653,7 @@ L'évaluation de chaque module du système est l'une des étapes les plus import
         \[ F-mesure = \frac{2 * (Precision * Rappel)} {(Precision + Rappel)}\]
         
         \subsubsection{Courbe ROC} 
-        Courbe ROC : ROC montre une relation entre la sensibilité et la spécificité de l'algorithme.
+        C'est une course qui montre la relation entre la sensibilité et la spécificité de l'algorithme.
         
         \subsubsection{Perplexité}
         Dans le traitement du automatique du langage naturel, la perplexité est un moyen d'évaluer les modèles de langage \cite{perplexite}. Un modèle de langage est une distribution de probabilité sur des phrases ou des textes entiers. Elle est calculée comme suit:
@@ -691,8 +681,8 @@ L'évaluation de chaque module du système est l'une des étapes les plus import
     \subsection{Métriques d'évaluation du module de résumé automatique}
     Dans le module de résumé automatique, la mesure principale est \emph{Rouge}. Ci-dessous, nous allons la présenter.
 
-        \subsubsection{Métrique d'évaluation : ROUGE\label{metrique-eval}}
-        ROUGE est l'acronyme de \textquotedbl Recall-Oriented Understudy for Gisting Evaluation\textquotedbl. Il s'agit essentiellement d'un ensemble de métriques permettant d'évaluer le résumé automatique de textes ainsi que la traduction automatique. Il fonctionne en comparant un résumé produit automatiquement ou une traduction à un ensemble de résumés de référence (généralement produits par des humains). \cite{rouge0}
+        \subsubsection{Métrique d'évaluation ROUGE\label{metrique-eval}}
+        ROUGE est l'acronyme de \textquotedbl Recall-Oriented Understudy for Gisting Evaluation\textquotedbl. Il s'agit essentiellement d'un ensemble de métriques permettant d'évaluer le résumé automatique de textes ainsi que la traduction automatique. Il fonctionne en comparant un résumé produit automatiquement ou une traduction à un ensemble de résumés de référence (généralement produits par des humains) \cite{rouge0}.
 
         \subsubsection{Types des métriques de ROUGE\label{type-rouge}}
         \begin{itemize}
