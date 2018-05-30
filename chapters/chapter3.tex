@@ -638,13 +638,15 @@ L'évaluation de chaque module du système est l'une des étapes les plus import
     \subsection{Métriques d'évaluation du module de catégorisation}
     Dans le module de catégorisation des articles, nous allons évaluer nos modèles en utilisant la précision, le rappel, la F-mesure et les tables de confusions \cite{mesurecateg}.
         \subsubsection{La matrice de Confusion}
-        Pour analyser plus finement la qualité des classes produites par le modèle de catégorisation, on peut s’intéresser aux tables de confusion. 
+        Pour analyser plus finement la qualité des classes produites par le modèle de catégorisation, on peut s’intéresser aux tables de confusion.
+
+        Une matrice de confusion ou tableau de contingence sert à évaluer la qualité d'une classification. Elle est obtenue en comparant les données classées avec des données de référence qui doivent être différentes de celles ayant servi à réaliser la classification.
         
         \begin{itemize}
-            \item{\textbf{TP }True Positive (vrais positifs) :} nombre d'articles bien prédits de la classe.
-            \item{\textbf{FP }False Positive (faux positifs) :} nombre d'articles prédits d'une classe alors qu'ils ne devraient pas en faire parti.
-            \item{\textbf{FN }False Negative (faux négatifs) :} nombre d'articles prédits comme étant de la classe alors qu'il ne le sont pas en vrai.
-            \item{\textbf{TN }True Negative (vrais négatifs) :} nombre d'articles prédits comme n'étant pas dans la classe à juste titre.
+            \item{\textbf{TP }True Positive (vrais positifs) :} résultat où le modèle prédit correctement la classe positive.
+            \item{\textbf{FP }False Positive (faux positifs) :} résultat où le modèle prédit incorrectement la classe positive.
+            \item{\textbf{FN }False Negative (faux négatifs) :} résultat où le modèle prédit incorrectement la classe négative.
+            \item{\textbf{TN }True Negative (vrais négatifs) :} résultat où le modèle prédit correctement la classe négative.
         \end{itemize}
         
         \subsubsection{Accuracy} 
