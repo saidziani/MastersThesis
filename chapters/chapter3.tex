@@ -326,7 +326,7 @@ Le résumé automatique permet à l'utilisateur de notre système d'avoir une id
         \item{Similarité avec la phrase centroïde}
     \end{enumerate} 
 
-    \subsection{Résumé automatique extractif par Plongement de mots\ref{plongement}}
+    \subsection{Résumé automatique extractif par plongement de mots}
     L'approche proposée par l'équipe de recherche du département informatique de l'Université de Bari en Italie \cite{notrerésumé}, est basée sur la similarité textuelle entre la phrase centroïde et les autres phrases du texte en utilisant les plongements de mots (Word embeddings) présentés dans \autoref{wordebd}. Le plongement de mots utilisé dans cette approche est un modèle Skip-Gram (\autoref{skip-gram}) entraîné sur le contenu de Wikipédia en utilisant la bibliothèque FastText développé par le Laboratoire en Intelligence Artificielle de \emph{Facebook} qui prend en charge 294 langues différentes \cite{fasttext}. Parmi les modèles développés, nous allons nous intéresser à celui de l'Anglais et l'Arabe. Ci-dessous, nous allons présenter les étapes de conception du résumé automatique.
 
         \subsubsection{pré-traitement des articles}
@@ -350,7 +350,7 @@ Le résumé automatique permet à l'utilisateur de notre système d'avoir une id
         \end{algorithm2e}
 
        \subsubsection{Construction d'un vecteur de centroïde}
-        Après l'étape de pré-traitement, place à la construction des vecteurs de centroïde. Afin de construire un vecteur centroïde en utilisant les plongements de mots, nous sélectionnons d'abord les mots significatifs dans le document. Pour cela, nous calculons le poids TF-IDF de chaque mot dans chaque document. Ensuite, les mots ayant le poids TF-IDF supérieur à une constante empirique fixée au tout début de cette phase qui désignera un seuil de document (IDF) seront sélectionnés. Ainsi, nous calculons l'encastrement\footnote{ICI DEF} du centroïde comme la somme des mots les mieux classés dans le document en utilisant les plongements de mots de Wikipédia, comme le montre l'équation suivante :
+        Après l'étape de pré-traitement, place à la construction des vecteurs de centroïde. Afin de construire un vecteur centroïde en utilisant les plongements de mots, nous sélectionnons d'abord les mots significatifs dans le document. Pour cela, nous calculons le poids TF-IDF de chaque mot dans chaque document. Ensuite, les mots ayant le poids TF-IDF supérieur à une constante empirique fixée au tout début de cette phase qui désignera un seuil de document (IDF) seront sélectionnés. Ainsi, nous calculons l'encastrement du centroïde comme la somme des mots les mieux classés dans le document en utilisant les plongements de mots de Wikipédia, comme le montre l'équation suivante :
 
              \begin{equation*}
              C = \sum_{\substack{w\in D\\
@@ -385,6 +385,7 @@ Le résumé automatique permet à l'utilisateur de notre système d'avoir une id
                 \caption{Algorithme de construction du vecteur centroïde}
              \end{algorithm2e}
              
+             \vspace*{0.5cm}
              La \autoref{centro-vec} présente un exemple d'un vecteur de centroïdes. 
               \begin{figure}[H]
                  \centering
@@ -416,7 +417,7 @@ Le résumé automatique permet à l'utilisateur de notre système d'avoir une id
         \subsubsection{Sélection des phrases}
        Après la phase de notation des phrases du document, elles sont, ensuite, triées par ordre décroissant en fonction de la similarité. Les phrases les mieux classées sont itérativement sélectionnées et ajoutées au résumé jusqu'à ce que la limite (taille du résumé) soit atteinte. Afin de satisfaire la propriété de redondance, nous allons calculer, à chaque itération, la \emph{similarité de cosinus} entre la phrase à venir et les phrases déjà sélectionnées dans le résumé.
 
-       Il est à noter qu'un seuil a été fixé afin de rejeter toutes les phrases qui ont une similarité très élevés par rapport à une phrase afin d'éviter cette redondance.
+       Il est à noter qu'un seuil a été fixé afin de rejeter toutes les phrases qui ont une similarité très élevées par rapport à une phrase afin d'éviter cette redondance.
 
         \begin{algorithm2e}[H]
             \SetAlgoLined
@@ -609,7 +610,6 @@ Le diagramme de séquence est un diagramme UML qui fait partie des diagrammes co
     \caption{Diagramme de séquence dans le cas de l'utilisation non personnalisée de "Feedny"}
 \end{figure}
 
-%%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~%%
 \section{Mesures d'évaluation du système}
 L'évaluation de chaque module du système est l'une des étapes les plus importantes. Plusieurs métriques d'évaluations ont été utilisées, nous allons les présenter dans ce qui suit.
 
@@ -662,6 +662,29 @@ L'évaluation de chaque module du système est l'une des étapes les plus import
         \subsubsection{Courbe ROC} 
         Courbe ROC : ROC montre une relation entre la sensibilité et la spécificité de l'algorithme.
         
+        \subsubsection{Perplexité}
+        Dans le traitement du automatique du langage naturel, la perplexité est un moyen d'évaluer les modèles de langage. Un modèle de langage est une distribution de probabilité sur des phrases ou des textes entiers. Elle est calculée comme suit:
+        \[
+        \text{perplexite}(D\textsubscript{test}) =
+        \exp
+        \left \{-\frac{\sum_{d=1}^{M}{\log{p(w_d)}}}{\sum_{d=1}^{M}{N_d}}\right\}
+        \]
+
+        Où D est un document, w est un terme du document, p(w) est la probabilité d'apparition du terme w dans D et N est le nombre de mots dans le document.
+
+        La valeur de celle-ci est algébriquement équivalente à l'inverse de la moyenne géométrique par vraisemblance. Un score de perplexité inférieur indique une meilleure performance de généralisation.
+
+        \subsubsection{Cohérence de sujet}
+        La cohérence de sujet (Topic coherence) mesure le , dans les mots utilisés pour décrire une catégorie, un mot commun est en moyenne un bon prédicteur pour un mot moins commun.
+
+        Nous allons calculer la cohérence en utilisant \textquotedbl intrinsic UMass measure\textquotedbl qui est proposé par \cite{}. La formule est présentée là-dessous :
+        \[
+        \text{score}_{\text{UMass}}(w_i, w_j) =
+        \log
+        \frac{D(w_i, w_j) + 1}{D(w_i)}
+        \]
+        Où w\textsubscript{i} est un mot commun et w\textsubscript{j} est moins commun, les deux mots font parti des mots qui décrivent une catégorie, D est un document.
+
     \subsection{Métriques d'évaluations du module de résumé automatique}
     Dans le module de résumé automatique, la mesure principale est \emph{Rouge}. Ci-dessous, nous allons la présenter.
 
@@ -684,3 +707,6 @@ L'évaluation de chaque module du système est l'une des étapes les plus import
                 Exemple : si la précision est égale a 40\%, cela signifie que 40\% des n-grammes du résumé généré par le système sont également présents dans le résumé de référence.}
             \item {La F-mesure est calculée à partir de la précision et du rappel \ref{fmesure}.}
         \end{itemize}
+
+\section{Conclusion}
+Lors de ce chapitre, nous avons proposé la conception du système \textquotedbl Feedny\textquotedbl. Nous avons commencer par décrire la conception des modules de recommandation, de catégorisation d'articles, de résumé et de la traduction automatique. Nous avons ensuite décrit la structure de notre base de données, puis présenter l'architecture globale du système. Par la suite, nous avons présenter les schémas conceptuels de \textquotedbl Feedny\textquotedbl. Et nous avons, enfin, expliciter les mesures d'évaluation des différents modules. Dans le prochain chapitre, nous allons présenter la réalisation et les résultats de notre travail.
