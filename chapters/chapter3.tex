@@ -156,59 +156,69 @@ Dans cette partie, nous allons voir la conception détaillée de notre système 
 \section{Module de catégorisation d'article de presse}
 Le premier module sur lequel nous avons travailler, c'est la catégorisation d'articles de presse. Nous avons expérimenter plusieurs techniques proposées dans la littérature. Nous présentons ci-après chaque approche, ses résultats, ses points forts et ses faiblesses.
 
-En se basant sur les travaux de \cite{categorisation} pour l'Anglais et \cite{categorisation} pour l'Arabe, nous avons entraîné nos modèles sur des corpus d'articles de différentes sources afin de garantir la diversité dans nos données (plus de détails dans le chapitre 4\ref{chapter4}).
-À REVOIR!!
+% En se basant sur les travaux de \cite{categorisation} pour l'Anglais et \cite{categorisation} pour l'Arabe, nous avons entraîné nos modèles sur des corpus d'articles de différentes sources afin de garantir la diversité dans nos données (plus de détails dans le chapitre 4\ref{chapter4}).
+% À REVOIR!!
 
     \subsection{Approches expérimentées\label{approches}}
-    Toutes les approches utilisées sont basées sur l'apprentissage automatique, supervisé et non supervisé. 
+    Toutes les approches utilisées, pour la catégorisation d'articles de presse, sont basées sur l'apprentissage automatique, supervisé et non supervisé. 
 
     \subsubsection{Basées sur l'Apprentissage Non Supervisé}
-        
         \begin{itemize}
             \item{LDA (Latent Dirichlet Allocation) : }\\
-            Latent Dirichlet Allocation (LDA) est un modèle probabiliste génératif qui permet de décrire des collections de documents de texte ou d’autres types de données discrètes. LDA fait partie d’une catégorie de modèles appelés “topic models”, qui cherchent à découvrir des structures thématiques cachées dans des vastes archives de documents. Ceci permet d’obtenir des méthodes efficaces pour le traitement et l’organisation des documents de ces archives: organisation automatique des documents par sujet.
+            "Latent Dirichlet Allocation" est un modèle probabiliste génératif qui permet de décrire des collections de documents de texte ou d'autres types de données discrètes. LDA fait partie d'une catégorie de modèles appelés "topic models", qui cherchent à découvrir des structures thématiques cachées dans des vastes archives de documents. L'organisation automatique des documents par sujet est une application connue de LDA.
         \end{itemize}
         
-        \begin{itemize}
-            \item{Corpus et dataset}
-        \end{itemize}
+    \begin{itemize}[label={}, leftmargin=*]
+        \item{\textbf{Corpus et dataset}}\\
+        Le Dataset \emph{DeepMind Q\&A} de Hermann et al. (2015) \cite{cnndailymail} a été utilisé. Les articles de presse ont étaient récoltés pour l'utilisation dans un travail de recherche dans les systèmes de Questions/Réponses. Le corpus est contient 92 579 articles de presse de \emph{CNN}.
+
+        Chaque article est sous le format suivant :
+       \begin{itemize}
+        \item \textbf{id : }identifiant unique de l'article.
+        \item \textbf{contenu : }contenu de l'article.
+       \end{itemize}
+    \end{itemize}
         
     \subsubsection{Basées sur l'Apprentissage Supervisé}
         \begin{itemize}
             \item{Naïve de Bayes : }\\
-            c'est une méthode connue de l'Apprentissage automatique supervisé. Un de ses avantages en plus d'être un modèle simple, c'est qu'ils renvoient non seulement la prédiction mais aussi le degré de certitude, ce qui peut être très utile dans certaines applications. Mais en ayant un problème à classes multiples, cette approche nous a donnés des résultats très modeste en un temps d'exécution assez importants, ce qui nous a poussé à abandonner son utilisation.
+            C'est une méthode connue de l'apprentissage automatique supervisé. Un de ses avantages, en plus d'être un modèle simple et facilement interprétable, c'est qu'il renvoie le degré de certitude en plus de la prédiction, ce qui peut être très utile dans certaines applications. 
+
+            Mais en ayant un problème à classes multiples, cette approche nous a donnés des résultats très modeste en un temps d'exécution assez importants, ce qui nous a poussé à abandonner son utilisation.\\
             
             \item{Arbres de décision : }\\
-            peuvent être assistés par un expert. Ces principaux avantages sont : robuste face aux données aberrantes, pas très sensible aux données manquantes, possibilité d’intervenir dans la construction de l’arbre, etc. Son principale inconvénient reste la dépendance très forte entre la taille de la base d’apprentissage et les performances.
+            L'un des algorithmes d'apprentissage automatique supervisé les plus facile à interpréter. Ces principaux avantages sont : robuste face aux données aberrantes, pas très sensible aux données manquantes, possibilité d'intervenir dans la construction de l'arbre, etc. 
+
+            Son principale inconvénient reste la dépendance très forte entre la taille de la base d'apprentissage et les performances.\\
             
             \item{SVM (Support Vector Machines) : }\\
-            Les machines à vecteurs support (en anglais Support Vector Machine, SVM) sont un ensemble de techniques d’apprentissage supervisé destinées à résoudre des problèmes de classification (SVC) et de régression. Les SVM sont des types des classifieurs. On ne considérera ici que le cas des SVM linéaires.
+            Les machines à vecteurs supports (en anglais Support Vector Machine, SVM) sont destinées à résoudre des problèmes de classification et de régression. Les SVMs cherchent à trouver la frontière séparatrice optimale entre les classes, à partir d'un ensemble d'apprentissages. Dans le cas de la classification de textes (articles de presse dans notre cas), les SVMs ont montrés une grande capacité de prédiction malgré le très grand nombre de caractéristiques des textes (> 10000) contrairement aux autres techniques.\\ 
             
             \item{Descente de Gradient Stochastique : }\\
-            Descente de gradient stochastique¶
-            La SGD peut être beaucoup plus rapide que la descente de gradient ordinaire (batch), parce que le nombre de mises à jour est beaucoup plus grand. C’est particulièrement vrai pour des jeux de données volumineux, ou pour le cas en ligne. En fait, dans les tâches d’apprentissage machine, on n’utilise la descente de gradient ordinaire (au lieu de stochastique) que lorsque la fonction à minimiser ne peut pas être décomposée comme ci-dessus (comme une moyenne).
+            Le SGD est un algorithme de classification linéaire, souvent utilisé pour l'optimisation. Il peut être combiné avec d'autres techniques d'apprentissage, (SVM, Réseau de neurones, etc.), comme  fonction d'optimisation d'erreur. Dans notre cas, il est utilisé avec un SVM pour le modèle de catégorisation d'articles de presse arabe.
         \end{itemize}
 
-        \begin{itemize}[leftmargin=*, label={}]
-            \item{Corpus et dataset}\\
-                À la fin de la phase de pré-traitement, nous avons définie une structure pour faciliter l'exploration des datasets. Ci-dessous la structure choisie :
-                \begin{itemize}
-                   \item{\textbf{id} : }un identifiant unique de l'article,
-                   \item{\textbf{contenu} : }les différents paragraphes de l'article,
-                   \item{\textbf{catégorie} : }la catégorie de l'article extraite depuis la source.
-                \end{itemize}
-        \end{itemize}
+    \begin{itemize}[leftmargin=*, label={}]
+        \item{Corpus et dataset}\\
+            Nous avons défini une structure pour chaque article, pour faciliter l'exploration des datasets. Ci-dessous la structure choisie :
+            \begin{itemize}
+               \item{\textbf{id} : }un identifiant unique de l'article,
+               \item{\textbf{contenu} : }les différents paragraphes de l'article,
+               \item{\textbf{catégorie} : }la catégorie de l'article extraite depuis la source.
+            \end{itemize}
+    \end{itemize}
 
     \subsection{Processus de catégorisation}
-        \subsubsection{Pré-traitement des articles de presse}
-        Plusieurs opérations de pré-traitements ont été effectuées. 
+        \subsubsection{Pré-traitement des articles de presse}\label{pretraitement}
+        Plusieurs opérations de pré-traitements ont été effectuées sur chaque article dans le but de rendre l'utilisation des données avec les différents algorithmes d'apprentissage automatique possible.
+
         On prend le paragraphe suivant comme exemple :
 
             \begin{arab}أمرت السلطات القطرية الأسواق والمراكز التجارية في البلاد برفع وإزالة السلع الواردة من السعودية والبحرين والإمارات ومصر في الذكرى الأولى لإعلان هذه الدول الحصار عليها.\end{arab}
             
-        Ci-après les étapes suivies :
+        Ci-après les étapes de pré-traitement suivies :
         \begin{enumerate}[leftmargin=*]
-            \item{\textbf{Segmentation (Tokenization) et suppression des mots vides :} }permet d'extraire toutes les entités lexicales d'un article donné. La segmentation est suivie de la suppression des tokens non utiles tel que la ponctuation, les pronoms, les déterminants, etc.
+            \item{\textbf{Segmentation (Tokenization) et suppression des mots vides :} }permet d'extraire toutes les entités lexicales d'un article donné. La segmentation est suivie de la suppression des tokens non-utiles tel que la ponctuation, les pronoms, les déterminants, etc.
 
             Après segmentation : \{
                 \begin{arab}'أمرت', 'السلطات', 'القطرية', 'الأسواق', 'و', 'المراكز', 'التجارية', 'في', 'البلاد', 'برفع', 'و', 'إزالة', 'السلع', 'الواردة', 'من', 'السعودية', 'و', 'البحرين', 'و', 'الإمارات', 'و', 'مصر', 'في', 'الذكرى', 'الأولى', 'لإعلان', 'هذه', 'الدول', 'الحصار', 'عليها', '.'\end{arab}
@@ -224,16 +234,17 @@ En se basant sur les travaux de \cite{categorisation} pour l'Anglais et \cite{ca
             \begin{arab}'أمر', ' سلطة ', 'قطر', 'سوق', 'مركز', 'تجاري', 'بلد', 'رفع', 'إزالة', 'سلعة', 'وارد', 'سعودية', 'بحرين', 'إمارة', 'مصر', 'ذكرى', 'أول', 'إعلان', 'دولة', 'حصار'\end{arab}
             \}\\
 
-            \item{\textbf{N-grammes :} }les N-grammes permettent de construire une sous-séquence de n mots consécutives. Ils permettent de contextualiser l'ordre d'apparition d'un ensemble de mots.\\
+            \item{\textbf{N-grammes :} }les N-grammes permettent de construire une sous-séquence de n mots consécutifs. Ils permettent de contextualiser l'ordre d'apparition d'un ensemble de mots.
 
             Après génération des N-grammes (bi-grammes dans notre cas) : \{
             \begin{arab}('أمر', 'سلطة'), ('سلطة', 'قطر'), ('قطر', 'سوق'), ('سوق', 'مركز'), ('مركز', 'تجاري'), ('تجاري', 'بلد'), ('بلد', 'رفع'), ('رفع', 'إزالة'),('إزالة', 'سلعة'), ('سلعة', 'وارد'), ('وارد', 'سعودية'), ('سعودية', 'بحرين'), ('بحرين', 'إمارة'), ('إمارة', 'مصر'), ('مصر', 'ذكرى'), ('ذكرى', 'أول'), ('أول', 'إعلان'), ('إعلان', 'دولة'), ('دولة', 'حصار')\end{arab}
             \}\\
         \end{enumerate}
         \subsubsection{Modèle de classification d'articles de presse}
-            Nous avons développé plusieurs modèles de catégorisation d'articles basés sur l'apprentissage supervisé et non supervisé cités dans \autoref{},  zfeze hfnzoflk nz,ofkzne fomizeln zomifn zofiznefoi eofnze fozefm, zfopiz nf,zome ifnzef oizfn zoifz !!!Say something about classification.
+            Nous avons développé plusieurs modèles de catégorisation d'articles de presse basés sur l'apprentissage supervisé et non supervisé cités présentés la \autoref{approches}. L'algorithme \autoref{algomodeles} présente les étapes de développement des différents modèles.
 
             \begin{algorithm2e}[H]
+            \label{algomodeles}
             \SetAlgoLined
             \SetKwInOut{Input}{input}
             \SetKwInOut{Output}{output}
@@ -253,9 +264,10 @@ En se basant sur les travaux de \cite{categorisation} pour l'Anglais et \cite{ca
             \end{algorithm2e}
 
         \subsubsection{Prédiction des catégories d'articles de presse}
-            Nous avons développé plusieurs modèles de catégorisation d'articles basés sur l'apprentissage supervisé et non supervisé cités dans \autoref{},  zfeze hfnzoflk nz,ofkzne fomizeln zomifn zofiznefoi eofnze fozefm, zfopiz nf,zome ifnzef oizfn zoifz !!!Say something about classification.
-            
+            Une fois le modèle est prêt, nous utilisons le résultat pour la prédiction d'un nouvel article. L'article à classifier doit passé par les mêmes étapes de pré-traitement cités dans la \autoref{pretraitement}. On peut voir le processus de la prédiction dans l'algorithme \autoref{algoprediction}.
+
             \begin{algorithm2e}[H]
+            \label{algoprediction}
             \SetAlgoLined
             \SetKwInOut{Input}{input}
             \SetKwInOut{Output}{output}
@@ -270,8 +282,6 @@ En se basant sur les travaux de \cite{categorisation} pour l'Anglais et \cite{ca
             \Return{catégorie}
             \caption{Algorithme de prédiction de catégorie d'un article de presse}
             \end{algorithm2e}
-
-
 %%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~%%
 
 \section{Module de résumé automatique}
@@ -282,7 +292,7 @@ Ci-dessous la présentation des différentes approches expérimentées.
         \subsubsection{Corpus et datasets}
         Le dataset contient plus de 70 articles. Il est dédié principalement au résumé automatique par apprentissage supervisé pour la langue Arabe, mais peut être utilisé également dans d'autres applications, telles que la compression des textes.
 
-        L'annotation consiste en l'attribution de quatre type d’étiquettes possibles à chaque phrase de l'article :
+        L'annotation consiste en l'attribution de quatre type d'étiquettes possibles à chaque phrase de l'article :
             \begin{itemize}
                 \item S (select) : phrase importante, à prendre en considération dans la construction du résumé.
                 \item R (remove) : cette phrase est à supprimer, son absence n'affecte pas le sens du résumé.
@@ -515,18 +525,18 @@ Ci-dessous un exemple d'un document de la collection de profils :
 \section{Architecture du système \textquotedbl Feedny\textquotedbl}
 Dans cette partie, nous allons présenter l'architecture globale de notre système, cette dernière est déployé sous la forme d'une architecture 3-tiers. Ci-dessous, nous présentons ce qu'est une architecture 3-tiers ainsi que son avantage avant d'expliciter un schéma de l'architecture globale.
 
-\subsection{Présentation de l’architecture 3-tiers}
+\subsection{Présentation de l'architecture 3-tiers}
 Une application Web possède souvent une architecture 3-tiers.
-La couche DAO : " Data Access Object " s’occupe de l’accès aux données, le plus souvent des
-données persistantes au sein d’un SGBD.
+La couche DAO : " Data Access Object " s'occupe de l'accès aux données, le plus souvent des
+données persistantes au sein d'un SGBD.
 
-La couche métier : implémente les algorithmes " métier " de l’application. Cette couche est indé-
-pendante de toute forme d’interface avec l’utilisateur.C’est généralement la couche la plus
-stable de l’architecture. Elle ne change pas si on change l’interface utilisateur ou la façon
-d’accéder aux données nécessaires au fonctionnement de l’application.
+La couche métier : implémente les algorithmes " métier " de l'application. Cette couche est indé-
+pendante de toute forme d'interface avec l'utilisateur.C'est généralement la couche la plus
+stable de l'architecture. Elle ne change pas si on change l'interface utilisateur ou la façon
+d'accéder aux données nécessaires au fonctionnement de l'application.
 
-La couche interface utilisateur : interface (graphique souvent) qui permet à l’utilisateur de pi
-loter l’application et d’en recevoir des informations.
+La couche interface utilisateur : interface (graphique souvent) qui permet à l'utilisateur de pi
+loter l'application et d'en recevoir des informations.
 FIGURE 3.1 – Architecture 3-tiers
 
 \begin{figure}[H]
@@ -535,15 +545,15 @@ FIGURE 3.1 – Architecture 3-tiers
     \caption{Diagramme présentant les cas d'utilisations}
 \end{figure}
 
-\subsection{Avantage de l’architecture multi-tiers}
-L’avantage principal d’une architecture 3-tiers (multi-tiers) est la facilité de déploiement.L’application
-en elle même n’est déployée que sur la partie serveur.
-Le client ne nécessite qu’une installation et une configuration minime.
-En effet il suffit d’installer un navigateur web compatible avec l’application pour que le client
-puisse accéder à l’application.
+\subsection{Avantage de l'architecture multi-tiers}
+L'avantage principal d'une architecture 3-tiers (multi-tiers) est la facilité de déploiement.L'application
+en elle même n'est déployée que sur la partie serveur.
+Le client ne nécessite qu'une installation et une configuration minime.
+En effet il suffit d'installer un navigateur web compatible avec l'application pour que le client
+puisse accéder à l'application.
 Cette facilité de déploiement aura pour conséquence non seulement de réduire le coût de déploie
 ment mais aussi de permettre une évolution régulière du système. Cette évolution ne nécessitera
-que la mise à jour de l’application sur le serveur applicatif.[4]
+que la mise à jour de l'application sur le serveur applicatif.[4]
 
 \subsection{Schéma global de \textquotedbl Feedny\textquotedbl}
 L'architecture globale du système "Feedny" comporte quatre processus principales: Catégorisation, résumé, traduction et recommandation d'articles de presse.
@@ -623,7 +633,7 @@ Le diagramme de séquence est un diagramme UML qui fait partie des diagrammes co
         \[ Accuracy = \frac{tp+tn} {tp+fp+tn+fn} \]
         \item{\textbf{Précision :} }elle évalue le pouvoir prédictif du modèle en mesurant la capacité du modèle à prédire que des classes correctes.
         \[ Precision = \frac{tp} {tp+fp} \]
-        \item{\textbf{Rappel :} }la capacité d’un modèle à prédire toutes les classes correctes de l'ensemble de test.
+        \item{\textbf{Rappel :} }la capacité d'un modèle à prédire toutes les classes correctes de l'ensemble de test.
         \[ Rappel = \frac{tp} {tp+fn} \]
         \item{\textbf{F-mesure :} }une mesure composite qui profite aux algorithmes avec une sensibilité plus élevée et des algorithmes de défis avec spécificité plus élevée.!!!
         \[ F-mesure = \frac{2 * (Precision * Rappel)} {(Precision + Rappel)} \]
