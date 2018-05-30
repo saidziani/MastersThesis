@@ -467,19 +467,19 @@ Toutefois, il fallait rechercher le module de traduction le plus performant afin
 
 Afin d'intégrer un bon système de traduction automatique, nous avons exploré deux sources principales, la première était destiné à une utilisation professionnelle, de plus, la version gratuite offrait une traduction pour des textes de taille limités. Et la deuxième, était la solution la plus adaptée à notre cas d'étude. Elle est à la fois accessible et offrait des possibilités de traduction pour des textes longs (articles de presse, thèse, etc). 
 
-
 \section{Conception de la base de données}
-Le choix a été porté sur les bases de données NoSQL (\autoref{nosql}) vu la structure très dynamique des articles de presse mais aussi des profils utilisateurs.
+Afin de s'adapter à la structure très dynamique des articles de presse et des profils également, nous avons choisi d'utiliser les bases de données NoSQL\ref{nosql}.
 
-MongoDB est une base de données orientée document écrite en C++ \cite{NOSQL3}. Les objets sont stockés en série sous la forme BSON.
-Les objets n'ont pas besoin d'avoir la même structure ou les mêmes champs et les champs communs n'ont pas besoin d'avoir le même type, permettant ainsi un stockage de schéma flexible. À cet effet, nous présentons ci-dessous, sous ce format, la "collection d'articles" et la "collection des profils".
+Le SGBD MongoDB que nous avons utiliser est un système orienté document écrit en C++ \cite{NOSQL3}. Les objets sont stockés en série sous la forme BSON\footnote{C'est un format d'échange de données informatiques utilisé principalement comme stockage de données et format de transfert de données par le réseau dans la base de données MongoDB [Wikipédia]}
+
+Les objets n'ont pas besoin d'avoir la même structure ou les mêmes champs et les champs communs n'ont pas besoin d'avoir le même type, permettant ainsi un stockage de schéma flexible. À cet effet, nous présentons ci-dessous, sous notre base de données, la collection d'articles et la collection des profils.
 
 \subsection{Collection d'articles}
-Les articles extraits depuis différentes sources sont tous sauvegardés sous une structure définie au préalable, prenant en considération les différences entre les formats suivies par les revu de presse. 
+Les articles extraits depuis différentes sources sont tous sauvegardés sous une structure définie au préalable, prenant en considération les différences entre les formats suivies par les revues de presse. 
 
-À cet effet nous avons choisi \emph{JSON} qui est un format léger d'échange de données. Il est facile à lire ou à écrire pour des humains\cite{json} et est pris en charge par tout les langages de programmation.
+À cet effet, nous avons choisi \emph{JSON} qui est un format léger d'échange de données. Il est facile à lire ou à écrire pour des humains \cite{json} et est pris en charge par tout les langages de programmation.
 
-Chaque article est représenté comme suit:
+Chaque article est représenté comme suit :
 \begin{itemize}
     \item \textbf{Identifiant, \textquotedbl \_id\textquotedbl: } identifiant unique d'un article de presse.
     \item \textbf{Langue, \textquotedbl language\textquotedbl:} la langue dans laquelle l'article est écrit.
@@ -495,7 +495,7 @@ Chaque article est représenté comme suit:
     \item \textbf{Traduction, \textquotedbl translatedContent\textquotedbl:} contenu de l'article de presse traduit.\\
 \end{itemize}
 
-Voici maintenant un exemple d'un document de la collection d'articles.
+Voici maintenant un exemple d'un document de la collection d'articles :
 \begin{lstlisting}[style=code]
 {
 '_id': '5afc18571d41c833a8632a24', 
@@ -514,7 +514,7 @@ Voici maintenant un exemple d'un document de la collection d'articles.
 \end{lstlisting}
 
 \subsection{Collection de profils}
-Le profile d'utilisateur regroupe très peu d'informations dans le but de protéger la vie privée. Cependant, les catégories et les sources préférées par l'utilisateur sont sauvegardées. 
+Le profil d'utilisateur regroupe très peu d'informations dans le but de protéger la vie privée. Cependant, les catégories et les sources préférées par l'utilisateur sont sauvegardées. 
 
 Un profil utilisateur est représenté comme suit :
 \begin{itemize}
@@ -546,42 +546,34 @@ Ci-dessous un exemple d'un document de la collection de profils :
 
 
 \section{Architecture du système \textquotedbl Feedny\textquotedbl}
-Dans cette partie, nous allons présenter l'architecture globale de notre système, cette dernière est déployé sous la forme d'une architecture 3-tiers. Ci-dessous, nous présentons ce qu'est une architecture 3-tiers ainsi que son avantage avant d'expliciter un schéma de l'architecture globale.
+Dans cette partie, nous allons présenter l'architecture globale de notre système, cette dernière est déployée sous la forme d'une architecture 3-tiers. Ci-dessous, nous présentons ce qu'est une architecture 3-tiers ainsi que son avantage avant d'expliciter un schéma de l'architecture globale.
 
 \subsection{Présentation de l'architecture 3-tiers}
-Une application Web possède souvent une architecture 3-tiers.
-La couche DAO : " Data Access Object " s'occupe de l'accès aux données, le plus souvent des
-données persistantes au sein d'un SGBD.
-
-La couche métier : implémente les algorithmes " métier " de l'application. Cette couche est indé-
-pendante de toute forme d'interface avec l'utilisateur.C'est généralement la couche la plus
-stable de l'architecture. Elle ne change pas si on change l'interface utilisateur ou la façon
-d'accéder aux données nécessaires au fonctionnement de l'application.
-
-La couche interface utilisateur : interface (graphique souvent) qui permet à l'utilisateur de pi
-loter l'application et d'en recevoir des informations.
-FIGURE 3.1 – Architecture 3-tiers
+Une application mobile ou web possède souvent une architecture 3-tiers.
+\begin{itemize}
+    \item\textbf{La couche DAO : }\\
+    "Data Access Object" s'occupe de l'accès aux données, le plus souvent des données persistantes au sein d'un SGBD.\\
+    \item\textbf{La couche métier : }\\
+    Implémente les algorithmes "métiers" de l'application. Cette couche est indépendante de toute forme d'interface avec l'utilisateur. C'est généralement la couche la plus stable de l'architecture. Elle ne change pas si on change l'interface utilisateur ou la façon d'accéder aux données nécessaires au fonctionnement de l'application.\\
+    \item\textbf{La couche interface utilisateur : }interface (web ou mobile) qui permet à l'utilisateur de piloter l'application et d'en recevoir des informations.
+\end{itemize}
 
 \begin{figure}[H]
     \centering
     \includegraphics[height=100pt,width=400pt]{img/chapter3/tiers.png}
-    \caption{Diagramme présentant les cas d'utilisations}
+    \caption{Architecture 3-tiers}
 \end{figure}
 
 \subsection{Avantage de l'architecture multi-tiers}
-L'avantage principal d'une architecture 3-tiers (multi-tiers) est la facilité de déploiement.L'application
-en elle même n'est déployée que sur la partie serveur.
-Le client ne nécessite qu'une installation et une configuration minime.
-En effet il suffit d'installer un navigateur web compatible avec l'application pour que le client
-puisse accéder à l'application.
-Cette facilité de déploiement aura pour conséquence non seulement de réduire le coût de déploie
-ment mais aussi de permettre une évolution régulière du système. Cette évolution ne nécessitera
-que la mise à jour de l'application sur le serveur applicatif.[4]
+L'avantage principal d'une architecture 3-tiers (multi-tiers) est la facilité de déploiement. L'application
+en elle même n'est déployée que sur la partie serveur. Le client ne nécessite qu'une installation et une configuration minime. 
+
+Cette facilité de déploiement aura pour conséquence non seulement de réduire le coût de déploiement, mais aussi de permettre une évolution régulière du système. Cette évolution ne nécessitera que la mise à jour de l'application sur le serveur applicatif.
 
 \subsection{Schéma global de \textquotedbl Feedny\textquotedbl}
-L'architecture globale du système "Feedny" comporte quatre processus principales: Catégorisation, résumé, traduction et recommandation d'articles de presse.
+L'architecture globale du système "Feedny" comporte quatre processus principaux: catégorisation, résumé, traduction et recommandation d'articles de presse.
 
-Les entrées (articles de presse extraits de plusieurs sources) sont sauvegardés dans une base de données. Le processus de catégorisation commence par classifier l'article selon son contenu, ensuite un résumé est généré, l'article est traduit de l'Anglais vers l'Arabe (ou l'inverse) et enfin, il sera recommandé à un utilisateur selon son profile et ses préférences comme on peut le voir dans la figure \ref{shemaglobal}.
+Les entrées (articles de presse extraits de plusieurs sources) sont sauvegardées dans une base de données. Le processus de catégorisation commence par classifier l'article selon son contenu, ensuite un résumé est généré, l'article est traduit de l'Anglais vers l'Arabe (ou l'inverse) et enfin, il sera recommandé à un utilisateur selon son profil et ses préférences comme on peut le voir dans la figure \ref{shemaglobal}.
 
 \begin{figure}[H]
     \centering
@@ -590,42 +582,34 @@ Les entrées (articles de presse extraits de plusieurs sources) sont sauvegardé
     \label{shemaglobal}
 \end{figure}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Shéma %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 \section{Schémas conceptuels de "Feedny"}
 Nous allons présenter dans cette partie, la façon avec laquelle le logiciel fournit les différentes fonctionnalités. Celle-ci décrit d'une manière claire et précise, le fonctionnement du futur système en utilisant un langage de modélisation. 
 
-Nous avons choisi la méthode UML (Unified Modeling Language), qui est une notation graphique conçue pour représenter, spécifier et construire les systèmes logiciels. UML utilise des techniques orientées objets pour la modélisation des systèmes, depuis la conception jusqu'à la maintenance, d'une manière compréhensible par l'homme et disposant de qualités formelles suffisantes pour être traduites automatiquement en code source.\cite{UML}
+Nous avons choisi la méthode UML (Unified Modeling Language), qui est une notation graphique conçue pour représenter, spécifier et construire les systèmes logiciels. UML utilise des techniques orientées objets pour la modélisation des systèmes, depuis la conception jusqu'à la maintenance, d'une manière compréhensible par l'être humain et disposant de qualités formelles suffisantes pour être traduites automatiquement en code source \cite{UML}.
 
 \subsection{Diagramme de cas d'utilisation}
 "Le diagrammes de cas d'utilisation (initié par Ivar Jacobson en 1992 dans la méthode OOSE) est un type de diagramme UML qui permet de définir les besoins des acteurs dans un système quelconque en établissant les fonctionnalités attendues et en organisant les besoins. Il peut être aussi utilisés ensuite comme moyen d'organisation du développement du logiciel, notamment pour la structuration et le déroulement des tests du logiciel".\cite{UML}
-
-\subsubsection{Diagramme de cas d'utilisation de "Feedny"}
 \begin{figure}[H]
     \centering
     \includegraphics[height=400pt,width=350pt]{img/chapter3/diagcasdutilisation.png}
-    \caption{Diagramme présentant les cas d'utilisations}
+    \caption{Diagramme présentant les cas d'utilisations de "Feedny"}
 \end{figure}
 
 \subsection{Diagramme de séquence}
-Le diagramme de séquence est un diagramme UML qui fait partie des diagrammes comportementaux (dynamiques) dont L'objectif est de représenter les interactions entre les objets et les acteurs ou bien entre objets uniquement  en indiquant la chronologie des échanges. Cette représentation peut se réaliser en considérant les différents scénarios associés.\cite{UML}
-
-
-\subsubsection{Diagrammes de séquence de "Feedny"}
-
+Le diagramme de séquence est un diagramme UML qui fait partie des diagrammes comportementaux (dynamiques) dont L'objectif est de représenter les interactions entre les objets et les acteurs ou bien entre objets uniquement en indiquant la chronologie des échanges. Cette représentation peut se réaliser en considérant les différents scénarios associés \cite{UML}.
 \begin{figure}[H]
     \centering
     \includegraphics[height=500pt,width=425pt]{img/chapter3/diagseqperso.png}
-    \caption{Diagramme de séquence dans le cas personnalisé}
+    \caption{Diagramme de séquence dans le cas de l'utilisation personnalisée de "Feedny"}
 \end{figure}
-
 
 \begin{figure}[H]
     \centering
     \includegraphics[height=500pt,width=425pt]{img/chapter3/diagseqnonperso.png}
-    \caption{Diagramme de séquence dans le cas non personnalisé}
+    \caption{Diagramme de séquence dans le cas de l'utilisation non personnalisée de "Feedny"}
 \end{figure}
 
+%%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~%%
 \section{Mesures d'évaluation du système}
     \subsection{Métriques d'évaluations du module de résumé automatique}
         \subsubsection{Métrique d'évaluation : ROUGE\label{metrique-eval}}
