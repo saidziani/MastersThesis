@@ -2,40 +2,39 @@
 
 \newpage
 \section{Présentation de l'application "Feedny"}
-Après avoir compléter les différents modules qui composent notre système, nous avons procéder à l'intégration de ces derniers dans une application mobile multi plate-formes (Androïd et IOS) dans l'optique de permettre à l'utilisateur de bénéficier de chaque fonctionnalité.
+Après avoir finaliser les différents modules qui composent notre système, nous avons procéder à l'intégration de ces derniers dans une application mobile multi plate-formes (Androïd et IOS) dans l'optique de permettre à l'utilisateur de bénéficier de chaque fonctionnalité.!!
 
-L'expérience utilisateur au sein de notre application est étudier pour optimiser la navigation entre les différents espaces. L'application est très intuitifs et conçu afin d'attirer les utilisateurs le plus de temps possible.
-
-La phase d'implémentation a été divisée en deux phases, le développement Back-end de l'API qui est la pièce motrice de l'application et qui intègre tout les modèles de classification, résumé et recommandation, et le développement de l'interface utilisateur sous forme d'une application mobile.
+% L'expérience utilisateur au sein de notre application est étudier pour optimiser la navigation entre les différents espaces. L'application est très intuitifs et conçu afin d'attirer les utilisateurs le plus de temps possible.
+La phase d'implémentation a été divisée en deux parties, le développement Back-end de l'API qui est la pièce motrice de l'application et qui intègre tout les modèles de classification, résumé et recommandation, et le développement de l'interface utilisateur sous forme d'une application mobile.
 
 \begin{figure}[H]
     \centering
     \includegraphics[height=132pt,width=270pt]{img/chapter4/frontbackend.png}
-    \caption{Logos des langages de programmations utilisés}
-    \label{}
+    \caption{API et application mobile - les deux composants principales de \textquotedbl Feedny\textquotedbl }
+    \label{frontbackend}
 \end{figure}
 
-Nous allons présenter chaque étape d'implémentation dans ce qui suit.
+Nous allons présenter chaque composant apparu sur la \autoref{frontbackend} et ses étapes d'implémentations en détails dans ce qui suit.
 
-    \subsection{Back-end}
-    La partie "métier" de l'application consiste en une REST API qui intègre tout les modules. L'API reçoit les requêtes des utilisateurs à travers l'interface, et retourne une réponse via le protocole HTTP.
+    \subsection{Développement Back-end}
+    La partie "métier" de l'application consiste en un service web sous l'architecture REST\footnote{Respresentational State Transfert : un style d'architecture définissant un ensemble de contraintes et de propriétés basées sur le protocole HTTP [Wikipédia]} API\footnote{Application Programming Interface : un ensemble normalisé de classes, de méthodes ou de fonctions qui sert de façade par laquelle un logiciel offre des services à d'autres logiciels [Wikipédia]} qui intègre tout les modules. L'API reçoit les requêtes des utilisateurs à travers l'interface, et retourne une réponse via le protocole HTTP.
 
-    Elle est composée de TROIS principaux modules :
+    Le Back-end est développé entièrement en Python en utilisant le Framework Flask\autoref{flask}. L'API est hébergée, pendant la phase de développement, dans un serveur web. 
+    
+    Elle est composée de deux modules :
         \begin{itemize}
-            \item Extraction d'articles
-            \item Géstion de la base de données
-            \item GESTION DE
+            \item Module d'extraction d'articles
+            \item Module de gestion de la base de données
         \end{itemize} 
-    Nous allons expliquer en détails le fonctionnement de chaque module dans la partie suivante.
 
         \subsubsection{Extraction d'articles}
-        Le composant clés de notre système est l'article de presse, ce dernier se trouve un peu partout sur les revues de preese en ligne. À cet effet, nous avons implémenter une fonctionnalité qui permet d'extraire des articles de presse de différentes sources dans les deux langues.
+        Le composant le plus important dans notre système est l'article de presse. Ce dernier se trouve un peu partout sur les revues de presses en ligne. À cet effet, nous avons implémenter une fonctionnalité qui permet d'extraire des articles de presse de différentes sources dans les deux langues.
 
-        L'extraction d'articles de presse peut être personnalisée selon le besoin, on peut choisir à partir des catégories, région, pays, etc.
+        L'extraction d'articles de presse peut être personnalisée selon le besoin, on peut choisir des articles à partir des catégories, région, pays, etc.
 
-        Lors de l'extraction d'un article, nous allons récupéré toutes les informations relative à ce dernier tels que : le contenu de l'article, le titre, l'auteur, l'horaire de publication, etc.
+        Lors de l'extraction d'un article, nous récupérons toutes les informations relatives à ce dernier tels que : le contenu de l'article, le titre, l'auteur, l'horaire de publication, etc.
 
-        Le module d'extraction d'article de presse peut être invoquer juste en saissant une requete dans le navigateur ou en visitant la page principale de notre application, et on aura la réponse sous le format JSON, comme dans l'exemple suivant qui monte une extraction par nom de source :
+        Le module d'extraction d'article de presse peut être invoquer juste en saisissant une requête dans le navigateur ou en visitant la page principale de notre application, la réponse est retournée sous le format JSON, comme dans l'exemple suivant qui monte une extraction par nom de source :
 
 \begin{lstlisting}[style=api] 
   http://feedny.io/api/articles/add/sources=al-jazeera-english
@@ -46,16 +45,16 @@ Nous allons présenter chaque étape d'implémentation dans ce qui suit.
   http://feedny.io/api/articles/add/categories=sport,health
 \end{lstlisting}  
 
-        \subsubsection{Géstion de la base de données}
-        Le module de géstion de la base de données s'occupe de l'insertion, la suppression, la recherche et la mise à jour des articles et des profils utilisateurs.
+        \subsubsection{Gestion de la base de données}
+        Le module de gestion de la base de données s'occupe de l'insertion, la suppression, la recherche et la mise à jour des articles et des profils utilisateurs.
 
-        Chaque appel de l'API implique systématiquement une opération implicite sur la base de données. Elle est composée, comme cité dans \autoref{}, de deux collection : Articles et Profils. 
+        Chaque appel à l'API implique systématiquement une opération implicite sur la base de données. Elle est composée, comme cité dans \autoref{}, de deux collections : Articles et Profils. 
 
         \begin{enumerate}[leftmargin=*]
             \item\textbf{Gestion de la collection d'Articles}\\
-            Après extraction d'un article de presse, il sera stocké dans un document qui apparient à la collection Articles dans notre base de données NoSQL (la structure d'un document Article a été présentée dans \autoref{}) afin de faciliter la recherche et de remédier à la lenteur du débit internet. 
+            Après extraction d'un article de presse, il sera stocké dans un document qui apparient à la collection Articles dans notre base de données NoSQL afin de faciliter la recherche et de remédier à la lenteur du débit internet. (la structure d'un document Article a été présentée dans \autoref{})
 
-            La recherche peut se faire avec n'importe quel attribut d'un article, et c'est l'un des plus grand avantages des base de données NoSQL. Les articles peuvent aussi avoir une structure différentes, et on peut stocké, également, des images et du son, s'il y-en a.
+            La recherche peut se faire avec n'importe quel attribut d'un article de presse, et c'est l'un des plus grand avantages des base de données NoSQL. Les articles peuvent aussi avoir une structure différentes, et on peut stocké, également, des images et du son, s'il y-en a.
 
             On peut également proposer des articles à un utilisateur, en utilisant son vecteur de probabilité de sélection et ses sources préférées : 
 \begin{lstlisting}[style=api] 
@@ -63,7 +62,7 @@ Nous allons présenter chaque étape d'implémentation dans ce qui suit.
 \end{lstlisting} 
             
             \item\textbf{Gestion de la collection de Profils}\\
-            La stucture des profils utilisateurs est très dynamique, elle est différentes d'un utilisateur à un autre. Les utilisateurs peuvent avoir plusieurs préférences et source favorites comme ils peuvent ne pas avoir. La gestion des profils est également effectué à partir de l'API, un nouvel utilisateur est ajouter de la façon suivante :   
+            La structure des profils utilisateurs est très dynamique, elle est différentes d'un utilisateur à un autre. Les utilisateurs peuvent avoir plusieurs préférences et source favorites. La gestion des profils est également effectué à partir de l'API, un nouvel utilisateur est ajouter de la façon suivante :   
 \begin{lstlisting}[style=api] 
   http://feedny.io/api/profiles/add/profile=username::password::user@hey.com::sport,religion::bbc-news,echourouk
 \end{lstlisting} 
@@ -74,12 +73,12 @@ Nous allons présenter chaque étape d'implémentation dans ce qui suit.
 \end{lstlisting}            
         \end{enumerate} 
 
-    \subsection{Front-end}
-    Dans le monde du developpement web et mobile, nous recherchons toujours des cycles de développement très courts, des délais de déploiement réduits avec une meilleure performance.
+    \subsection{Développement Front-end}
+    Dans le monde du développement web et mobile, nous recherchons toujours des cycles de développement très courts, des délais de déploiement réduits avec une meilleure performance.
 
-    Une technologie très récente (2016) se trouve au beau milieu de ces exigences, le developpement d'application mobile hybride, en utilisant des techniques et des languages de programmations très répandus parmi les développeurs web (comme JavaScript ou HTML5 et CSS) enveloppées dans un Framework lui permettant de fonctionner nativement sur n'importe quel appareil et système d'exploitation (Andoir et IOS).
+    Une technologie très récente (2016) se trouve au beau milieu de ces exigences, le développement d'application mobile hybride, en utilisant des techniques et des langages de programmation très répandus parmi les développeurs web (comme JavaScript ou HTML5 et CSS) enveloppées dans un Framework lui permettant de fonctionner nativement sur n'importe quel appareil et système d'exploitation (Androïd ou IOS).
 
-    Ils existent plusieurs Frameworks d'applications mobiles hybrides, mais React-native \autoref{} developpé par \emph{Facebook}, et jusqu'à l'écriture de ces lignes, reste le plus performant et le plus evolutifs tout en restant stable. On peut cité quelques points forts de React-native : 
+    Ils existent plusieurs Frameworks d'applications mobiles hybrides, mais React-native \autoref{} développé par \emph{Facebook}, et jusqu'à l'écriture de ces lignes, reste le plus performant et le plus évolutifs tout en restant stable. On peut cités quelques points forts de React-native : 
         \begin{itemize}
             \item Open source, communauté ne cessent de s'agrandir,
             \item Facebook continue à investir dans sa croissance,
@@ -88,9 +87,9 @@ Nous allons présenter chaque étape d'implémentation dans ce qui suit.
             \item Moins d'utilisation de la mémoire,
             \item ...
         \end{itemize}
-    Tout ces arguments nous ont poussé à choisir React-native comme Framework pour developper notre application mobile. 
+    Tout ces arguments nous ont poussé à choisir React-native comme Framework pour développer notre application mobile. 
 
-    \subsubsection{Fonctionnalités disponibles}
+    \subsection{Fonctionnalités disponibles}
     Deux méthode d'utilisation de notre application sont disponible: Avec authentification, Sans authentification. La personnalisation des recommandations en dépendra.
     \begin{enumerate}[leftmargin=*]
         \item\textbf{Avec authentification (personnalisé)}\\
@@ -143,5 +142,3 @@ Nous allons présenter chaque étape d'implémentation dans ce qui suit.
     % \subsubsection{Favoris}
     % \subsubsection{Catégories}
     % \subsubsection{Article}
-
- 

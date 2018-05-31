@@ -2,57 +2,58 @@
 
 \newpage
 \section{Introduction}
-Après avoir finalisé l'étape de conception, nous consacrons ce chapitre à la réalisation. Les différentes problématiques ont étaient profondément analysées, ce qui nous a permit d'entreprendre le développement des modules, ayant comme objectif d'aboutir à un produit final exploitable par les utilisateurs.
+Après avoir finalisé l'étape de conception, nous consacrons ce chapitre à la réalisation. Les différentes problématiques ont étaient profondément analysées, ce qui nous a permis d'entreprendre le développement des modules, ayant comme objectif d'aboutir à un produit final exploitable par les utilisateurs.
 
-Nous allons d'abord présenter l'environnement de travail ainsi que les outils et les logiciels utilisés, nous décrivons également en détails les étapes de réalisation de chaque module, et nous clôturons avec l'évaluation et les résultats de notre système ainsi que l'application mobile réalisée.
+Nous allons d'abord présenter l'environnement de travail ainsi que les outils et les logiciels utilisés, nous décrivons également en détails les étapes de réalisation de chaque module et de son évaluation et nous clôturons avec l'application mobile réalisée.
+
 \section{Environnement et outils de travail}
-    \subsection{Matériels}
-    Le matériel utilisé consiste en 2 ordinateurs personnels ainsi qu'un serveur (Cloud) dédié aux traitements gourmands en terme de ressource et en temps d'exécution.
-    \begin{enumerate}
-        \item{\textbf{Poste de travail 1}}
-        \begin{table}[h!]
-            \begin{center}
-                \begin{tabular}{|C{5cm}|C{8cm}|}
-                    \hline
-                    \textbf{Système d'exploitation} &  GNU/Linux Ubuntu 16.04 xenial 64bits \\
-                    \textbf{RAM} &  4 Go \\
-                    \textbf{Processeur} & Intel Core i3-3110M CPU @ 2.4GHz \\
-                    \hline
-                \end{tabular}
-            \end{center}
+\subsection{Matériels}
+Le matériel utilisé consiste en 2 ordinateurs personnels ainsi qu'un serveur (Cloud) dédié aux traitements gourmands en terme de ressource et en temps d'exécution.
+\begin{enumerate}
+    \item{\textbf{Poste de travail 1}}
+    \begin{table}[h!]
+        \begin{center}
+            \begin{tabular}{|C{5cm}|C{8cm}|}
+                \hline
+                \textbf{Système d'exploitation} &  GNU/Linux Ubuntu 16.04 xenial 64bits \\
+                \textbf{RAM} &  4 Go \\
+                \textbf{Processeur} & Intel Core i3-3110M CPU @ 2.4GHz \\
+                \hline
+            \end{tabular}
+        \end{center}
         \caption{Caractéristiques du poste de travail 1}
-        \end{table}
-
-        \item{\textbf{Poste de travail 2}}
-        \begin{table}[h!]
-            \begin{center}
-                \begin{tabular}{|C{5cm}|C{8cm}|}
-                    \hline
-                    \textbf{Système d'exploitation} &  Windows 8.1 64bits \\
-                    \textbf{RAM} &  12 Go \\
-                    \textbf{Processeur} & Intel Core i7-5500 CPU @ 2.40 GHZ \\
-                    \hline
-                \end{tabular}
-            \end{center}
+    \end{table}
+    
+    \item{\textbf{Poste de travail 2}}
+    \begin{table}[h!]
+        \begin{center}
+            \begin{tabular}{|C{5cm}|C{8cm}|}
+                \hline
+                \textbf{Système d'exploitation} &  Windows 8.1 64bits \\
+                \textbf{RAM} &  12 Go \\
+                \textbf{Processeur} & Intel Core i7-5500 CPU @ 2.40 GHZ \\
+                \hline
+            \end{tabular}
+        \end{center}
         \caption{Caractéristiques du poste de travail 2}
-        \end{table}
-
-        \item{\textbf{Serveur (Cloud Virtual Machine)}}
-        \begin{table}[h!]
-            \begin{center}
-                \begin{tabular}{|C{5cm}|C{8cm}|}
-                    \hline
-                    \textbf{Système d'exploitation} &  GNU/Linux Ubuntu Data Science 64bits \\
-                    \textbf{RAM} &  32 Go \\
-                    \textbf{Processeur} & Intel Xeon CPU E5-2673 v4 @ 2.295GHz \\
-                    \hline
-                \end{tabular}
-            \end{center}
+    \end{table}
+    
+    \item{\textbf{Serveur (Cloud Virtual Machine)}}
+    \begin{table}[h!]
+        \begin{center}
+            \begin{tabular}{|C{5cm}|C{8cm}|}
+                \hline
+                \textbf{Système d'exploitation} &  GNU/Linux Ubuntu Data Science 64bits \\
+                \textbf{RAM} &  32 Go \\
+                \textbf{Processeur} & Intel Xeon CPU E5-2673 v4 @ 2.295GHz \\
+                \hline
+            \end{tabular}
+        \end{center}
         \caption{Caractéristiques de la machine virtuelle}
-        \end{table}
-    \end{enumerate}   
+    \end{table}
+\end{enumerate}   
 
-    \subsection{Langages de programmation et logiciels}
+\subsection{Langages de programmation et logiciels}
     Nous avons utilisé au cours de la réalisation de notre système, plusieurs langages de programmation et logiciels. Ci-après une brève présentation de ces derniers :
         \subsubsection{Langages de programmation}
             \begin{figure}[H]
@@ -88,12 +89,18 @@ Nous allons d'abord présenter l'environnement de travail ainsi que les outils e
 
                 \item{\textbf{Numpy : }}
                 "Numerical Python" fournit une interface pour stocker et effectuer des opérations sur les données. D'une certaine manière, les tableaux Numpy sont comme les listes en Python, mais Numpy permet de rendre les opérations beaucoup plus efficaces, surtout sur les tableaux de grande taille qui sont au cœur de l'écosystème de la Data Science \cite{numpy}.\\
+
+                \item{\textbf{Theano : }}
+                bibliothèque Python qui permet de définir, d'optimiser et d'évaluer efficacement des expressions mathématiques impliquant des tableaux multidimensionnels. Ses principales caractéristiques sont la facilité d'intégration avec le module Numpy et l'utilisation transparente du GPU qui effectue des calculs intensifs plus rapidement qu'un CPU \cite{theano}.\\
                 
                 \item{\textbf{Gensim : }}
                 Librairie Python gratuite conçue pour extraire automatiquement des sujets sémantiques à partir de documents. Les algorithmes de Gensim, tels que l'analyse sémantique latente, permettent de découvrir la structure sémantique des documents en examinant les schémas statistiques de cooccurrence des mots au sein d'un corpus de documents \cite{gensim}.\\
 
                 \item{\textbf{Pandas : }}
                 Fournit deux structures de données fondamentales, la "Série" et le "DataFrame". On peut voir ces structures comme une généralisation des tableaux et des matrices de Numpy. La différence entre les structures de Pandas et celles de Numpy c'est la définition explicites par l'utilisateur des indices et des index sur les objets (matrices) .\cite{pandas}\\
+
+                \item{\textbf{Theano : }}
+                Bibliothèque Python qui permet de définir, d'optimiser et d'évaluer efficacement des expressions mathématiques impliquant des tableaux multidimensionnels. Ses principales caractéristiques sont la facilité d'intégration avec le module Numpy et l'utilisation transparente du GPU qui effectue des calculs intensifs plus rapidement qu'un CPU \cite{theano}.\\
 
                 \item{\textbf{Pickle : }}
                 Module Python utilisé pour sérialiser et désérialiser les structures d'objets Python. La sérialisation (ou «pickling») fait référence au processus de conversion d'un objet en mémoire en un flux d'octets pouvant être stocké sur disque ou envoyé sur un réseau. Plus tard, ce flux de caractères peut être récupéré et désérialisé (ou «unpickling») en retour vers un objet Python \cite{pickle}.\\
@@ -121,6 +128,10 @@ Nous allons d'abord présenter l'environnement de travail ainsi que les outils e
 
                 \item{\textbf{PyMongo}}
                 Module de gestion du SGBD MongoDB sous le langage Python, il fournit une variété de commandes très intéressantes qui permettent de faciliter la manipulation d'une base de donnée NoSql \cite{pymongo}.\\
+
+                \item{\textbf{Flask}}\label{flask}
+                Module de gestion du SGBD MongoDB sous le langage Python, il fournit une variété de commandes très intéressantes qui permettent de faciliter la manipulation d'une base de donnée NoSql \cite{pymongo}.\\
+
             \end{enumerate}
 
         \subsubsection{Formats de données}
@@ -156,460 +167,703 @@ Nous allons d'abord présenter l'environnement de travail ainsi que les outils e
                 Système de gestion de versions décentralisé. C'est un logiciel libre créé par \emph{Linus Torvalds}, auteur du noyau Linux, et distribué selon les termes de la licence publique générale (GPL). En 2016, il s’agit du logiciel de gestion de versions le plus populaire qui est utilisé par plus de douze millions de personnes \cite{git}.
             \end{enumerate}
 
-
-
+\newpage
 \section{Recommandation}
-\subsection{Approche probabilité de sélection}  
-Afin d'implémenter cette approche et tenter de générer une collection de profils utilisateurs, nous avons essayer d'utiliser des datasets destinés au articles de presse. Ci-dessous, une description des datasets utilisés.
 
-\subsubsection{SmartMedia Adressa News Dataset}
-Le dataset Adressa est un ensemble de données d'actualité comprenant des articles de presse (en norvégien) en lien avec des utilisateurs anonymes. Cet ensemble de données est publié avec la collaboration de l'Université norvégienne des sciences et technologies (NTNU) et Adressavisen (journal local à Trondheim, Norvège) dans le cadre du projet RecTech sur la technologie de recommandation.\cite{refnorvege}
+Afin d'implémenter cette approche et tenter de générer une collection de profils utilisateurs, nous avons essayer d'utiliser des datasets destinés au articles de presse. Afin de concevoir une base de données de profils utilisateurs, nous avons solliciter \emph{Google News}\cite{bibid}, \emph{Bing News}\cite{bibid} et \emph{Yahoo Webscope} \cite{bibid} mais sans aucune réponse de la part de ces entreprises. Alors, nous avons explorer d'autres sources décrites ci-dessous.
 
-\subsubsection{Structure du dataset}
+\subsection{Corpus et dataset}
+    \subsubsection{SmartMedia Adressa News Dataset}
+    Le dataset Adressa est un ensemble de données d'actualité comprenant des articles de presse (en norvégien) associé a une base de rofils utilisateurs. Cet ensemble de données est publié avec la collaboration de l'Université norvégienne des sciences et technologies \emph{(NTNU)} et \emph{Adressavisen} (journal local à Trondheim, Norvège) dans le cadre du projet \emph{RecTech} sur la technologie de recommandation.\cite{refnorvege}
 
+    \begin{enumerate}[leftmargin=*]
+        \item\textbf{Structure du dataset}\\
+        Le dataset contient une collection d'articles et une collection d'utilisateur. Les figures \ref{instance-profil} et \ref{instance-article} ci-dessous la structure des collections de données.
+        \begin{figure}[H]
+            \centering
+            \includegraphics[height=155pt,width=260pt]{img/chapter4/smartmedia/structure_profil.jpg}
+            \caption{Structure d'une instance de profil du dataset SmartMedia}
+            \label{instance-profil}
+        \end{figure}
+        
+        \begin{figure}[H]
+            \centering
+            \includegraphics[height=200pt,width=330pt]{img/chapter4/smartmedia/structure.png}
+            \caption{Structure d'une instance d'article du dataset SmartMedia}
+            \label{instance-article}
+        \end{figure}
 
-Exemple :
+        \item\textbf{Statistiques sur le dataset}\\
+        La récolte du dataset s'est faite pendant 7 jours pour une taille totale de 1.4 Go de collections d'articles et profils stockés dans des structures de format \emph{Json}. Ils contient au total 923 articles et 15514 utilisateurs.\\
 
+        \item\textbf{Inconvénients de l'utilisation de \textquotedbl SmartMedia Adressa News Dataset\textquotedbl}\\
+        Le dataset décrit dans cette partie traite les articles de presse en langage nowégien, c'est a dire que les catégories des articles sont en norwégien et le contenu des articles aussi. Ce qui nous a amené a abandonné ce dataset. En plus de la masse importante de données que l'on ne peut modifier au risque de biaiser les résultats et la difficulté de traitement les fichiers dans un poste de travail (1 ou 2) ce qui nécessite l'utilisation du serveur.\\
+    \end{enumerate}
 
-\subsubsection{Statistiques sur le dataset}
+    \subsubsection{\textquotedbl YOW \textquotedbl dataset }
+    \emph{YOW} est collecté à l'Université \emph{Carnegie Mellon} pour le \emph{Yow-now}, le système de filtrage des articles de presse \cite{carnegieYOW}.
 
-
-\subsubsection{Inconvénients de l'utilisation de \textquotedbl SmartMedia Adressa News Dataset\textquotedbl}
-
-Le dataset décrit dans cette partie traite les articles de presse en langage nowégien, c'est a dire que les catégories des articles sont en norwégien et le contenu des articles aussi. Ce qui nous a amené a abandonné ce dataset.
-  
-\subsubsection{Le dataset \textquotedbl YOW \textquotedbl}
-Afin de concevoir une base de données de profils utilisateurs, nous avons solliciter \emph{Google News}, \emph{Bing News} et \emph{Yahoo Webscope} mais sans aucune réponse de la part de ces entreprises. 
-
-Mais au final, nous avons pu obtenir le dataset \emph{YOW} qui est le seul dataset d'interactions des profils avec des articles de presse. 
-
-\emph{Yow} été collecté à l'Université \emph{Carnegie Mellon} pour le \emph{Yow-now} le système de filtrage des articles de presse \cite{carnegieYOW}.
-
-Le dataset YOW est composé de plusieurs attribut, des informations sur les interactions de 22 utilisateurs avec des articles de presse de différentes catégories. Les instances du dataset sont très bien adapté au filtrage collaboratif. Comme il n'y a pas d'information sur le contenu des articles de presse, le filtrage basé sur le contenu n'est pas possible. 
-
-\subsubsection{Structure du dataset}
-Chaque instance du dataset YOW est composé de 23 attribut propre à l'utilisateur et à l'article de presse. Ci-après les attributs les plus importants pour notre système de recommandations :  
+    Le dataset YOW est composé de plusieurs attribut, des informations sur les interactions de 22 utilisateurs avec des articles de presse de différentes catégories. Les instances du dataset sont très bien adapté au filtrage collaboratif. Comme il n'y a pas d'information sur le contenu des articles de presse, le filtrage basé sur le contenu n'est pas possible. \\
+    \begin{enumerate}[leftmargin=*]
+        \item\textbf{Structure du dataset}\\
+        Chaque instance du dataset YOW est composé de 23 attribut propre à l'utilisateur et à l'article de presse. Ci-après les attributs les plus importants pour notre système de recommandations :  \\
 \begin{lstlisting}[style=code] 
-{
-'user_id': '19', 
-'document_id': '27010084'
-'timestamp': '2004-04-23T15:38:25Z'
-'timeonpage': '63s', #temps de lecture
-'classes': [
-'space', 'international', 'iraq', 
-],
-...
-},
+ {
+ 'user_id': '19', 
+ 'document_id': '27010084'
+ 'timestamp': '2004-04-23T15:38:25Z'
+ 'timeonpage': '63s', #temps de lecture
+ 'classes': [ 'space', 'international', 'iraq', ...],
+ ...
+ },
 \end{lstlisting}
+    \item\textbf{Statistiques sur le dataset}\\
+    Yow-now est un système de filtrage d'informations qui recommande des articles de presse aux utilisateurs à partir de divers flux RSS. Les données sont recueillies par une étude d'un mois qui comprend environ 25 personnes et plus de 7000 entrées de commentaires de tous les utilisateurs. Au total 383 articles évalués par chaque utilisateur. 
 
-\subsubsection{Statistiques sur le dataset}
-Yow-now est un système de filtrage d'informations qui recommande des articles de presse aux utilisateurs à partir de divers flux RSS. Les données sont recueillies par une étude d'un mois qui comprend environ 25 personnes et plus de 7000 entrées de commentaires de tous les utilisateurs. Au total 383 articles évalués par chaque utilisateur. 
+    Le dataset comporte également des évaluations implicite et explicite sur les recommandations. Le profilage explicite est sous forme de note de 1 à 5, quant à l'implicite est établi selon les interactions de l'utilisateur (souris, clavier et activités de défilement).\\
 
-Le dataset comporte également des évaluations implicite et explicite sur les recommandations. Le profilage explicite est sous forme de note de 1 à 5, quant à l'implicite est établi selon les interactions de l'utilisateur (souris, clavier et activités de défilement).
+    \item\textbf{Avantages de l'utilisation de \textquotedbl YOW Dataset\textquotedbl}\\
+     Le dataset décrit dans cette partie traite les articles de presse en Anglais et contient des retour implicites de l'utilisateur. Ce qui représente un avantage pour notre implémentation. De plus le dataset est représenté dans un format \emph{CSV} qui est interprété rapidement par les posetes de travail 1 et 2.\\
+\end{enumerate}
 
+    \subsection{Approche probabilité de sélection}  
+    L'approche basé probabilité de sélection détaillé dans ??autoref{} va étre implémenté ci-dessous en utilisant le dataset \textquotedbl YOW\textquotedbl.
+        \subsubsection{Recommandation personnalisée}
+        \begin{enumerate}[leftmargin=*]
+            \item\textbf{Pré-traitement des données}\\
+            Chaque instance du dataset \emph{YOW} est une interaction de l'utilisateur U avec un article A.
 
-\subsubsection{Pré-traitement des données}
-Chaque instance du dataset \emph{YOW} est une interaction de l'utilisateur U avec un article A.
-
-L'interaction peut avoir plusieurs valeurs pour l'attribut \emph{Classe} (catégorie dans notre cas). "Classe" peut prendre des noms de catégories et des mots-clés de l'article, par exemple :
-\begin{itemize}
-    \item Noms de catégories : world, science, entertainment, space, business, food, etc.
-    \item Mots-clés :Iraq, Amazon, Malaysia, Oil, Japan, etc.\\ 
-\end{itemize}
-Pour adapter ces données à notre modèle de catégorisation d'article nous avons effectué des pré-traitement sur chaque instance du dataset. Nous avons annoter le dataset manuellement dans le but de convertir les noms de catégories et les mots-clés en catégories présente dans notre système (7 pour l'Anglais et 6 pour l'Arabe), par exemple :
-\begin{itemize}
-    \item Avant : nuclear weapons, international, middle east, business, John Kerry, accident, tradegy, space, science.
-    \item Après : 
-    \begin{itemize}
-        \item {nuclear weapons, international, middle east} : World
-        \item {John Kerry} : US
-        \item {space, science} : Science \& Technology
-        \item {accident, tradegy} : Society
-        \item {business} : Business\\
-    \end{itemize}    
-\end{itemize}
-De plus, le dataset a été classé dans l'ordre croissant de l'attribut "Timestamp", la date et l'horaire de l'interaction, dans le but de récupérer l'historique et le changement des centres d’intérêts de chaque utilisateur. 
-
-À chaque nouvelle interaction le vecteur de probabilité de sélection des catégories d'articles se mets à jour en fonction de l'article visité. 
-
-La mise à jour consiste en l'augmentation de la probabilité de sélection de la catégorie de l'article choisie et la diminution des autres catégories (s'il y-en a). 
-
-L'exemple suivant montre le processus de mise à jour :
-\begin{itemize}[label={}]
-    \item $P = {'news': 0.0581,'sport': 0.717, 'sci\_tech': 0.149}$\\
-\end{itemize}
-
-L'utilisateur X a cliqué et lu un article de la catégorie \emph{Sport}, le vecteur de probabilité de sélection va se mettre à jour en fonction de cette dernière interaction (détails dans \ref{proba-select}).
-\begin{itemize}[label={}]
-    \item $P[sport] = (1-{\alpha}) * {P[sport]} + {\alpha}$
-    \item $P[sport] = (1-{0.1}) * {P[sport]} + {0.1}$
-    \item $P[sport] = (1-{0.1}) * {0.717} + {0.1}$
-    \item $P[sport] = 0.745$
-\end{itemize}
-
-Quant aux autres catégories du vecteurs de sélection :
-\begin{itemize}[label={}]
-    \item $P[news] = (1-{\alpha}) * {P[news]} $
-    \item $P[news] = (1-{0.1}) * {P[news]} $
-    \item $P[news] = (1-{0.1}) * {0.0581} $
-    \item $P[news] = 0.0523$
-    \item 
-    \item $P[sci\_tech] = (1-{\alpha}) * {P[sci\_tech]} $
-    \item $P[sci\_tech] = (1-{0.1}) * {P[sci\_tech]} $
-    \item $P[sci\_tech] = (1-{0.1}) * {0.1499} $
-    \item $P[sci\_tech] = 0.135$
-\end{itemize}
-Après cette interaction, le vecteur de probabilité de sélection devient :
-\begin{itemize}[label={}]
-    \item $P = {'news': 0.0523, 'sport': 0.745, 'sci_tech': 0.135}$\\
-\end{itemize}
-Pour un nouvel utilisateur, le même traitement est appliqué, le vecteur de probabilité de sélection se remplie petit à petit en fonction des interaction qui vont être mise à jour de la même façon.
-
-\subsubsection{Utilisateur non identifier}
-Dans le cas où l'utilisateur n'est pas connecté, donc il n’y a pas de vecteur de probabilité de sélection, la recommandation est basée sur la similarité entre articles.
-
-Si l'utilisateur U a lu l'article A1, les articles A2, A3, ..., An similaires à A1, seront recommandés. La similarité entre article est calculé à partir du contenu, le texte sera convertit en TF-IDF et les articles les plus proches en calculant la similarité du Cosinus seront considérés comme article qui parle du même sujet ou de la même catégorie.
-
-\begin{itemize}[leftmargin=*]
-    \item Exemple :\\ 
-    A1 = "Real Madrid 3-1 Liverpool: Jurgen Klopp says Reds wanted everything and got minus something"\\
-    Articles similaires à A1 = \{\\
-    'Gareth Bale on his Champions League final goal for Real Madrid': 0.26435,\\
-    'Real Madrid 3-1 Liverpool: ‘Flawed Karius pays for lack of focus’': 0.21839,\\
-    'Columbus Crew: Two US cities fight over one football team': 0.073586
-    \}
-\end{itemize} 
-
-\section{Catégorisation}
-    Le deuxième module sur lequel nous avons travailler, c'est la catégorisation d'articles de presse. Nous avons expérimenter plusieurs techniques proposées dans la littérature. Nous présentons ci-après chaque approche, ses résultats, ses points forts et ses faiblesses.
-    \subsection{Approches expérimentées\label{approches}}
-        Toutes les approches utilisées sont basées sur l'apprentissage automatique, supervisé et non supervisé. 
-        \subsubsection{Basées sur l'Apprentissage Non Supervisé}
+            L'interaction peut avoir plusieurs valeurs pour l'attribut \emph{Classe} (catégorie dans notre cas). "Classe" peut prendre des noms de catégories et des mots-clés de l'article, par exemple :
             \begin{itemize}
-                \item{LDA (Latent Dirichlet Allocation) : }
+                \item Noms de catégories : world, science, entertainment, space, business, food, etc.
+                \item Mots-clés :Iraq, Amazon, Malaysia, Oil, Japan, etc.\\ 
+            \end{itemize}
+            Pour adapter ces données à notre modèle de catégorisation d'article nous avons effectué des pré-traitement sur chaque instance du dataset. Nous avons annoter le dataset manuellement dans le but de convertir les noms de catégories et les mots-clés en catégories présente dans notre système (7 pour l'Anglais et 6 pour l'Arabe), par exemple :
+            \begin{itemize}
+                \item Avant : nuclear weapons, international, middle east, business, John Kerry, space, science.
+                \item Après :
+                \begin{itemize}
+                    \item {nuclear weapons, international, middle east} : World
+                    \item {John Kerry} : US
+                    \item {space, science} : Science \& Technology
+                    \item {accident, tradegy} : Society (Pour l'Anglais US)
+                    \item {business} : Business\\
+                \end{itemize}    
+            \end{itemize}
+            De plus, le dataset a été classé dans l'ordre croissant de l'attribut "Timestamp", la date et l'horaire de l'interaction, dans le but de récupérer l'historique et le changement des centres d’intérêts de chaque utilisateur. 
+
+            \item\textbf{Implémentation}\\
+            À chaque nouvelle interaction le vecteur de préférences de catégories d'un utilisateur se mets à jour en fonction de la catégorie  de l'article visité. 
+
+            La mise à jour consiste en l'augmentation de la probabilité de sélection de la catégorie de l'article choisie et la diminution des autres catégories (s'il y-en a). 
+
+            L'exemple suivant montre le processus de mise à jour :
+            \begin{itemize}[label={}]
+                \item $P(U) = {'news': 0.0581,'sport': 0.717, 'sci\_tech': 0.149}$\\
             \end{itemize}
 
-        \subsubsection{Basées sur l'Apprentissage Supervisé}
-            \begin{table}[H]
-                    \begin{center}
-                        \begin{tabular}{|c|c|c|c|c}
-                            \hline
-                            \textbf{Modèle} & \textbf{Précision} & \textbf{Rappel} & \textbf{F-mesure} \\
-                            \hline
-                            Naïve de Bayes & 0.89 & 0.87 & 0.88 \\
-                            Arbre de décision & 0.82 & 0.84 & 0.83 \\
-                            \textbf{Descente de Gradient Stochastique} & \textbf{0.94} & \textbf{0.94} & \textbf{0.94} \\
-                            SVM & 0.91 & 0.89 & 0.90 \\
-                            \hline
-                        \end{tabular}
-                    \end{center}
-                    \caption{Résultats comparatifs des modèles de catégorisation pour l'arabe}
-                    \label{modele-categ}
-                \end{table}
-                
-    \subsection{Corpus et dataset}
-        Comme tout problème de classification, la catégorisation d'articles de presse nécessite de très grandes masses de données. C'est pour cela que nous avons consacrer une bonne période du projet à la récolte des corpus et la préparation des datasets.     
-        \subsubsection{Quelques chiffres et statistique}
-            \begin{itemize}
-                \item{\textbf{Anglais : }}
-                 Le dataset baptisé "News" a été récolté par le Laboratoire Informatique de \emph{l'Université de Pise} \cite{pise}, il regroupes des articles de 3 sources différentes : \emph{The New York Times}, \emph{Reuters} et \emph{USA Today}. le Tableau \ref{news-categ} présente en détails le nombre d'articles de chaque catégorie.
-                \begin{table}[H]
-                    \begin{center}
-                        \begin{tabular}{|C{5cm}|C{5cm}|}
-                            \hline
-                            \textbf{Catégorie} &  \textbf{Nombre d'articles} \\
-                            \hline
-                            Business & 5366 \\                            
-                            Entertainment & 3286 \\
-                            Health & 1851 \\
-                            Science \& Technology & 2872 \\
-                            Sport & 8189 \\
-                            US & 4783 \\
-                            World & 6255 \\
-                            \textbf{Totale} &  \textbf{32602} \\
-                            \hline
-                        \end{tabular}
-                    \end{center}
-                    \caption{Nombres d'articles de chaque catégorie du corpus "News"}
-                    \label{news-categ}
-                \end{table}
-                \item{\textbf{Arabe : }}
-                Le corpus TALAA\footnote{Traitement Automatique du Langage et Apprentissage Automatique, l'équipe de recherche du Laboratoire de Recherche en Intelligence Artificielle du département informatique de l'USTHB} pour la catégorisation d'articles de presse est une grande collection d'articles publiés entre 2010 et 2014 dans différentes revue de presse Arabe sur internet. Il contient plus de 14 millions de mots de 582000 types différents. Le corpus contient 8 catégories, mais nous avons choisi de travailler sur 6 catégories plus générales comme on peut le constater dans le tableau suivant \ref{talaa-categ} \cite{talaa}. 
-                \begin{table}[H]
-                    \begin{center}
-                        \begin{tabular}{|c|c|}
-                            \hline
-                            \textbf{Catégorie} &  \textbf{Nombre d'articles} \\
-                            \hline
-                            \begin{arab}الجزائر\end{arab} & 6603 \\
-                            \begin{arab}الثقافة\end{arab} & 3311 \\
-                            \begin{arab}الدين\end{arab} & 2568 \\
-                            \begin{arab}المجتمع\end{arab} & 7714 \\
-                            \begin{arab}الرياضة\end{arab} & 8104 \\
-                            \begin{arab}العالم\end{arab} & 4380 \\
-                            \textbf{Totale} & \textbf{32680} \\
-                            \hline
-                        \end{tabular}
-                    \end{center}
-                    \caption{Nombres d'articles des 6 catégories choisies du corpus "TALAA"}
-                    \label{talaa-categ}
-                \end{table}
+            L'utilisateur U a cliqué et lu un article de la catégorie \emph{Sport}, le le vecteur de préférences de catégories va se mettre à jour en fonction de cette dernière interaction (détails dans \ref{proba-select}).
+            \begin{itemize}[label={}]
+                \item $P(U, sport) = (1-{\alpha}) * {P(U, sport)} + {\alpha}$
+                \item $P(U, sport) = (1-{0.1}) * {P(U, sport)} + {0.1}$
+                \item $P(U, sport) = (1-{0.1}) * {0.717} + {0.1}$
+                \item $P(U, sport) = 0.745$
             \end{itemize}
-        \subsubsection{Pré-traitement et structure des datasets}
-            Les deux corpus utilisés dans les deux langues étaient sous le format brute, ce qui nécessitaient une restructuration et un pré-traitement afin de permettre leur exploitation.  
 
-            Plusieurs opérations de pré-traitements ont été effectuées. Ci-après les étapes suivies :
-            \begin{enumerate}
-                \item{\textbf{Segmentation (Tokenization) et suppression des mots vides :} } Pour l'Anglais nous avons utiliser le Tokenizer natif de NLTK, et FARASA Toolbox pour la langue Arabe.\\  
-                
-                \item{\textbf{Racinisation (Stemming) :} } 
-                La librairie Snowball Stemmer de NLTK a été utilisé pour l'Anglais, quant à l'Arabe c'est toujours la Toolbox FARASA.\\
+            Quant aux autres catégories du vecteurs de sélection :
+            \begin{itemize}[label={}]
+                \item $P(U, news) = (1-{\alpha}) * {P(U, news)} $
+                \item $P(U, news) = (1-{0.1}) * {P(U, news)} $
+                \item $P(U, news) = (1-{0.1}) * {0.0581} $
+                \item $P(U, news) = 0.0523$
+                \item 
+                \item $P(U, sci\_tech) = (1-{\alpha}) * {P(U, sci\_tech)} $
+                \item $P(U, sci\_tech) = (1-{0.1}) * {P(U, sci\_tech)} $
+                \item $P(U, sci\_tech) = (1-{0.1}) * {0.1499} $
+                \item $P(U, sci\_tech) = 0.135$
+            \end{itemize}
+            Après cette interaction, le le vecteur de préférences de catégories devient de l'utilisateur U devient :
+            \begin{itemize}[label={}]
+                \item $P(U) = {'news': 0.0523, 'sport': 0.745, 'sci_tech': 0.135}$\\
+            \end{itemize}
+            Pour un nouvel utilisateur, le même traitement est appliqué, le vecteur de préférences de catégories se remplie petit à petit en fonction des interaction qui vont être mise à jour de la même façon. Ainsi, cela résout le problème de démarrage à froid ??autoref{}.
+        \end{enumerate}
 
-                \item{\textbf{N-grammes :} }
-                 L'algorithme natif de NLTK a été utilisé pour les deux langues (Anglais et Arabe).\\ 
-                
-                \item{\textbf{Extraction des caractéristiques :} }
-                Les librairies Countvectorizer et tfidfvectorizer de scikit-learn ont été utilisés dans l'éxtraction des caractéristiques pour l'anglais et l'arabe.\\
+        \subsubsection{Recommandation non personnalisée}
+        Dans le cas où l'utilisateur n'est pas connecté, ce dernier ne possède pas de vecteur de préférences de catégories, donc la recommandation sera basée sur la similarité entre articles.
+            \begin{enumerate}[leftmargin=*]
+                \item\textbf{Implémentation}\\
+                Si l'utilisateur U a lu l'article A1, les articles A2, A3, ..., An similaires à A1, seront recommandés. La similarité entre article est calculé à partir du contenu, le texte sera convertit en TF-IDF et les articles les plus proches en calculant la similarité du Cosinus seront considérés comme article qui parle du même sujet ou de la même catégorie.
+
+                \begin{itemize}[leftmargin=*]
+                    \item Exemple :\\ 
+                    A1 = "Real Madrid 3-1 Liverpool: Jurgen Klopp says Reds wanted everything and got minus something"\\
+                    Articles similaires à A1 = \{\\
+                    'Gareth Bale on his Champions League final goal for Real Madrid': 0.26435,\\
+                    'Real Madrid 3-1 Liverpool: ‘Flawed Karius pays for lack of focus’': 0.21839,\\
+                    'Columbus Crew: Two US cities fight over one football team': 0.073586
+                    \}
+                \end{itemize} 
             \end{enumerate}
+    \subsection{Intégration du module de Recommandation}
+    Dans la phase d'intégration, nous avons implémenter les algorithmes de recommandation et utiliser les bases de profil dans notre serveur en utilisant la bibliothéque PyMongo. Ainsi, dans chacun des processus de recommandation, les mises ajour seront faites automatiquement au niveau de notre base données stocké dans le serveur.
 
-            
-    \subsection{Modèles finaux}
-        Après expérimentation des techniques citées dans \ref{approches}, voici les modèles finaux de la catégorisation d'articles de presse implémentés en Python en utilisant la librairie Scikit-learn \ref{scikit-learn} :
-        \begin{itemize}
-            \item{\textbf{Anglais :} }le modèle le plus performant est obtenu en utilisant l'algorithme SVM avec 80\% de données pour l'apprentissage et le 20\% restant pour les tests sur un total de 32602 articles de 7 catégories différentes.\\
+\section{Catégorisation d'articles}
+Le deuxième module sur lequel nous avons travailler, c'est la catégorisation d'articles de presse. Nous avons expérimenter plusieurs techniques proposées dans la littérature. Nous présentons ci-après chaque approche, ses résultats, ses points forts et ses faiblesses.
 
-            \item{\textbf{Arabe :} }l'algorithme de la Descente de Gradient Stochastique nous a donné les meilleurs résultats en utilisant 32680 articles, avec 75\% de données pour l'apprentissage et le reste pour les tests. 
-        \end{itemize}
-    \subsection{Résultats et évaluation}
-        \subsubsection{Résultats}
-        \begin{itemize}
-            \item{\textbf{Anglais :}}
-            \begin{itemize}
-                \item{Accuracy : 0.987}
-                \item{Précision : 0.988}
-                \item{Rappel : 0.982}
-                \item{F-mesure : 0.985}
-            \end{itemize}
-            \begin{table}[H]
-                    \begin{center}
-                        \begin{tabular}{|c|C{2cm}|C{2cm}|C{2cm}|C{2cm}|}
-                            \hline
-                            \textbf{Catégorie} &  \textbf{Précision} &  \textbf{Rappel} &  \textbf{F-mesure} &  \textbf{Support} \\
-                            \hline
-                            Business & 0.98 & 0.96 & 0.97 & 1046 \\
-                            Entertainment & 0.99 & 0.99 & 0.99 & 651 \\
-                            Health & 0.97 & 1.00 & 0.99 & 388 \\
-                            Science \& Technology & 0.94 & 1.00 & 0.97 & 546 \\
-                            Sport & 1.00 & 1.00 & 1.00 & 1635 \\
-                            US & 0.99 & 0.98 & 0.99 & 993 \\
-                            World & 1.00 & 0.99 & 0.99 & 1262 \\                          
-                            \textbf{Moyenne/Totale} & \textbf{0.99} & \textbf{0.98} & \textbf{0.99} & \textbf{6521} \\
-                            \hline
-                        \end{tabular}
-                    \end{center}
-                    \caption{Résultat global et pour chaque catégorie de la catégorisation pour l'Anglais}
-            \end{table}
-            \item{\textbf{Arabe :}}
-            \begin{itemize}
-                \item{Accuracy : 0.936}
-                \item{Précision : 0.94}
-                \item{Rappel : 0.94}
-                \item{F-mesure : 0.94}
-            \end{itemize}
-            \begin{table}[H]
-                    \begin{center}
-                        \begin{tabular}{|c|C{2cm}|C{2cm}|C{2cm}|C{2cm}|}
-                            \hline
-                            \textbf{Catégorie} &  \textbf{Précision} &  \textbf{Rappel} &  \textbf{F-mesure} &  \textbf{Support} \\
-                            \hline
-                            \begin{arab}الجزائر\end{arab} & 0.93 & 0.88 & 0.91 & 664 \\
-                            \begin{arab}الثقافة\end{arab} & 0.91 & 0.86 & 0.88 & 509 \\
-                            \begin{arab}الدين\end{arab} & 0.94 & 0.92 & 0.93 & 860 \\
-                            \begin{arab}المجتمع\end{arab} & 0.91 & 0.94 & 0.92 & 1541 \\
-                            \begin{arab}الرياضة\end{arab} & 0.99 & 0.99 & 0.99 & 1620 \\
-                            \begin{arab}العالم\end{arab} & 0.92 & 0.94 & 0.93 & 1316 \\                      
-                            \textbf{Moyenne/Totale} & \textbf{0.94} & \textbf{0.94} & \textbf{0.94} & \textbf{6510} \\
-                            \hline
-                        \end{tabular}
-                    \end{center}
-                    \caption{Résultat global et pour chaque catégorie de la catégorisation pour l'Arabe}
-                \end{table}
-        \end{itemize}
+Toutes les approches utilisées sont basées sur l'apprentissage automatique, supervisé et non supervisé. 
+    \subsection{Approche basée sur l'Apprentissage Non Supervisé LDA}
+    \textquotedbl Latent Dirichlet Allocation\textquotedbl, déjà présenté dans ??autoref{},  Dans ce cas non supervisé STILL NEED SOMETHING  TO SAY
 
-        \subsubsection{Évaluations}
-        \begin{itemize}[leftmargin=*]
-            \item{\textbf{Anglais :} }\\
-                Le \autoref{confusion-anglais} présente la matrice de confusion du module de catégorisation d'articles de presse pour l'Anglais. On peut constater qu'il y-a très peu de confusion entre les différentes catégories, à part quelques articles comme les 31 articles qui ont été prédits comme \emph{Science \& Technology} alors qu'ils appartiennent à la catégorie \emph{Business}, cela est dû au contenu de ces articles qui doivent parlés de business dans le domaine de la science et technologie. 
-                \begin{table}[H]
-                    \begin{center}
-                        \begin{tabular}{|c|c|c|c|c|c|c|c|}
-                            \cline{2-8}
-                            \multicolumn{1}{c|}{} & \textbf{Sport} &  \textbf{World} &  \textbf{News} &  \textbf{Business} &  \textbf{Health} & \textbf{Entert.\footnote{Entertainment}} &  \textbf{Sci-Tech} \\
-                            \hline
-                            \textbf{Sport} & 1635 & 0 & 0 & 0 & 0 & 0 & 0 \\
-                            \textbf{World}  & 0 & 1249 & 0 & 9 & 2 & 1 & 1 \\
-                            \textbf{News}  & 0 & 0 & 974 & 11 & 3 & 3 & 2 \\
-                            \textbf{Business}  & 0 & 5 & 4 & 1003 & 3 & 0 & 31 \\
-                            \textbf{Health}  & 0 & 0 & 0 & 0 & 388 & 0 & 0 \\
-                            \textbf{Entert.}  & 0 & 0 & 0 & 1 & 3 & 646 & 1 \\
-                            \textbf{Sci-Tech}  & 0 & 0 & 1 & 0 & 0 & 1 & 544 \\
-                            \hline
-                        \end{tabular}
-                    \end{center}
-                    \caption{Matrice de confusion du modèle de la catégorisation d'articles Anglais}
-                    \label{confusion-anglais}
-                \end{table}
-                % \item{Courbe ROC : }
-                % \begin{figure}[H]
-                %     \centering
-                %     \includegraphics[height=320pt,width=330pt]{img/chapter4/rocEN.png}
-                %     \caption{}
-                %     \label{}
-                % \end{figure}
-            \item{\textbf{Arabe :} }\\
-                Tout comme l'Anglais le modèle développé pour l'Arabe, a montré une capacité de prédiction très élevée. Comme on peut le voire dans le \autoref{confusion-arabe}, la confusion entre les catégories est très faible à part quelques articles des catégories proches en terme de contenu. 
-                \begin{table}[H]
-                    \begin{center}
-                        \begin{tabular}{|c|c|c|c|c|c|c|}
-                            % \cline{2-7}
-                            % \hline
-                            % \multicolumn{1}{c|}{} & \multicolumn{6}{|c|}{Predicted} \\
-                            % \hline
-                            \cline{2-7}
-                            \multicolumn{1}{c|}{} & \textbf{\begin{arab}العالم\end{arab}} &  \textbf{\begin{arab}الرياضة\end{arab}} &  \textbf{\begin{arab}الجزائر\end{arab}} &  \textbf{\begin{arab}المجتمع\end{arab}} &  \textbf{\begin{arab}الدين\end{arab}} &  \textbf{\begin{arab}الثقافة\end{arab}} \\
-                            \hline
-                            \textbf{\begin{arab}العالم\end{arab}} & 1232  &  1  & 11 &  51  & 18  &  3 \\
-                            \textbf{\begin{arab}الرياضة\end{arab}}  & 1 & 1609  &  1  &  6  &  3 &   0 \\
-                            \textbf{\begin{arab}الجزائر\end{arab}}  & 28  &  2 & 587 &  21  &  9  & 17 \\
-                            \textbf{\begin{arab}المجتمع\end{arab}}  & 43  & 11 &  17& 1447 &  12 &  11 \\
-                            \textbf{\begin{arab}الدين\end{arab}}  & 36  &  0  &  6 &  18 & 788 &  12 \\
-                            \textbf{\begin{arab}الثقافة\end{arab}}  & 3  &  0 &   8 & 53  &  9 & 436 \\
-                            \hline
-                        \end{tabular}
-                    \end{center}
-                    \caption{Matrice de confusion du modèle de la catégorisation d'articles Arabe}
-                    \label{confusion-arabe}
-                \end{table}
+    \subsection{Corpus et dataset}
+    Comme expliqué dans le chapitre précédent (??autoref{}), nous avons utilisé le dataset CNN de 92000 articles pour implémenter et évaluer le modèle d'apprentissage non supervisé.
 
-                % \item{Courbe ROC : }
-                % \begin{figure}[H]
-                %     \centering
-                %     \includegraphics[height=320pt,width=330pt]{img/chapter4/ux/1.png}
-                %     \caption{}
-                %     \label{}
-                % \end{figure}
-        \end{itemize}
+    \subsection{Implémentation}
+    Pour l'implémentation de \emph{LDA} nous avons utilisé la bibliothéque Gensim pour :
+    la racinalisation, 
+    le stemming et 
+    l'extraction des caractéristique. 
+    l'imlplémentation du modéle. 
+
+    \subsection{Évaluation du modèle}
+    Aprés avoir entrainer notre modèle sur plusieurs paramètres, nous avons retenu les meilleurs :
+    Nombre de passes :10
+    Nombre de topics :14
+    Nombre d'itérations par passe :1000
+
+    Nous avons obtenues ci-dessous une représentation, selon le nombre de sujets définies, une liste des mots les plus représentatifs (5 mots) de chaque cluster pour un échantillon de 6 clusters.
+    \begin{table}[H]
+        \begin{center}
+            \begin{tabular}{|C{2.1cm}|C{2.1cm}|C{2.1cm}|C{2.1cm}|C{2.1cm}|C{2.1cm}|}
+                \hline                      
+                \textbf{Health} & \textbf{Tech.} & \textbf{World} & \textbf{Travel} & \textbf{US} & \textbf{Justice}\\ 
+                \hline     
+                health &  facebook &         china  &    world  &     president   &   court \\
+                school  &     news  &   government  &     city     &      obama  &     case \\
+                children  &    media   &       north  &   london     &       u.s.  & attorney \\  
+                students  &   online   &      united  &     park     &     states  &  charges \\  
+                medical  &    video   &        u.s.  &    south     &   american  &    judge \\  
+                care  &  twitter   &        iran  &    hotel     &      white  &      law \\  
+                university  &   social   &      australia  &  british     &     united  & trial \\ 
+                hospital &  internet   &      russia   &    year   &   government  &   report \\  
+                disease   &     use   &       korea   &     art & house  &    told  \\  
+                parents   &   phone & continent &   africa    &     america  &   prison \\  
+                \hline
+                
+            \end{tabular}
+        \end{center}
+        \caption{Résultats des clusters résultant de la catégorisation en Anglais avec LDA}
+        \label{Lda-categ}
+    \end{table}                           
+
+    Après avoir explicité la liste des mots par cluster, ci-dessous, nous allons présenter les résultats de l'évaluation du modèle \emph{LDA} présenté dans \ref{inmplementation}.
+    \begin{table}[H]
+        \begin{center}
+            \begin{tabular}{|c|c|}
+                \hline
+                \textbf{Perpléxité} & \textbf{Coherence de sujet} \\
+                \hline
+                -8.560 &-1.572  \\
+                \hline
+            \end{tabular}
+        \end{center}
+        \caption{Evaluation du modéle LDA}
+        \label{Eval LDA}
+    \end{table}
+
+
+\subsection{Approches Basées sur l'Apprentissage Supervisé}
+La catégorisation d'articles de presse basée sur l'apprentissage supervisé, nécessite un corpus de d'articles déjà annotés avec les catégories de chaque document. Ce-après les étapes suivies dans le développement du modèle de catégorisation d'articles de presse.
+\subsection{Corpus et dataset}
+Comme tout problème de classification, la catégorisation d'articles de presse nécessite de très grandes masses de données. C'est pour cela que nous avons consacrer une bonne période du projet à la récolte des corpus et la préparation des datasets.     
+    \subsubsection{Anglais}
+    Le dataset baptisé "News" a été récolté par le Laboratoire Informatique de \emph{l'Université de Pise} \cite{pise}, il regroupes des articles de 3 sources différentes : \emph{The New York Times}, \emph{Reuters} et \emph{USA Today}. le Tableau \ref{news-categ} présente en détails le nombre d'articles de chaque catégorie.
+    \begin{table}[H]
+        \begin{center}
+            \begin{tabular}{|C{5cm}|C{5cm}|}
+                \hline
+                \textbf{Catégorie} &  \textbf{Nombre d'articles} \\
+                \hline
+                Business & 5366 \\                            
+                Entertainment & 3286 \\
+                Health & 1851 \\
+                Science \& Technology & 2872 \\
+                Sport & 8189 \\
+                US & 4783 \\
+                World & 6255 \\
+                \textbf{Totale} &  \textbf{32602} \\
+                \hline
+            \end{tabular}
+        \end{center}
+        \caption{Nombres d'articles de chaque catégorie du corpus "News"}
+        \label{news-categ}
+    \end{table}
+
+    \subsubsection{Arabe}
+    Le corpus TALAA\footnote{Traitement Automatique du Langage et Apprentissage Automatique, l'équipe de recherche du Laboratoire de Recherche en Intelligence Artificielle du département informatique de l'USTHB} pour la catégorisation d'articles de presse est une grande collection d'articles publiés entre 2010 et 2014 dans différentes revue de presse Arabe sur internet. Il contient plus de 14 millions de mots de 582000 types différents. Le corpus contient 8 catégories, mais nous avons choisi de travailler sur 6 catégories plus générales comme on peut le constater dans le tableau suivant \ref{talaa-categ} \cite{talaa}. 
+    \begin{table}[H]
+        \begin{center}
+            \begin{tabular}{|c|c|}
+                \hline
+                \textbf{Catégorie} &  \textbf{Nombre d'articles} \\
+                \hline
+                \begin{arab}الجزائر\end{arab} & 6603 \\
+                \begin{arab}الثقافة\end{arab} & 3311 \\
+                \begin{arab}الدين\end{arab} & 2568 \\
+                \begin{arab}المجتمع\end{arab} & 7714 \\
+                \begin{arab}الرياضة\end{arab} & 8104 \\
+                \begin{arab}العالم\end{arab} & 4380 \\
+                \textbf{Totale} & \textbf{32680} \\
+                \hline
+            \end{tabular}
+        \end{center}
+        \caption{Nombres d'articles des 6 catégories choisies du corpus "TALAA"}
+        \label{talaa-categ}
+    \end{table}
+
+\subsection{Pré-traitement et structure des datasets}
+Les deux corpus utilisés dans les deux langues étaient sous le format brute, ce qui nécessitaient une restructuration et un pré-traitement afin de permettre leur exploitation.  
+
+Plusieurs opérations de pré-traitements ont été effectuées. Ci-après les étapes suivies :
+\begin{enumerate}
+    \item{\textbf{Segmentation (Tokenization) et suppression des mots vides :} } Pour l'Anglais nous avons utiliser le Tokenizer natif de NLTK, et FARASA Toolbox pour la langue Arabe.\\  
+    
+    \item{\textbf{Racinisation (Stemming) :} } 
+    La librairie Snowball Stemmer de NLTK a été utilisé pour l'Anglais, quant à l'Arabe c'est toujours la Toolbox FARASA.\\
+    
+    \item{\textbf{N-grammes :} }
+    L'algorithme natif de NLTK a été utilisé pour les deux langues (Anglais et Arabe).\\ 
+    
+    \item{\textbf{Extraction des caractéristiques :} }
+    Les librairies Countvectorizer et tfidfvectorizer de scikit-learn ont été utilisés dans l'éxtraction des caractéristiques pour l'anglais et l'arabe.\\
+\end{enumerate}
+
+
+\subsection{Implémentation}
+Après expérimentation des techniques citées dans \ref{approches}, voici les modèles finaux de la catégorisation d'articles de presse implémentés en Python en utilisant la librairie Scikit-learn \ref{scikit-learn} :
+
+    \subsubsection{Anglais}
+    le modèle le plus performant est obtenu en utilisant l'algorithme SVM avec 80\% de données pour l'apprentissage et le 20\% restant pour les tests sur un total de 32602 articles de 7 catégories différentes.
+    
+    Dans le \autoref{modele-categ-en}, présente une comparaison entre les deux techniques expérimentées pour l'Anglais.
+    \begin{table}[H]
+        \begin{center}
+            \begin{tabular}{|l|C{6cm}|r|} 
+                \hline
+                \textbf{Modèle} & \multicolumn{2}{c|}{\textbf{Résultats}} \\
+                \hline
+                    & Précision & \textbf{0.99} \\
+                \textbf{SVM} & Rappel & \textbf{0.99} \\
+                    & F-mesure & \textbf{0.99} \\
+                \hline
+                LDA & Perplexité & -8.55 \\
+                    & Cohérence & -1.57 \\
+                \hline
+            \end{tabular}
+        \end{center}
+        \caption{Résultats comparatifs des modèles de catégorisation pour l'arabe}
+        \label{modele-categ-en}
+    \end{table}
+      
+    \subsubsection{Arabe}
+    l'algorithme de la Descente de Gradient Stochastique, nous a donné les meilleurs résultats en utilisant 32680 articles, avec 75\% de données pour l'apprentissage et le reste pour les tests. 
+
+    Le \autoref{modele-categ-ar} présente une comparaison entre les résultats des différentes techniques expérimentées.
+    \begin{table}[H]
+      \begin{center}
+          \begin{tabular}{|c|c|c|c|c}
+              \hline
+              \textbf{Modèle} & \textbf{Précision} & \textbf{Rappel} & \textbf{F-mesure} \\
+              \hline
+              Naïve de Bayes & 0.89 & 0.87 & 0.88 \\
+              Arbre de décision & 0.82 & 0.84 & 0.83 \\
+              \textbf{Descente de Gradient Stochastique} & \textbf{0.94} & \textbf{0.94} & \textbf{0.94} \\
+              SVM & 0.91 & 0.89 & 0.90 \\
+              \hline
+          \end{tabular}
+      \end{center}
+      \caption{Résultats comparatifs des modèles de catégorisation pour l'arabe}
+      \label{modele-categ-ar}
+    \end{table}  
+
+\subsection{Résultats}
+    Les résultats des tests des modèles de catégorisation d'articles de presse, sont calculés en utilisant les métriques déjà présentés dans ??autoref{}. Des résultats comparatifs sont présentés dans ce qui suit.
+    \subsubsection{Anglais}
+    Le modèle destiné à la catégorisation d'articles de presse de l'Anglais, a montré une très haute capacité prédictive, l'accuracy \ref{} du meilleur modèle est de 98,7\%. Le \autoref{result-categ-en} présente les résultats détaillés de chaque catégorie avec les mesures de performances.
+    % \begin{itemize}
+    %   \item{Accuracy : 0.987}
+    %   \item{Précision : 0.988}
+    %   \item{Rappel : 0.982}
+    %   \item{F-mesure : 0.985}
+    % \end{itemize}
+    \begin{table}[H]
+        \begin{center}
+            \begin{tabular}{|c|C{2cm}|C{2cm}|C{2cm}|C{2cm}|}
+                \hline
+                \textbf{Catégorie} &  \textbf{Précision} &  \textbf{Rappel} &  \textbf{F-mesure} &  \textbf{Support} \\
+                \hline
+                Business & 0.98 & 0.96 & 0.97 & 1046 \\
+                Entertainment & 0.99 & 0.99 & 0.99 & 651 \\
+                Health & 0.97 & 1.00 & 0.99 & 388 \\
+                Science \& Technology & 0.94 & 1.00 & 0.97 & 546 \\
+                Sport & 1.00 & 1.00 & 1.00 & 1635 \\
+                US & 0.99 & 0.98 & 0.99 & 993 \\
+                World & 1.00 & 0.99 & 0.99 & 1262 \\                          
+                \textbf{Moyenne/Totale} & \textbf{0.99} & \textbf{0.98} & \textbf{0.99} & \textbf{6521} \\
+                \hline
+            \end{tabular}
+        \end{center}
+        \caption{Résultat global et pour chaque catégorie de la catégorisation pour l'Anglais}
+        \label{result-categ-en}
+    \end{table}
+
+    \subsubsection{Arabe}
+    Le modèle de catégorisation d'articles de presse Arabe a montré, également, des résultats très satisfaisants avec une accuracy de 93.6\% et une précision de 94\%. Les résultats détaillés sont présentés dans le \autoref{result-categ-ar}.
+    % \begin{itemize}
+    %   \item{Accuracy : 0.936}
+    %   \item{Précision : 0.94}
+    %   \item{Rappel : 0.94}
+    %   \item{F-mesure : 0.94}
+    % \end{itemize}
+    \begin{table}[H]
+        \begin{center}
+            \begin{tabular}{|c|C{2cm}|C{2cm}|C{2cm}|C{2cm}|}
+                \hline
+                \textbf{Catégorie} &  \textbf{Précision} &  \textbf{Rappel} &  \textbf{F-mesure} &  \textbf{Support} \\
+                \hline
+                \begin{arab}الجزائر\end{arab} & 0.93 & 0.88 & 0.91 & 664 \\
+                \begin{arab}الثقافة\end{arab} & 0.91 & 0.86 & 0.88 & 509 \\
+                \begin{arab}الدين\end{arab} & 0.94 & 0.92 & 0.93 & 860 \\
+                \begin{arab}المجتمع\end{arab} & 0.91 & 0.94 & 0.92 & 1541 \\
+                \begin{arab}الرياضة\end{arab} & 0.99 & 0.99 & 0.99 & 1620 \\
+                \begin{arab}العالم\end{arab} & 0.92 & 0.94 & 0.93 & 1316 \\                      
+                \textbf{Moyenne/Totale} & \textbf{0.94} & \textbf{0.94} & \textbf{0.94} & \textbf{6510} \\
+                \hline
+            \end{tabular}
+        \end{center}
+        \caption{Résultat global et pour chaque catégorie de la catégorisation pour l'Arabe}
+        \label{result-categ-ar}
+    \end{table}
+
+\subsection{Évaluations}
+    \subsubsection{Anglais}
+    Le \autoref{confusion-anglais} présente la matrice de confusion du module de catégorisation d'articles de presse pour l'Anglais. On peut constater qu'il y-a très peu de confusion entre les différentes catégories, à part quelques articles comme les 31 articles qui ont été prédits comme \emph{Science \& Technology} alors qu'ils appartiennent à la catégorie \emph{Business}, cela est dû au contenu de ces articles qui doivent parlés de business dans le domaine de la science et technologie. 
+    \begin{table}[H]
+        \begin{center}
+            \begin{tabular}{|c|c|c|c|c|c|c|c|}
+                \cline{2-8}
+                \multicolumn{1}{c|}{} & \textbf{Sport} &  \textbf{World} &  \textbf{News} &  \textbf{Business} &  \textbf{Health} & \textbf{Entert.\footnote{Entertainment}} &  \textbf{Sci-Tech} \\
+                \hline
+                \textbf{Sport} & 1635 & 0 & 0 & 0 & 0 & 0 & 0 \\
+                \textbf{World}  & 0 & 1249 & 0 & 9 & 2 & 1 & 1 \\
+                \textbf{News}  & 0 & 0 & 974 & 11 & 3 & 3 & 2 \\
+                \textbf{Business}  & 0 & 5 & 4 & 1003 & 3 & 0 & 31 \\
+                \textbf{Health}  & 0 & 0 & 0 & 0 & 388 & 0 & 0 \\
+                \textbf{Entert.}  & 0 & 0 & 0 & 1 & 3 & 646 & 1 \\
+                \textbf{Sci-Tech}  & 0 & 0 & 1 & 0 & 0 & 1 & 544 \\
+                \hline
+            \end{tabular}
+        \end{center}
+        \caption{Matrice de confusion du modèle de la catégorisation d'articles Anglais}
+        \label{confusion-anglais}
+    \end{table}
+    Les données de la matrice de confusion sont représentés graphiquement dans la \autoref{roc-en} sous forme de courbe ROC (Receiver Operating Characteristic) qui donne le taux de vrais positifs  en fonction du taux de faux positifs.
+    \begin{figure}[H]
+        \centering
+        \includegraphics[height=320pt,width=330pt]{img/chapter4/result/rocEN.png}
+        \caption{Courbe ROC du modèle de catégorisation pour l'Anglais}
+        \label{roc-en}
+    \end{figure}
+
+    \subsubsection{Arabe}
+    Tout comme l'Anglais le modèle développé pour l'Arabe, a montré une capacité de prédiction très élevée. Comme on peut le voire dans le \autoref{confusion-arabe}, la confusion entre les catégories est très faible à part quelques articles des catégories proches en terme de contenu. 
+    \begin{table}[H]
+        \begin{center}
+            \begin{tabular}{|c|c|c|c|c|c|c|}
+                % \cline{2-7}
+                % \hline
+                % \multicolumn{1}{c|}{} & \multicolumn{6}{|c|}{Predicted} \\
+                % \hline
+                \cline{2-7}
+                \multicolumn{1}{c|}{} & \textbf{\begin{arab}العالم\end{arab}} &  \textbf{\begin{arab}الرياضة\end{arab}} &  \textbf{\begin{arab}الجزائر\end{arab}} &  \textbf{\begin{arab}المجتمع\end{arab}} &  \textbf{\begin{arab}الدين\end{arab}} &  \textbf{\begin{arab}الثقافة\end{arab}} \\
+                \hline
+                \textbf{\begin{arab}العالم\end{arab}} & 1232  &  1  & 11 &  51  & 18  &  3 \\
+                \textbf{\begin{arab}الرياضة\end{arab}}  & 1 & 1609  &  1  &  6  &  3 &   0 \\
+                \textbf{\begin{arab}الجزائر\end{arab}}  & 28  &  2 & 587 &  21  &  9  & 17 \\
+                \textbf{\begin{arab}المجتمع\end{arab}}  & 43  & 11 &  17& 1447 &  12 &  11 \\
+                \textbf{\begin{arab}الدين\end{arab}}  & 36  &  0  &  6 &  18 & 788 &  12 \\
+                \textbf{\begin{arab}الثقافة\end{arab}}  & 3  &  0 &   8 & 53  &  9 & 436 \\
+                \hline
+            \end{tabular}
+        \end{center}
+        \caption{Matrice de confusion du modèle de la catégorisation d'articles Arabe}
+        \label{confusion-arabe}
+    \end{table}
+
+    La courbe ROC du modèle de catégorisation Arabe est présenté dans la \autoref{roc-ar} 
+    \begin{figure}[H]
+        \centering
+        \includegraphics[height=320pt,width=330pt]{img/chapter4/result/rocAR.png}
+        \caption{Courbe ROC du modèle de catégorisation pour l'Arabe}
+        \label{roc-ar}
+    \end{figure}
+    
+\subsection{Intégration du module de catégorisation}
+Afin d'intégrer notre module de catégorisation, nous avons utilisé la bibliothèque Pickle qui permet de sauvegarder le modèle dans un fichier binaire. Ensuite, il suffit juste de charger le modèle et de lancer la prédiction sur des nouveaux articles.
+
 
 \section{Résumé automatique}
-    La deuxième partie de la phase de réalisation est consacrée au résumé automatique. Nous avons expérimentés plusieurs techniques et méthodes que nous allons voire en détails dans cette section. 
-    \subsection{Approches expérimentées}
-        \subsubsection{Résumé extractif par Apprentissage Supervisé}
-            Nous avons commencé par une approche basée sur l'apprentissage automatique supervisé, ce qui nécessitait des corpus d'articles avec leur résumés types.
-            \begin{itemize}
-                 \item{\textbf{Contribution à la récolte de données : "Sumrized" et "Mou3in"}}\\
-                Face au manque flagrant des corpus (gratuits) pour le résumé automatique, nous avons développer une plate-forme contributive sur le web baptisée \textbf{Sumrized.com} pour la récolte des textes et des résumés en trois langues Arabe, Anglais et Français. 
+La deuxième partie de la phase de réalisation est consacrée au résumé automatique. Nous avons expérimentés plusieurs techniques et méthodes que nous allons voire en détails dans cette section. 
+\subsection{Résumé extractif par Apprentissage Supervisé}
+Nous avons commencé par une approche basée sur l'apprentissage automatique supervisé, ce qui nécessitait des corpus d'articles avec leur résumés types.
 
-                Chaque texte et son résumé sont vérifier manuellement par un expert qui peut consulter et valider les contributions à partir d'un Dashboard dédié à cet effet. L'interface principale de la plate-forme, qui est en ligne depuis Février 2018, est présentée dans la figure \ref{sumrized-ui}. 
-
-                \begin{figure}[H]
-                    \centering
-                    \includegraphics[height=180pt,width=320pt]{img/chapter4/sumrized/responsive.png}
-                    \caption{La plate-forme Sumrized sur les différents supports}
-                    \label{sumrized-ui}
-                \end{figure} 
-
-                Nous avons également développé une application de bureau, appelée \textbf{Mou3in}, afin de faciliter l'annotation des textes, elle offre à son utilisateur la possibilité d'attribuer une étiquette à chaque phrase selon son jugement (à supprimer ou à laisser). La figure \ref{mou3in} présente l'espace de travail sur l'application "Mou3in" :
-                \begin{figure}[H]
-                    \centering
-                    \includegraphics[height=230pt,width=370pt]{img/chapter4/mou3in/mou3in.png}
-                    \caption{Interface utilisateur de "Mou3in"}
-                    \label{mou3in}
-                \end{figure}
-
-                \item{\textbf{Pré-traitement et structure du dataset}}\\
-                Tout les articles du dataset sont sous le format XML, chaque article a son propre identifiant et divisé en paquets de phrases selon l'opération effectuée. Ci-après la figure \ref{xml-structure} qui montre un exemple du dataset : 
-                \begin{figure}[H]
-                    \centering
-                    \includegraphics[height=220pt,width=430pt]{img/chapter4/xml.png}
-                    \caption{Structure d'un article du dataset}
-                    \label{xml-structure}
-                \end{figure}
-                L'approche basée sur l'apprentissage automatique demandait un très grand nombre d'articles résumés, ce qui nous a poussé à l'abandonner.
-            \end{itemize}
-        \subsubsection{Résumé extractif par Machine de Boltzman}
-            L'approche proposée dans \cite{boltzman} utilise un modèle d'apprentissage profond afin de prédire les phrases les plus importantes dans un texte donnée en utilisant 9 caractéristiques sur chaque phrase. Elle consiste en trois grande phases: l'extraction des caractéristiques, la conversion en valeurs numériques et la génération du résumé à partir des scores de chaque phrase. 
-
-            \begin{itemize}[leftmargin=*]
-                \item{\textbf{Pré-traitement et structure du dataset}}\\
-                Cette méthode, contrairement aux autres, est appliquée sur un seul document, on a pas besoin de plusieurs documents. La texte est segmenté en phrase, chaque phrase est divisé en mots et les caractéristiques citées là-dessus sont calculées.\\
-
-                La matrice qui représentent le texte est injectée dans une Machine de Boltzman\footnote{Type de réseau de neurones artificiels pour l'apprentissage non supervisé} afin de calculé les score des phrases. Les résultats sont triés dans l'ordre décroissant des scores et le résumé est établi selon ces derniers.\\
-
-                \item{\textbf{Résultats et critiques}}\\
-                L'évaluation de ce modèle est effectuée en utilisant le \emph{Gold Standard}\footnote{Dataset de référence construit par des experts linguistes, utilisé pour l'évaluation des résultats} Duc2004 qui est un dataset qui contient 50 articles de presse de différentes catégories et 4 à 5 résumés de référence pour chaque article.
-
-                Nous avons obtenu les résultats présentés dans le \autoref{result-boltzman} en utilisant ROUGE (les métriques d'évaluations, ROUGE notamment, sont définies dans la \autoref{metrique-eval}) : 
-                \begin{table}[H]
-                    \begin{center}
-                        \begin{tabular}{|c|C{1.2cm}|C{1.2cm}|C{1.2cm}|C{1.2cm}|C{1.2cm}|C{1.2cm}|C{1.2cm}|C{1.2cm}|}
-                            \cline{2-9}
-                            \multicolumn{1}{c|}{} & \textbf{R-1} &  \textbf{R-2} &  \textbf{R-3} &  \textbf{R-4} &  \textbf{R-L} &  \textbf{R-W} &  \textbf{R-S} &  \textbf{R-SU} \\
-                            \hline
-                            \textbf{Rappel} & 0.4172 & 0.0615 & 0.0129 & 0.0042 & 0.3239 & 0.1089 & 0.1693 & 0.1739 \\
-                            \textbf{Précision} & 0.1982 & 0.0264 & 0.0054 & 0.0016 & 0.1525 & 0.0919 & 0.0385 & 0.0402 \\
-                            \textbf{F-mesure} & 0.2549 & 0.0346 & 0.0071 & 0.0022 & 0.1963 & 0.0934 & 0.0556 & 0.0578 \\
-                            \hline
-                        \end{tabular}
-                    \end{center}
-                    \caption{Résultats du résumeur extractif basé sur la Machine de Boltzman}
-                    \label{result-boltzman}
-                \end{table}
-                En effet, ces résultats sont très proches des résumeurs de l'état de l'art, mais le modèle que nous avons utilisé est pré-entraîné sur un type de données totalement différent (des images), ce qui nous a amené à laisser tomber cette approche.   
-            \end{itemize}
-
-        \subsubsection{Résumé extractif par Plongement de mots\ref{plongement}}
-        L'approche proposée par l'équipe de recherche du département informatique de l'Université de Bari en Italie \cite{bari}, est basée sur la similarité textuelle entre la phrase centroïde et les autres phrases du texte en utilisant les plongements de mots (Word embeddings). La conception et l'algorithme de réalisation sont détaillés dans \ref{plongement}       
-
-    \subsection{Résultats et évaluation}
-        \subsubsection{Métrique d'évaluation : ROUGE\label{metrique-eval}}
-        ROUGE est l'acronyme de "Recall-Oriented Understudy for Gisting Evaluation". Il s'agit essentiellement d'un ensemble de métriques permettant d'évaluer le résumé automatique de textes ainsi que la traduction automatique. Il fonctionne en comparant un résumé produit automatiquement ou une traduction à un ensemble de résumés de référence (généralement produits par des humains). \cite{rouge0}
+    \subsubsection{Contribution à la récolte de données : "Sumrized" et "Mou3in"}
+    Face au manque flagrant des corpus (gratuits) pour le résumé automatique, nous avons développer une plate-forme contributive sur le web baptisée \textbf{Sumrized.com} pour la récolte des textes et des résumés en trois langues Arabe, Anglais et Français. 
     
-        \subsubsection{Types des métriques de ROUGE\label{type-rouge}}
-        \begin{itemize}
-            \item{ROUGE-1, 2, 3 et 4 : font référence au chevauchement des uni-grammes, bi-grammes, tri-grammes et quadri-grammes, respectivement, entre le système et les résumés de référence \cite{rouge1}.}\\
-            \item{ROUGE-L, W : basés sur la plus longue sous-séquence commune (LCS) \cite{rouge2}.}\\
-            \item{ROUGE-S : basé sur les cooccurrences des paires de mots dans l'ordre des phrases \cite{rouge2}.}\\
-            \item{ROUGE-SU : en plus des paires de mots, il utilise aussi la cooccurrence mot unique toujours dans l'ordre des phrases.}
-        \end{itemize}
+    Chaque texte et son résumé sont vérifier manuellement par un expert qui peut consulter et valider les contributions à partir d'un Dashboard dédié à cet effet. L'interface principale de la plate-forme, qui est en ligne depuis Février 2018, est présentée dans la figure \ref{sumrized-ui}. 
     
-        \subsubsection{Résultats du modèle de résumé automatique final}
-        \begin{table}[H]
-            \begin{center}
-                \begin{tabular}{|c|C{1.2cm}|C{1.2cm}|C{1.2cm}|C{1.2cm}|C{1.2cm}|C{1.2cm}|C{1.2cm}|C{1.2cm}|}
-                    \cline{2-9}
-                    \multicolumn{1}{c|}{} & \textbf{R-1} &  \textbf{R-2} &  \textbf{R-3} &  \textbf{R-4} &  \textbf{R-L} &  \textbf{R-W} &  \textbf{R-S} &  \textbf{R-SU} \\
-                    \hline
-                    \textbf{Rappel} & 0.5631 & 0.1226 & 0.0346 & 0.0139 & 0.5111 & 0.1729 & 0.2981 & 0.3029 \\
-                    \textbf{Précision} & 0.1662 & 0.0361 & 0.0105 & 0.0042 & 0.1503 & 0.0912 & 0.0281 & 0.0289 \\
-                    \textbf{F-mesure} & 0.2485 & 0.0541 & 0.0157 & 0.0063 & 0.2245 & 0.1145 & 0.0488 & 0.0503 \\
-                    \hline
-                \end{tabular}
-             \end{center}
-            \caption{Résultats du résumeur extractif basé sur le plongement de mots}
-            \label{result-boltzman}
-        \end{table}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[height=180pt,width=320pt]{img/chapter4/sumrized/responsive.png}
+        \caption{La plate-forme Sumrized sur les différents supports}
+        \label{sumrized-ui}
+    \end{figure} 
+    
+    Nous avons également développé une application de bureau, appelée \textbf{Mou3in}, afin de faciliter l'annotation des textes, elle offre à son utilisateur la possibilité d'attribuer une étiquette à chaque phrase selon son jugement (à supprimer ou à laisser). La figure \ref{mou3in} présente l'espace de travail sur l'application "Mou3in" :
+    \begin{figure}[H]
+        \centering
+        \includegraphics[height=230pt,width=370pt]{img/chapter4/mou3in/mou3in.png}
+        \caption{Interface utilisateur de "Mou3in"}
+        \label{mou3in}
+    \end{figure}
+    
+    L'approche basée sur l'apprentissage automatique demandait un très grand nombre d'articles résumés, ce qui nous a poussé à l'abandonner.
+
+
+\subsection{Résumé extractif par Machine de Boltzman}
+L'approche proposée dans \cite{boltzman} utilise un modèle d'apprentissage profond afin de prédire les phrases les plus importantes dans un texte donnée en utilisant 9 caractéristiques sur chaque phrase. Elle consiste en trois grande phases: l'extraction des caractéristiques, la conversion en valeurs numériques et la génération du résumé à partir des scores de chaque phrase. 
+
+    \subsubsection{Pré-traitement et structure du dataset}
+    Cette méthode, contrairement aux autres, est appliquée sur un seul document, on a pas besoin de plusieurs documents. La texte est segmenté en phrase, chaque phrase est divisé en mots et les caractéristiques citées là-dessus sont calculées.\\
+    
+    La matrice qui représente le texte est injectée dans une Machine de Boltzman\footnote{Type de réseau de neurones artificiels pour l'apprentissage non supervisé} en utilisant la bibliothèque Theano \autoref{theano} afin de calculé les score des phrases. Les résultats sont triés dans l'ordre décroissant des scores et le résumé est établi selon ces derniers.\\
+    
+    \subsubsection{Résultats et critiques}
+    L'évaluation de ce modèle est effectuée en utilisant le \emph{Gold Standard}\footnote{Dataset de référence construit par des experts linguistes, utilisé pour l'évaluation des résultats} Duc2004 qui est un dataset qui contient 50 articles de presse de différentes catégories et 4 à 5 résumés de référence pour chaque article.
+    
+    Afin d'évaluer ce résumeur automatique, nous avons appliqué le paramètre suivant :
+    
+    Longueur du résumé = 25 \% de la taille du texte en entrée.
+    
+    Nous avons obtenu les résultats présentés dans le \autoref{result-boltzman} en utilisant ROUGE (les métriques d'évaluations, ROUGE notamment, sont définies dans la \autoref{metrique-eval}) : 
+    \begin{table}[H]
+        \begin{center}
+            \begin{tabular}{|c|C{1.2cm}|C{1.2cm}|C{1.2cm}|C{1.2cm}|C{1.2cm}|C{1.2cm}|C{1.2cm}|C{1.2cm}|}
+                \cline{2-9}
+                \multicolumn{1}{c|}{} & \textbf{R-1} &  \textbf{R-2} &  \textbf{R-3} &  \textbf{R-4} &  \textbf{R-L} &  \textbf{R-W} &  \textbf{R-S} &  \textbf{R-SU} \\
+                \hline
+                \textbf{Rappel} & 0.4172 & 0.0615 & 0.0129 & 0.0042 & 0.3239 & 0.1089 & 0.1693 & 0.1739 \\
+                \textbf{Précision} & 0.1982 & 0.0264 & 0.0054 & 0.0016 & 0.1525 & 0.0919 & 0.0385 & 0.0402 \\
+                \textbf{F-mesure} & 0.2549 & 0.0346 & 0.0071 & 0.0022 & 0.1963 & 0.0934 & 0.0556 & 0.0578 \\
+                \hline
+            \end{tabular}
+        \end{center}
+        \caption{Résultats du résumeur extractif basé sur la Machine de Boltzman}
+        \label{result-boltzman}
+    \end{table}
+    En effet, ces résultats sont très proches des résumeurs de l'état de l'art, mais le modèle que nous avons utilisé est pré-entraîné sur un type de données totalement différent (des images), ce qui nous a amené à laisser tomber cette approche.   
+
+\subsection{Résumé extractif par Plongement de mots\ref{plongement}}
+Dans ce type de résumé, nous allons appliqué le modèle de plongements de mots préentrainé de wikipédia \ref{plongement} sur un document (Résumeur automatique extractif mono document)\cite{notreresume}afin d'aboutir a un résumé automatique et cela en utilisant les bibliothèques Gensim et NumPy. 
+
+\subsection{Résultats et évaluation}
+Afin d'évaluer ce résumeur automatique, nous avons utilisé le dataset Duc2004 ??\autoref{} et nous avons fixé paramètres suivants :
+
+Seuil de similarité = 0.95
+Seuil de poids du document (IDF) = 0.3
+Longueur du résumé = 25 \% de la taille du texte en entrée.
+
+Nous avons obtenu les résultats présentés dans le \autoref{result-boltzman} en utilisant ROUGE (les métriques d'évaluations, ROUGE notamment, sont définies dans la \autoref{metrique-eval}) : 
+
+\begin{table}[H]
+    \begin{center}
+        \begin{tabular}{|c|C{1.2cm}|C{1.2cm}|C{1.2cm}|C{1.2cm}|C{1.2cm}|C{1.2cm}|C{1.2cm}|C{1.2cm}|}
+            \cline{2-9}
+            \multicolumn{1}{c|}{} & \textbf{R-1} &  \textbf{R-2} &  \textbf{R-3} &  \textbf{R-4} &  \textbf{R-L} &  \textbf{R-W} &  \textbf{R-S} &  \textbf{R-SU} \\
+            \hline
+            \textbf{Rappel} & 0.5631 & 0.1226 & 0.0346 & 0.0139 & 0.5111 & 0.1729 & 0.2981 & 0.3029 \\
+            \textbf{Précision} & 0.1662 & 0.0361 & 0.0105 & 0.0042 & 0.1503 & 0.0912 & 0.0281 & 0.0289 \\
+            \textbf{F-mesure} & 0.2485 & 0.0541 & 0.0157 & 0.0063 & 0.2245 & 0.1145 & 0.0488 & 0.0503 \\
+            \hline
+        \end{tabular}
+    \end{center}
+    \caption{Résultats du résumeur extractif basé sur le plongement de mots}
+    \label{result-boltzman}
+\end{table}
+L'évaluation de résumeur montre une augmentation des valeurs des métriques d'évaluation par rapport à l'approche précédente (??\autoref{}) qui est moins performante sur le même dataset. Ces résultats nous en poussé a considéré le résumeur automatique basé sur les plongements de mots comme résumeur du système \textquotedbl Feedny\textquotedbl.
+
+\subsection{Intégration du module de résumé autmatique}
+Dans la phase d'intégration, nous avons charger les modèles de plongement de mots (Anglais et Arabe) comme modéle préentrainé et nous avons fait appel dans notre serveur afin de délivrer le résumé.
+
 
 \section{Traduction Automatique}
-Comme il a été décrit dans le chapitre précédent, la traduction sera intégrée directement à l'application finale afin d'offrir une fonctionnalité de traduction en plus de celle du résumé et la catégorisation. A cet effet, nous avons utilisé la bibliothèque TextBlob qui offre une traduction multilingues d'un article ou d'un résumé.
-    \subsection{Exemple de traduction automatique}
-    \begin{itemize}
-        \item Anglais :\\ 
-        \textquotedbl The Interior Ministers of Spain and Algeria signed an agreement this week to form a joint team of investigation with the goals of fighting “illegal migration” and “preventing Islamist terrorism.” The agreement comes after recent crackdowns by the Algerian authorities during the first months of 2018 have reduced the number of undocumented Algerian migrants arriving in Spain, a reduction that was praised by the Spanish Interior Minister Juan Ignacio Zoido at their meeting in Madrid.\textquotedbl \\
-        
-        \item Arabe :\\
-        \textquotedbl وقع وزيرا الداخلية الإسباني والجزائري اتفاقا هذا الأسبوع لتشكيل فريق مشترك من التحقيق بهدف محاربة "الهجرة غير الشرعية" و "منع الإرهاب الإسلامي". ويأتي هذا الاتفاق بعد الإجراءات القمعية الأخيرة التي قامت بها السلطات الجزائرية خلال الأشهر الأولى من خفّض عام 2018 عدد المهاجرين الجزائريين غير الشرعيين الذين وصلوا إلى إسبانيا ، وهو تخفيض أشاد به وزير الداخلية الإسباني خوان إغناسيو زويدو في اجتماعهم في مدريد. \textquotedbl
-    
-        \item Français :\\
-        \textquotedbl Les ministres de l'Intérieur d'Espagne et d'Algérie ont signé cette semaine un accord pour former une équipe conjointe d'enquête ayant pour objectif de lutter contre les "migrations clandestines" et "la prévention du terrorisme islamiste." L'accord intervient après les récentes mesures de répression des autorités algériennes. 2018 ont réduit le nombre de migrants algériens sans papiers arrivant en Espagne, une réduction qui a été saluée par le ministre espagnol de l'Intérieur Juan Ignacio Zoido lors de leur réunion à Madrid.\textquotedbl \\
+Comme il a été décrit dans le chapitre précédent, la traduction sera intégrée directement à l'application finale afin d'offrir une fonctionnalité de traduction en plus de celle du résumé et la catégorisation. A cet effet, nous avons utilisé la bibliothèque TextBlob \autoref{label} qui offre une traduction multilingues d'un article ou d'un résumé.
 
-   \end{itemize}
+\subsection{Intégration du module de traduction automatique}
+L'intégration du module de traduction se fait juste sur un appel depuis l'API du système \textquotedbl Feedny\textquotedbl en utilisant la bibliothèque textBlob et en fournissant le type de langage en paramètre.
+
+\subsection{Traduction automatique par TextBlob}
+\begin{itemize}
+    \item Anglais :\\ 
+    \textquotedbl The Interior Ministers of Spain and Algeria signed an agreement this week to form a joint team of investigation with the goals of fighting “illegal migration” and “preventing terrorism.” The agreement comes after recent crackdowns by the Algerian authorities during the first months of 2018 have reduced the number of undocumented Algerian migrants arriving in Spain, a reduction that was praised by the Spanish Interior Minister Juan Ignacio Zoido at their meeting in Madrid.\textquotedbl \\
+    
+    \item Arabe :\\
+    \begin{arab}" وقع وزيرا الداخلية الإسباني والجزائري اتفاقا هذا الأسبوع لتشكيل فريق مشترك من التحقيق بهدف محاربة "الهجرة غير الشرعية" و "منع الإرهاب". ويأتي هذا الاتفاق بعد الإجراءات القمعية الأخيرة التي قامت بها السلطات الجزائرية خلال الأشهر الأولى من خفّض عام 2018 عدد المهاجرين الجزائريين غير الشرعيين الذين وصلوا إلى إسبانيا ، وهو تخفيض أشاد به وزير الداخلية الإسباني خوان إغناسيو زويدو في اجتماعهم في مدريد. "\end{arab}
+    
+    \item Français :\\
+    \textquotedbl Les ministres de l'Intérieur d'Espagne et d'Algérie ont signé cette semaine un accord pour former une équipe conjointe d'enquête ayant pour objectif de lutter contre les "migrations clandestines" et "la prévention du terrorisme." L'accord intervient après les récentes mesures de répression des autorités algériennes. 2018 ont réduit le nombre de migrants algériens sans papiers arrivant en Espagne, une réduction qui a été saluée par le ministre espagnol de l'Intérieur Juan Ignacio Zoido lors de leur réunion à Madrid.\textquotedbl \\
+\end{itemize}
+
+\section{Présentation de l'application "Feedny"}
+Après avoir finaliser les différents modules qui composent notre système, nous avons procéder à l'intégration de ces derniers dans une application mobile multi plate-formes (Androïd et IOS) dans l'optique de permettre à l'utilisateur de bénéficier de chaque fonctionnalité.!!
+
+% L'expérience utilisateur au sein de notre application est étudier pour optimiser la navigation entre les différents espaces. L'application est très intuitifs et conçu afin d'attirer les utilisateurs le plus de temps possible.
+La phase d'implémentation a été divisée en deux parties, le développement Back-end de l'API qui est la pièce motrice de l'application et qui intègre tout les modèles de classification, résumé et recommandation, et le développement de l'interface utilisateur sous forme d'une application mobile.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[height=132pt,width=270pt]{img/chapter4/frontbackend.png}
+    \caption{API et application mobile - les deux composants principales de \textquotedbl Feedny\textquotedbl }
+    \label{frontbackend}
+\end{figure}
+
+Nous allons présenter chaque composant apparu sur la \autoref{frontbackend} et ses étapes d'implémentations en détails dans ce qui suit.
+
+    \subsection{Développement Back-end}
+    La partie "métier" de l'application consiste en un service web sous l'architecture REST\footnote{Respresentational State Transfert : un style d'architecture définissant un ensemble de contraintes et de propriétés basées sur le protocole HTTP [Wikipédia]} API\footnote{Application Programming Interface : un ensemble normalisé de classes, de méthodes ou de fonctions qui sert de façade par laquelle un logiciel offre des services à d'autres logiciels [Wikipédia]} qui intègre tout les modules. L'API reçoit les requêtes des utilisateurs à travers l'interface, et retourne une réponse via le protocole HTTP.
+
+    Le Back-end est développé entièrement en Python en utilisant le Framework Flask\autoref{flask}. L'API est hébergée, pendant la phase de développement, dans un serveur web. 
+    
+    Elle est composée de deux modules :
+        \begin{itemize}
+            \item Module d'extraction d'articles
+            \item Module de gestion de la base de données
+        \end{itemize} 
+
+        \subsubsection{Extraction d'articles}
+        Le composant le plus important dans notre système est l'article de presse. Ce dernier se trouve un peu partout sur les revues de presses en ligne. À cet effet, nous avons implémenter une fonctionnalité qui permet d'extraire des articles de presse de différentes sources dans les deux langues.
+
+        L'extraction d'articles de presse peut être personnalisée selon le besoin, on peut choisir des articles à partir des catégories, région, pays, etc.
+
+        Lors de l'extraction d'un article, nous récupérons toutes les informations relatives à ce dernier tels que : le contenu de l'article, le titre, l'auteur, l'horaire de publication, etc.
+
+        Le module d'extraction d'article de presse peut être invoquer juste en saisissant une requête dans le navigateur ou en visitant la page principale de notre application, la réponse est retournée sous le format JSON, comme dans l'exemple suivant qui monte une extraction par nom de source :
+
+\begin{lstlisting}[style=api] 
+  http://feedny.io/api/articles/add/sources=al-jazeera-english
+\end{lstlisting}
+        
+        ou encore par catégorie :
+\begin{lstlisting}[style=api] 
+  http://feedny.io/api/articles/add/categories=sport,health
+\end{lstlisting}  
+
+        \subsubsection{Gestion de la base de données}
+        Le module de gestion de la base de données s'occupe de l'insertion, la suppression, la recherche et la mise à jour des articles et des profils utilisateurs.
+
+        Chaque appel à l'API implique systématiquement une opération implicite sur la base de données. Elle est composée, comme cité dans \autoref{}, de deux collections : Articles et Profils. 
+
+        \begin{enumerate}[leftmargin=*]
+            \item\textbf{Gestion de la collection d'Articles}\\
+            Après extraction d'un article de presse, il sera stocké dans un document qui apparient à la collection Articles dans notre base de données NoSQL afin de faciliter la recherche et de remédier à la lenteur du débit internet. (la structure d'un document Article a été présentée dans \autoref{})
+
+            La recherche peut se faire avec n'importe quel attribut d'un article de presse, et c'est l'un des plus grand avantages des base de données NoSQL. Les articles peuvent aussi avoir une structure différentes, et on peut stocké, également, des images et du son, s'il y-en a.
+
+            On peut également proposer des articles à un utilisateur, en utilisant son vecteur de probabilité de sélection et ses sources préférées : 
+\begin{lstlisting}[style=api] 
+  http://feedny.io/api/profiles/onload/username=yankheloufi
+\end{lstlisting} 
+            
+            \item\textbf{Gestion de la collection de Profils}\\
+            La structure des profils utilisateurs est très dynamique, elle est différentes d'un utilisateur à un autre. Les utilisateurs peuvent avoir plusieurs préférences et source favorites. La gestion des profils est également effectué à partir de l'API, un nouvel utilisateur est ajouter de la façon suivante :   
+\begin{lstlisting}[style=api] 
+  http://feedny.io/api/profiles/add/profile=username::password::user@hey.com::sport,religion::bbc-news,echourouk
+\end{lstlisting} 
+            
+            Et le profil peut être également mis à jour de la manière qui suit : 
+\begin{lstlisting}[style=api] 
+  http://feedny.io/api/profiles/update/profile=username::preferences+algeria
+\end{lstlisting}            
+        \end{enumerate} 
+
+    \subsection{Développement Front-end}
+    Dans le monde du développement web et mobile, nous recherchons toujours des cycles de développement très courts, des délais de déploiement réduits avec une meilleure performance.
+
+    Une technologie très récente (2016) se trouve au beau milieu de ces exigences, le développement d'application mobile hybride, en utilisant des techniques et des langages de programmation très répandus parmi les développeurs web (comme JavaScript ou HTML5 et CSS) enveloppées dans un Framework lui permettant de fonctionner nativement sur n'importe quel appareil et système d'exploitation (Androïd ou IOS).
+
+    Ils existent plusieurs Frameworks d'applications mobiles hybrides, mais React-native \autoref{} développé par \emph{Facebook}, et jusqu'à l'écriture de ces lignes, reste le plus performant et le plus évolutifs tout en restant stable. On peut cités quelques points forts de React-native : 
+        \begin{itemize}
+            \item Open source, communauté ne cessent de s'agrandir,
+            \item Facebook continue à investir dans sa croissance,
+            \item Les composants réutilisables,
+            \item Compatibilité avec les APIs, les SGBDs et les extensions tiers,
+            \item Moins d'utilisation de la mémoire,
+            \item ...
+        \end{itemize}
+    Tout ces arguments nous ont poussé à choisir React-native comme Framework pour développer notre application mobile. 
+
+    \subsection{Fonctionnalités disponibles}
+    Deux méthode d'utilisation de notre application sont disponible: Avec authentification, Sans authentification. La personnalisation des recommandations en dépendra.
+    \begin{enumerate}[leftmargin=*]
+        \item\textbf{Avec authentification (personnalisé)}\\
+        Si l'utilisateur s'authentifie, la version personnalisée de notre application lui sera accessible et pourra dès la première connexion choisir ses catégories et ses sources favorites afin de construire son profil utilisateur.
+
+        À partir de là, les articles proposés sont choisis en fonction de ses préférences, et les recommandations seront de plus en plus raffinées avec l'utilisation de l'application.
+
+        Les utilisateurs de "Feedny" auront comme fonctionnalités:  
+        \begin{itemize}
+            \item \textbf{Catégorisation automatique d'articles :}\\
+            Les articles sont classifiés dans différentes catégories suivant le sujet traité.
+            \item \textbf{Résumé automatique :}\\
+            Au lieu de lire un article complet, l'utilisateur aura un résumé généré automatiquement à partir de l'article qui lui permettra de retrouver tout les faits importants décrit dans l'article.
+            \item \textbf{Traduction automatique :}\\
+            l'utilisateur aura la possibilité d'avoir une traduction de l'article en cours de lecture.
+            \item \textbf{Favoriser un article, une revue ou une catégorie :}\\
+            L'utilisateur pourra aussi marquer un article, une source ou une catégorie précise d'articles comme favorite.
+            \item \textbf{Mentionner la satisfaction :}\\
+            Il aura la possibilité d'ajouter une mention de préférence "J'aime" ou "Je n'aime pas" sur la recommandation.
+            \item \textbf{Recherche d'articles :}\\
+            l'utilisateur aura la possibilité de faire une recherche spécifique des articles, et ceux en se basant soit sur : une recherche basé mots clés, une recherche basé sur une catégorie ou une recherche selon la source de l'article. 
+            \item \textbf{Consultations des articles recommandés :}\\
+            L'interface offrira la possibilité de consulter tout les détails concernant l'article (auteur, date de publication, etc.) 
+        \end{itemize}
+        Dès la connexion de l'utilisateur, ce dernier peut s'identifier en utilisant un nom d'utilisateur et un mot de passe ; sinon il utilisera les services non personnalisés du système qui sont présentés dans le point suivant.\\
+
+        \item\textbf{Sans authentification (non personnalisé)}\\
+        Dans le cas où l'utilisateur ne souhaite s'identifier, la version non personnalisé sera entièrement accessible et il pourra :
+        \begin{itemize}
+            \item \textbf{Recommandation basée similarité :}\\
+            Dans le cas non personnalisé, la recommandation se basera uniquement sur l'article consulté et lu et les différents articles disponible dans la base de données.    
+            \item \textbf{Consultation des articles suggérés :}\\
+            l'utilisateur pourra en effet au moment même ou il lit un article, d'avoir une suggestion d'autres articles jugés similaires par le système.
+            \item Toutes les autres fonctionnalités de la version Personnalisé qui n'utilisent pas le profile utilisateur sont également disponible.
+        \end{itemize}
+    \end{enumerate}
+    \vspace*{0.7cm}
+    Nous allons voir maintenant, les différentes interfaces de noter application.
+    \subsubsection{Authentification}
+    L'utilisateur peut créer un compte afin de s'authentifier, il peut s'inscrire en utilisant son compte \emph{Google}, \emph{Facebook} ou \emph{Twitter}. 
+        \begin{figure}[H]
+            \centering
+            \includegraphics[height=200pt,width=100pt]{img/chapter4/feedny/feedny.png}
+            \caption{Espace d'authentification de "Feedy"}
+            \label{}
+        \end{figure}
+
+SUITE DES INTERFACES...
+
+
+\section{Conclusion}
+
+Dans ce chapitre, nous avons présenté l'implémentation des différents modules ainsi que les résultats réalisé a l'aide des outils présent . Nous avons présenté l'implémentation des algorithmes d'apprentissage ainsi que leur évaluation. Pour chaque module nous avons parlé de son intégration dans le système. Dans la deuxième partie de ce chapitre nous avons ... décrit la manière dont les
+fonctionnalités ont été implémentées. 
