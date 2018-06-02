@@ -1,48 +1,36 @@
 %!TEX program=luatex
 
-\newpage
-Aujourd'hui, les internautes se retrouvent quotidiennement face à un flux d'informations massif et une diversité de contenu très importantes, et les médias et sites d'actualité y contribuent pleinement. Dans un environnement où l'utilisateur ne dispose toujours pas de moyen satisfaisant pour gérer ce flux, un nouveau besoin se crée, celui d'une expérience de lecture personnalisée, correspondant le plus pertinemment et efficacement aux besoins et centres d'intérêt de l'utilisateur.
+Aujourdâ€™hui, les internautes se retrouvent quotidiennement face Ã  un flux dâ€™informations massif et une diversitÃ© de contenu trÃ¨s importante, et les mÃ©dias et sites dâ€™actualitÃ© y contribuent pleinement. Dans un environnement oÃ¹ l'utilisateur ne dispose toujours pas de moyen satisfaisant pour gÃ©rer ce flux, un nouveau besoin se crÃ©e, celui dâ€™une expÃ©rience de lecture personnalisÃ©e, correspondant le plus pertinemment et efficacement aux besoins et centres dâ€™intÃ©rÃªt de lâ€™utilisateur.
+ 
+La premiÃ¨re motivation de ce travail Ã©tÃ© de fournir un outil qui permet au lecteur de faire sa revue de presse quotidienne de la faÃ§on la plus efficace et la plus enrichissante possible.
+ 
+Nous rÃ©alisons Ã  prÃ©sent quâ€™entreprendre ce projet s'Ã©tend bien au-delÃ  du cadre dâ€™un projet de fin d'Ã©tudes et s'inscrit dans une optique d'innovation, dont lâ€™objectif est d'apporter une rÃ©elle contribution et valeur ajoutÃ©e Ã  toutes les solutions existantes.
+ 
+Dans le prÃ©sent mÃ©moire, nous avons examinÃ© en premier lieu la littÃ©rature des systÃ¨mes de recommandation tout en explicitant les diffÃ©rents concepts liÃ©s au profilage utilisateur. Et ce, afin d'enlever lâ€™ambiguÃ¯tÃ© quant Ã  ses diffÃ©rents usages pour bien cerner les possibilitÃ©s d'exploitation de ses techniques.
+ 
+Nous avons ensuite effectuÃ© un long travail de recherche sur l'Ã©tat de l'art du traitement automatique du langage naturel. Nous avons ainsi identifiÃ© les travaux les plus fiables, les diffÃ©rentes techniques utilisÃ©es et les outils les plus performants.
+ 
+Une longue pÃ©riode du projet a Ã©tÃ© dÃ©diÃ©e Ã  la recherche, la rÃ©colte et le prÃ©-traitement des donnÃ©es. Une fois les datasets de chaque application crÃ©Ã©s, une Ã©tude exploratoire a Ã©tÃ© effectuÃ©e sur ces derniers afin de dÃ©tecter les composants homogÃ¨nes des donnÃ©es disponibles et de mettre en Ã©vidence les indicateurs discriminants des instances des corpus.
 
-La première motivation de ce travail est de fournir un outil qui permet au lecteur de faire sa revue de presse quotidienne de la façon la plus efficace et la plus enrichissante possible.
+NÃ©anmoins, un des principaux freins au projet a Ã©tÃ© le manque flagrant de rÃ©fÃ©rences, de corpus et d'outils pour le traitement automatique de la langue arabe. Un travail consÃ©quent a Ã©tÃ© effectuÃ© pour le prÃ©-traitement et la prÃ©paration des datasets, liÃ©s Ã  lâ€™aberration et la particularitÃ© de cette langue.
+ 
+Nous avons Ã©galement prÃ©sentÃ© la conception de la solution proposÃ©e, dÃ©taillÃ© les diffÃ©rentes dÃ©marches suivies et dÃ©fini les approches adoptÃ©es, tout en justifiant les choix entrepris, leurs avantages et leurs inconvÃ©nients.
+ 
+La derniÃ¨re phase aborde l'implÃ©mentation et l'intÃ©gration des diffÃ©rents modules, dans laquelle nous avons prÃ©sentÃ© une Ã©tude comparative des modÃ¨les d'apprentissage automatique dÃ©veloppÃ©s pour chacune des quatre problÃ©matiques principales : la catÃ©gorisation, le rÃ©sumÃ© automatique, la traduction automatique et la recommandation d'articles de presse. Nous avons par la suite prÃ©sentÃ© les rÃ©sultats obtenus et Ã©valuÃ© ces derniers en utilisant les mesures et les mÃ©triques adÃ©quates.
+ 
+Les rÃ©sultats de la classification d'articles de presse ont Ã©tÃ© trÃ¨s satisfaisants comparÃ©s aux travaux similaires. Les modÃ¨les infÃ©rÃ©s pour la prÃ©diction des catÃ©gories ont donnÃ© un taux de prÃ©cision de 99\%. Nous avons Ã©galement eu de trÃ¨s bons rÃ©sultats quant au rÃ©sumÃ© automatique dans les deux langues.
+ 
+La derniÃ¨re Ã©tape de notre projet a Ã©tÃ© la rÃ©alisation de l'application \textquotedbl Feedny\textquotedbl.\\
+\textquotedbl Feedny\textquotedbl est une application mobile qui intÃ¨gre tous les modÃ¨les dÃ©veloppÃ©s, elle permet au lecteur d'exploiter toutes les fonctionnalitÃ©s prÃ©sentÃ©es prÃ©cÃ©demment. L'expÃ©rience utilisateur et le design des interfaces ont Ã©tÃ© conÃ§us de telle sorte Ã  complÃ©ter les fonctionnalitÃ©s par l'intuitivitÃ© et le plaisir de l'utilisation.
+ 
+La derniÃ¨re partie du mÃ©moire prÃ©sente les fonctionnalitÃ©s et interfaces de l'application ainsi que les diffÃ©rentes phases du dÃ©veloppement en justifiant le choix des outils et les langages de programmation.
+ 
+Nous pouvons aujourdâ€™hui dire que notre objectif a Ã©tÃ© atteint, puisque lâ€™application que nous avons rÃ©alisÃ©e satisfait largement les principales ambitions dÃ©finies.
+ 
+Ce projet nous a Ã©tÃ© bÃ©nÃ©fique sur plusieurs plans. Il nous a permis de mettre en pratique toutes les connaissances acquises lors de notre cursus de master en SystÃ¨mes Informatiques Intelligents, de dÃ©velopper une mÃ©thodologie de recherche et de distinction des travaux, d'Ã©largir les notions thÃ©oriques dans le TALN, l'apprentissage automatique et la recherche d'informations, et de nous initier aux systÃ¨mes de recommandations d'articles de presse. Le mÃ©moire nous a permis d'amÃ©liorer notre capacitÃ© rÃ©dactionnelle et de devenir plus rigoureux quant aux questions de plagiat, des sources d'informations et de leur rÃ©fÃ©rencement. Le travail en binÃ´me, supervisÃ© par notre promotteur Ã  renforcer notre capacitÃ© Ã  travailler en Ã©quipe.
+ 
+Toutefois, il est trÃ¨s important de signaler que la solution proposÃ©e reste largement perfectible. Plusieurs points demandent encore Ã  Ãªtre revus et retravaillÃ©s. L'une des perspectives qui pourraient s'avÃ©rer intÃ©ressantes serait de construire un large corpus pour le rÃ©sumÃ© automatique abstractif, afin de donner plus d'exactitude aux rÃ©sumÃ©s gÃ©nÃ©rÃ©s. Il serait trÃ¨s utile aussi d'ajouter d'autres catÃ©gories d'articles de presse, cela donnera plus de diversitÃ© au contenu proposÃ©. Les modÃ¨les de classification d'articles pourraient Ãªtre amÃ©liorÃ©s afin de s'adapter aux vocabulaires rÃ©cents et de prendre en charge les nouveaux mots du langage (Brexit, Facebooker, etc.).
 
-Nous réalisons à présent qu'entreprendre ce projet de “réalisation d'un outil de revue de presse personnalisé" s'étend bien au-delà du cadre d'un projet de fin d'études et s'inscrit dans un objectif d'innovation et dans une optique d'apporter une réelle contribution et valeur ajoutée à toutes les solutions existantes.
-
-Dans le présent mémoire, nous avons examiné, en premier lieu, la littérature des systèmes de recommandations tout en explicitant les différents concepts liés au profilage utilisateur, afin d'enlever l'ambiguïté quant à ses différents usages pour bien cerner les possibilités d'exploitation de ses techniques.
-
-Ensuite, nous avons effectué un long travail de recherche sur l'état de l'art du traitement automatique du langage naturel. Nous avons ainsi identifié les travaux les plus fiables, les différentes techniques utilisées et les outils les plus performants.
-
-Une longue période du projet a été dédiée à la recherche, la récolte et le pré-traitement des données. Une fois les datasets de chaque application créés, une étude exploratoire a été effectuée sur ces derniers afin de détecter les composants homogènes des données disponibles et mettre en évidence les indicateurs discriminants des instances des corpus. 
-
-Néanmoins, nous tenons à signaler le manque flagrant de références, de corpus et d'outils pour le traitement automatique de la langue arabe. Un travail conséquent a été effectué pour le pré-traitement et la préparation des datasets, liés à l'aberration et la particularité de cette langue. 
-
-Nous avons également présenté la conception de la solution proposée, détaillé les différentes démarches suivies et défini les approches adoptées, tout en justifiant les choix entrepris, leurs avantages et leurs inconvénients. 
-
-La dernière phase aborde l'implémentation et l'intégration des différents modules, dans laquelle nous avons présenté une étude comparative des modèles d'apprentissage automatique développés pour chacune des quatre problématiques principales : la catégorisation, le résumé automatique, la traduction automatique et la recommandation d'articles de presse. Nous avons par la suite présenté les résultats obtenus et évalué ces derniers en utilisant les mesures et les métriques adéquates.
-
-
-Nos résultats de classification d'articles de presse sont très satisfaisants comparés aux travaux similaires. Les modèles inférés pour la prédiction des catégories, ont donnés un taux de précision de 99\%. Nous avons également de très bon résultats quant au résumé automatique dans les deux langues.
-
-La dernière étape de notre projet était la réalisation de l'application \textquotedbl Feedny\textquotedbl.\\
-\textquotedbl Feedny\textquotedbl est une application mobile qui intègre tout les modèles développés, elle permet au lecteur d'exploiter toutes les fonctionnalités déjà présentées. L'expérience utilisateur et le design sont conçu pour compléter l'utilisabilité, afin de faire intervenir le plaisir d'utilisation et MACHIN/**/.   
-
-Dans la dernière parti du mémoire, Les fonctionnalités et les interfaces de l'application ont été présentées ainsi que les différentes phases du développement en justifiant le choix des outils et langages de programmation.
-
-Notre objectif a été désormais atteint, puisque l'application que nous avons réalisée satisfait largement les principaux ambitions définis.
-
-Ce projet nous a été bénéfique sur plusieurs plans. Il nous a permis de :
-\begin{itemize}
-    \item mettre en pratique toute les connaissances acquises lors de notre cursus de master en Systèmes Informatiques Intelligents,
-    \item développer une méthodologie de recherche et de distinction des travaux,
-    \item élargir les notions théoriques dans le TALN, l'apprentissage automatique et la recherche d'informations,
-    \item s'initier au systèmes de recommandations d'articles de presse,
-    \item améliorer notre capacité rédactionnelle, et devenir plus rigoureux quant aux plagiat, sources d'informations et référencement.
-    \item renforcer notre capacité de travailler en équipe. 
-\end{itemize}
-
-Toutefois, il est très importants de signaler que la solution proposée reste largement perfectible. Plusieurs points demandent encore à être revus et retravaillés. L'une des perspectives qui pouvait être intéressantes serait de construire un large corpus pour le résumé automatique abstractif, afin de donnée plus d'exactitude aux résumés générés. Il serait très utile aussi dans l'avenir d'ajouter d'autres catégories d'articles de presse, cela pourra donné plus de diversité au contenu proposé. Les modèles de classification d'articles pourraient être améliorés afin de s'adapter aux vocabulaires récent et de prendre en charge les nouveaux mots du langage (Brexit, Facebooker, etc.).  
-
-Quant à l'application \textquotedbl Feedny\textquotedbl, elle pourrait être enrichie, également, par d'autres fonctionnalités tel que l'ajout de nouvelles sources d'articles de presse par l'utilisateur. Proposé plusieurs source pour un même sujet d'article afin d'identifier les sources les plus fiables et objectives.
-L'application pourrait devenir plus accessible si une plate-forme sur le web sera développé.
-
-
-
+% Notre systÃ¨me de recommandation doit Ãªtre Ã©valuÃ© dans le future, dÃ©s que le nombre d'utilisateurs et interactions le permettenet
+Quant Ã  l'application \textquotedbl Feedny\textquotedbl, elle pourrait Ãªtre enrichie Ã©galement par d'autres fonctionnalitÃ©s telles que l'ajout de nouvelles sources d'articles de presse par l'utilisateur. Mais aussi par le fait de proposer plusieurs sources pour un mÃªme sujet d'article afin d'identifier les sources les plus fiables et objectives.
+Et bien sÃ»r, lâ€™application ne gagnerait que plus dâ€™utilisateurs et ne deviendrait que plus accessible si une plateforme web de la solution est dÃ©veloppÃ©e.
