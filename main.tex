@@ -1,10 +1,9 @@
-%!TEX program=luatex
+% !TEX program=luatex
 
 \documentclass[12pt]{report}
+\usepackage[Glenn]{fncychap}
 \usepackage[T1]{fontenc}
 \usepackage[francais]{babel}
-% \usepackage[Lenny]{fncychap}
-\usepackage[Glenn]{fncychap}
 \usepackage{fontspec}
 \usepackage{wrapfig}
 \usepackage{graphicx}
@@ -25,9 +24,8 @@
 \usepackage{amsthm}
 \usepackage{amsfonts}
 \usepackage{graphics}
-\usepackage{graphicx}
 \usepackage{color}
-\usepackage[grey,utopia]{quotchap}
+% \usepackage[grey,utopia]{quotchap}
 \usepackage{moreverb}
 \usepackage{xcolor}
 \usepackage{framed}
@@ -81,6 +79,8 @@ frame=leftline,
 framerule=2pt,
 }
 
+
+
 %~~~BEGIN~~~%
 \begin{document}
 \pagenumbering{gobble}
@@ -98,19 +98,28 @@ framerule=2pt,
 % \clearpage
 
 
-\pagenumbering{arabic} 
+\pagenumbering{roman} 
+
+\newpage
+\input{other/no-plagiat}
 
 \chapter*{Remerciements}    
-\input{other/thanks}
+\input{other/thanksF}
+\chapter*{Remerciements}    
+\input{other/thanksS}
 
-% \chapter*{Dédicaces}    
-% \input{other/dedication}
+\chapter*{Dédicaces}    
+\input{other/dedicationF}
+\chapter*{Dédicaces}    
+\input{other/dedicationS}
 
-% \chapter*{Résumé}    
-% \input{other/abstract}
+\newpage
+\input{other/abstract}
 
-% \chapter*{Introduction générale}    
-% \input{other/intro}
+\chapter*{Introduction générale}    
+\input{other/intro}
+
+% \pagenumbering{arabic} 
 
 % \chapter{Systèmes de recommandations}
 % \input{chapters/chapter1}
@@ -124,8 +133,8 @@ framerule=2pt,
 % \chapter{Implémentation et résultats}    
 % \input{chapters/chapter4}
 
-% \chapter*{Conclusion et perspectives}    
-% \input{chapters/conclusion}
+\chapter*{Conclusion et perspectives}    
+\input{other/conclusion}
 
 
 % \bibliographystyle{unsrt} 
