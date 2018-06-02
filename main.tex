@@ -3,7 +3,8 @@
 \documentclass[12pt]{report}
 \usepackage[T1]{fontenc}
 \usepackage[francais]{babel}
-\usepackage[Lenny]{fncychap}
+% \usepackage[Lenny]{fncychap}
+\usepackage[Glenn]{fncychap}
 \usepackage{fontspec}
 \usepackage{wrapfig}
 \usepackage{graphicx}
@@ -84,7 +85,6 @@ framerule=2pt,
 \begin{document}
 \pagenumbering{gobble}
 % \renewcommand{\contentsname}{Sommaire}
-
 % \tableofcontents
 % \clearpage
 
@@ -97,17 +97,20 @@ framerule=2pt,
 % \listofalgorithmes
 % \clearpage
 
-% \newcommand{\listequationsname}{Liste des Equations}
-% \newlistof{myequations}{equ}{\listequationsname}
-% \newcommand{\myequations}[1]{%
-%     \addcontentsline{equ}{myequations}{\protect\numberline{\theequation}#1}\par}
-
-% \xpretocmd{\listofmyequations}{\addcontentsline{toc}{chapter}{\listequationsname}}{}{}
-% \listofmyequations
-% \clearpage
-
 
 \pagenumbering{arabic} 
+
+\chapter*{Remerciements}    
+\input{other/thanks}
+
+% \chapter*{Dédicaces}    
+% \input{other/dedication}
+
+% \chapter*{Résumé}    
+% \input{other/abstract}
+
+% \chapter*{Introduction générale}    
+% \input{other/intro}
 
 % \chapter{Systèmes de recommandations}
 % \input{chapters/chapter1}
@@ -118,25 +121,15 @@ framerule=2pt,
 % \chapter{Conception}    
 % \input{chapters/chapter3}
 
-% \chapter{Réalisation}    
+% \chapter{Implémentation et résultats}    
 % \input{chapters/chapter4}
 
-% \chapter{Introduction}    
-% \input{chapters/intro}
-
-% \chapter{Résumé}    
-\input{chapters/abstract}
-
-% \chapter{Présentation}    
-% \input{chapters/presentation}
-
-% \chapter{Réalisation}    
-% \input{chapters/chapter4}
+% \chapter*{Conclusion et perspectives}    
+% \input{chapters/conclusion}
 
 
-
-\bibliographystyle{unsrt} 
-\bibliography{ref}
+% \bibliographystyle{unsrt} 
+% \bibliography{ref}
 
 \end{document}
 %~~~END~~~%

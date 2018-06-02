@@ -1,58 +1,48 @@
 %!TEX program=luatex
 
 \newpage
-\pagenumbering{arabic}
+Aujourd'hui, les internautes se retrouvent quotidiennement face à un flux d'informations massif et une diversité de contenu très importantes, et les médias et sites d'actualité y contribuent pleinement. Dans un environnement où l'utilisateur ne dispose toujours pas de moyen satisfaisant pour gérer ce flux, un nouveau besoin se crée, celui d'une expérience de lecture personnalisée, correspondant le plus pertinemment et efficacement aux besoins et centres d'intérêt de l'utilisateur.
 
-\section{Conclusion}
+La première motivation de ce travail est de fournir un outil qui permet au lecteur de faire sa revue de presse quotidienne de la façon la plus efficace et la plus enrichissante possible.
 
-Face à l’absence de solution adéquate au besoin en revue de presse localement en Algérie, nous avons rechercher et implémenter au  travers de ce travail une revue de presse novatrice : une revue de presse en 2 langues permettant de répondre aux besoins des utilisateurs en termes d'informations de manière personnalisé. 
+Nous réalisons à présent qu'entreprendre ce projet de “réalisation d'un outil de revue de presse personnalisé" s'étend bien au-delà du cadre d'un projet de fin d'études et s'inscrit dans un objectif d'innovation et dans une optique d'apporter une réelle contribution et valeur ajoutée à toutes les solutions existantes.
 
-Dans le cadre de notre projet, nous avons commencé par détaillé les différentes méthodes et approches des systèmes de recommandations en générale, et pour les articles de presse en particulier ainsi qu'un état de l'art des travaux de recherche réalisé a ce sujet. Nous avons enchainé ensuite avec le résumé automatique, ou nous avions commencé par rappeler certaines notions du traitement automatique du langage naturel qui est le domaine phare de résumé automatique ainsi que la catégorisation de textes que l'on a présenté ensuite avec un état de l'art des travaux de recherche.
+Dans le présent mémoire, nous avons examiné, en premier lieu, la littérature des systèmes de recommandations tout en explicitant les différents concepts liés au profilage utilisateur, afin d'enlever l'ambiguïté quant à ses différents usages pour bien cerner les possibilités d'exploitation de ses techniques.
 
-Au terme des différentes présentations des notions de ce projet, nous avons présenté la phase architecturale qui est composé de quatre modules élémentaires: le module de recommandation qui constitue la partie principale de notre travail a été conçu pour deux types d'utilisations, la version personnalisé qui permet a un utilisateur enregistré d'avoir des articles recommandés a plein temps, et la version non personnalisé qui permet a un utilisateur non enregistré d'avoir une recommandation par similarité du contenu qu'il consulte. Le deuxième module est le module de résumé automatique, la ou nous avons implémenté une solution basé sur un résumé automatique extractif disponible pour tous les articles et pour toutes les utilisations. Le troisième module est le module de catégorisation des articles, la ou nous avons implémenté un modèle de prédiction basé sur apprentissage automatique supervisé, qui a permis de prédire des articles de manière formelle selon les catégories disponibles. Le quatrième module est le module de traduction automatique que nous avons intégré directement et qui offre a l'utilisateur l'opportunité de traduire n'importe quel article en langue Arabe ou Anglaise. 
+Ensuite, nous avons effectué un long travail de recherche sur l'état de l'art du traitement automatique du langage naturel. Nous avons ainsi identifié les travaux les plus fiables, les différentes techniques utilisées et les outils les plus performants.
 
+Une longue période du projet a été dédiée à la recherche, la récolte et le pré-traitement des données. Une fois les datasets de chaque application créés, une étude exploratoire a été effectuée sur ces derniers afin de détecter les composants homogènes des données disponibles et mettre en évidence les indicateurs discriminants des instances des corpus. 
 
-Dans la partie conceptuelle de notre travail, nous avons explicité toute la conception des modules, a travers les algorithmes détaillés et les schémas conceptuels produit en \emph{UML}.
+Néanmoins, nous tenons à signaler le manque flagrant de références, de corpus et d'outils pour le traitement automatique de la langue arabe. Un travail conséquent a été effectué pour le pré-traitement et la préparation des datasets, liés à l'aberration et la particularité de cette langue. 
 
-Enfin, dans la partie implémentation, nous avons explicité l'implémentation et l'évaluation des différents modules de  notre système a commencer par la catégorisation qui a donné de bons résultats en utilisant un modéle basé apprentissage automatique supervisé, ce qui nous a permis de passer au module de résumé la ou nous avons utilisé un modèle basé sur les plongements de mots. l'évaluation du résumé automatique a donné des résultats significatif sur des données dédiés a l'évaluation.
-La recommandation......?????. Enfin pour le module de traduction automatique, nous avons utilisé \cite{textblob} qui est une bibliothèque connu dans le traitement automatique du langage en générale et la traduction en particulier.
+Nous avons également présenté la conception de la solution proposée, détaillé les différentes démarches suivies et défini les approches adoptées, tout en justifiant les choix entrepris, leurs avantages et leurs inconvénients. 
 
-\section{Perspectives}
-Nous avons explicité dans ce projet une nouvelle manière d'utilisation des revues de presse. Nous avons implémenté un système qui offre a la fois une revue personnalisé, un résumé pour chaque article consulté et une possibilité de traduction de l'article en plusieurs langues.
-
-Cependant, le système que nous avons développé peut faire l'objet d'améliorations qui pourraient renforcer l'utilisation de la revue de presse, soit au niveau modulaire ou bien au niveau globale. Parmi les améliorations possibles au niveau modulaire, il serait possible a l'avenir d'évaluer le module de recommandations en ayant une base de profils large avec les mesures décrites dans \autoref{chap3}, et fonctionnelement il serait possible d'ajouter des recommandations basé sur les activités des utilisateur dans les réseaux sociaux. Le résumé automatique aussi peut faire l'objet d'amélioration en utilisant un résumé automatique abstractif mais il faudra la s'assurer de l'efficacité du modèle produit. Pour la catégorisation, il s'agira de produire un modèle basé sur un apprentissage par ??? capable de s'adapter au nouveaux vocabulaires qui déterminent une catégorie exemple: le mot \textquotedbl Brexit\textquotedbl qui désigne la sortie de la grande bretagne de l'union européenne n'appartenaient pas au vocabulaire jusqu'en 2016. Pour le module de traduction automatique, il serait envisageable de d'implémenter un modéle de traduction automatique propre a l'application \textquotedbl Feedny\textquotedbl.
-
-En ce qui concerne l'application globale, d'autres améliorations peuvent être ajoutés tel que l'ajout de nouvelles sources des articles, ajout des notifications qui sont un très bon atout pour informer l'utilisateur en temps réel en fonction de ses intérêts et rendre l'application multi plateformes ce qui induit qu'il faudrait développer un site web de \textquotedbl Feedny\textquotedbl.
-
-Au terme de ce projet, nous avons couvert la majeure partie de notre apprentissage en matière de systèmes intelligents, recherche d'informations, datamining et l'apprentissage automatique qui sont la les modules les plus importants de notre cursus de Master en systèmes informatiques intelligents, sans négliger l'apport des connaissances acquises lors du cursus de licences tel que les bases de données et les systèmes d'informations.
-Grâce a ce riche programme que nous avons acquis, il nous a été bénéfique pour la mise en place et la réalisation de ce projet avec lequel nous avons appris énormément et avec lequel nous allons explorer de nouvelles perspectives.  
+La dernière phase aborde l'implémentation et l'intégration des différents modules, dans laquelle nous avons présenté une étude comparative des modèles d'apprentissage automatique développés pour chacune des quatre problématiques principales : la catégorisation, le résumé automatique, la traduction automatique et la recommandation d'articles de presse. Nous avons par la suite présenté les résultats obtenus et évalué ces derniers en utilisant les mesures et les métriques adéquates.
 
 
+Nos résultats de classification d'articles de presse sont très satisfaisants comparés aux travaux similaires. Les modèles inférés pour la prédiction des catégories, ont donnés un taux de précision de 99\%. Nous avons également de très bon résultats quant au résumé automatique dans les deux langues.
 
+La dernière étape de notre projet était la réalisation de l'application \textquotedbl Feedny\textquotedbl.\\
+\textquotedbl Feedny\textquotedbl est une application mobile qui intègre tout les modèles développés, elle permet au lecteur d'exploiter toutes les fonctionnalités déjà présentées. L'expérience utilisateur et le design sont conçu pour compléter l'utilisabilité, afin de faire intervenir le plaisir d'utilisation et MACHIN/**/.   
 
+Dans la dernière parti du mémoire, Les fonctionnalités et les interfaces de l'application ont été présentées ainsi que les différentes phases du développement en justifiant le choix des outils et langages de programmation.
 
+Notre objectif a été désormais atteint, puisque l'application que nous avons réalisée satisfait largement les principaux ambitions définis.
 
-
-Dans ce mémoire, nous avons présenté le travail qui nous a été confié dans le cadre de
-notre projet de fin d’études au sein de COSIDER CANALISATIONS et du département informatique de l'USTHB. Il s’agit de concevoir une application web dédié à la gestion du système d'informations de la direction des approvisionnements et de la sous-traitance.\\
-Le stage effectué au sein d'une équipe compétentes d'ingénieurs spécialisés dans le développement web, nous a permis en tant qu’étudiants, d’apprendre les principes de base de la discipline et de confronter au réel difficulté du domaine professionnel.\\
-Notre travail s’est focalisé, dans un premier temps, sur l'analyse des différents procédures,
-ce qui nous a permet de connaître d'une manière précise les réels besoins à prendre en charge.\\
-Cette étape nous a apporté de nombreuses connaissances sur les mécanismes suivis de manière générale et sur les acteurs impliqués et les tâches accomplis en particulier.
-En second lieu, notre étude à consisté à concevoir le système tout en suivant les méthodes étudier dans les différents modules de la génie des logiciels et les systèmes d'informations.Nous avons pus définir, à cette phase, les fonctionnalités de notre système d'une manière claire et précise.\\
-En dernier lieu, nous avons aborder la réalisations de l'application, son développement a aussi nécessité l’apprentissage de quelques langages de développement et certains outils et extensions indispensable.\\
-Notre objectif a été désormais atteint, puisque l’application que nous avons réalisée satisfait largement les principaux objectifs définis au préalable.\\
-Ce projet nous a été bénéfique sur plusieurs points. Il nous a permis :
+Ce projet nous a été bénéfique sur plusieurs plans. Il nous a permis de :
 \begin{itemize}
-    \item D’aborder le domaine du développement web .
-    \item De se documenter et comprendre la notion d'un système de gestion informatique.
-    \item D’approfondir nos connaissances sur le PHP et le HTML.
-    \item D’apprendre de nouveau langages de programmations tel que JavaScript.
-    \item D'élargir nos connaissances dans la programmations orientés objets.
-    \item D’acquérir des connaissances sur les nouvelles technologies utilisé dans le web.
-    \item De se familiariser avec le langage de rédaction des rapports et des mémoires LATEX.
-    \item D’améliorer l’esprit du travail d’équipe.
-    \item D’acquérir une première expérience dans un milieu professionnel.\\
+    \item mettre en pratique toute les connaissances acquises lors de notre cursus de master en Systèmes Informatiques Intelligents,
+    \item développer une méthodologie de recherche et de distinction des travaux,
+    \item élargir les notions théoriques dans le TALN, l'apprentissage automatique et la recherche d'informations,
+    \item s'initier au systèmes de recommandations d'articles de presse,
+    \item améliorer notre capacité rédactionnelle, et devenir plus rigoureux quant aux plagiat, sources d'informations et référencement.
+    \item renforcer notre capacité de travailler en équipe. 
 \end{itemize}
-Nous avons cependant éprouvé certaines difficultés.Par exemple, pour acquérir les documents nécessaires lors de la phase d'étude.\\
-Toutefois, il est important de signaler que l'application conçue au cours de notre travail reste largement perfectible. En effet, elle peut être enrichie par de nouvelles fonctionnalités tel que la géolocalisation des chantiers, l’impression des contrats et des demandes et permettre le suivi du transit.
+
+Toutefois, il est très importants de signaler que la solution proposée reste largement perfectible. Plusieurs points demandent encore à être revus et retravaillés. L'une des perspectives qui pouvait être intéressantes serait de construire un large corpus pour le résumé automatique abstractif, afin de donnée plus d'exactitude aux résumés générés. Il serait très utile aussi dans l'avenir d'ajouter d'autres catégories d'articles de presse, cela pourra donné plus de diversité au contenu proposé. Les modèles de classification d'articles pourraient être améliorés afin de s'adapter aux vocabulaires récent et de prendre en charge les nouveaux mots du langage (Brexit, Facebooker, etc.).  
+
+Quant à l'application \textquotedbl Feedny\textquotedbl, elle pourrait être enrichie, également, par d'autres fonctionnalités tel que l'ajout de nouvelles sources d'articles de presse par l'utilisateur. Proposé plusieurs source pour un même sujet d'article afin d'identifier les sources les plus fiables et objectives.
+L'application pourrait devenir plus accessible si une plate-forme sur le web sera développé.
+
+
+
