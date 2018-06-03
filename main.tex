@@ -100,26 +100,27 @@ framerule=2pt,
 
 \pagenumbering{roman} 
 
+% \newpage
+% \input{other/no-plagiat}
+
+% \chapter*{Remerciements}    
+% \input{other/thanksF}
+% \chapter*{Remerciements}    
+% \input{other/thanksS}
+
+% \chapter*{Dédicaces}    
+% \input{other/dedicationF}
+% \chapter*{Dédicaces}    
+% \input{other/dedicationS}
+
+% \newpage
+% \input{other/abstract}
+
 \newpage
-\input{other/no-plagiat}
+\pagenumbering{arabic} 
+% \chapter*{Introduction générale}    
+% \input{other/intro}
 
-\chapter*{Remerciements}    
-\input{other/thanksF}
-\chapter*{Remerciements}    
-\input{other/thanksS}
-
-\chapter*{Dédicaces}    
-\input{other/dedicationF}
-\chapter*{Dédicaces}    
-\input{other/dedicationS}
-
-\newpage
-\input{other/abstract}
-
-\chapter*{Introduction générale}    
-\input{other/intro}
-
-% \pagenumbering{arabic} 
 
 % \chapter{Systèmes de recommandations}
 % \input{chapters/chapter1}
@@ -130,15 +131,15 @@ framerule=2pt,
 % \chapter{Conception}    
 % \input{chapters/chapter3}
 
-% \chapter{Implémentation et résultats}    
-% \input{chapters/chapter4}
+\chapter{Implémentation et résultats}    
+\input{chapters/chapter4}
 
-\chapter*{Conclusion et perspectives}    
-\input{other/conclusion}
-
-
-% \bibliographystyle{unsrt} 
-% \bibliography{ref}
+% \chapter*{Conclusion et perspectives}    
+% \input{other/conclusion}
+\newpage
+\pagenumbering{roman} 
+\bibliographystyle{unsrt} 
+\bibliography{ref}
 
 \end{document}
 %~~~END~~~%
