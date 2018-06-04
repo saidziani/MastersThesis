@@ -2,42 +2,46 @@
 
 \newpage
 \section{Introduction}
-Avec la montée du Web 2.0, la production de contenu participatif et collaboratif a largement remplacé les méthodes traditionnelles de partage de l'information. Un vaste potentiel inexploité réside dans les quantités de données à la fois énormes et dynamiques disponibles sur les différentes plate-formes numériques qui ne peuvent être traités avec les méthodes de l'informatique classique.
+Avec la montée du Web 2.0, la production de contenu participatif et collaboratif a largement remplacé les méthodes traditionnelles de partage de l'information. Un vaste potentiel inexploité réside dans les quantités de données à la fois énormes et dynamiques disponibles sur les différentes plate-formes numériques qui ne peuvent être traitées avec les méthodes de l'informatique classique.
 
 Les revues de presses, les blogs et les magazines représentent une partie considérable dans ce tsunami informationnel, et le choix des lectures quotidiennes devient de plus en plus difficile.
 
 Dans ce chapitre, nous allons discuter du Traitement Automatique du Langage Naturel (TALN), de sa puissance et son importance. En bref, l'objectif de cette partie est de décrire le but, les procédures et les applications pratiques du TALN d'une manière simple et claire. Nous examinerons la littérature la plus récente tout en décrivant les méthodes et les processus disponibles, nous analyserons certains des défis auxquels les chercheurs sont confrontés, et passerons brièvement en revue certaines des applications actuelles et futures de cette science.
 
 \section{Définition}
-Le Traitement automatique du langage naturel est l'un des principaux domaines de l'intelligence artificielle. Il permet de développer des systèmes qui peuvent \emph{analyser} et \emph{comprendre} le langage humain. En dehors des opérations courantes de traitement de texte qui considèrent les textes comme une simple séquence de symboles, l'utilisation des techniques de TALN permet d'organiser et de structurer des quantités énormes de connaissances pour développer des applications très avancées telles que la synthèse automatique, la reconnaissance d'entités, l'analyse des sentiments, la reconnaissance de la parole, etc.\\
+Le Traitement automatique du langage naturel est l'un des principaux domaines de l'intelligence artificielle. Il permet de développer des systèmes qui peuvent \emph{analyser} et \emph{comprendre} le langage humain. En dehors des opérations courantes de traitement de texte qui considèrent les textes comme une simple séquence de symboles, l'utilisation des techniques de TALN permet d'organiser et de structurer des quantités énormes de connaissances pour développer des applications très avancées telles que la synthèse automatique, la reconnaissance d'entités, l'analyse des sentiments, la reconnaissance de la parole, etc.
 
 Le TALN est considéré comme un problème difficile en informatique dû à l'imprécision du langage humain. Comprendre le langage humain, c'est comprendre non seulement les mots, mais aussi les concepts et comment ils sont liés pour créer du sens. Bien que la langue soit l'une des tâches les plus faciles à apprendre pour les humains, l'ambiguïté rend le traitement de cette dernière difficile à maîtriser pour les ordinateurs.
 
 \section{Domaines d'application}
 Le TALN est utilisé pour manipuler le langage humain, qu'il s'agisse d'extraire du sens ou de générer du texte dans le but d'accomplir des tâches telles que le résumé automatique d'un document, la traduction entre deux langages naturels ou la détection des spams.
 
-On peut distinguer deux grands domaines où les techniques du TALN ont pu faire des avancés énormes : la \emph{recherche scientifique} et \emph{l'industrie informatique}.\\
+On peut distinguer deux grands domaines où les techniques du TALN ont pu faire des avancés énormes : la \emph{recherche scientifique} et \emph{l'industrie informatique}.
+
 %Recherche scientifique
-Dans les laboratoires de recherche en intelligence artificielle, le TALN est considéré, souvent, comme l'une des branches les plus importantes et les plus productives.\\ 
+Dans les laboratoires de recherche en intelligence artificielle, le TALN est considéré, souvent, comme l'une des branches les plus importantes et les plus productives.
+
 De nombreuses activités cognitives qui se produisent dans l'esprit humain ont pu être simulées grâce à ses techniques.
 On peut en citer quelques unes : 
-\begin{itemize}
-    \item \textbf{La traduction automatique :}
-    la traduction automatique des textes est probablement l'un des domaines les plus connus de l'IA. Elle a fait l'objet de plusieurs travaux depuis les années 50 du siècle passé. Le processus de traduction est découpé en plusieurs phases successives. Tout d'abord la compréhension et l'assimilation, ensuite la réexpression et la reformulation en langue cible.\\
+\begin{itemize}[leftmargin={0.5cm}]
+    \item \textbf{La traduction automatique :}\\
+    la traduction automatique des textes est probablement l'un des domaines les plus connus de l'IA. Elle a fait l'objet de plusieurs travaux depuis les années 50 du siècle passé. Le processus de traduction est découpé en plusieurs phases successives. Tout d'abord la compréhension et l'assimilation, ensuite la réexpression et la reformulation en langue cible.
+
     Le traducteur automatique le plus utilisé sur internet est \emph{Google Translate} développé par le département de traduction automatique de \emph{Google} en 2006; il supporte aujourd'hui plus de 103 langues \cite{ggltrans}.
 
-    \item \textbf{Le résumé automatique :}
+    \item \textbf{Le résumé automatique :}\\
     la construction automatique de résumés est un champ de recherche original en informatique, même si son ampleur n'a jamais été aussi importante que la traduction automatique. Plusieurs approches ont été proposées. Premièrement, des systèmes qui permettent l'élaboration automatique de résumés à partir de l'extraction de phrases. Ensuite, et avec le développement des outils informatiques (logiciels et matériels), la construction de résumés s'est basée sur le fait de donner au programme informatique la capacité d'élaborer des abstractions à partir de la \emph{compréhension} des textes.
 
-    \item \textbf{La classification de textes/documents :}
+    \item \textbf{La classification de textes/documents :}\\
     la classification automatique de documents/textes est un problème connu en informatique; il s'agit d'assigner un document/texte à une ou plusieurs catégories ou classes. Le problème est différent selon la nature des documents/textes en question. L'idée générale consiste en l'identification et l'extraction des éléments pertinents à partir d'un texte/document contenant des informations dont la nature est spécifiée à l'avance. Elle vise donc à transformer un texte de son format initial (une suite de chaînes de caractères) à une représentation structurée et donc un format compréhensible par l'ordinateur.\\
 \end{itemize}
 
 %Industrie
 Quant à l'industrie, et avec le coût du calcul qui ne cesse de baisser, l'évolution exponentielle des algorithmes et surtout la disponibilité des données sur les différents supports numériques, les entreprises ont commencé à s'intéresser à l'analyse et l'exploitation de ces quantités massives de connaissances. Ceci a été rendu plus facile en utilisant le TALN. En voici quelques exemples : 
-\begin{itemize}
+\begin{itemize}[leftmargin={0.5cm}]
     \item \textbf{Service Client :}\\
-    Fortement utilisées dans le service client, les techniques de TALN permettent de développer des systèmes capables de simuler les interactions entre les clients et les entreprises. Il est possible de développer des systèmes qui pointent vers les raisons de l'insatisfaction/satisfaction des consommateurs.\\
+    Fortement utilisées dans le service client, les techniques de TALN permettent de développer des systèmes capables de simuler les interactions entre les clients et les entreprises. Il est possible de développer des systèmes qui pointent vers les raisons de l'insatisfaction/satisfaction des consommateurs.
+
     De nombreuses entreprises aujourd'hui analysent les enregistrements d'appels clients, les conversations sur les réseaux sociaux et les commentaires sur les forums. Ils déploient également des robots de discussion et des assistants en ligne automatisés pour fournir une réponse immédiate aux besoins simples et réduire la charge de travail pour leurs employés. On peut citer : 
     \begin{itemize}
         \item \textbf{La reconnaissance vocale :} les progrès de l'apprentissage profond (Deep Learning) au cours des dernières années et les quantités massives de données disponibles sur internet ont permis de déployer cette technologie dans des systèmes commerciaux tels que Siri d'Apple, Alexa d'Amazon et Google Assistant/Home dernièrement.
@@ -132,7 +136,8 @@ Parmi les techniques les plus importantes du traitement automatique de la langue
     
     Le comptage de mots est un processus qui permet de transformer un document donné en un vecteur de mots qui représente ce document (Vocabulaire) et de compter l'occurrence de chaque mot dans ce document. Premièrement, un vecteur est initialement défini où chaque entrée de ce dernier correspond à un mot dans le dictionnaire initial (texte). Ensuite, pour représenter un texte en utilisant ce vecteur, un comptage du nombre d'apparition de chaque mot dans le dictionnaire est assigné dans l'entrée vectorielle correspondante.
 
-    Par exemple, prenons le dictionnaire suivant \{Reconnaissance, Faciale, Monde, La\}. Nous voulons vectoriser le texte "La reconnaissance faciale", donc nous aurons le vecteur suivant : (1, 1, 0, 1).\\
+    Par exemple, prenons le dictionnaire suivant \{Reconnaissance, Faciale, Monde, La\}. Nous voulons vectoriser le texte "La reconnaissance faciale", donc nous aurons le vecteur suivant : (1, 1, 0, 1).
+
     Afin d'améliorer cette représentation, il est préférable d'utiliser les techniques de lemmatisation des mots et des n-grammes. Ceci permettra, par exemple, de considérer "faces" et "faciales" comme des formes du même lemme "face".
     
     \subsection{TF-IDF Fréquence des Termes-Fréquence Document Inverse}
@@ -182,7 +187,9 @@ Parmi les techniques les plus importantes du traitement automatique de la langue
     
     \subsection{Plongement de mots (Word embedding)}
     
-    Le plongement de mots (word embedding) est une technique qui permet de représenter les mots sous forme d'un vecteur de nombres réels grâce à un apprentissage en utilisant un ensemble de mots, ce qui facilite l'analyse sémantique des mots. Les plongements de mots constituent une méthode pour faire face à un problème récurrent en intelligence artificielle, à savoir celui de la dimension. En effet, la représentation de mots avec les méthodes traditionnelles (bag of words) se fait avec un vecteur contenant tout le dictionnaire. En revanche la technique des word embeddings diminue le nombre de ces dimensions, facilitant ainsi les tâches d'apprentissage impliquant ces mots.
+    Le plongement de mots (word embedding) est une technique qui permet de représenter les mots sous forme d'un vecteur de nombres réels grâce à un apprentissage en utilisant un ensemble de mots, ce qui facilite l'analyse sémantique des mots. Les plongements de mots constituent une méthode pour faire face à un problème récurrent en intelligence artificielle, à savoir celui de la dimension. 
+
+    En effet, la représentation de mots avec les méthodes traditionnelles (bag of words) se fait avec un vecteur contenant tout le dictionnaire. En revanche la technique des word embeddings diminue le nombre de ces dimensions, facilitant ainsi les tâches d'apprentissage impliquant ces mots.
     
     
     \subsubsection{Techniques d'apprentissage}
@@ -213,16 +220,20 @@ Parmi les techniques les plus importantes du traitement automatique de la langue
     \end{itemize}
 
     \subsubsection{Domaines d'application}
-    Grâce au gain en terme de dimensionalité, l'utilisation des plongements de mots (Word embedding) a permis de faciliter la tâche d'apprentissage dans la traduction automatique \cite{we2} en permettant une analyse des bigrammes et trigrammes, ce qui rend la traduction plus contextuelle.\\
+    Grâce au gain en terme de dimensionalité, l'utilisation des plongements de mots (Word embedding) a permis de faciliter la tâche d'apprentissage dans la traduction automatique \cite{we2} en permettant une analyse des bigrammes et trigrammes, ce qui rend la traduction plus contextuelle.
+
     L'analyse des sentiment en a aussi profité, car elle n'a plus besoin de corpus annoté par un expert pour faire l'apprentissage \cite{we3} et la reconnaissance vocale qui a bénéficié d'une réduction des coûts et du temps de collecte et d'annotation de corpus \cite{we4}.
        
  
     \subsection{Word2Vec}
-    Word2vec est un réseau de neurones à deux couches qui traite des documents texte. Son entrée est un corpus de textes et sa sortie est un ensemble de vecteurs de caractéristiques pour les mots de ce corpus. Bien que Word2vec ne soit pas un réseau de neurones profond, il transforme le texte en une forme numérique que les réseaux profonds peuvent comprendre. Le but et l'utilité de Word2vec est de regrouper les vecteurs de mots similaires dans un espace vectoriel. Autrement dit, il détecte les similitudes mathématiquement. Word2vec crée des vecteurs qui sont des représentations numériques distribuées d'entités de mots, des caractéristiques telles que le contexte de mots individuels; tout cela est fait sans intervention d'un expert.\\
+    Word2vec est un réseau de neurones à deux couches qui traite des documents texte. Son entrée est un corpus de textes et sa sortie est un ensemble de vecteurs de caractéristiques pour les mots de ce corpus. Bien que Word2vec ne soit pas un réseau de neurones profond, il transforme le texte en une forme numérique que les réseaux profonds peuvent comprendre. 
+
+    Le but et l'utilité de Word2vec est de regrouper les vecteurs de mots similaires dans un espace vectoriel. Autrement dit, il détecte les similitudes mathématiquement. Word2vec crée des vecteurs qui sont des représentations numériques distribuées d'entités de mots, des caractéristiques telles que le contexte de mots individuels; tout cela est fait sans intervention d'un expert.
     
     \subsubsection{Processus d'apprentissage}
     
-    Avec suffisamment de données, d'utilisation et de contextes, Word2vec peut faire des prédictions très précises sur la signification d'un mot en fonction des exemples passés. Ces prédictions peuvent être utilisées pour établir l'association d'un mot avec d'autres mots (par exemple, «homme» est un «garçon», «femme» est une «fille»), ou regrouper des documents et les classer par sujet. Ces clusters peuvent constituer la base de la recherche dans le domaine du traitement automatique du langage naturel.\\ 
+    Avec suffisamment de données, d'utilisation et de contextes, Word2vec peut faire des prédictions très précises sur la signification d'un mot en fonction des exemples passés. Ces prédictions peuvent être utilisées pour établir l'association d'un mot avec d'autres mots (par exemple, «homme» est un «garçon», «femme» est une «fille»), ou regrouper des documents et les classer par sujet. Ces clusters peuvent constituer la base de la recherche dans le domaine du traitement automatique du langage naturel.
+
     La sortie du réseau de neurones Word2vec est un vocabulaire dans lequel chaque élément est associé à un vecteur, qui peut être introduit dans un réseau d'apprentissage en profondeur ou simplement interrogé pour détecter les relations entre les mots. En mesurant la similitude de cosinus, aucune similitude est exprimée sous la forme d'un angle de 90 degrés, alors que la similarité totale de 1 est un angle de 0 degré, un chevauchement complet; c'est-à-dire que Algérie est égale à Algérie, tandis que algérien a une distance cosinus de 0.727976 par rapport à Algérie, qui est la plus petite distance par rapport aux autres mots. Voici une liste de mots associés à "Algeria" en utilisant Word2vec, par ordre de proximité :
     
     \begin{table}[h!]
@@ -301,17 +312,17 @@ Parmi les techniques les plus importantes du traitement automatique de la langue
         \end{itemize}   
 
         \subsubsection{État de l'art du Résumé extractif}
-        \textbf{•La méthode basée TF-IDF\footnote{Term Frequency-Inverse Document Frequency, méthode de pondération souvent utilisée en recherche d'information.} :}
+        \textbf{• La méthode basée TF-IDF\footnote{Term Frequency-Inverse Document Frequency, méthode de pondération souvent utilisée en recherche d'information.} :}
             Les phrases sont classées en fonction de la fréquence du terme et de l'inverse de la fréquence du document \cite{tfidf}. La similarité entre le vecteur de requête et les vecteurs de phrases est calculée puis les phrases les plus importantes sont incluses dans le résumé. L'inconvénient est  la Redondance dans le résumés \cite{surveysummarization}.
             
-        \textbf{•La méthode basée sur apprentissage automatique supervisé :} Les phrases sont classées sur la base de l'inclusion de phrases récapitulatives et de l'exclusion de phrases résumées. La classification est basée sur les caractéristiques de la pertinence des phrases dans le résumé. Les probabilités de classification sont faites sur la base de la technique statistique en utilisant la règle de Bayes. Dans ce cas, la redondance sera peut être réduite mais cette méthode reste complexe \cite{surveysummarization}.
+        \textbf{• La méthode basée sur apprentissage automatique supervisé :} Les phrases sont classées sur la base de l'inclusion de phrases récapitulatives et de l'exclusion de phrases résumées. La classification est basée sur les caractéristiques de la pertinence des phrases dans le résumé. Les probabilités de classification sont faites sur la base de la technique statistique en utilisant la règle de Bayes. Dans ce cas, la redondance sera peut être réduite mais cette méthode reste complexe \cite{surveysummarization}.
             
-        \textbf{•La méthode basée sur le Clustering\footnote{Le partitionnement de données, méthode d'analyse de données, vise à diviser un ensemble de données en différents « paquets » homogènes, chaque sous-ensemble partageant des caractéristiques communes.} :} Ces documents sont représentés en utilisant le TF-IDF de dizaines de mots. La fréquence de terme utilisée dans ce contexte est le nombre moyen d'occurrences (par document) dans le cluster. La valeur IDF est calculée sur la base du corpus entier. Le synthétiseur prend des documents déjà groupés en entrée. Chaque cluster est considéré comme un thème.
-        Le thème quant à lui est représenté par des mots avec leurs fréquences d’occurrences. La sélection de la phrase est basée sur la similarité des phrases au thème du cluster. Le facteur suivant qui est pris en compte pour la sélection de la phrase est l'emplacement de la phrase dans le document (Li). Le dernier facteur qui augmente la score d'une phrase est sa similitude avec la première phrase du document auquel elle appartient (Fi).
+        \textbf{• La méthode basée sur le Clustering\footnote{Le partitionnement de données, méthode d'analyse de données, vise à diviser un ensemble de données en différents « paquets » homogènes, chaque sous-ensemble partageant des caractéristiques communes.} :} Ces documents sont représentés en utilisant le TF-IDF de dizaines de mots. La fréquence de terme utilisée dans ce contexte est le nombre moyen d'occurrences (par document) dans le cluster. La valeur IDF est calculée sur la base du corpus entier. Le synthétiseur prend des documents déjà groupés en entrée. Chaque cluster est considéré comme un thème.
+        Le thème quant à lui est représenté par des mots avec leurs fréquences d’occurrences. La sélection de la phrase est basée sur la similarité des phrases au thème du cluster. 
 
-        L'avantage du clustering est qu'il peut être utilisé pour grouper des phrases similaires dans plusieurs document \cite{surveysummarization}.
+        Le facteur suivant qui est pris en compte pour la sélection de la phrase est l'emplacement de la phrase dans le document (Li). Le dernier facteur qui augmente la score d'une phrase est sa similitude avec la première phrase du document auquel elle appartient (Fi). L'avantage du clustering est qu'il peut être utilisé pour grouper des phrases similaires dans plusieurs document \cite{surveysummarization}.
             
-        \textbf{•La méthode basée Logique Floue\footnote{Formalisée par Lotfi Zadeh en 1965, elle consiste à tenir compte de divers facteurs numériques pour aboutir à une décision qu'on souhaite acceptable.} :} Le système flou considère les caractéristiques des phrases telles que la longueur de la phrase, le mot du titre, les mots-clés, .etc \cite{10}. Il assigne un score aux phrases et extrait les plus importantes sur la base des valeurs assignées.
+        \textbf{• La méthode basée Logique Floue\footnote{Formalisée par Lotfi Zadeh en 1965, elle consiste à tenir compte de divers facteurs numériques pour aboutir à une décision qu'on souhaite acceptable.} :} Le système flou considère les caractéristiques des phrases telles que la longueur de la phrase, le mot du titre, les mots-clés, .etc \cite{10}. Il assigne un score aux phrases et extrait les plus importantes sur la base des valeurs assignées.
 
         L'avantage de cette méthode consiste en la facilité de l'extraction des caractéristiques qui servent à calculé le score qui sert, à son tours, comme entrée à \emph{Fuzzifier}, mais la performance de cette approche reste limitée \cite{surveysummarization}.
 
@@ -323,11 +334,11 @@ Parmi les techniques les plus importantes du traitement automatique de la langue
         Principalement basées sur les Réseaux de neurones récurrents, ces dernières ont pu montrer des performances et des résultats assez impressionnants, comme on peut le constater dans \cite{atsuss} et \cite{ruch} où plusieurs nouveaux modèles basés sur l'apprentissage profond ont été proposés qui surpassent statistiquement toutes les autres approches abstractives.
 
         \subsubsection{État de l'art du Résumé abstractif}
-        \textbf{•Méthode basée sur les arbres de dépendance :} Elle utilise un arbre de dépendance pour représenter le texte d'un document. Sur la base des relations entre les sous-arbres les phrases similaires sont sélectionnées et le résumeur génère le résumé final \cite{5}.
+        \textbf{• Méthode basée sur les arbres de dépendance :} Elle utilise un arbre de dépendance pour représenter le texte d'un document. Sur la base des relations entre les sous-arbres les phrases similaires sont sélectionnées et le résumeur génère le résumé final \cite{5}.
             
-        \textbf{•Méthode basée sur un modèle :} Elle utilise un modèle pour représenter le document. Les modèles linguistiques et les règles d'extraction sont utilisées pour identifier les extraits du texte les plus pertinents \cite{5}.
+        \textbf{• Méthode basée sur un modèle :} Elle utilise un modèle pour représenter le document. Les modèles linguistiques et les règles d'extraction sont utilisées pour identifier les extraits du texte les plus pertinents \cite{5}.
 
-        \textbf{•Méthode basée sur l'ontologie :} Dans cette méthode, il est question d'utiliser des ontologies dans le processus de résumé automatique \cite{ram}.
+        \textbf{• Méthode basée sur l'ontologie :} Dans cette méthode, il est question d'utiliser des ontologies dans le processus de résumé automatique \cite{ram}.
  
         
 
@@ -338,18 +349,18 @@ Parmi les techniques les plus importantes du traitement automatique de la langue
     \subsection{Domaines d'application}
     Parmi plusieurs applications dans lesquelles la catégorisation de textes est couramment utilisée, nous pouvons citer :
 
-    \textbf{•Filtrage et organisation des informations d'actualités :} avec les quantités énormes de d'informations d'actualités en ligne, il est très difficile de catégoriser ces dernières manuellement, mais cela est possible grâce aux algorithmes de classifications. 
+    \textbf{• Filtrage et organisation des informations d'actualités :} avec les quantités énormes de d'informations d'actualités en ligne, il est très difficile de catégoriser ces dernières manuellement, mais cela est possible grâce aux algorithmes de classifications. 
 
-    \textbf{•Organisation des documents :} aider à la catégorisation de documents, un exemple d'application est l'ensemble des fichiers d'un ordinateur où il s'agit de distinguer les fichiers \emph{log}, \emph{système}, etc.
+    \textbf{• Organisation des documents :} aider à la catégorisation de documents, un exemple d'application est l'ensemble des fichiers d'un ordinateur où il s'agit de distinguer les fichiers \emph{log}, \emph{système}, etc.
 
-    \textbf{•Exploration des opinions :} souvent utilisée pour la catégorisation des commentaires sur les réseaux sociaux.
+    \textbf{• Exploration des opinions :} souvent utilisée pour la catégorisation des commentaires sur les réseaux sociaux.
 
-    \textbf{•Catégorisation des emails et filtrage des spams :} reconnaître l'objet de l'email ou déterminer les courriers indésirables de manière automatisée.
+    \textbf{• Catégorisation des emails et filtrage des spams :} reconnaître l'objet de l'email ou déterminer les courriers indésirables de manière automatisée.
      
     \subsection{Techniques de classifications de textes}
     De nombreuse techniques ont été conçues pour la catégorisation des textes. Puisqu'il est possible de modéliser ces derniers comme des données quantitatives généralement avec des fréquences de termes, la plupart des méthodes appliquées aux problèmes quantitatifs sont également applicables. Quelques une de ces techniques on été citées dans \cite{stca} :
 
-    \begin{itemize}
+    \begin{itemize}[leftmargin={0.7cm}]
         \item Arbres de décisions : la division hiérarchique de l'espace de données dans les arbres de décisions permet de créer des partitions de classes qui sont plus asymétriques en termes de distribution de leurs classes.
 
         \item Bases de règles : déterminer les modèles de mots les plus susceptibles d'être liés aux différentes classes, basé sur un ensemble de règles dans lesquelles le coté gauche correspond à un motif de mot, et le coté droit à une étiquette de classe.
@@ -369,7 +380,7 @@ Parmi les techniques les plus importantes du traitement automatique de la langue
     
       De nombreux travaux de recherches ont été faits dans la catégorisation de textes mais ce qui est plus intéressant pour nous c'est de prospecter ceux destinés à la catégorisation des articles de presse \cite{itemetat0}, parmi ceux-là on retrouve :
      
-     \begin{itemize}
+     \begin{itemize}[leftmargin={0.7cm}]
         
      \item Thorsten Joachims introduit les machines à vecteurs de support (Support vector machine) pour la catégorisation de textes. Il fournit à la fois théorique et preuve empirique que les SVM sont très bien adaptés pour la catégorisation de textes \cite{itemetat1}. 
      
@@ -397,8 +408,11 @@ La traduction est une activité en croissance très rapide de nos jours \cite{tr
         Dans ce type de traducteur, historiquement l'approche la plus ancienne et obsolète, la traduction automatique était basée sur les traductions des dictionnaires multilingues ordinaires, c'est à dire la traduction des mots du texte en entrée mot par mot en ne prenant pas en considération le sens des phrases. Il est à noter que les recherches dans le dictionnaire peuvent être faites avec ou sans l'utilisation des outils de langages dans l'analyse.
         \subsubsection{Traducteur automatique à base de règles de production}
         Dans ce type de traduction automatique, le traducteur prend en compte les données étymologiques des langues des documents en entrée et le document cible fondamentalement récupéré de 
-        lexiques et structures de phrases couvrant les règles sémantiques, morphologiques et syntaxiques principales de chaque langue individuellement. L'acquisition des phrases composant la langue du document source par le traducteur permet de produire des phrases cibles dans la langue du document cible sur le principe d'analyses morphologique, syntaxique et sémantique des deux langues.
+        lexiques et structures de phrases couvrant les règles sémantiques, morphologiques et syntaxiques principales de chaque langue individuellement. 
+
+        L'acquisition des phrases composant la langue du document source par le traducteur permet de produire des phrases cibles dans la langue du document cible sur le principe d'analyses morphologique, syntaxique et sémantique des deux langues.
         Les principaux travaux utilisant les bases de règles pour la traduction ont été créés au milieu des années 1970 \cite{surveyTraduction}.
+
         Les traducteurs automatiques à base de règles de production sont capables de produire des traductions avec une qualité raisonnable, mais la construction du système prend beaucoup de temps et de main-d'œuvre parce que ces ressources linguistiques doivent être fabriquées à la main.De plus, il est très difficile de corriger l'entrée ou d'ajouter de nouvelles règles au système pour générer une traduction \cite{jean}.
         \subsubsection{Traducteur automatique à base d'exemples}
         L'approche à base d'exemples repose sur un ensemble de phrases traduites préalablement. Lors de la traduction, le processus vérifie si la phrase à l'entrée est parmi les exemples; dans le cas positif, il fournit directement sa traduction, sinon il s'inspire d'autres phrases contenant un ou plusieurs ensembles de mots similaires et fournit la traduction de ces mots selon les exemples dont il dispose \cite{gent}.
@@ -412,4 +426,5 @@ La traduction est une activité en croissance très rapide de nos jours \cite{tr
 
 \section{Conclusion}
 Dans ce chapitre, nous avons essayé de faire le tour des techniques du Traitement Automatique du Langage Naturel. Nous avons d'abord présenté cette science, son importance et ses domaines d'application. Ensuite, nous avons examiné l'état de l'art de chaque technique en expliquant les processus et les méthodes. Enfin, nous avons passé rapidement en revue certaines applications actuelles du TALN.
-Le prochain point à aborder quant à lui, présentera notre contribution, la conception générale de la solution proposée et ses différentes fonctionnalités.  
+
+Le prochain point à aborder quant à lui, présentera notre contribution et sa conception générale, la solution proposée et ses différentes fonctionnalités.  
