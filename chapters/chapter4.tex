@@ -53,7 +53,7 @@ Le matériel utilisé consiste en 2 ordinateurs personnels ainsi qu'un serveur (
     \end{table}
 \end{enumerate}   
 
-\subsection{Langages de programmation et logiciels}
+\subsection{Langages de programmation et logiciels}\label{def-tools}
     Nous avons utilisé au cours de la réalisation de notre système, plusieurs langages de programmation et logiciels. Ci-après une brève présentation de ces derniers :
         \subsubsection{Langages de programmation}\label{react-native-def}
             \begin{figure}[H]
@@ -73,7 +73,7 @@ Le matériel utilisé consiste en 2 ordinateurs personnels ainsi qu'un serveur (
                 Framework mobile hybride Open source développé par Facebook depuis début 2015. Il continue d'évoluer avec le soutien de nombreux contributeurs. Le but de React Native est de pouvoir réutiliser le maximum de code entre les différentes plates-formes (iOS et Android). Il offre un gain de temps considérable par rapport à du développement spécifique, tout en étant aussi performant \cite{reactnative}.
             \end{enumerate}
 
-        \subsubsection{Librairies et bibliothèques}\label{def-tools}
+        \subsubsection{Librairies et bibliothèques}
             \begin{figure}[h]
                     \centering
                     \includegraphics[height=150pt,width=320pt]{img/chapter4/tools/tools.png}
@@ -692,18 +692,18 @@ L'évaluation de résumeur montre une augmentation des valeurs des métriques d'
 Dans la phase d'intégration, nous avons charger les modèles de plongement de mots (Anglais et Arabe) comme modèles de résumé automatique et nous avons fait appel dans notre serveur.
 
 \section{Traduction automatique}
-Comme il a été décrit dans le chapitre précédent, la traduction automatique sera intégrée directement à l'application finale afin d'offrir une fonctionnalité de traduction en plus de celle du résumé et de la catégorisation. À cet effet, nous avons utilisé la bibliothèque TextBlob \autoref{def-tools} qui offre une traduction multilingue d'un article ou d'un résumé.
+Comme il a été décrit dans le chapitre précédent, la traduction automatique sera intégrée directement à l'application finale afin d'offrir une fonctionnalité de traduction en plus de celle du résumé et de la catégorisation. À cet effet, nous avons utilisé la bibliothèque TextBlob (\autoref{def-tools}) qui offre une traduction multilingue d'un article ou d'un résumé.
 
 \subsection{Traduction automatique par TextBlob}
 \begin{itemize}
     \item Anglais :\\ 
     \textquotedbl The Interior Ministers of Spain and Algeria signed an agreement this week to form a joint team of investigation with the goals of fighting \textquotedbl illegal migration\textquotedbl and \textquotedbl preventing terrorism\textquotedbl. The agreement comes after recent crackdowns by the Algerian authorities during the first months of 2018 have reduced the number of undocumented Algerian migrants arriving in Spain, a reduction that was praised by the Spanish Interior Minister Juan Ignacio Zoido at their meeting in Madrid.\textquotedbl \\
     
-    \item Arabe :\\
+    \item Arabe :
     \begin{arab}" وقع وزيرا الداخلية الإسباني والجزائري اتفاقا هذا الأسبوع لتشكيل فريق مشترك من التحقيق بهدف محاربة "الهجرة غير الشرعية" و "منع الإرهاب". ويأتي هذا الاتفاق بعد الإجراءات القمعية الأخيرة التي قامت بها السلطات الجزائرية خلال الأشهر الأولى من خفّض عام 2018 عدد المهاجرين الجزائريين غير الشرعيين الذين وصلوا إلى إسبانيا ، وهو تخفيض أشاد به وزير الداخلية الإسباني خوان إغناسيو زويدو في اجتماعهم في مدريد. "\end{arab}
     
     \item Français :\\
-    \textquotedbl Les ministres de l'Intérieur d'Espagne et d'Algérie ont signé cette semaine un accord pour former une équipe conjointe d'enquête ayant pour objectif de lutter contre les \textquotedbl migrations clandestines\textquotedbl et \textquotedbl la prévention du terrorisme\textquotedbl. L'accord intervient après les récentes mesures de répression des autorités algériennes. 2018 ont réduit le nombre de migrants algériens sans papiers arrivant en Espagne, une réduction qui a été saluée par le ministre espagnol de l'Intérieur Juan Ignacio Zoido lors de leur réunion à Madrid.\textquotedbl \\
+    \textquotedbl Les ministres de l'Intérieur d'Espagne et d'Algérie ont signé cette semaine un accord pour former une équipe conjointe d'enquête ayant pour objectif de lutter contre les \textquotedbl migrations clandestines\textquotedbl et \textquotedbl la prévention du terrorisme\textquotedbl. L'accord intervient après les récentes mesures de répression des autorités algériennes. 2018 ont réduit le nombre de migrants algériens sans papiers arrivant en Espagne, une réduction qui a été saluée par le ministre espagnol de l'Intérieur Juan Ignacio Zoido lors de leur réunion à Madrid.\textquotedbl\\
 \end{itemize}
 
 Comme mentionné dans le chapitre précédent, les traductions obtenues ont été jugées très bonnes, suffisamment pour pouvoir utiliser le traducteur TextBlob.
@@ -713,7 +713,7 @@ L'intégration du module de traduction se fait juste sur un appel depuis l'API d
 
 
 \section{Présentation de l'application \textquotedbl Feedny\textquotedbl}
-Après avoir finalisé les différents modules qui composent notre système, nous avons procédé à l'intégration de ces derniers dans une application mobile multiplate-forme (Androïd et IOS) dans l'optique de permettre à l'utilisateur de bénéficier de chaque fonctionnalité.!!
+Après avoir finalisé les différents modules qui composent notre système, nous avons procédé à l'intégration de ces derniers dans une application mobile multiplate-forme (Androïd et IOS) dans l'optique de permettre à l'utilisateur de bénéficier de chaque fonctionnalité.
 
 % L'expérience utilisateur au sein de notre application est étudier pour optimiser la navigation entre les différents espaces. L'application est très intuitifs et conçu afin d'attirer les utilisateurs le plus de temps possible.
 La phase d'implémentation a été divisée en deux parties, le développement Back-end de l'API qui est la pièce motrice de l'application et qui intègre tous les modèles de classification, résumé et recommandation, et le développement de l'interface utilisateur sous forme d'une application mobile.
@@ -947,8 +947,6 @@ La \autoref{article-categ2} contient une liste d'articles d'une catégorie donn�
     \caption{Articles d'une catégorie trié par ordre de publication.}
     \label{article-categ2}
 \end{figure}
-
-
 
  \subsubsection{Sources d'articles}
 Les sources d'articles de presse (journaux, revue, etc.) sont présentées sur l'interface \emph{Sources}, l'utilisateur peut consulter les articles d'une source spécifique, mais aussi sélectionné des sources préférées.
