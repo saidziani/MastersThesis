@@ -1,11 +1,11 @@
 %!TEX program=luatex
 
-\newpage
 \section{Introduction}
 Les systèmes de recommandation demeurent aujourd'hui un moyen non négligeable pour l'amélioration de l'expérience utilisateur sur les réseaux sociaux, le e-commerce et sur les moteurs de recherche. Ils contribuent d'une manière considérable dans l'accroissement de plusieurs entreprises technologiques telles que \emph{Facebook}, \emph{Amazon} ou \emph{Google} qui exploitent des quantités massives de données (Big data) afin de faire des recommandations avec un niveau de confiance assez élevé.
 
 Il sera question dans ce chapitre d'effectuer une description de l'état de l'art par la présentation des systèmes de recommandations et leurs utilisations pour la prédiction des comportements des utilisateurs, suivie d'une brève présentation de l'apprentissage automatique et ses différentes techniques, et nous allons conclure par l'introduction des techniques de profilage d'utilisateurs.
 
+\newpage
 \section{Apprentissage automatique}
 \emph{L'apprentissage automatique} comme il a été défini par \emph{svensson} et \emph{Söderberg} dans leur article \textquotedbl Machines that learn\textquotedbl \cite{svensson} désigne la conception et le développement d'algorithmes et de techniques qui permettent aux ordinateurs d'apprendre et de prédire de façon intelligente.
 
@@ -212,7 +212,7 @@ L'utilisation des systèmes de recommandation pour des sites de vente en ligne o
 Parmi ces contraintes, on retrouve :
 \begin{itemize}
     
-    \item \textbf{Le démarrage à froid (Cold start) : }c'est-à-dire on ne possède aucune information précédente sur l'utilisateur, ses préférences ou son profil. Généralement, c'est lors d'une navigation sans identification que ce cas se présente.\\
+    \item \textbf{Le démarrage à froid (Cold start)\label{cold-start} : }c'est-à-dire on ne possède aucune information précédente sur l'utilisateur, ses préférences ou son profil. Généralement, c'est lors d'une navigation sans identification que ce cas se présente.\\
     
     \item \textbf{Le manque de données (Data sparsity) : }les structures de données liées au profil de l'utilisateur peuvent être vides ou très denses ce qui nécessite pour les deux cas un traitement particulier.\\
     
@@ -220,7 +220,7 @@ Parmi ces contraintes, on retrouve :
     
     \item \textbf{Les Changements des intérêts des utilisateurs : }c'est la capacité d'adaptation du système de recommandation aux besoins de l'utilisateur, c'est-à-dire que si les tendances de ce dernier changent, le système doit proposer des articles adaptés à ses nouvelles tendances.\\
         
-    \item \textbf{L'évolutivité (Scalability)\label{evolutivite} : }c'est la capacité du système à servir plusieurs utilisateurs à la fois et sa rapidité d'interaction avec la source des articles. La dynamique de l'environnement exige une rapidité de calcul en temps réel.\\
+    \item \textbf{L'évolutivité (Scalability) : }c'est la capacité du système à servir plusieurs utilisateurs à la fois et sa rapidité d'interaction avec la source des articles. La dynamique de l'environnement exige une rapidité de calcul en temps réel.\\
 \end{itemize}
 
 \subsection{État de l'art des systèmes de recommandations pour les articles de presse}
@@ -349,4 +349,4 @@ Vu l'importance des systèmes de recommandations aujourd'hui, leur place est plu
 
 Dans ce chapitre, nous avons commencé par présenter les différentes approches de l'apprentissage automatique, nous avons ensuite détaillé ce qu'est un système de recommandation, ses types et un bref état de l'art sur les systèmes les plus couramment utilisés et leurs avantages. Enfin, nous avons expliqué la notion de profil d'utilisateur, ses types et son extraction et le type de bases de données utilisées dans le stockage des profils et la confidentialité des données utilisateurs.
 
-Dans le chapitre suivant, il en sera question de faire une introduction au traitement automatique du langage et de présenter ses différents aspects.
+Quant au chapitre suivant, il en sera question de faire une introduction au traitement automatique du langage et de présenter ses différents aspects.

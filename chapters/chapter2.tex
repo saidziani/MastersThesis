@@ -1,6 +1,5 @@
 %!TEX program=luatex
 
-\newpage
 \section{Introduction}
 Avec la montée du Web 2.0, la production de contenu participatif et collaboratif a largement remplacé les méthodes traditionnelles de partage de l'information. Un vaste potentiel inexploité réside dans les quantités de données à la fois énormes et dynamiques disponibles sur les différentes plate-formes numériques qui ne peuvent être traitées avec les méthodes de l'informatique classique.
 
@@ -8,6 +7,7 @@ Les revues de presses, les blogs et les magazines représentent une partie consi
 
 Dans ce chapitre, nous allons discuter du Traitement Automatique du Langage Naturel (TALN), de sa puissance et son importance. En bref, l'objectif de cette partie est de décrire le but, les procédures et les applications pratiques du TALN d'une manière simple et claire. Nous examinerons la littérature la plus récente tout en décrivant les méthodes et les processus disponibles, nous analyserons certains des défis auxquels les chercheurs sont confrontés, et passerons brièvement en revue certaines des applications actuelles et futures de cette science.
 
+\newpage
 \section{Définition}
 Le Traitement automatique du langage naturel est l'un des principaux domaines de l'intelligence artificielle. Il permet de développer des systèmes qui peuvent \emph{analyser} et \emph{comprendre} le langage humain. En dehors des opérations courantes de traitement de texte qui considèrent les textes comme une simple séquence de symboles, l'utilisation des techniques de TALN permet d'organiser et de structurer des quantités énormes de connaissances pour développer des applications très avancées telles que la synthèse automatique, la reconnaissance d'entités, l'analyse des sentiments, la reconnaissance de la parole, etc.
 
@@ -185,7 +185,7 @@ Parmi les techniques les plus importantes du traitement automatique de la langue
         \end{figure}
     
     
-    \subsection{Plongement de mots (Word embedding)}
+    \subsection{Plongement de mots (Word embedding)\label{wordembd}}
     
     Le plongement de mots (word embedding) est une technique qui permet de représenter les mots sous forme d'un vecteur de nombres réels grâce à un apprentissage en utilisant un ensemble de mots, ce qui facilite l'analyse sémantique des mots. Les plongements de mots constituent une méthode pour faire face à un problème récurrent en intelligence artificielle, à savoir celui de la dimension. 
 
@@ -208,7 +208,7 @@ Parmi les techniques les plus importantes du traitement automatique de la langue
         \end{figure}
         
     
-    \item Dans la seconde méthode, c'est le contraire du modèle CBOW : le modèle essaie de prédire le contexte en fonction du mot. C’est la technique du « Skip-Gram ». En effet, la couche d'entrée correspond au mot cible et la couche de sortie correspond au contexte. Ainsi, Skip-Gram cherche la prédiction du contexte étant donné un mot au lieu de la prédiction d'un mot étant donné son contexte comme c'est le cas pour CBOW comme on peut le voir dans la figure \ref{cbow2}.
+    \item Dans la seconde méthode, c'est le contraire du modèle CBOW : le modèle essaie de prédire le contexte en fonction du mot. C’est la technique du « Skip-Gram ». En effet, la couche d'entrée correspond au mot cible et la couche de sortie correspond au contexte. Ainsi, Skip-Gram cherche la prédiction du contexte étant donné un mot au lieu de la prédiction d'un mot étant donné son contexte comme c'est le cas pour CBOW comme on peut le voir dans la  \autoref{cbow2}.\label{skip-gram}
     
      \begin{figure}[H]
         \centering
