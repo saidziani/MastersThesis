@@ -1,13 +1,15 @@
-%!TEX program=luatex
+% !TEX program=luatex
+
 \documentclass[12pt]{report}
+\usepackage[Glenn]{fncychap}
 \usepackage[T1]{fontenc}
 \usepackage[francais]{babel}
-\usepackage[Lenny]{fncychap}
 \usepackage{fontspec}
 \usepackage{wrapfig}
 \usepackage{graphicx}
 \usepackage{soul}
-\usepackage[colorlinks=true, linkcolor=blue]{hyperref}
+\usepackage[colorlinks=true, linkcolor=black, urlcolor=black, citecolor=black]{hyperref}
+% \usepackage[hyphens, spaces, obeyspaces]{url}
 \usepackage[a4paper, width=150mm, top=25mm, bottom=25mm]{geometry}
 \usepackage{parskip}
 \usepackage{enumitem}
@@ -15,20 +17,39 @@
 \usepackage{listings}
 \usepackage{float}
 \usepackage[final]{pdfpages}
+\usepackage{xcolor}
+\usepackage{tocbibind}
+\usepackage{tocloft}
+\usepackage{xpatch}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{graphics}
+\usepackage{color}
+% \usepackage[grey,utopia]{quotchap}
+\usepackage{moreverb}
+\usepackage{xcolor}
+\usepackage{framed}
+\usepackage{arabluatex}
+\usepackage[algo2e, french, onelanguage, ruled]{algorithm2e}
 \setlist[itemize]{label=\textbullet}
 \usepackage{fancyhdr}
-\pagestyle{fancy}
+\pagestyle{fancy}   
 \fancyhead{}
 \fancyhead[C]{\leftmark}
 \renewcommand{\headrulewidth}{0.4pt}
 \renewcommand{\footrulewidth}{0.4pt}
-
-
 \usepackage{xcolor}
 \definecolor{light-gray}{gray}{0.90}
 \newcommand{\code}[1]{\colorbox{light-gray}{\texttt{#1}}}
-
 \usepackage{listings}
+\usepackage{multirow}
+
+\usepackage{array}
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+
 \lstdefinestyle{code}{
 language=python,                   
 keywordstyle=\color{blue},      
@@ -44,25 +65,77 @@ frame=leftline,
 framerule=2pt,
 }
 
+\lstdefinestyle{api}{
+language=python,                   
+keywordstyle=\color{blue},      
+stringstyle=\color{blue},        
+commentstyle=\color{gray},     
+basicstyle=\small\ttfamily,           
+% numbers=false,                   
+numberstyle=\normalsize,        
+numbersep=7pt,                  
+showstringspaces=false,         
+breaklines=true,                
+frame=leftline,                 
+framerule=2pt,
+}
+
+
+
 %~~~BEGIN~~~%
 \begin{document}
-
+\pagenumbering{gobble}
 \renewcommand{\contentsname}{Sommaire}
 \tableofcontents
+\clearpage
+
 \listoffigures
+\clearpage
+
 \listoftables
+\clearpage
 
+\listofalgorithmes
+\clearpage
+
+\pagenumbering{roman} 
+\newpage
+\input{other/no-plagiat}
+
+\chapter*{Remerciements}    
+\input{other/thanksF}
+\chapter*{Remerciements}    
+\input{other/thanksS}
+
+\chapter*{Dédicaces}    
+\input{other/dedicationF}
+\chapter*{Dédicaces}    
+\input{other/dedicationS}
+
+\newpage
+\input{other/abstract}
+
+\newpage
 \pagenumbering{arabic} 
+\chapter*{Introduction générale}    
+\input{other/intro}
 
-
-% \chapter{Systèmes de recommandations}
-% \input{chapters/chapter1}
+\chapter{Systèmes de recommandations}
+\input{chapters/chapter1}
 
 \chapter{Traitement Automatique du Langage Naturel}
-\input{chapters/chapter2-fix}
+\input{chapters/chapter2}
 
+\chapter{Conception}    
+\input{chapters/chapter3}
 
+\chapter{Implémentation et résultats}    
+\input{chapters/chapter4}
 
+\chapter*{Conclusion et perspectives}    
+\input{other/conclusion}
+\newpage
+\pagenumbering{roman} 
 \bibliographystyle{unsrt} 
 \bibliography{ref}
 

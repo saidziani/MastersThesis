@@ -1,13 +1,14 @@
 \documentclass[12pt , a4paper]{report}
 \usepackage[french]{babel}
 \usepackage[T1]{fontenc}
-\usepackage[pdftex]{graphicx}  
-\usepackage[utf8]{inputenc} 
+\usepackage[pdftex]{graphicx}  %utiliser le package graphics pour les figures
+\usepackage[utf8]{inputenc} %changer au jeu de caractères UTF-8
 \usepackage{array}
 \usepackage{fancyhdr}
 \usepackage{lmodern}
 \usepackage{graphicx}
 \frenchbsetup{StandardLists=true}
+%\usepackage{fancybox}
 \usepackage{shadow}
 \pagestyle{fancy}
 \hoffset -0.21in
@@ -27,18 +28,19 @@
 \normalsize{Département d'informatique}\\
 \end{center}
 \begin{center}
-\includegraphics[width=4cm,height=4cm]{usthb.jpg}
+\includegraphics[width=4cm,height=3.7cm]{usthb.jpg}
 \end{center}
 
 
 \begin{center}
 \Huge{\textbf{Mémoire de Master}}\\
-\vspace{0.7cm}
-\large{Domaine: Informatique}\\
-\vspace{0.2cm}
-\large{Spécialité: Systèmes Informatiques Intelligents}\\
-\vspace{1.5cm}
-\normalsize{\textbf{}}
+\large{Domaine : Informatique}\\
+\textbf{}\\
+\large{\textbf{Spécialité: Systèmes Informatiques Intelligents}}\\
+\textbf{}\\
+\bigskip
+\vspace*{1cm}
+\normalsize{\textbf{Thème}}
 \end{center}
 \shabox{
 \begin{minipage}{0.9\textwidth}
@@ -47,17 +49,28 @@
 \end{center}
 \end{minipage}
 }
-\vspace{3cm}
-\\
-\begin{itemize}
-    \item{Réalisé par:}
-       \begin{description}
-        \item{\textbf{Mohamed Fawzi TOUATI}} 
-        \item{\textbf{Saïd ZIANI}} 
-       \end{description} 
-\end{itemize}
-\vspace{3cm}
-\centering{\textbf{00-00-2018}}
+\vspace*{1.5cm}
 
+\begin{table}[h]
+\center
+\begin{tabular}{p{8cm}p{6.5cm}}
+\textbf{Présenté par :} & \textbf{Proposé et dirigé par :}\\
+- Mohamed Fawzi TOUATI  & -	Pr. Ahmed GUESSOUM\\
+- Saïd ZIANI\\
+\end{tabular}
+\end{table}
 
+\vspace*{0.5cm}
+
+\begin{table}[h]
+\begin{tabular}{p{6.5cm}p{5cm}}
+\textbf{Devant le jury composé de:}&\\
+- \,\,\, Mme. F. KHELLAF & Présidente \\
+- \,\,\, Mme. N. ABDAT & Membre \\
+\end{tabular}
+\end{table}
+\vspace*{2.7cm}
+\begin{center}
+Projet N\textsuperscript{o} : 069/2018
+\end{center}
 \end{document}
