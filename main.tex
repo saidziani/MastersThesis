@@ -8,7 +8,8 @@
 \usepackage{wrapfig}
 \usepackage{graphicx}
 \usepackage{soul}
-\usepackage[colorlinks=true, linkcolor=blue]{hyperref}
+\usepackage[colorlinks=true, linkcolor=black, urlcolor=black, citecolor=black]{hyperref}
+% \usepackage[hyphens, spaces, obeyspaces]{url}
 \usepackage[a4paper, width=150mm, top=25mm, bottom=25mm]{geometry}
 \usepackage{parskip}
 \usepackage{enumitem}
@@ -43,9 +44,6 @@
 \newcommand{\code}[1]{\colorbox{light-gray}{\texttt{#1}}}
 \usepackage{listings}
 \usepackage{multirow}
-
-\userpackage[hyphens, spaces, obeyspaces]{url}
-\usepackage[colorlinks=true, linkcolor=black, urlcolor=black, citecolor=black]{hyperref}
 
 \usepackage{array}
 \newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
@@ -106,24 +104,23 @@ framerule=2pt,
 % \newpage
 % \input{other/no-plagiat}
 
-\chapter*{Remerciements}    
-\input{other/thanksF}
-\chapter*{Remerciements}    
-\input{other/thanksS}
+% \chapter*{Remerciements}    
+% \input{other/thanksF}
+% \chapter*{Remerciements}    
+% \input{other/thanksS}
 
-\chapter*{Dédicaces}    
-\input{other/dedicationF}
-\chapter*{Dédicaces}    
-\input{other/dedicationS}
+% \chapter*{Dédicaces}    
+% \input{other/dedicationF}
+% \chapter*{Dédicaces}    
+% \input{other/dedicationS}
 
-\newpage
-\input{other/abstract}
+% \newpage
+% \input{other/abstract}
 
 \newpage
 \pagenumbering{arabic} 
-\chapter*{Introduction générale}    
-\input{other/intro}
-
+% \chapter*{Introduction générale}    
+% \input{other/intro}
 
 \chapter{Systèmes de recommandations}
 \input{chapters/chapter1}
@@ -131,14 +128,14 @@ framerule=2pt,
 \chapter{Traitement Automatique du Langage Naturel}
 \input{chapters/chapter2}
 
-% \chapter{Conception}    
-% \input{chapters/chapter3}
+\chapter{Conception}    
+\input{chapters/chapter3}
 
 % \chapter{Implémentation et résultats}    
 % \input{chapters/chapter4}
 
-\chapter*{Conclusion et perspectives}    
-\input{other/conclusion}
+% \chapter*{Conclusion et perspectives}    
+% \input{other/conclusion}
 \newpage
 \pagenumbering{roman} 
 \bibliographystyle{unsrt} 
