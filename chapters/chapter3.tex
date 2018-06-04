@@ -25,7 +25,7 @@ Dans cette partie, nous allons voir la conception détaillée de notre système 
 
         L'exemple suivant présente un vecteur de probabilité de sélection pour les catégories préférées d'un utilisateur U :
             \[P(U) = {'sport': 0.7178, 'news': 0.1581, 'sci\_tech': 0.1492}\]            
-        Il faut noter que la taille du vecteur de probabilité de sélection des catégories préférées est différentes d'un utilisateur à un autre.
+        Il faut noter que la taille du vecteur de probabilité de sélection des catégories préférées est différente d'un utilisateur à un autre.
 
         Ce vecteur se met à jour, comme déjà cité, après chaque interaction de l'utilisateur U avec l'article A de la catégorie C. Au fur et à mesure, la probabilité de sélection d'une catégorie C\textsubscript{i} augmente si cette dernière est sélectionnée, sinon, elle diminue pour donner moins d'importances aux articles qui font partie de cette catégorie.
 
@@ -68,9 +68,9 @@ Dans cette partie, nous allons voir la conception détaillée de notre système 
         \caption{Algorithme de profilage d'un utilisateur}
         \end{algorithm2e}
         \subsubsection{Similarité entre utilisateurs}
-        Afin de diversifier la recommandation d'articles de presse, nous avons mis en place une méthode de calcul de similarité entre utilisateur qui permet de recommander des articles selon les préférences et les centres d'intérêt d'un utilisateur similaire. 
+        Afin de diversifier la recommandation d'articles de presse, nous avons mis en place une méthode de calcul de similarité entre utilisateurs qui permet de recommander des articles selon les préférences et les centres d'intérêt d'un utilisateur similaire. 
 
-        Selon \cite{euclidepreuve} qui propose une étude détaillée sur les mesures de similarité pour le filtrage collaboratif, il en est ressorti comme conclusion que la distance euclidienne était la mesure la plus adéquate en terme de précision et temps d'exécution. La formule de calcul de la distance euclidienne entre les préférences des utilisateurs est la suivante :
+        Selon \cite{euclidepreuve} qui propose une étude détaillée sur les mesures de similarité pour le filtrage collaboratif, il en est ressorti comme conclusion que la distance euclidienne était la mesure la plus adéquate en termes de précision et temps d'exécution. La formule de calcul de la distance euclidienne entre les préférences des utilisateurs est la suivante :
 
         \begin{itemize}[label={}, leftmargin=0cm]
             \item Soient U\textsubscript{1} et U\textsubscript{2} deux utilisateurs,
@@ -154,7 +154,7 @@ Dans cette partie, nous allons voir la conception détaillée de notre système 
 
 %%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~%%
 \section{Module de catégorisation d'article de presse}
-Le premier module sur lequel nous avons travailler, c'est la catégorisation d'articles de presse. Nous avons expérimenter plusieurs techniques proposées dans la littérature. Nous présentons ci-après chaque approche, ses résultats, ses points forts et ses faiblesses.
+Le premier module sur lequel nous avons travaillé, c'est la catégorisation d'articles de presse. Nous avons expérimenté plusieurs techniques proposées dans la littérature. Nous présentons ci-après chaque approche, ses résultats, ses points forts et ses faiblesses.
 
     \subsection{Approches expérimentées\label{approches}}
     Toutes les approches utilisées, pour la catégorisation d'articles de presse, sont basées sur l'apprentissage automatique, supervisé et non supervisé. 
@@ -162,7 +162,7 @@ Le premier module sur lequel nous avons travailler, c'est la catégorisation d'a
     \subsubsection{Basées sur l'Apprentissage Non Supervisé}
         \begin{itemize}
             \item{LDA (Latent Dirichlet Allocation) : }\\
-            \textquotedbl Latent Dirichlet Allocation\textquotedbl  est un modèle probabiliste génératif qui permet de décrire des collections de documents de texte ou d'autres types de données discrètes. LDA fait partie d'une catégorie de modèles appelés \textquotedbl topic models\textquotedbl , qui cherchent à découvrir des structures thématiques cachées dans des vastes archives de documents. L'organisation automatique des documents par sujet est une application connue de LDA.
+            \textquotedbl Latent Dirichlet Allocation\textquotedbl  est un modèle probabiliste génératif qui permet de décrire des collections de documents de texte ou d'autres types de données discrètes. LDA fait partie d'une catégorie de modèles appelés \textquotedbl topic models\textquotedbl , qui cherchent à découvrir des structures thématiques cachées dans de vastes archives de documents. L'organisation automatique des documents par sujet est une application connue de LDA.
         \end{itemize}
         
     \begin{itemize}[label={}, leftmargin=*]
@@ -181,18 +181,18 @@ Le premier module sur lequel nous avons travailler, c'est la catégorisation d'a
             \item{Naïve de Bayes : }\\
             C'est une méthode connue de l'apprentissage automatique supervisé. Un de ses avantages, en plus d'être un modèle simple et facilement interprétable, c'est qu'il renvoie le degré de certitude en plus de la prédiction, ce qui peut être très utile dans certaines applications. 
 
-            Mais en ayant un problème à classes multiples, cette approche nous a donnés des résultats très modeste en un temps d'exécution assez importants, ce qui nous a poussé à abandonner son utilisation.\\
+            Mais en ayant un problème à classes multiples, cette approche nous a donnés des résultats très modestes en un temps d'exécution assez importants, ce qui nous a poussés à abandonner son utilisation.\\
             
             \item{Arbres de décision : }\\
             L'un des algorithmes d'apprentissage automatique supervisé les plus facile à interpréter. Ces principaux avantages sont : robuste face aux données aberrantes, pas très sensible aux données manquantes, possibilité d'intervenir dans la construction de l'arbre, etc. 
 
-            Son principale inconvénient reste la dépendance très forte entre la taille de la base d'apprentissage et les performances.\\
+            Son principal inconvénient reste la dépendance très forte entre la taille de la base d'apprentissage et les performances.\\
             
             \item{SVM (Support Vector Machines) : }\\
-            Les machines à vecteurs supports (en anglais Support Vector Machine, SVM) sont destinées à résoudre des problèmes de classification et de régression. Les SVMs cherchent à trouver la frontière séparatrice optimale entre les classes, à partir d'un ensemble d'apprentissages. Dans le cas de la classification de textes (articles de presse dans notre cas), les SVMs ont montrés une grande capacité de prédiction malgré le très grand nombre de caractéristiques des textes (> 10000) contrairement aux autres techniques.\\ 
+            Les machines à vecteurs de soutien (en anglais Support Vector Machine, SVM) sont destinées à résoudre des problèmes de classification et de régression. Les SVMs cherchent à trouver la frontière séparatrice optimale entre les classes, à partir d'un ensemble d'apprentissages. Dans le cas de la classification de textes (articles de presse dans notre cas), les SVMs ont montré une grande capacité de prédiction malgré le très grand nombre de caractéristiques des textes (> 10000) contrairement aux autres techniques.\\ 
             
             \item{Descente de Gradient Stochastique : }\\
-            Le SGD est un algorithme de classification linéaire, souvent utilisé pour l'optimisation. Il peut être combiné avec d'autres techniques d'apprentissage, (SVM, Réseau de neurones, etc.), comme  fonction d'optimisation d'erreur. Dans notre cas, il est utilisé avec un SVM pour le modèle de catégorisation d'articles de presse arabe.
+            Le SGD est un algorithme de classification linéaire, souvent utilisé pour l'optimisation. Il peut être combiné avec d'autres techniques d'apprentissage (SVM, Réseau de neurones, etc.), comme  fonction d'optimisation d'erreur. Dans notre cas, il est utilisé avec un SVM pour le modèle de catégorisation d'articles de presse arabe.
         \end{itemize}
 
     \begin{itemize}[leftmargin=*, label={}]
@@ -215,7 +215,7 @@ Le premier module sur lequel nous avons travailler, c'est la catégorisation d'a
             
         Ci-après les étapes de pré-traitement suivies :
         \begin{enumerate}[leftmargin=*]
-            \item{\textbf{Segmentation (Tokenization) et suppression des mots vides :} }permet d'extraire toutes les entités lexicales d'un article donné. La segmentation est suivie de la suppression des tokens non-utiles tel que la ponctuation, les pronoms, les déterminants, etc.
+            \item{\textbf{Segmentation (Tokenization) et suppression des mots vides :} }permet d'extraire toutes les entités lexicales d'un article donné. La segmentation est suivie de la suppression des tokens non-utiles tels que la ponctuation, les pronoms, les déterminants, etc.
 
             Après segmentation : 
                 \begin{arab}'أمرت', 'السلطات', 'القطرية', 'الأسواق', 'و', 'المراكز', 'التجارية', 'في', 'البلاد', 'برفع', 'و', 'إزالة', 'السلع', 'الواردة', 'من', 'السعودية', 'و', 'البحرين', 'و', 'الإمارات', 'و', 'مصر', 'في', 'الذكرى', 'الأولى', 'لإعلان', 'هذه', 'الدول', 'الحصار', 'عليها', '.'\end{arab}
@@ -284,7 +284,7 @@ Le premier module sur lequel nous avons travailler, c'est la catégorisation d'a
 \section{Module de résumé automatique}
 Le résumé automatique permet à l'utilisateur de notre système d'avoir une idée générale sur le contenu d'un article de presse. Les idées les plus importantes d'un texte sont identifiées. Afin de réussir l'identification des idées (phrases ou mots), nous avons expérimenté plusieurs techniques que nous allons présenter dans ce qui suit.
 
-    \subsection{Résumé extractif par Apprentissage Supervisé}
+    \subsection{Résumé extractif par Apprentissage supervisé}
     Tout d'abord, nous avons commencé par l'approche proposée dans \cite{riad-belkbir} qui est basée sur un apprentissage automatique supervisé en utilisant un dataset annoté manuellement. 
         \subsubsection{Corpus et datasets}
         Le dataset développé par l'équipe TALAA, contient plus de 70 articles. Il est dédié principalement au résumé automatique par apprentissage supervisé pour la langue Arabe, mais peut être utilisé également dans d'autres applications, telles que la compression des textes.
@@ -298,7 +298,7 @@ Le résumé automatique permet à l'utilisateur de notre système d'avoir une id
             \end{itemize}
 
         \subsubsection{Pré-traitement et structure du dataset}
-        Tout les articles du dataset sont sous le format XML, chaque article a son propre identifiant et divisé en paquets de phrases selon l'opération effectuée. Ci-après la \autoref{xml-structure} qui montre un exemple du dataset : 
+        Tous les articles du dataset sont sous le format XML, chaque article a son propre identifiant et divisé en paquets de phrases selon l'opération effectuée. Ci-après la \autoref{xml-structure} qui montre un exemple du dataset : 
         \begin{figure}[H]
             \centering
             \includegraphics[height=220pt,width=430pt]{img/chapter4/xml.png}
@@ -308,7 +308,7 @@ Le résumé automatique permet à l'utilisateur de notre système d'avoir une id
         L'approche basée sur l'apprentissage automatique demandait un très grand nombre d'articles avec leurs résumés, ce qui nous a poussés à l'abandonner.
 
     \subsection{Résumé extractif par Machine de Boltzman}
-    L'approche proposée dans \cite{boltzman} utilise un modèle d'apprentissage profond afin de prédire les phrases les plus importantes dans un texte donnée en utilisant 9 caractéristiques sur chaque phrase. Elle consiste en trois grandes phases: l'extraction des caractéristiques, la conversion en valeurs numériques et la génération du résumé à partir des scores de chaque phrase. 
+    L'approche proposée dans \cite{boltzman} utilise un modèle d'apprentissage profond afin de prédire les phrases les plus importantes dans un texte donné en utilisant 9 caractéristiques sur chaque phrase. Elle consiste en trois grandes phases: l'extraction des caractéristiques, la conversion en valeurs numériques et la génération du résumé à partir des scores de chaque phrase. 
 
     Les caractéristiques extraites sont les suivantes :
     \begin{enumerate}
@@ -324,7 +324,7 @@ Le résumé automatique permet à l'utilisateur de notre système d'avoir une id
     \end{enumerate} 
 
     \subsection{Résumé automatique extractif par plongement de mots}
-    L'approche proposée par l'équipe de recherche du département informatique de l'Université de Bari en Italie \cite{notreresume}, est basée sur la similarité textuelle entre la phrase centroïde et les autres phrases du texte en utilisant les plongements de mots (Word embeddings) présentés dans \autoref{wordebd}. Le plongement de mots utilisé dans cette approche est un modèle Skip-Gram (\autoref{skip-gram}) entraîné sur le contenu de Wikipédia en utilisant la bibliothèque FastText développé par le Laboratoire en Intelligence Artificielle de \emph{Facebook} qui prend en charge 294 langues différentes \cite{fasttext}. Parmi les modèles développés, nous allons nous intéresser à celui de l'Anglais et l'Arabe. Ci-dessous, nous allons présenter les étapes de conception du résumé automatique.
+    L'approche proposée par l'équipe de recherche du département informatique de l'Université de Bari en Italie \cite{notreresume}, est basée sur la similarité textuelle entre la phrase centroïde et les autres phrases du texte en utilisant les plongements de mots (Word embeddings) présentés dans \autoref{wordebd}. Le plongement de mots utilisé dans cette approche est un modèle Skip-Gram (\autoref{skip-gram}) entraîné sur le contenu de Wikipédia en utilisant la bibliothèque FastText développée par le Laboratoire d'intelligence artificielle de \emph{Facebook} qui prend en charge 294 langues différentes \cite{fasttext}. Parmi les modèles développés, nous allons nous intéresser à celui de l'Anglais et l'Arabe. Ci-dessous, nous allons présenter les étapes de conception du résumé automatique.
 
         \subsubsection{pré-traitement des articles}
         Dans cette phase, il suffit juste de segmenter les textes en phrases, les phrases en tokens et supprimer les mots vides. Ceci étant dû au fait que le plongement de mots que nous allons utiliser (le modèle Skip-Gram entraîné sur le contenu Wikipédia) servira entre autres à détecter les régularités linguistiques des  mots de la même racine. Par exemple : le mot le plus similaire à \textquotedbl Algeria\textquotedbl est le mot \textquotedbl Algerian\textquotedbl \ref{}, c'est pour cela que la racinisation n'est pas utilisée. L'algorithme \autoref{algopreresume} décrit les étapes de pré-traitement d'un article.
@@ -403,7 +403,7 @@ Le résumé automatique permet à l'utilisateur de notre système d'avoir une id
         S\textsubscript{j}: la $j\textsuperscript{ième}$ phrase du document. \\ 
         $E[idx(w)]$ : le plongement de mot du terme $w$.
 
-        Afin d'obtenir le score finale de la phrase, on calcule la similarité de cosinus entre la somme des plongements, déjà calculé (\ref{somplong}), de la phrase S\textsubscript{j} et le plongement de la phrase centroïde S\textsubscript{centroide}.
+        Afin d'obtenir le score final de la phrase, on calcule la similarité de cosinus entre la somme des plongements, déjà calculée (\ref{somplong}), de la phrase S\textsubscript{j} et le plongement de la phrase centroïde S\textsubscript{centroide}.
         
         \[sim\_cos(S\textsubscript{centroide},S\textsubscript{j}) = \frac {S\textsubscript{centroide} \cdot S\textsubscript{j}}{||S\textsubscript{centroide}|| \cdot ||S\textsubscript{j}||}\]
 
@@ -417,7 +417,7 @@ Le résumé automatique permet à l'utilisateur de notre système d'avoir une id
 
         \subsubsection{Sélection des phrases}
        Après la phase de notation des phrases du document, elles sont, ensuite, triées par ordre décroissant en fonction de la similarité. Les phrases les mieux classées sont itérativement sélectionnées et ajoutées au résumé jusqu'à ce que la limite (taille du résumé) soit atteinte. Afin de satisfaire la propriété de redondance, nous allons calculer, à chaque itération, la \emph{similarité de cosinus} entre la phrase à venir et les phrases déjà sélectionnées dans le résumé.\\
-       Il est à noter qu'un seuil a été fixé afin de rejeter toutes les phrases qui ont une similarité très élevées par rapport à une phrase afin d'éviter cette redondance.
+       Il est à noter qu'un seuil a été fixé afin de rejeter toutes les phrases qui ont une similarité très élevée par rapport à une phrase afin d'éviter cette redondance.
         \begin{algorithm2e}[H]
             \SetAlgoLined
             \SetKwInOut{Input}{input}
@@ -448,7 +448,7 @@ Le résumé automatique permet à l'utilisateur de notre système d'avoir une id
             \caption{Algorithme de Sélection des phrases}
         \end{algorithm2e}
 
-        À la fin de cette étape, nous allons avoir un résumé du document désordonné et les phrases sont triées selon leur score et pas dans l'ordre de leurs apparitions dan le texte original. Pour y remédier, nous allons rajouter un tri des phrases selon l'ordre du document.
+        À la fin de cette étape, nous allons avoir un résumé du document désordonné et les phrases sont triées selon leur score et pas dans l'ordre de leurs apparitions dans le texte original. Pour y remédier, nous allons rajouter un tri des phrases selon l'ordre du document.
         
          \begin{algorithm2e}[H]
              \SetAlgoLined
@@ -465,12 +465,12 @@ Le résumé automatique permet à l'utilisateur de notre système d'avoir une id
 Dans ce module, notre tâche n'était pas d'implémenter ou de concevoir un traducteur automatique, mais uniquement d'utiliser un traducteur multilingue existant, et de l'intégrer dans notre architecture globale présentée dans la \autoref{shemaglobal}. 
 Toutefois, il fallait rechercher le module de traduction le plus performant afin de traduire un article complet de la manière la plus rapide.
 
-Afin d'intégrer un bon système de traduction automatique, nous avons exploré deux sources principales, la première était destiné à une utilisation professionnelle, de plus, la version gratuite offrait une traduction pour des textes de taille limités. Et la deuxième, était la solution la plus adaptée à notre cas d'étude. Elle est à la fois accessible et offrait des possibilités de traduction pour des textes longs (articles de presse, thèse, etc). 
+Afin d'intégrer un bon système de traduction automatique, nous avons exploré deux sources principales, la première était destinée à une utilisation professionnelle, de plus, la version gratuite offrait une traduction pour des textes de taille limités. Et la deuxième était la solution la plus adaptée à notre cas d'étude. Elle est à la fois accessible et offrait des possibilités de traduction pour des textes longs (articles de presse, thèse, etc.). 
 
 \section{Conception de la base de données}
 Afin de s'adapter à la structure très dynamique des articles de presse et des profils également, nous avons choisi d'utiliser les bases de données NoSQL\ref{nosql}.
 
-Le SGBD MongoDB que nous avons utiliser est un système orienté document écrit en C++ \cite{NOSQL3}. Les objets sont stockés en série sous la forme BSON\footnote{C'est un format d'échange de données informatiques utilisé principalement comme stockage de données et format de transfert de données par le réseau dans la base de données MongoDB [Wikipédia]}
+Le SGBD MongoDB que nous avons utilisé est un système orienté document écrit en C++ \cite{NOSQL3}. Les objets sont stockés en série sous le format BSON\footnote{C'est un format d'échange de données informatiques utilisé principalement comme stockage de données et format de transfert de données par le réseau dans la base de données MongoDB [Wikipédia]}
 
 Les objets n'ont pas besoin d'avoir la même structure ou les mêmes champs et les champs communs n'ont pas besoin d'avoir le même type, permettant ainsi un stockage de schéma flexible. À cet effet, nous présentons ci-dessous, sous notre base de données, la collection d'articles et la collection des profils.
 
@@ -560,7 +560,7 @@ Une application mobile ou web possède souvent une architecture 3-tiers.
 
 \subsection{Avantage de l'architecture multi-tiers}
 L'avantage principal d'une architecture 3-tiers (multi-tiers) est la facilité de déploiement. L'application
-en elle même n'est déployée que sur la partie serveur. Le client ne nécessite qu'une installation et une configuration minime. 
+en elle-même n'est déployée que sur la partie serveur. Le client ne nécessite qu'une installation et une configuration minime. 
 
 Cette facilité de déploiement aura pour conséquence non seulement de réduire le coût de déploiement, mais aussi de permettre une évolution régulière du système. Cette évolution ne nécessitera que la mise à jour de l'application sur le serveur applicatif.
 
@@ -588,7 +588,7 @@ Nous allons présenter dans cette partie, la façon avec laquelle le logiciel fo
 \end{figure}
 
 \subsection{Diagramme de séquence}
-Le diagramme de séquence est un diagramme UML qui fait partie des diagrammes comportementaux (dynamiques) dont L'objectif est de représenter les interactions entre les objets et les acteurs ou bien entre objets uniquement en indiquant la chronologie des échanges. Cette représentation peut se réaliser en considérant les différents scénarios associés \cite{UML}.
+Le diagramme de séquence est un diagramme UML qui fait partie des diagrammes comportementaux (dynamiques) dont l'objectif est de représenter les interactions entre les objets et les acteurs ou bien entre objets uniquement en indiquant la chronologie des échanges. Cette représentation peut se réaliser en considérant les différents scénarios associés \cite{UML}.
 \begin{figure}[H]
     \centering
     \includegraphics[height=500pt,width=425pt]{img/chapter3/diagseqperso.png}
@@ -640,13 +640,13 @@ L'évaluation de chaque module du système est l'une des étapes les plus import
         \end{itemize}
         
         \subsubsection{Accuracy} 
-        C'est une mesure qui évalue l'efficacité globale de l'algorithme par rapport au données de test.
+        C'est une mesure qui évalue l'efficacité globale de l'algorithme par rapport aux données de test.
         \[ Accuracy = \frac{tp+tn} {tp+fp+tn+fn} \]
         \subsubsection{Précision} 
         Elle évalue le pouvoir prédictif du modèle en mesurant la capacité du modèle à prédire que des classes correctes.
         \[ Precision = \frac{tp} {tp+fp} \]
         \subsubsection{Rappel} 
-        La capacité d’un modèle à prédire toutes les classes correctes de l'ensemble de test.
+        La capacité d’un modèle à prédire toutes les classes correctes de l'ensemble de tests.
         \[ Rappel = \frac{tp} {tp+fn} \]
         \subsubsection{F-mesure}
         Une mesure composite qui profite aux algorithmes avec une sensibilité plus élevée et des algorithmes de défis avec spécificité plus élevée. \label{fmesure}
@@ -670,13 +670,13 @@ L'évaluation de chaque module du système est l'une des étapes les plus import
         \subsubsection{Cohérence de sujet}
         La cohérence de sujet (Topic coherence) mesure le , dans les mots utilisés pour décrire une catégorie, un mot commun est en moyenne un bon prédicteur pour un mot moins commun.
 
-        Nous allons calculer la cohérence en utilisant \textquotedbl intrinsic UMass measure\textquotedbl qui est proposé par \cite{perplexite}. La formule est présentée là-dessous :
+        Nous allons calculer la cohérence en utilisant \textquotedbl intrinsic UMass measure\textquotedbl qui est proposée par \cite{perplexite}. La formule est présentée là-dessous :
         \[
         \text{score}_{\text{UMass}}(w_i, w_j) =
         \log
         \frac{D(w_i, w_j) + 1}{D(w_i)}
         \]
-        Où w\textsubscript{i} est un mot commun et w\textsubscript{j} est moins commun, les deux mots font parti des mots qui décrivent une catégorie, D est un document.
+        Où w\textsubscript{i} est un mot commun et w\textsubscript{j} est moins commun, les deux mots font partie des mots qui décrivent une catégorie, D est un document.
 
     \subsection{Métriques d'évaluation du module de résumé automatique}
     Dans le module de résumé automatique, la mesure principale est \emph{Rouge}. Ci-dessous, nous allons la présenter.
@@ -702,4 +702,4 @@ L'évaluation de chaque module du système est l'une des étapes les plus import
         \end{itemize}
 
 \section{Conclusion}
-Lors de ce chapitre, nous avons proposé la conception du système \textquotedbl Feedny\textquotedbl. Nous avons commencer par décrire la conception des modules de recommandation, de catégorisation d'articles, de résumé et de la traduction automatique. Nous avons ensuite décrit la structure de notre base de données, puis présenter l'architecture globale du système. Par la suite, nous avons présenter les schémas conceptuels de \textquotedbl Feedny\textquotedbl. Et nous avons, enfin, expliciter les mesures d'évaluation des différents modules. Dans le prochain chapitre, nous allons présenter la réalisation et les résultats de notre travail.
+Lors de ce chapitre, nous avons proposé la conception du système \textquotedbl Feedny\textquotedbl. Nous avons commencé par décrire la conception des modules de recommandation, de catégorisation d'articles, de résumé et de la traduction automatique. Nous avons ensuite décrit la structure de notre base de données, puis présenté l'architecture globale du système. Par la suite, nous avons présenté les schémas conceptuels de \textquotedbl Feedny\textquotedbl. Et nous avons, enfin, explicité les mesures d'évaluation des différents modules. Dans le prochain chapitre, nous allons présenter la réalisation et les résultats de notre travail.
