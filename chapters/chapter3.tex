@@ -27,7 +27,7 @@ Dans cette partie, nous allons voir la conception détaillée de notre système 
 
     Cette étape nécessite le profilage des utilisateurs et le calcul de similarité entre ces derniers. Dans ce qui suit les détails de chacune des deux méthodes.
 
-        \subsubsection{Profilage d'un utilisateur}
+        \subsubsection{Profilage d'un utilisateur}\label{proba-selct}
         Le profilage d'un utilisateur consiste à déterminer les centres d'intérêt d'un utilisateur tout en se basant sur les articles lus et visités. Pour cela, nous avons mis en place plusieurs méthodes de calcul des probabilités de préférences afin de mieux cibler les utilisateurs et garantir une solution conforme aux caractéristiques de la recommandation pour les articles de presse. 
 
         Pour le calcul des probabilités des préférences des utilisateurs, nous avons utilisé une méthode de calcul qui permet à la fois de résoudre le problème de la récence (\autoref{recence}) et le démarrage à froid (\autoref{cold-start}).
@@ -173,7 +173,7 @@ Le premier module sur lequel nous avons travaillé c'est la catégorisation d'ar
     \subsection{Approches expérimentées pour la catégorisation\label{approches}}
     Toutes les approches utilisées, pour la catégorisation d'articles de presse, sont basées sur l'apprentissage automatique, supervisé et non supervisé. 
 
-    \subsubsection{Catégorisation basée sur l'Apprentissage Non Supervisé}
+    \subsubsection{Catégorisation basée sur l'Apprentissage Non Supervisé}\label{non-supervised}
         \begin{itemize}
             \item{LDA (Latent Dirichlet Allocation) : }\\
             \textquotedbl Latent Dirichlet Allocation\textquotedbl  est un modèle probabiliste génératif qui permet de décrire des collections de documents, de textes, ou d'autres types de données discrètes. LDA fait partie d'une catégorie de modèles appelés \textquotedbl topic models\textquotedbl , qui cherchent à découvrir des structures thématiques cachées dans de vastes archives de documents. L'organisation automatique des documents par sujet est une application connue de LDA.
@@ -342,7 +342,6 @@ Le résumé automatique permet à l'utilisateur de notre système d'avoir une id
         Dans cette phase, il suffit juste de segmenter les textes en phrases, les phrases en tokens et supprimer les mots vides. Ceci est dû au fait que le plongement de mots que nous allons utiliser (le modèle Skip-Gram entraîné sur le contenu Wikipédia) servira entre autres à détecter les régularités linguistiques des  mots de la même racine. Par exemple, le mot le plus similaire à \textquotedbl Algeria\textquotedbl est le mot \textquotedbl Algerian\textquotedbl (\autoref{table:1}), c'est pour cela que la racinisation n'est pas utilisée. L'algorithme \autoref{algopreresume}, ci-dessous, décrit les étapes de pré-traitement d'un article.
 
          \begin{algorithm2e}[H]
-          \label{algopreresume}
           \SetAlgoLined
           \SetKwInOut{Input}{input}
           \SetKwInOut{Output}{output}
@@ -356,6 +355,7 @@ Le résumé automatique permet à l'utilisateur de notre système d'avoir une id
           }
           \Return {ListesTokens}
          \caption{Algorithme de pré-traitement du résumé}
+         \label{algopreresume}
         \end{algorithm2e}
 
        \subsubsection{Construction d'un vecteur de centroïde}
@@ -374,8 +374,8 @@ Le résumé automatique permet à l'utilisateur de notre système d'avoir une id
                 \SetKwInOut{Input}{input}
                 \SetKwInOut{Output}{output}
                 \Input{phrases, SeuilDocument}
-                //phrases : phrases a traité
-                //SeuilDocument : IDF du texte contenu dans le document
+                //phrases : phrases a traité\\
+                //SeuilDocument : IDF du texte contenu dans le document\\
                 \Output{Vecteur centroïde}
                 
                 Lire(phrases)\\
@@ -433,10 +433,10 @@ Le résumé automatique permet à l'utilisateur de notre système d'avoir une id
             \SetKwInOut{Input}{input}
             \SetKwInOut{Output}{output}
             \Input{phrases, scores, seuilSimilarité, seuilRésumé}
-            //phrases : phrases qui composent le texte original. 
-            //seuilSimilarité : seuil de similarité entre la phrase centroïde et le reste des phrases.
-            //scores : similarité entre la phrase centroïde et la phrase sélectionnée.
-            //seuilRésumé : taille maximale du résumé.
+            //phrases : phrases qui composent le texte original\\
+            //seuilSimilarité : seuil de similarité entre la phrase centroïde et le reste des phrases\\
+            //scores : similarité entre la phrase centroïde et la phrase sélectionnée\\
+            //seuilRésumé : taille maximale du résumé\\
             \Output{Résumé}
             phrases = Tri(phrases, scores)\\
             k = 1\\
@@ -481,14 +481,14 @@ Toutefois, il fallait rechercher le module de traduction le plus performant afin
 
 Afin d'intégrer un bon système de traduction automatique, nous avons exploré deux sources principales. La première était destinée à une utilisation professionnelle. De plus, la version gratuite offrait une traduction pour des textes de taille limités. Et la deuxième était la solution la plus adaptée à notre cas d'étude. Elle est à la fois accessible et offre des possibilités de traduction pour des textes longs (articles de presse, thèse, etc.). 
 
-\section{Conception de la base de données}
+\section{Conception de la base de données}\label{concept-bdd}
 Afin de s'adapter à la structure très dynamique des articles de presse et des profils également, nous avons choisi d'utiliser les bases de données NoSQL \autoref{nosql-ss}.
 
 Le SGBD MongoDB que nous avons utilisée est un système orienté document écrit en C++ \cite{NOSQL3}. Les objets sont stockés en série sous le format BSON\footnote{C'est un format d'échange de données informatiques utilisé principalement comme stockage de données et format de transfert de données par le réseau dans la base de données MongoDB [Wikipédia]}
 
 Les objets n'ont pas besoin d'avoir la même structure ou les mêmes champs et les champs communs n'ont pas besoin d'avoir le même type, permettant ainsi un stockage de schéma flexible. À cet effet, nous présentons ci-dessous, sous notre base de données, la collection d'articles et la collection des profils.
 
-\subsection{Collection d'articles}
+\subsection{Collection d'articles}\label{article-collection}
 Les articles extraits depuis différentes sources sont tous sauvegardés sous une structure définie au préalable, prenant en considération les différences entre les formats suivies par les revues de presse. À cet effet, nous avons choisi \emph{JSON} qui est un format léger d'échange de données. Il est facile à lire et à écrire pour des humains \cite{json} et est pris en charge par tous les langages de programmation.
 
 Chaque article est représenté comme suit :
@@ -525,7 +525,7 @@ Voici maintenant un exemple d'un document de la collection d'articles :
 },
 \end{lstlisting}
 
-\subsection{Collection de profils}
+\subsection{Collection de profils}\label{profils-collection}
 Nous avons choisi que le profil d'utilisateur regroupe très peu d'informations et ce dans le but de protéger sa vie privée. Cependant, les catégories et les sources préférées par l'utilisateur sont sauvegardées. 
 
 Un profil utilisateur est représenté comme suit :
@@ -579,7 +579,7 @@ Nous allons présenter dans cette partie, la façon avec laquelle le logiciel fo
 \textquotedbl Le diagramme de cas d'utilisation (initié par Ivar Jacobson en 1992 dans la méthode OOSE) est un type de diagramme UML qui permet de définir les besoins des acteurs dans un système quelconque en établissant les fonctionnalités attendues et en organisant les besoins. Il peut aussi être utilisés ensuite comme moyen d'organisation du développement du logiciel, notamment pour la structuration et le déroulement des tests du logiciel\textquotedbl\text{ }\cite{UML}.
 \begin{figure}[H]
     \centering
-    \includegraphics[height=400pt,width=350pt]{img/chapter3/diagcasdutilisation.png}
+    \includegraphics[width=420pt]{img/chapter3/diagcasdutilisation.png}
     \caption{Diagramme présentant les cas d'utilisations dans \textquotedbl Feedny\textquotedbl }
 \end{figure}
 
@@ -621,7 +621,7 @@ L'évaluation de chaque module du système est l'une des étapes les plus import
 
         Où d\textsubscript{i} est la note actuelle, D\textsubscript{i} est la note prédite et n est le nombre de notes.
 
-    \subsection{Métriques d'évaluation du module de catégorisation}
+    \subsection{Métriques d'évaluation du module de catégorisation}\label{metrics}
     Dans le module de catégorisation des articles, nous allons évaluer nos modèles en utilisant la précision, le rappel, la F-mesure et les tables de confusion \cite{mesurecateg}.
         \subsubsection{La matrice de Confusion}
         Pour analyser plus finement la qualité des classes produites par le modèle de catégorisation, on peut s’intéresser aux tables de confusion.

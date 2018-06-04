@@ -122,12 +122,12 @@ Parmi les techniques les plus importantes du traitement automatique de la langue
     Les N-grammes sont toutes les combinaisons de mots adjacents de longueur n qui peuvent être retrouvés dans un texte. Par exemple, étant donné la chaîne "L'Algérie est le plus grand pays d'Afrique" les 2-grammes (bi-grammes) de cette chaîne sont :
     
     \begin{lstlisting}[style=code]
-    "L'Algérie est"  
-    "est le" 
-    "le plus"
-    "plus grand"
-    "grand pays"
-    "pays d'Afrique"
+        "L'Algérie est"  
+        "est le" 
+        "le plus"
+        "plus grand"
+        "grand pays"
+        "pays d'Afrique"
     \end{lstlisting}
     
      Le point important des n-grammes est qu'ils capturent la structure de la langue du point de vue statistique, ce qui permet de savoir quel mot est susceptible de suivre la structure donnée. La longueur optimale dépend vraiment de l'application. Si les n-grammes sont trop courts, le modèle ne sera pas apte à faire la différence entre les mots. D'un autre côté, si les n-grammes sont trop longs, le modèle s'en tient aux cas particuliers et ignorera les connaissances générales.
@@ -417,7 +417,7 @@ La traduction est une activité en croissance très rapide de nos jours \cite{tr
         \subsubsection{Traducteur automatique à base d'exemples}
         L'approche à base d'exemples repose sur un ensemble de phrases traduites préalablement. Lors de la traduction, le processus vérifie si la phrase à l'entrée est parmi les exemples; dans le cas positif, il fournit directement sa traduction, sinon il s'inspire d'autres phrases contenant un ou plusieurs ensembles de mots similaires et fournit la traduction de ces mots selon les exemples dont il dispose \cite{gent}.
         \subsubsection{Traducteur automatique basé connaissances}
-        Ce type de traducteur automatique se concentre sur l'aspect lexical que représente un domaine défini (propre à un seul domaine) comme, par exemple, un traducteur pour les articles de recherches, médecine, etc \cite{surveyTraduction}.
+        Ce type de traducteur automatique se concentre sur l'aspect lexical que représente un domaine défini (propre à un seul domaine) comme, par exemple, un traducteur pour les articles de recherches, médecine, etc. \cite{surveyTraduction}.
         \subsubsection{Traducteur automatique basé sur un corpus}
         La traduction automatique basée sur le corpus (CBMT) est générée sur l'analyse des corpus de textes bilingues. Cette technique utilisée depuis 1989 se base sur un corpus de traduction pour la machine. Cette technique a dominé les autres compte tenu de son exactitude, notamment à l'ajout d'exemples au système qui peut améliorer ses performances puisqu'il est basé sur les données, bien que l'accumulation et la gestion de l'énorme corpus de données bilingues puisse également être coûteuses \cite{jean}.
         \subsubsection{Traducteur automatique basé contexte}
