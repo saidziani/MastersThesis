@@ -15,11 +15,12 @@ Les entrées (articles de presse extraits de plusieurs sources) sont sauvegardé
 
 \begin{figure}[H]
     \centering
-    \includegraphics[height=520pt,width=380pt]{img/chapter3/global.png}
+    \includegraphics[width=450pt]{img/chapter3/global.png}
     \caption{Schéma global du fonctionnement de \textquotedbl Feedny\textquotedbl }
     \label{shemaglobal}
 \end{figure}
 
+Nous allons commencer par détailler les différents modules du système \textquotedbl Feedny\textquotedbl, ensuite les schémas conceptuels, puis les métriques d'évaluations que nous utiliserons. \\
 \section{Module de recommandation}
 Dans cette partie, nous allons voir la conception détaillée de notre système de recommandation. Ci-dessous, nous présentons les deux approches proposées, la recommandation personnalisée et la recommandation non-personnalisée d'articles de presse.
     \subsection{Recommandation personnalisée\label{personal}}
@@ -250,15 +251,15 @@ Le premier module sur lequel nous avons travaillé c'est la catégorisation d'ar
             
         \end{enumerate}
         \subsubsection{Modèle de classification d'articles de presse}
-            Nous avons développé plusieurs modèles de catégorisation d'articles de presse basés sur l'apprentissage supervisé et non supervisé présentés dans la \autoref{approches}. L'algorithme \autoref{algomodeles} présente les étapes de développement des différents modèles.
+            Nous avons développé plusieurs modèles de catégorisation d'articles de presse basés sur l'apprentissage supervisé et non supervisé présentés dans la \autoref{approches}. L'algorithme \autoref{algomodeles} présente les étapes quivies pour le développement des différents modèles.
 
             \begin{algorithm2e}[H]
             \label{algomodeles}
             \SetAlgoLined
             \SetKwInOut{Input}{input}
             \SetKwInOut{Output}{output}
-            \Input{Dataset: Article}
-            \Output{ModèleEntrainé} //Le modèle d'apprentissage déjà entraîné est chargé. \\
+            \Input{Dataset}
+            \Output{ModèleEntrainé}
             tf-idf = [ ]\\
             \For{article \in Dataset}{
                 segmentation(article)\\
@@ -427,7 +428,7 @@ Le résumé automatique permet à l'utilisateur de notre système d'avoir une id
             \end{figure}
 
         \subsubsection{Sélection des phrases}
-       Après la phase de notation des phrases du document, elles sont ensuite, triées par ordre décroissant en fonction de la similarité. Les phrases les mieux classées sont itérativement sélectionnées et ajoutées au résumé jusqu'à ce que la limite (taille maximale du résumé) soit atteinte. Afin de satisfaire la propriété de redondance, nous allons calculer, à chaque itération, la \emph{similarité de cosinus} entre la phrase à venir et les phrases déjà sélectionnées dans le résumé. Il est à noter qu'un seuil a été fixé afin de rejeter toutes les phrases qui ont une similarité très élevée par rapport à une autre phrase afin d'éviter cette redondance.
+       Après la phase de notation des phrases du document, elles sont ensuite, triées par ordre décroissant en fonction de la similarité. Les phrases les mieux classées sont itérativement sélectionnées et ajoutées au résumé jusqu'à ce que la limite (taille maximale du résumé) soit atteinte. Afin de satisfaire la propriété de redondance, nous allons calculer, à chaque itération, la \emph{similarité de cosinus} entre la phrase à venir et les phrases déjà sélectionnées dans le résumé. Il est à noter qu'un seuil a été fixé afin de rejeter toutes les phrases qui ont une similarité très élevée par rapport à une autre phrase afin d'éviter cette redondance.\\
         \begin{algorithm2e}[H]
             \SetAlgoLined
             \SetKwInOut{Input}{input}

@@ -1,11 +1,11 @@
 %!TEX program=luatex
 
-\newpage
 \section{Introduction}
 Après avoir finalisé l'étape de conception, nous consacrons ce chapitre à la réalisation. Les différentes problématiques ont été profondément analysées, ce qui nous a permis d'entreprendre le développement des modules, ayant comme objectif d'aboutir à un produit final exploitable par les utilisateurs.
 
 Nous allons d'abord présenter l'environnement de travail ainsi que les outils et les logiciels utilisés. Nous décrivons également en détail les étapes de réalisation de chaque module et de son évaluation et nous clôturons avec l'application mobile réalisée.
 
+\newpage
 \section{Environnement et outils de travail}
 \subsection{Matériels}
 Le matériel utilisé consiste en 2 ordinateurs personnels ainsi qu'un serveur (Cloud) dédié aux traitements gourmands en termes de ressource et en temps d'exécution.
@@ -21,7 +21,7 @@ Le matériel utilisé consiste en 2 ordinateurs personnels ainsi qu'un serveur (
                 \hline
             \end{tabular}
         \end{center}
-        \caption{Caractéristiques du poste de travail 1.}
+        \caption{Caractéristiques du poste de travail 1}
     \end{table}
     
     \item{\textbf{Poste de travail 2}}
@@ -35,7 +35,7 @@ Le matériel utilisé consiste en 2 ordinateurs personnels ainsi qu'un serveur (
                 \hline
             \end{tabular}
         \end{center}
-        \caption{Caractéristiques du poste de travail 2.}
+        \caption{Caractéristiques du poste de travail 2}
     \end{table}
     
     \item{\textbf{Serveur (Cloud Virtual Machine)}}
@@ -49,7 +49,7 @@ Le matériel utilisé consiste en 2 ordinateurs personnels ainsi qu'un serveur (
                 \hline
             \end{tabular}
         \end{center}
-        \caption{Caractéristiques de la machine virtuelle.}
+        \caption{Caractéristiques de la machine virtuelle}
     \end{table}
 \end{enumerate}   
 
@@ -59,7 +59,7 @@ Le matériel utilisé consiste en 2 ordinateurs personnels ainsi qu'un serveur (
             \begin{figure}[H]
                     \centering
                     \includegraphics[height=60pt,width=200pt]{img/chapter4/tools/language.png}
-                    \caption{Logos des langages de programmation utilisés.}
+                    \caption{Logos des langages de programmation utilisés}
                     \label{}
             \end{figure}
             \begin{enumerate}[leftmargin=*]
@@ -77,7 +77,7 @@ Le matériel utilisé consiste en 2 ordinateurs personnels ainsi qu'un serveur (
             \begin{figure}[h]
                     \centering
                     \includegraphics[height=150pt,width=320pt]{img/chapter4/tools/tools.png}
-                    \caption{Logos de quelques librairies utilisées.}
+                    \caption{Logos de quelques librairies utilisées}
                     \label{}
             \end{figure}
             \begin{enumerate}[leftmargin=*]
@@ -146,7 +146,7 @@ Le matériel utilisé consiste en 2 ordinateurs personnels ainsi qu'un serveur (
             \begin{figure}[H]
                     \centering
                     \includegraphics[height=80pt,width=250pt]{img/chapter4/tools/software.png}
-                    \caption{Logos des logiciels utilisés.}
+                    \caption{Logos des logiciels utilisés}
                     \label{}
             \end{figure}
             \begin{enumerate}[leftmargin=*]
@@ -178,14 +178,14 @@ Afin d'implémenter cette approche et tenter de générer une collection de prof
         \begin{figure}[H]
             \centering
             \includegraphics[width=350pt]{img/chapter4/smartmedia/structure_profil.jpg}
-            \caption{Structure d'une instance de profil du dataset SmartMedia.}
+            \caption{Structure d'une instance de profil du dataset SmartMedia}
             \label{instance-profil}
         \end{figure}
         
         \begin{figure}[H]
             \centering
-            \includegraphics[width=410pt]{img/chapter4/smartmedia/structure.png}
-            \caption{Structure d'une instance d'article du dataset SmartMedia.}
+            \includegraphics[height=300pt, width=425pt]{img/chapter4/smartmedia/structure.png}
+            \caption{Structure d'une instance d'article du dataset SmartMedia}
             \label{instance-article}
         \end{figure}
 
@@ -332,7 +332,7 @@ Toutes les approches utilisées sont basées sur l'apprentissage automatique, su
                 
             \end{tabular}
         \end{center}
-        \caption{Résultats des clusters résultant de la catégorisation en Anglais avec LDA.}
+        \caption{Résultats des clusters résultant de la catégorisation en Anglais avec LDA}
         \label{Lda-categ}
     \end{table}                           
 
@@ -386,7 +386,7 @@ Comme tout problème de classification, la catégorisation d'articles de presse 
     \end{table}
 
     \subsubsection{Arabe}
-    Le corpus TALAA\footnote{Développé par l'équipe de recherche Traitement Automatique du Langage et Apprentissage Automatique du Laboratoire de Recherche en Intelligence Artificielle du département informatique de l'USTHB} pour la catégorisation d'articles de presse est une grande collection d'articles publiés entre 2010 et 2014 dans différentes revues de presse arabes sur internet. Il contient plus de 14 millions de mots de 582000 types différents. Le corpus contient 8 catégories, mais nous avons choisi de travailler sur 6 catégories plus générales comme on peut le constater dans le \autoref{talaa-categ} \cite{asma-sellab}. 
+    Le corpus TALAA\footnote{Développé par l'équipe de recherche en Traitement Automatique du Langage et Apprentissage Automatique du Laboratoire de Recherche en Intelligence Artificielle du département informatique de l'USTHB} pour la catégorisation d'articles de presse est une grande collection d'articles publiés entre 2010 et 2014 dans différentes revues de presse arabes sur internet. Il contient plus de 14 millions de mots de 582000 types différents. Le corpus contient 8 catégories, mais nous avons choisi de travailler sur 6 catégories plus générales comme on peut le constater dans le \autoref{talaa-categ} \cite{asma-sellab}. 
     \begin{table}[H]
         \begin{center}
             \begin{tabular}{|c|c|}
@@ -420,15 +420,15 @@ Les deux corpus utilisés dans les deux langues étaient sous format brut, ce qu
     L'algorithme natif de NLTK a été utilisé pour les deux langues (Anglais et Arabe).\\ 
     
     \item{\textbf{Extraction des caractéristiques :} }
-    Les librairies Countvectorizer et tfidfvectorizer de scikit-learn ont été utilisés dans l'extraction des caractéristiques pour l'Anglais et l'Arabe.\\
+    Les librairies \emph{Countvectorizer} et \emph{tfidfvectorizer} de Scikit-learn ont été utilisés dans l'extraction des caractéristiques pour l'Anglais et l'Arabe.\\
 \end{enumerate}
 
 
 \subsection{Implémentation}
-Après expérimentation des techniques citées dans la \autoref{approches}, voici les modèles finaux de la catégorisation d'articles de presse implémentés en Python en utilisant la librairie Scikit-learn (\autoref{def-tools}) :
+Après expérimentation des techniques citées dans la \autoref{approches}, on va présenté, dans ce qui suit, les modèles finaux de la catégorisation d'articles de presse implémentés en Python en utilisant la librairie Scikit-learn (\autoref{def-tools}).
 
-    \subsubsection{Corpus Anglais}
-    le modèle le plus performant est obtenu en utilisant l'algorithme SVM avec 80\% de données pour l'apprentissage et les 20\% restants pour les tests sur un total de 32602 articles de 7 catégories différentes.
+    \subsubsection{Anglais}
+    Le modèle le plus performant est obtenu en utilisant l'algorithme SVM avec 80\% de données pour l'apprentissage et les 20\% restants pour les tests sur un total de 32602 articles de 7 catégories différentes.
     
     Le \autoref{modele-categ-en}, présente une comparaison entre les deux techniques expérimentées pour l'Anglais.
     \begin{table}[H]
@@ -450,7 +450,7 @@ Après expérimentation des techniques citées dans la \autoref{approches}, voic
         \label{modele-categ-en}
     \end{table}
       
-    \subsubsection{Corpus Arabe}
+    \subsubsection{Arabe}
     l'algorithme de la Descente de Gradient Stochastique nous a donné les meilleurs résultats en utilisant 32680 articles, avec 75\% de données pour l'apprentissage et le reste pour les tests. 
 
     Le \autoref{modele-categ-ar} présente une comparaison entre les résultats des différentes techniques expérimentées.
@@ -498,7 +498,7 @@ Après expérimentation des techniques citées dans la \autoref{approches}, voic
                 \hline
             \end{tabular}
         \end{center}
-        \caption{Résultat global et pour chaque catégorie de la catégorisation pour l'Anglais.}
+        \caption{Résultat global et pour chaque catégorie de la catégorisation pour l'Anglais}
         \label{result-categ-en}
     \end{table}
 
@@ -533,25 +533,26 @@ Après expérimentation des techniques citées dans la \autoref{approches}, voic
 \subsection{Évaluations}
     \subsubsection{Anglais}
     Le \autoref{confusion-anglais} présente la matrice de confusion du module de catégorisation d'articles de presse pour l'Anglais. On peut constater qu'il y a très peu de confusion entre les différentes catégories, à part quelques articles comme les 31 articles qui ont été prédits comme \emph{Science \& Technology} alors qu'ils appartiennent à la catégorie \emph{Business}. Cela est dû au contenu de ces articles qui parlent de business dans le domaine de la science et technologie. 
-    \begin{table}[H]
-        \begin{center}
-            \begin{tabular}{|c|c|c|c|c|c|c|c|}
-                \cline{2-8}
-                \multicolumn{1}{c|}{} & \textbf{Sport} &  \textbf{World} &  \textbf{News} &  \textbf{Business} &  \textbf{Health} & \textbf{Entert.\footnote{Entertainment}} &  \textbf{Sci-Tech} \\
-                \hline
-                \textbf{Sport} & 1635 & 0 & 0 & 0 & 0 & 0 & 0 \\
-                \textbf{World}  & 0 & 1249 & 0 & 9 & 2 & 1 & 1 \\
-                \textbf{News}  & 0 & 0 & 974 & 11 & 3 & 3 & 2 \\
-                \textbf{Business}  & 0 & 5 & 4 & 1003 & 3 & 0 & 31 \\
-                \textbf{Health}  & 0 & 0 & 0 & 0 & 388 & 0 & 0 \\
-                \textbf{Entert.}  & 0 & 0 & 0 & 1 & 3 & 646 & 1 \\
-                \textbf{Sci-Tech}  & 0 & 0 & 1 & 0 & 0 & 1 & 544 \\
-                \hline
-            \end{tabular}
-        \end{center}
-        \caption{Matrice de confusion du modèle de catégorisation d'articles de presse pour la langue Anglaise}
-        \label{confusion-anglais}
-    \end{table}
+
+\begin{table}[H]
+\centering
+    \begin{center}
+        \begin{tabular}{ll|l|l|l|l|l|l|l|}
+        \cline{3-9}
+            &  & \multicolumn{7}{c|}{Classes prédites} \\ \cline{3-9} 
+            &  &   \textbf{Sport} &  \textbf{World} &  \textbf{News} &  \textbf{Business} &  \textbf{Health} & \textbf{Entert.\footnote{Entertainment}} &  \textbf{Sci-Tech}  \\ \hline
+        \multicolumn{1}{|l|}{\multirow{7}{*}{\rotatebox{90}{Classes réelles}}} &  \textbf{Sport} & 1635 & 0 & 0 & 0 & 0 & 0 & 0  \\ 
+        \multicolumn{1}{|l|}{}  &  \textbf{World}  & 0 & 1249 & 0 & 9 & 2 & 1 & 1   \\ 
+        \multicolumn{1}{|l|}{}  &  \textbf{News}  & 0 & 0 & 974 & 11 & 3 & 3 & 2   \\ 
+        \multicolumn{1}{|l|}{}  &  \textbf{Business}  & 0 & 5 & 4 & 1003 & 3 & 0 & 31   \\ 
+        \multicolumn{1}{|l|}{}  &  \textbf{Health}  & 0 & 0 & 0 & 0 & 388 & 0 & 0   \\ 
+        \multicolumn{1}{|l|}{}  &  \textbf{Entert.}  & 0 & 0 & 0 & 1 & 3 & 646 & 1   \\ 
+        \multicolumn{1}{|l|}{}  &  \textbf{Sci-Tech}  & 0 & 0 & 1 & 0 & 0 & 1 & 544   \\ \hline
+        \end{tabular}
+    \end{center}
+    \caption{Matrice de confusion du modèle de catégorisation d'articles de presse pour la langue Anglaise}
+    \label{confusion-anglais}
+\end{table}
    Les données de la matrice de confusion sont représentées graphiquement dans la \autoref{roc-en} sous forme de courbe ROC (Receiver Operating Characteristic) qui donne le taux de vrais positifs en fonction du taux de faux positifs.
     \begin{figure}[H]
         \centering
@@ -562,34 +563,30 @@ Après expérimentation des techniques citées dans la \autoref{approches}, voic
 
     \subsubsection{Arabe}
     Tout comme pour l'Anglais, le modèle développé pour l'Arabe a montré une capacité de prédiction très élevée. Comme on peut le voire dans le \autoref{confusion-arabe}, la confusion entre les catégories est très faible à part quelques articles des catégories proches en terme de contenu. 
-    \begin{table}[H]
-        \begin{center}
-            \begin{tabular}{|c|c|c|c|c|c|c|}
-                % \cline{2-7}
-                % \hline
-                % \multicolumn{1}{c|}{} & \multicolumn{6}{|c|}{Predicted} \\
-                % \hline
-                \cline{2-7}
-                \multicolumn{1}{c|}{} & \textbf{\begin{arab}العالم\end{arab}} &  \textbf{\begin{arab}الرياضة\end{arab}} &  \textbf{\begin{arab}الجزائر\end{arab}} &  \textbf{\begin{arab}المجتمع\end{arab}} &  \textbf{\begin{arab}الدين\end{arab}} &  \textbf{\begin{arab}الثقافة\end{arab}} \\
-                \hline
-                \textbf{\begin{arab}العالم\end{arab}} & 1232  &  1  & 11 &  51  & 18  &  3 \\
-                \textbf{\begin{arab}الرياضة\end{arab}}  & 1 & 1609  &  1  &  6  &  3 &   0 \\
-                \textbf{\begin{arab}الجزائر\end{arab}}  & 28  &  2 & 587 &  21  &  9  & 17 \\
-                \textbf{\begin{arab}المجتمع\end{arab}}  & 43  & 11 &  17& 1447 &  12 &  11 \\
-                \textbf{\begin{arab}الدين\end{arab}}  & 36  &  0  &  6 &  18 & 788 &  12 \\
-                \textbf{\begin{arab}الثقافة\end{arab}}  & 3  &  0 &   8 & 53  &  9 & 436 \\
-                \hline
-            \end{tabular}
-        \end{center}
-        \caption{Matrice de confusion du modèle de la catégorisation d'articles Arabe.}
-        \label{confusion-arabe}
-    \end{table}
+\begin{table}[H]
+\centering
+    \begin{center}
+        \begin{tabular}{ll|l|l|l|l|l|l|l|}
+        \cline{3-8}
+            &  & \multicolumn{6}{c|}{Classes prédites} \\ \cline{3-8} 
+            &  &   \textbf{\begin{arab}العالم\end{arab}} &  \textbf{\begin{arab}الرياضة\end{arab}} &  \textbf{\begin{arab}الجزائر\end{arab}} &  \textbf{\begin{arab}المجتمع\end{arab}} &  \textbf{\begin{arab}الدين\end{arab}} &  \textbf{\begin{arab}الثقافة\end{arab}}  \\ \hline
+        \multicolumn{1}{|l|}{\multirow{6}{*}{\rotatebox{90}{Classes réelles}}} & \textbf{\begin{arab}العالم\end{arab}} & 1232  &  1  & 11 &  51  & 18  &  3  \\ 
+        \multicolumn{1}{|l|}{}  & \textbf{\begin{arab}الرياضة\end{arab}}  & 1 & 1609  &  1  &  6  &  3 &   0   \\ 
+        \multicolumn{1}{|l|}{}  & \textbf{\begin{arab}الجزائر\end{arab}}  & 28  &  2 & 587 &  21  &  9  & 17   \\ 
+        \multicolumn{1}{|l|}{}  & \textbf{\begin{arab}المجتمع\end{arab}}  & 43  & 11 &  17& 1447 &  12 &  11   \\ 
+        \multicolumn{1}{|l|}{}  & \textbf{\begin{arab}الدين\end{arab}}  & 36  &  0  &  6 &  18 & 788 &  12   \\ 
+        \multicolumn{1}{|l|}{}  & \textbf{\begin{arab}الثقافة\end{arab}}  & 3  &  0 &   8 & 53  &  9 & 436   \\\hline
+        \end{tabular}
+    \end{center}
+    \caption{Matrice de confusion du modèle de la catégorisation d'articles Arabe}
+    \label{confusion-arabe}
+\end{table}
 
     La courbe ROC du modèle de catégorisation pour la langue arabe est présentée dans la \autoref{roc-ar} 
     \begin{figure}[H]
         \centering
         \includegraphics[height=320pt,width=330pt]{img/chapter4/result/rocAR.png}
-        \caption{Courbe ROC du modèle de catégorisation pour la langue arabe.}
+        \caption{Courbe ROC du modèle de catégorisation pour la langue Arabe}
         \label{roc-ar}
     \end{figure}
 
@@ -631,9 +628,9 @@ Nous avons commencé par une approche basée sur l'apprentissage automatique sup
 L'approche proposée dans \cite{boltzman} utilise un modèle d'apprentissage profond afin de prédire les phrases les plus importantes dans un texte donné en utilisant 9 caractéristiques sur chaque phrase. Elle consiste en trois grandes phases: l'extraction des caractéristiques, la conversion en valeurs numériques et la génération du résumé à partir des scores de chaque phrase. 
 
     \subsubsection{Pré-traitement et structure du dataset}
-    Cette méthode, contrairement aux autres, est appliquée sur un seul document et n'a pas besoin de plusieurs documents. La texte est segmenté en phrases, chaque phrase est divisée en mots, et les caractéristiques citées ci-dessus sont calculées.\\
+    Cette méthode, contrairement aux autres, est appliquée sur un seul document et n'a pas besoin de plusieurs documents. La texte est segmenté en phrases, chaque phrase est divisée en mots, et les caractéristiques citées ci-dessus sont calculées.
     
-    La matrice qui représente le texte est injectée dans une Machine de Boltzman\footnote{Type de réseau de neurones artificiels pour l'apprentissage non supervisé} en utilisant la bibliothèque Theano \cite{theano} afin de calculer les scores des phrases. Les résultats sont triés dans l'ordre décroissant des scores et le résumé est établi selon ces derniers.\\
+    La matrice qui représente le texte est injectée dans une Machine de Boltzman\footnote{Type de réseau de neurones artificiels pour l'apprentissage non supervisé} en utilisant la bibliothèque Theano \cite{theano} afin de calculer les scores des phrases. Les résultats sont triés dans l'ordre décroissant des scores et le résumé est établi selon ces derniers.
     
     \subsubsection{Résultats et critiques}
     L'évaluation de ce modèle a été effectuée en utilisant le \emph{Gold Standard}\footnote{Dataset de référence construit par des experts linguistes, utilisé pour l'évaluation des résultats} Duc2004 qui est un dataset qui contient 50 articles de presse de différentes catégories et 4 à 5 résumés de référence pour chaque article.
@@ -660,7 +657,7 @@ L'approche proposée dans \cite{boltzman} utilise un modèle d'apprentissage pro
     \end{table}
     En effet, ces résultats sont très proches des résumeurs de l'état de l'art, mais le modèle que nous avons utilisé est pré-entraîné sur un type de données totalement différent (des images), ce qui nous a amenés à laisser tomber cette approche.   
 
-\subsection{Résumé extractif par Plongement de mots}
+\subsection{Résumé extractif par plongement de mots}
 Dans ce type de résumé, nous allons appliquer le modèle de plongements de mots pré-entraîné de Wikipédia \cite{fasttext} sur un document (Résumeur automatique extractif mono document) \cite{notreresume} afin d'aboutir à un résumé automatique et cela en utilisant les bibliothèques Gensim et NumPy. 
 
 \subsection{Résultats et évaluation}
@@ -744,12 +741,12 @@ Lors de l'extraction d'un article, nous récupérons toutes les informations rel
 Le module d'extraction d'articles de presse peut être invoqué juste en saisissant une requête dans le navigateur ou en visitant la page principale de notre application. La réponse est retournée sous le format JSON, comme dans l'exemple suivant qui monte une extraction par nom de source :
 
 \begin{lstlisting}[style=api] 
-http://feedny.io/api/articles/add/sources=al-jazeera-english
+   http://feedny.io/api/articles/add/sources=al-jazeera-english
 \end{lstlisting}
 
 ou encore par catégorie :
 \begin{lstlisting}[style=api] 
-http://feedny.io/api/articles/add/categories=sport,health
+   http://feedny.io/api/articles/add/categories=sport,health
 \end{lstlisting}  
 
 \subsubsection{Gestion de la base de données}
@@ -761,25 +758,27 @@ Le module de gestion de la base de données s'occupe de l'insertion, la suppress
     
     La recherche peut se faire avec n'importe quel attribut d'un article de presse, et c'est l'un des plus grands avantages des bases de données NoSQL. Les articles peuvent aussi avoir une structure différente, et on peut stocker, également, des images et du son, s'il y en a. On peut également proposer des articles à un utilisateur, en utilisant son vecteur de probabilité de sélection et ses sources préférées : 
     
-    \begin{lstlisting}[style=api] 
-    http://feedny.io/api/profiles/onload/username=yankheloufi
-    \end{lstlisting} 
+\begin{lstlisting}[style=api] 
+   http://feedny.io/api/profiles/onload/username=yankheloufi
+\end{lstlisting} 
 
 \item\textbf{Gestion de la collection de Profils}\\
 La structure des profils utilisateurs est très dynamique; elle est différente d'un utilisateur à un autre. Les utilisateurs peuvent avoir plusieurs préférences et sources favorites. La gestion des profils est également effectuée à partir de l'API. 
 Un nouvel utilisateur est ajouté de la façon suivante :   
 \begin{lstlisting}[style=api] 
-http://feedny.io/api/profiles/add/profile=username::password::user@hey.com::sport,religion::bbc-news,echourouk
+   http://feedny.io/api/profiles/add/profile=username::password::user@hey.com::sport,religion::bbc-news,echourouk
 \end{lstlisting} 
 
 Et le profil peut être également mis à jour de la manière qui suit : 
 \begin{lstlisting}[style=api] 
-http://feedny.io/api/profiles/update/profile=username::preferences+algeria
+   http://feedny.io/api/profiles/update/profile=username::preferences+algeria
 \end{lstlisting}            
 \end{enumerate} 
 
 \subsection{Développement Front-end}
-Dans le monde du développement web et mobile, nous recherchons toujours des cycles de développement très courts, des délais de déploiement réduits avec une meilleure performance. Une technologie très récente (2016) se trouve au beau milieu de ces exigences, le développement d'application mobile hybride en utilisant des techniques et des langages de programmation très répandus parmi les développeurs web (comme JavaScript ou HTML5 et CSS) enveloppés dans un Framework leur permettant de fonctionner nativement sur n'importe quel appareil et système d'exploitation (Androïd ou IOS).
+Dans le monde du développement web et mobile, nous recherchons toujours des cycles de développement très courts, des délais de déploiement réduits avec une meilleure performance. 
+
+Une technologie très récente (2016) se trouve au beau milieu de ces exigences, le développement d'application mobile hybride en utilisant des techniques et des langages de programmation très répandus parmi les développeurs web (comme JavaScript ou HTML5 et CSS) enveloppés dans un Framework leur permettant de fonctionner nativement sur n'importe quel appareil et système d'exploitation (Androïd ou IOS).
 
 Il existe plusieurs Frameworks d'applications mobiles hybrides, mais React-native (\autoref{react-native-def}) développé par \emph{Facebook} et, jusqu'à l'écriture de ces lignes, reste le plus performant et le plus évolutif tout en restant stable. On peut citer quelques points forts de React-native : 
 \begin{itemize}
@@ -787,8 +786,7 @@ Il existe plusieurs Frameworks d'applications mobiles hybrides, mais React-nativ
     \item Facebook continue à investir dans sa croissance,
     \item Les composants sont réutilisables,
     \item Compatibilité avec les APIs, les SGBDs et les extensions tiers,
-    \item Moins d'utilisation de la mémoire,
-    \item ...
+    \item Moins d'utilisation de la mémoire.
 \end{itemize}
 Tous ces arguments nous ont poussés à choisir React-native comme Framework pour développer notre application mobile. 
 
@@ -873,14 +871,14 @@ Un article dans \textquotedbl Feedny\textquotedbl contient la catégorie infér�
         \begin{figure}[H]
             \centering
             \includegraphics[width=140pt]{img/chapter4/feedny/en-article.png}
-            \caption{Affichage des détails d'un article en langue Anglaise.}
+            \caption{Affichage des détails d'un article en langue Anglaise}
         \end{figure}
     \end{minipage}\hfill
     \begin {minipage}{0.48\textwidth}
     \begin{figure}[H]
         \centering
         \includegraphics[width=140pt]{img/chapter4/feedny/ar-article.png}
-        \caption{Affichage des détails d'un article en langue Arabe.}
+        \caption{Affichage des détails d'un article en langue Arabe}
     \end{figure}
 \end{minipage}
 \label{article-display}
@@ -891,14 +889,14 @@ La \autoref{categ-sum} présente le résumé généré d'un article et la catég
 \begin{figure}[H]
     \centering
     \includegraphics[width=410pt]{img/chapter4/feedny/en-summary.png}
-    \caption{Gros plan sur la catégorie et le résumé généré par \textquotedbl Feedny\textquotedbl.}
+    \caption{Gros plan sur la catégorie et le résumé pour l'Anglais généré par \textquotedbl Feedny\textquotedbl}
     \label{categ-sum}
 \end{figure}
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=410pt]{img/chapter4/feedny/ar-summary.png}
-    \caption{Gros plan sur la catégorie et le résumé généré par \textquotedbl Feedny\textquotedbl.}
+    \caption{Gros plan sur la catégorie et le résumé pour l'Arabe généré par \textquotedbl Feedny\textquotedbl}
     \label{categ-sum}
 \end{figure}
 
@@ -918,14 +916,14 @@ Toutes les catégories d'articles de presse de notre système sont regroupées d
         \begin{figure}[H]
             \centering
             \includegraphics[width=140pt]{img/chapter4/feedny/en-categ.png}
-            \caption{Catégories d'articles de presse de la langue Anglaise.}
+            \caption{Catégories d'articles de presse de la langue Anglaise}
         \end{figure}
     \end{minipage}\hfill
     \begin {minipage}{0.48\textwidth}
     \begin{figure}[H]
         \centering
         \includegraphics[width=140pt]{img/chapter4/feedny/ar-categ.png}
-        \caption{Catégories d'articles de presse de la langue Arabe.}
+        \caption{Catégories d'articles de presse de la langue Arabe}
     \end{figure}
 \end{minipage}
 \label{categ-display}
@@ -936,7 +934,7 @@ Cette figure (\autoref{article-categ}) présente l'interface utilisateur qui aff
 \begin{figure}[H]
     \centering
     \includegraphics[width=140pt]{img/chapter4/feedny/en-categ-articles1.png}
-    \caption{Tous les articles d'une catégorie.}
+    \caption{Tous les articles d'une catégorie}
     \label{article-categ}
 \end{figure}
 
@@ -944,7 +942,7 @@ La \autoref{article-categ2} contient une liste d'articles d'une catégorie donn�
 \begin{figure}[H]
     \centering
     \includegraphics[width=140pt]{img/chapter4/feedny/en-categ-articles.png}
-    \caption{Articles d'une catégorie trié par ordre de publication.}
+    \caption{Articles d'une catégorie trié par ordre de publication}
     \label{article-categ2}
 \end{figure}
 
@@ -965,4 +963,4 @@ Tous les articles qui appartient à un journal ou une revue de presse (Al Jazeer
 \end{figure}
 
 \section{Conclusion}
-Dans ce chapitre, nous avons présenté les différents modules réalisés, les résultats obtenus et l'évaluation en utilisant les métriques adéquates. Nous avons présenté, également, l'environnement de travail, les librairies et les outils utilisés. Et enfin, nous avons parlé de l'intégration de chaque module dans \textquotedbl Feedny\textquotedbl ainsi que les fonctionnalités et les interfaces utilisateurs de notre application mobile.
+Dans ce chapitre, nous avons présenté les différents modules réalisés, les résultats obtenus et les évaluations en utilisant les métriques adéquates. Nous avons présenté, également, l'environnement de travail, les librairies et les outils utilisés. Et enfin, nous avons parlé de l'intégration de chaque module dans \textquotedbl Feedny\textquotedbl ainsi que les fonctionnalités et les interfaces utilisateurs de notre application mobile.

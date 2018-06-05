@@ -81,7 +81,6 @@ framerule=2pt,
 }
 
 
-
 %~~~BEGIN~~~%
 \begin{document}
 \pagenumbering{gobble}
@@ -98,27 +97,30 @@ framerule=2pt,
 \listofalgorithmes
 \clearpage
 
-\pagenumbering{roman} 
-\newpage
-\input{other/no-plagiat}
+% \newpage    
+% \input{other/no-plagiat}
 
-\chapter*{Remerciements}    
-\input{other/thanksF}
-\chapter*{Remerciements}    
-\input{other/thanksS}
+% \pagenumbering{roman} 
+% \newpge
+% \chapter*{Remerciements}    
+% \input{other/thanksF}
+% \chapter*{Remerciements}    
+% \input{other/thanksS}
 
-\chapter*{Dédicaces}    
-\input{other/dedicationF}
-\chapter*{Dédicaces}    
-\input{other/dedicationS}
+% \chapter*{Dédicaces}    
+% \input{other/dedicationF}
+% \chapter*{Dédicaces}    
+% \input{other/dedicationS}
 
-\newpage
-\input{other/abstract}
+% \newpage
+% \input{other/abstract}
 
-\newpage
+% \newpage
+% \setlength{\parindent}{0.5cm}
+% \chapter*{Introduction générale}    
+% \input{other/intro}
+
 \pagenumbering{arabic} 
-\chapter*{Introduction générale}    
-\input{other/intro}
 
 \chapter{Systèmes de recommandations}
 \input{chapters/chapter1}
@@ -132,10 +134,11 @@ framerule=2pt,
 \chapter{Implémentation et résultats}    
 \input{chapters/chapter4}
 
-\chapter*{Conclusion et perspectives}    
-\input{other/conclusion}
+% \chapter*{Conclusion et perspectives}    
+% \input{other/conclusion}
+
 \newpage
-\pagenumbering{roman} 
+\pagenumbering{gobble} 
 \bibliographystyle{unsrt} 
 \bibliography{ref}
 
