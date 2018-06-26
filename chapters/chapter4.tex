@@ -166,7 +166,7 @@ Le matériel utilisé consiste en 2 ordinateurs personnels ainsi qu'un serveur (
 \newpage
 \section{Recommandation}
 
-Afin d'implémenter cette approche et tenter de générer une collection de profils utilisateurs, nous avons essayé d'utiliser des datasets destinés aux articles de presse. Afin de concevoir une base de données de profils utilisateurs, nous avons sollicité \emph{Google News} \cite{bibid}, \emph{Bing News} \cite{bibid} et \emph{Yahoo Webscope} \cite{bibid} mais sans aucune réponse de la part de ces entreprises. Alors, nous avons exploré d'autres sources décrites ci-dessous.
+Afin d'implémenter cette approche et tenter de générer une collection de profils utilisateurs, nous avons essayé d'utiliser des datasets destinés aux articles de presse. Afin de concevoir une base de données de profils utilisateurs, nous avons sollicité \emph{Google News}, \emph{Bing News} et \emph{Yahoo Webscope} \cite{bibid} mais sans aucune réponse de la part de ces entreprises. Alors, nous avons exploré d'autres sources décrites ci-dessous.
 
 \subsection{Corpus et dataset}
     \subsubsection{SmartMedia Adressa News Dataset}
@@ -249,7 +249,7 @@ Afin d'implémenter cette approche et tenter de générer une collection de prof
                 \item $P(U) = {'news': 0.0581,'sport': 0.717, 'sci\_tech': 0.149}$\\
             \end{itemize}
 
-            L'utilisateur U a cliqué et lu un article de la catégorie \emph{Sport}, le vecteur de préférences de catégories va se mettre à jour en fonction de cette dernière interaction (détails dans \ref{proba-select}).
+            L'utilisateur U a cliqué et lu un article de la catégorie \emph{Sport}, le vecteur de préférences de catégories va se mettre à jour en fonction de cette dernière interaction.
             \begin{itemize}[label={}]
                 \item $P(U, sport) = (1-{\alpha}) * {P(U, sport)} + {\alpha}$
                 \item $P(U, sport) = (1-{0.1}) * {P(U, sport)} + {0.1}$
@@ -336,7 +336,7 @@ Toutes les approches utilisées sont basées sur l'apprentissage automatique, su
         \label{Lda-categ}
     \end{table}                           
 
-    Après avoir explicité la liste des mots par cluster, ci-dessous, nous allons présenter les résultats de l'évaluation du modèle \emph{LDA} présenté dans \ref{inmplementation}.
+    Après avoir explicité la liste des mots par cluster, ci-dessous, nous allons présenter les résultats de l'évaluation du modèle \emph{LDA} présenté dans la \autoref{lda-present}.
     \begin{table}[H]
         \begin{center}
             \begin{tabular}{|c|c|}
@@ -904,26 +904,26 @@ La \autoref{categ-sum} présente le résumé généré d'un article et la catég
 L'interface présentée dans la \autoref{profile-display} contient les catégories et les sources préférées, mais aussi les articles que l'utilisateur a marqués comme favoris ou pour lire plus tard. L'utilisateur peut se déconnecter, ou se connecter s'il ne l'est pas déjà.
 \begin{figure}[H]
     \centering
-    \includegraphics[width=140pt]{img/chapter4/feedny/en-profile.png}
+    \includegraphics[width=136pt]{img/chapter4/feedny/en-profile.png}
     \caption{Détails sur le profil utilisateur}
     \label{profile-display}
 \end{figure}
 
    \subsubsection{Catégories}
-Toutes les catégories d'articles de presse de notre système sont regroupées dans l'interface présentée dans la \autoref{categ-display}, l'utilisateur peut favoriser des catégories ce qui va affecter les suggestions et les recommandations d'articles. 
+Toutes les catégories sont regroupées dans l'interface présentée dans \ref{categ-display}, l'utilisateur peut favoriser des catégories ce qui affecte les recommandations d'articles. 
 \begin{figure}[H]
     \begin{minipage}{0.48\textwidth}
         \begin{figure}[H]
             \centering
-            \includegraphics[width=140pt]{img/chapter4/feedny/en-categ.png}
-            \caption{Catégories d'articles de presse de la langue Anglaise}
+            \includegraphics[width=136pt]{img/chapter4/feedny/en-categ.png}
+            \caption{Catégories de l'Anglais}
         \end{figure}
     \end{minipage}\hfill
     \begin {minipage}{0.48\textwidth}
     \begin{figure}[H]
         \centering
-        \includegraphics[width=140pt]{img/chapter4/feedny/ar-categ.png}
-        \caption{Catégories d'articles de presse de la langue Arabe}
+        \includegraphics[width=138pt]{img/chapter4/feedny/ar-categ.png}
+        \caption{Catégories de l'Arabe}
     \end{figure}
 \end{minipage}
 \label{categ-display}
@@ -933,7 +933,7 @@ Toutes les catégories d'articles de presse de notre système sont regroupées d
 Cette figure (\autoref{article-categ}) présente l'interface utilisateur qui affiche tous les articles d'une seule catégorie. 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=140pt]{img/chapter4/feedny/en-categ-articles1.png}
+    \includegraphics[width=138pt]{img/chapter4/feedny/en-categ-articles1.png}
     \caption{Tous les articles d'une catégorie}
     \label{article-categ}
 \end{figure}
@@ -941,7 +941,7 @@ Cette figure (\autoref{article-categ}) présente l'interface utilisateur qui aff
 La \autoref{article-categ2} contient une liste d'articles d'une catégorie donnée, trier par ordre de publication.
 \begin{figure}[H]
     \centering
-    \includegraphics[width=140pt]{img/chapter4/feedny/en-categ-articles.png}
+    \includegraphics[width=138pt]{img/chapter4/feedny/en-categ-articles.png}
     \caption{Articles d'une catégorie trié par ordre de publication}
     \label{article-categ2}
 \end{figure}

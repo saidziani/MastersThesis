@@ -83,6 +83,14 @@ framerule=2pt,
 
 %~~~BEGIN~~~%
 \begin{document}
+
+\newpage
+\setlength{\parindent}{0.5cm}
+
+%%% Cover Page %%%
+\includepdf[pages=1]{cover/cover.pdf} 
+
+%%% Content tables %%% 
 \pagenumbering{gobble}
 \renewcommand{\contentsname}{Sommaire}
 \tableofcontents
@@ -97,30 +105,28 @@ framerule=2pt,
 \listofalgorithmes
 \clearpage
 
-% \newpage    
-% \input{other/no-plagiat}
+%%% NO-plagiat declaration %%%
+\newpage    
+\input{other/no-plagiat}
 
-% \pagenumbering{roman} 
-% \newpge
-% \chapter*{Remerciements}    
-% \input{other/thanksF}
-% \chapter*{Remerciements}    
-% \input{other/thanksS}
+\pagenumbering{roman} 
+\chapter*{Remerciements}    
+\input{other/thanksF}
+\chapter*{Remerciements}    
+\input{other/thanksS}
 
-% \chapter*{Dédicaces}    
-% \input{other/dedicationF}
-% \chapter*{Dédicaces}    
-% \input{other/dedicationS}
+\chapter*{Dédicaces}    
+\input{other/dedicationF}
+\chapter*{Dédicaces}    
+\input{other/dedicationS}
 
-% \newpage
-% \input{other/abstract}
+\newpage
+\input{other/abstract}
 
-% \newpage
-% \setlength{\parindent}{0.5cm}
-% \chapter*{Introduction générale}    
-% \input{other/intro}
-
+%%% Chapters %%%
 \pagenumbering{arabic} 
+\chapter*{Introduction générale}    
+\input{other/intro}
 
 \chapter{Systèmes de recommandations}
 \input{chapters/chapter1}
@@ -134,9 +140,10 @@ framerule=2pt,
 \chapter{Implémentation et résultats}    
 \input{chapters/chapter4}
 
-% \chapter*{Conclusion et perspectives}    
-% \input{other/conclusion}
+\chapter*{Conclusion et perspectives}    
+\input{other/conclusion}
 
+%%% References %%%
 \newpage
 \pagenumbering{gobble} 
 \bibliographystyle{unsrt} 

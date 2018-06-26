@@ -32,7 +32,8 @@ Afin d'implémenter un modèle performant et précis, certains pré-traitements 
 \subsection{Paradigmes de l'apprentissage automatique}
 Nous avons évoqué précédemment le type d'apprentissage à choisir dans le processus d'apprentissage. On peut trouver plusieurs algorithmes d'apprentissage automatique. Ces algorithmes peuvent être classés dans trois groupes basés sur la façon avec laquelle ils \emph{apprennent} à prédire : supervisé, non supervisé et par renforcement.
 
-\subsubsection{Apprentissage automatique supervisé}
+\begin{enumerate}[leftmargin=0.5cm]
+\item \textbf{Apprentissage automatique supervisé}\\
 L'apprentissage supervisé est ainsi nommé, car il nécessite l'intervention de l'être humain (souvent un expert) pour spécifier à l'algorithme les résultats qu'il devrait produire.
 
 L'apprentissage supervisé nécessite que les sorties possibles de l'algorithme soient déjà connues et que les données utilisées pour former l'algorithme soient déjà étiquetées avec des réponses correctes. Donc, les données d'apprentissage doivent être labellisées/classifiées au préalable en plus des caractéristiques d'identification.
@@ -73,7 +74,7 @@ On peut cité parmi les algorithmes : Naïves de Bayes, Baïves de Bayes Gaussie
 
 En d'autres termes, l'algorithme développe un hyperplan optimal en utilisant des données d'entrée ou données d'apprentissage sur ce plan de décision pour chaque nouvel exemple. Basé sur le noyau utilisé, SVM peut effectuer une classification linéaire et non linéaire.
 
-\subsubsection{Apprentissage automatique non supervisé}
+\item \textbf{Apprentissage automatique non supervisé}\\
 L'apprentissage automatique non supervisé consiste à déduire une fonction à partir de données \textbf{non labellisées/étiquetées} en utilisant des algorithmes basés sur le calcul de la similarité entre ces données. Les données seront divisées en plusieurs sous-groupes (clusters) contenant les données similaires.
 Ce type d'apprentissage est très utilisé dans le domaine de l'imagerie médicale, la détection d'anomalies et la recommandation.
 
@@ -83,8 +84,7 @@ Exemple : regrouper des articles de presse dans une catégorie.
 
 Les algorithmes utilisés sont : K-means, K-medoids, Propagation d'Affinité, Clustering Spectral, Cluster hiérarchique Ward, Clustering agglomératif, DBSCAN, Mélanges gaussiens, Bouleau, Décalage moyen, Maximisation des attentes (EM), etc \cite{surveymachinelearningregression}.
 
-
-\subsubsection{Apprentissage automatique par renforcement}
+\item \textbf{Apprentissage automatique par renforcement}\\
 Un type plus récent de problème d'apprentissage qui a acquis beaucoup de traction récemment s'appelle l'apprentissage par renforcement. Dans ce type d'apprentissage, aucun exemple n'est fourni à la machine sauf une information sous la forme d'un signal de récompense.
 
 Les méthodes d'apprentissage par renforcement ressemblent à la façon dont les humains apprennent : la machine essaie un tas de choses différentes et est récompensée quand elle réagit correctement.
@@ -92,6 +92,7 @@ Les méthodes d'apprentissage par renforcement ressemblent à la façon dont les
 L'apprentissage par renforcement est utile dans les cas où l'espace de solution est énorme ou infini et s'applique généralement dans les cas où la machine peut être considérée comme un agent interagissant avec son environnement (Agent cognitif).
 
 Exemple : un robot mobile décide s'il doit entrer dans une nouvelle pièce à la recherche de plus de déchets à collecter ou commencer à essayer de retrouver son chemin vers sa station de recharge. Il prend sa décision en fonction de la charge actuelle du niveau de sa batterie et comment rapidement et facilement il a pu trouver le chargeur dans le passé.
+\end{enumerate}
 
 \section{Systèmes de recommandations}
 Un nombre croissant d'entreprises en ligne utilisent des systèmes de recommandation pour accroître l'interaction de l'utilisateur et enrichir le potentiel d'achat. Les cas d'utilisation des systèmes de recommandation ont connu une expansion rapide dans de nombreux aspects du commerce électronique et des médias en ligne au cours des cinq dernières années.
