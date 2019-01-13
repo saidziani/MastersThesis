@@ -7,7 +7,7 @@
   
 <p align="center">
   <a target="_blank" href="http://sumrized.com/feedny/Mémoire de Master - Réalisation d'un outil de revue de presse personnalisée.pdf">
-    <img src="http://sumrized.com/feedny/cover.png" alt="Cover" />
+    <img src="https://s3.amazonaws.com/saidziani/thesis/screen.png" alt="Cover" />
   </a>
 </p>
 
